@@ -7,7 +7,11 @@
 // Implementation of RootCauseAnalyzer methods
 
 RootCauseAnalyzer::RootCauseAnalyzer(const AnalysisConfig& config)
-    : config_(config), current_memory_usage_(0) {
+    : config_(config),
+      current_memory_usage_(0),
+      min_trust_threshold_(0.3f),
+      trust_decay_factor_(0.5f),
+      current_trust_scores_(nullptr) {
     initialize_failure_patterns();
 }
 
@@ -479,4 +483,133 @@ std::string format_root_cause_result(const RootCauseResult& result) {
     }
 
     return ss.str();
+}
+
+// Trust-based fault containment methods implementation
+
+RootCauseResult RootCauseAnalyzer::analyze_with_trust_filtering(
+    const std::string& target_agent,
+    const std::vector<std::string>& symptoms,
+    const AdjacencyList& graph,
+    const std::unordered_map<std::string, float>& trust_scores
+) {
+    // Configure trust scores for this analysis
+    current_trust_scores_ = &trust_scores;
+
+    // Run standard analysis
+    RootCauseResult result = analyze_dependency_chain(target_agent, symptoms, graph);
+
+    // Apply trust-based filtering to the results
+    result.dependency_chain = filter_chain_by_trust(result.dependency_chain, trust_scores);
+
+    // Regenerate recommendations with trust awareness
+    if (!result.dependency_chain.empty()) {
+        result.recommendations = generate_trust_based_recommendations(
+            result.primary_root_cause, result.dependency_chain, trust_scores);
+
+        // Recalculate confidence considering trust
+        float total_confidence = 0.0f;
+        for (const auto& dep : result.dependency_chain) {
+            float trust_confidence = dep.confidence_score;
+            // Reduce confidence for low-trust agents
+            auto trust_it = trust_scores.find(dep.agent_id);
+            if (trust_it != trust_scores.end() && trust_it->second < min_trust_threshold_) {
+                trust_confidence *= (1.0f - trust_decay_factor_);
+            }
+            total_confidence += trust_confidence;
+        }
+        result.analysis_confidence = total_confidence / result.dependency_chain.size();
+    }
+
+    return result;
+}
+
+void RootCauseAnalyzer::configure_trust_analysis(float min_trust_threshold, float trust_decay_factor) {
+    min_trust_threshold_ = min_trust_threshold;
+    trust_decay_factor_ = trust_decay_factor;
+}
+
+std::vector<AgentDependency> RootCauseAnalyzer::filter_chain_by_trust(
+    const std::vector<AgentDependency>& chain,
+    const std::unordered_map<std::string, float>& trust_scores
+) const {
+    std::vector<AgentDependency> filtered_chain;
+
+    for (const auto& dep : chain) {
+        auto trust_it = trust_scores.find(dep.agent_id);
+        if (trust_it == trust_scores.end() || trust_it->second >= min_trust_threshold_) {
+            // Agent has sufficient trust, include in filtered chain
+            filtered_chain.push_back(dep);
+        } else {
+            // Low-trust agent - reduce confidence instead of removing completely
+            AgentDependency filtered_dep = dep;
+            filtered_dep.confidence_score *= (1.0f - trust_decay_factor_);
+            if (filtered_dep.confidence_score >= config_.min_confidence_threshold) {
+                filtered_chain.push_back(filtered_dep);
+            }
+            // Otherwise, agent is filtered out entirely
+        }
+    }
+
+    return filtered_chain;
+}
+
+std::vector<MitigationRecommendation> RootCauseAnalyzer::generate_trust_based_recommendations(
+    const std::string& failure_mode,
+    const std::vector<AgentDependency>& dependency_chain,
+    const std::unordered_map<std::string, float>& trust_scores
+) const {
+    // Start with standard recommendations
+    std::vector<MitigationRecommendation> recommendations =
+        generate_recommendations(failure_mode, dependency_chain);
+
+    // Count low-trust agents in the chain
+    size_t low_trust_count = 0;
+    for (const auto& dep : dependency_chain) {
+        auto trust_it = trust_scores.find(dep.agent_id);
+        if (trust_it != trust_scores.end() && trust_it->second < min_trust_threshold_) {
+            low_trust_count++;
+        }
+    }
+
+    // Add trust-specific recommendations if low-trust agents are prevalent
+    if (static_cast<float>(low_trust_count) / dependency_chain.size() > 0.5f) {
+        recommendations.push_back({
+            "Implement trust-based routing with SAR (Search & Reconnect) mechanism",
+            "HIGH",
+            "Low-trust agents contribute significantly to failure chain - quarantine suspicious agents",
+            85.0f
+        });
+
+        recommendations.push_back({
+            "Deploy rover agents for network topology repair and trust assessment",
+            "HIGH",
+            "Untrusted agents create instability - use rovers to validate connectivity",
+            80.0f
+        });
+
+        recommendations.push_back({
+            "Enable adaptive heartbeat intervals based on agent trust scores",
+            "MEDIUM",
+            "Frequent health checks for suspicious agents can prevent cascading failures",
+            70.0f
+        });
+    }
+
+    if (low_trust_count > 0) {
+        recommendations.push_back({
+            "Quarantine agents with trust scores below threshold for investigation",
+            "MEDIUM",
+            std::to_string(low_trust_count) + " low-trust agents identified in failure chain",
+            75.0f
+        });
+    }
+
+    // Re-sort by impact after adding trust-specific recommendations
+    std::sort(recommendations.begin(), recommendations.end(),
+              [](const MitigationRecommendation& a, const MitigationRecommendation& b) {
+                  return a.expected_impact > b.expected_impact;
+              });
+
+    return recommendations;
 }

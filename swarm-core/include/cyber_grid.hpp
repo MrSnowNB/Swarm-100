@@ -91,11 +91,22 @@ private:
     // Hardware-locked tick synchronization constants
     static constexpr double TICK_FREQUENCY_HZ = 120.0;  // 120 ticks per second
     static constexpr double CORRECTION_THRESHOLD = 0.001;  // 1ms error accumulation threshold
-    static constexpr int PULSE_PHASE_RATIO = 4;  // LoRA pulses every 4 ticks
+
+    // Adaptive communication parameters
+    int pulse_phase_ratio_;  // Adaptive pulse frequency
+    float adaptive_attenuation_k_;
+    float adaptive_global_damping_;
+    float adaptive_activation_threshold_;
+
+    // Heartbeat mechanism for resilience
+    std::unordered_map<std::string, std::chrono::steady_clock::time_point> last_heartbeat_;
+    std::unordered_map<std::string, float> agent_trust_scores_;  // 0.0 to 1.0
+    std::vector<std::string> rover_agents_;  // SAR mechanism agents
 
     // Random number generator for noise/probabilistic behavior
-    std::mt19937 rng_;
-    std::uniform_real_distribution<float> noise_dist_;
+    mutable std::mt19937 rng_;
+    mutable std::uniform_real_distribution<float> noise_dist_;
+    mutable std::uniform_real_distribution<float> jitter_dist_;  // For heartbeat jitter
 
     // Hardware timing synchronization
     long long tick_count_;
@@ -128,7 +139,7 @@ public:
     bool place_agent(int x, int y, const std::string& agent_id);
     bool remove_agent(int x, int y, const std::string& agent_id);
     Cell& find_agent(const std::string& agent_id);
-    std::pair<int, int> get_agent_position(const std::string& agent_id);
+    std::pair<int, int> get_agent_position(const std::string& agent_id) const;
 
     // Simulation engines
 
@@ -184,6 +195,22 @@ public:
     void set_lora_parameters(float attenuation_k = ATTENUATION_K,
                            float global_damping = GLOBAL_DAMPING,
                            float activation_threshold = ACTIVATION_THRESHOLD);
+
+    // Adaptive heartbeat and resilience methods
+    float calculate_local_density(int x, int y, int radius = 3) const;
+    void update_adaptive_parameters();
+    int get_adaptive_heartbeat_interval(const std::string& agent_id) const;
+    std::vector<std::string> identify_failed_agents(std::chrono::milliseconds timeout_threshold) const;
+    void initiate_sar_search(const std::string& failed_agent, const std::string& rover_agent);
+    void update_agent_trust(const std::string& agent_id, bool successful_communication);
+    float get_agent_trust(const std::string& agent_id) const;
+    void register_rover_agent(const std::string& agent_id);
+    std::vector<std::string> get_rover_agents() const;
+    float get_adaptive_pulse_range(int x, int y) const;
+
+    // Heartbeat management
+    void record_heartbeat(const std::string& agent_id);
+    std::chrono::steady_clock::time_point get_last_heartbeat(const std::string& agent_id) const;
 };
 
 // Spatial extension for RootCauseAnalyzer

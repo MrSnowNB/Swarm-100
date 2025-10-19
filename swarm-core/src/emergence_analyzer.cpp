@@ -552,17 +552,7 @@ std::unordered_map<std::string, double> EmergentBehaviorBenchmarkSuite::get_aggr
     };
 }
 
-bool EmergentBehaviorBenchmarkSuite::run_single_emergence_test(CyberGrid& grid, int max_generations) {
-    // Simplified test - in full implementation this would run the simulator
-    // For now, just return random result to demonstrate framework
-    std::random_device rd;
-    std::mt19937 gen(rd());
-    std::uniform_real_distribution<> dis(0.0, 1.0);
 
-    // Some configurations more likely to show emergence
-    double emergence_probability = 0.4;  // 40% success rate for demo
-    return dis(gen) < emergence_probability;
-}
 
 std::unique_ptr<EmergenceAnalyzer> EmergentBehaviorBenchmarkSuite::create_analyzer_for_grid(const CyberGrid& grid) {
     return std::make_unique<EmergenceAnalyzer>(grid);
@@ -578,4 +568,347 @@ std::string EmergentBehaviorBenchmarkSuite::generate_config_name(int width, int 
 void EmergentBehaviorBenchmarkSuite::save_trajectory_data(const BenchmarkResult& result, const std::string& filename) const {
     // Implementation would save ECR trajectories and other time series data
     // Not implemented in this basic version
+}
+
+// ResilientEmergenceBenchmarker Implementation
+
+ResilientEmergenceBenchmarker::ResilientEmergenceBenchmarker(CyberGrid& grid)
+    : grid_(&grid) {
+    active_agents_.clear();
+    agent_trust_scores_.clear();
+    resilience_history_.clear();
+}
+
+void ResilientEmergenceBenchmarker::register_agents(const std::vector<std::string>& agent_ids) {
+    active_agents_ = agent_ids;
+
+    // Initialize trust scores to default (0.5)
+    agent_trust_scores_.clear();
+    for (const auto& agent_id : agent_ids) {
+        agent_trust_scores_[agent_id] = 0.5f;
+        grid_->register_rover_agent(agent_id);  // Register as potential rover
+    }
+}
+
+void ResilientEmergenceBenchmarker::update_agent_trust(const std::string& agent_id, float trust_score) {
+    agent_trust_scores_[agent_id] = std::clamp(trust_score, 0.0f, 1.0f);
+}
+
+ResilientEmergenceBenchmarker::ResilienceMetrics
+ResilientEmergenceBenchmarker::run_resilience_simulation(
+    int agent_count,
+    int target_generations,
+    const std::vector<FaultInjectionPattern>& fault_patterns) {
+
+    // Setup initial agent distribution
+    std::vector<std::string> agent_ids;
+    for (int i = 0; i < agent_count; ++i) {
+        agent_ids.push_back("agent_" + std::to_string(i));
+    }
+    register_agents(agent_ids);
+
+    // Initialize metrics tracking
+    ResilienceMetrics metrics = {};
+    std::unordered_map<std::string, int> reconnect_times;
+    std::unordered_map<std::string, bool> survived_simulation;
+
+    for (const auto& agent_id : active_agents_) {
+        reconnect_times[agent_id] = 0;
+        survived_simulation[agent_id] = true;
+    }
+
+    // Run simulation with fault injection
+    for (long long gen = 0; gen < target_generations; ++gen) {
+        // Apply active fault patterns
+        for (const auto& pattern : fault_patterns) {
+            if (gen >= pattern.start_generation &&
+                gen < pattern.start_generation + pattern.duration_generations) {
+                simulate_generation_with_faults(pattern);
+            }
+        }
+
+        // Simulate grid evolution (simplified - would integrate with actual step())
+        if (grid_) {
+            // Would call grid_->step() here in full implementation
+        }
+
+        // Update resilience snapshot
+        update_resilience_snapshot(gen);
+
+        // Update agent state based on faults
+        auto failed_agents = grid_->identify_failed_agents(std::chrono::milliseconds(1000));
+        for (const auto& failed_agent : failed_agents) {
+            if (survived_simulation.count(failed_agent)) {
+                int current_failures = reconnect_times[failed_agent];
+                if (current_failures == 0) {
+                    // First failure - start counting
+                    reconnect_times[failed_agent] = 1;
+                }
+                // Agent still "survives" until full disconnection
+            }
+        }
+    }
+
+    return calculate_final_metrics();
+}
+
+void ResilientEmergenceBenchmarker::inject_network_partition(int isolation_duration, float affected_percentage) {
+    int total_agents = active_agents_.size();
+    int affected_count = static_cast<int>(total_agents * affected_percentage);
+
+    if (affected_count > 0) {
+        auto isolated_agents = select_random_agents(affected_count);
+
+        // Simulate network isolation
+        for (const auto& agent_id : isolated_agents) {
+            // In full implementation, would temporarily disable communication
+            // For simulation, mark as failed
+            update_agent_trust(agent_id, 0.0f);
+
+            // After duration, restore (would be timed in real simulation)
+            update_agent_trust(agent_id, 0.5f);  // Restore partial trust
+        }
+    }
+}
+
+void ResilientEmergenceBenchmarker::inject_heartbeat_failure(const std::vector<std::string>& affected_agents, float drop_probability) {
+    for (const auto& agent_id : affected_agents) {
+        std::mt19937 rng(std::random_device{}());
+        std::uniform_real_distribution<> dis(0.0, 1.0);
+
+        if (dis(rng) < drop_probability) {
+            // Fail to send heartbeat
+            update_agent_trust(agent_id, agent_trust_scores_[agent_id] * 0.8f);
+        }
+    }
+}
+
+void ResilientEmergenceBenchmarker::inject_trust_corruption(float corruption_intensity) {
+    for (auto& [agent_id, trust] : agent_trust_scores_) {
+        // Random corruption based on intensity
+        std::mt19937 rng(std::random_device{}());
+        std::normal_distribution<> corruption(0.0, corruption_intensity);
+
+        float corruption_amount = corruption(rng);
+        trust = std::clamp(trust + corruption_amount, 0.0f, 1.0f);
+    }
+}
+
+void ResilientEmergenceBenchmarker::inject_pulse_interference(int x, int y, int radius, float interference_strength) {
+    // Simulate LoRA interference in grid region
+    for (int dy = -radius; dy <= radius; ++dy) {
+        for (int dx = -radius; dx <= radius; ++dx) {
+            int nx = x + dx, ny = y + dy;
+            if (nx >= 0 && nx < grid_->width() && ny >= 0 && ny < grid_->height()) {
+                auto& cell = grid_->get_cell(nx, ny);
+                cell.reduce_energy(interference_strength);
+
+                // Check if any agents in this cell are affected
+                for (const auto& agent_id : cell.occupants) {
+                    update_agent_trust(agent_id, agent_trust_scores_[agent_id] * 0.9f);
+                }
+            }
+        }
+    }
+}
+
+std::vector<std::string> ResilientEmergenceBenchmarker::get_failed_agents() const {
+    return grid_->identify_failed_agents(std::chrono::milliseconds(1000));
+}
+
+double ResilientEmergenceBenchmarker::calculate_current_connectivity() const {
+    double connected_pairs = 0.0;
+    double total_possible_pairs = 0.0;
+
+    // Calculate fraction of agent pairs that can communicate
+    // Simplified: assume agents within adaptive range can communicate
+    for (size_t i = 0; i < active_agents_.size(); ++i) {
+        for (size_t j = i + 1; j < active_agents_.size(); ++j) {
+            total_possible_pairs += 1.0;
+
+            try {
+                auto pos1 = grid_->get_agent_position(active_agents_[i]);
+                auto pos2 = grid_->get_agent_position(active_agents_[j]);
+
+                float distance = grid_->toroidal_distance(pos1.first, pos1.second, pos2.first, pos2.second);
+                float adaptive_range = grid_->get_adaptive_pulse_range(pos1.first, pos1.second);
+
+                if (distance <= adaptive_range) {
+                    connected_pairs += 1.0;
+                }
+            } catch (const std::exception&) {
+                // Agent not found - cannot communicate
+            }
+        }
+    }
+
+    return total_possible_pairs > 0 ? connected_pairs / total_possible_pairs : 0.0;
+}
+
+double ResilientEmergenceBenchmarker::calculate_trust_entropy() const {
+    if (agent_trust_scores_.empty()) return 0.0;
+
+    // Calculate entropy of trust distribution
+    const int TRUST_BINS = 10;
+    std::vector<int> bins(TRUST_BINS, 0);
+
+    for (const auto& [agent_id, trust] : agent_trust_scores_) {
+        int bin = static_cast<int>(trust * (TRUST_BINS - 1));
+        bin = std::clamp(bin, 0, TRUST_BINS - 1);
+        bins[bin]++;
+    }
+
+    double entropy = 0.0;
+    for (int count : bins) {
+        if (count > 0) {
+            double p = static_cast<double>(count) / agent_trust_scores_.size();
+            entropy -= p * std::log2(p);
+        }
+    }
+
+    return entropy / std::log2(TRUST_BINS);  // Normalized entropy (0-1)
+}
+
+void ResilientEmergenceBenchmarker::start_sar_operation(const std::string& rover_agent, const std::string& target_agent) {
+    // Record SAR operation initiation
+    // In full implementation, would track active operations
+}
+
+void ResilientEmergenceBenchmarker::complete_sar_operation(const std::string& rover_agent, const std::string& target_agent, bool success) {
+    // Update trust based on SAR operation outcome
+    float trust_change = success ? 0.1f : -0.1f;
+    update_agent_trust(rover_agent, agent_trust_scores_[rover_agent] + trust_change);
+
+    if (success) {
+        // Successful reconnection - boost target agent trust
+        update_agent_trust(target_agent, agent_trust_scores_[target_agent] + 0.05f);
+    }
+}
+
+void ResilientEmergenceBenchmarker::simulate_generation_with_faults(const FaultInjectionPattern& pattern) {
+    // Apply pattern-specific fault simulation
+    switch (pattern.type) {
+        case FaultInjectionPattern::FaultType::NETWORK_PARTITION:
+            inject_network_partition(pattern.duration_generations, pattern.intensity);
+            break;
+
+        case FaultInjectionPattern::FaultType::HEARTBEAT_FAILURE: {
+            // Apply to either specified agents or random subset
+            std::vector<std::string> targets = pattern.affected_agents.empty() ?
+                select_random_agents(static_cast<int>(active_agents_.size() * pattern.intensity)) :
+                pattern.affected_agents;
+            inject_heartbeat_failure(targets, pattern.intensity);
+            break;
+        }
+
+        case FaultInjectionPattern::FaultType::TRUST_CORRUPTION:
+            inject_trust_corruption(pattern.intensity);
+            break;
+
+        case FaultInjectionPattern::FaultType::PULSE_INTERFERENCE: {
+            // Apply to random or center location
+            int center_x = pattern.affected_agents.empty() ?
+                grid_->width() / 2 : grid_->get_agent_position(pattern.affected_agents[0]).first;
+            int center_y = pattern.affected_agents.empty() ?
+                grid_->height() / 2 : grid_->get_agent_position(pattern.affected_agents[0]).second;
+            inject_pulse_interference(center_x, center_y, 3, pattern.intensity);
+            break;
+        }
+
+        case FaultInjectionPattern::FaultType::AGENT_ISOLATION: {
+            int isolation_count = static_cast<int>(active_agents_.size() * pattern.intensity);
+            auto isolated_agents = select_random_agents(isolation_count);
+            for (const auto& agent_id : isolated_agents) {
+                update_agent_trust(agent_id, 0.1f);  // Mark as isolated
+            }
+            break;
+        }
+    }
+}
+
+void ResilientEmergenceBenchmarker::update_resilience_snapshot(long long generation) {
+    ResilienceSnapshot snapshot;
+    snapshot.generation = generation;
+    snapshot.failed_agents = get_failed_agents();
+    snapshot.recovered_agents = {};  // Would track recoveries over time
+    snapshot.connectivity_index = calculate_current_connectivity();
+    snapshot.trust_entropy = calculate_trust_entropy();
+    snapshot.communication_success_rate = 1.0 - (snapshot.failed_agents.size() / static_cast<double>(active_agents_.size()));
+    snapshot.active_sar_operations = 0;  // Would track active SAR operations
+
+    resilience_history_.push_back(snapshot);
+}
+
+ResilientEmergenceBenchmarker::ResilienceMetrics ResilientEmergenceBenchmarker::calculate_final_metrics() const {
+    ResilienceMetrics metrics = {};
+
+    if (resilience_history_.empty()) return metrics;
+
+    // MTTR: Mean Time To Reconnect (simplified)
+    int total_failures = 0;
+    int total_recovery_time = 0;
+
+    for (const auto& snapshot : resilience_history_) {
+        total_failures += snapshot.failed_agents.size();
+        // Recovery time estimation would require tracking individual agent recovery times
+    }
+
+    metrics.mean_time_to_rejoin_ms = total_failures > 0 ?
+        static_cast<double>(total_recovery_time) / total_failures : 0.0;
+
+    // Agent survival ratio
+    metrics.agent_survival_ratio = static_cast<double>(active_agents_.size()) / active_agents_.size();  // Simplified
+
+    // Communication entropy
+    double avg_communication_entropy = 0.0;
+    for (const auto& snapshot : resilience_history_) {
+        avg_communication_entropy += snapshot.communication_success_rate;
+    }
+    metrics.communication_entropy = 1.0 - (avg_communication_entropy / resilience_history_.size());
+
+    // Trust stability
+    double trust_variance_sum = 0.0;
+    for (const auto& snapshot : resilience_history_) {
+        trust_variance_sum += 1.0 - snapshot.trust_entropy;  // Higher entropy = less stable
+    }
+    metrics.trust_stability_score = trust_variance_sum / resilience_history_.size();
+
+    // Heartbeat success rate
+    double avg_heartbeat_success = 0.0;
+    for (const auto& snapshot : resilience_history_) {
+        avg_heartbeat_success += snapshot.communication_success_rate;
+    }
+    metrics.heartbeat_success_rate = avg_heartbeat_success / resilience_history_.size();
+
+    // Connectivity recovery speed
+    double avg_connectivity = 0.0;
+    for (const auto& snapshot : resilience_history_) {
+        avg_connectivity += snapshot.connectivity_index;
+    }
+    metrics.average_connectivity_recovery = avg_connectivity / resilience_history_.size();
+
+    // Max simultaneous failures
+    metrics.max_simultaneous_failures = 0;
+    for (const auto& snapshot : resilience_history_) {
+        metrics.max_simultaneous_failures = std::max(metrics.max_simultaneous_failures,
+                                                      static_cast<int>(snapshot.failed_agents.size()));
+    }
+
+    // SAR operation efficiency
+    metrics.sar_operation_efficiency = 0.8;  // Placeholder - would be calculated from actual operations
+
+    return metrics;
+}
+
+std::vector<std::string> ResilientEmergenceBenchmarker::select_random_agents(int count) const {
+    if (active_agents_.empty() || count <= 0) return {};
+
+    count = std::min(count, static_cast<int>(active_agents_.size()));
+    std::vector<std::string> selected = active_agents_;
+
+    std::mt19937 rng(std::random_device{}());
+    std::shuffle(selected.begin(), selected.end(), rng);
+
+    selected.resize(count);
+    return selected;
 }

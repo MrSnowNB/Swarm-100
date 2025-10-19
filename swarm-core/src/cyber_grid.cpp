@@ -12,8 +12,13 @@ CyberGrid::CyberGrid(int width, int height)
     : width_(width),
       height_(height),
       grid_(static_cast<size_t>(width) * height),
+      pulse_phase_ratio_(4),  // Initial pulse phase ratio
+      adaptive_attenuation_k_(ATTENUATION_K),
+      adaptive_global_damping_(GLOBAL_DAMPING),
+      adaptive_activation_threshold_(ACTIVATION_THRESHOLD),
       rng_(std::random_device{}()),
       noise_dist_(0.0f, 1.0f),
+      jitter_dist_(0.8f, 1.2f),  // Heartbeat jitter: ±20%
       tick_count_(0),
       last_tick_time_(std::chrono::steady_clock::now()),
       timing_error_accumulator_(0.0) {
@@ -73,7 +78,7 @@ Cell& CyberGrid::find_agent(const std::string& agent_id) {
     throw std::runtime_error("Agent " + agent_id + " not found in grid");
 }
 
-std::pair<int, int> CyberGrid::get_agent_position(const std::string& agent_id) {
+std::pair<int, int> CyberGrid::get_agent_position(const std::string& agent_id) const {
     for (const auto& cell : grid_) {
         for (const auto& occupant : cell.occupants) {
             if (occupant == agent_id) {
@@ -93,8 +98,8 @@ void CyberGrid::step() {
     // Execute Conway rules every tick
     apply_conway_rules();
 
-    // Apply LoRA pulses as phase-locked subharmonic (every PULSE_PHASE_RATIO ticks)
-    if (tick_count_ % PULSE_PHASE_RATIO == 0) {
+    // Apply LoRA pulses as phase-locked subharmonic (every pulse_phase_ratio_ ticks)
+    if (tick_count_ % pulse_phase_ratio_ == 0) {
         apply_lora_pulses();
     }
 
@@ -502,4 +507,170 @@ float SpatialRootCauseAnalyzer::calculate_spatial_clustering(const std::vector<S
 
     // Convert to clustering score (0-1, higher = more clustered)
     return std::max(0.0f, 1.0f - avg_distance / 10.0f);
+}
+
+// Adaptive heartbeat and resilience methods implementation
+
+float CyberGrid::calculate_local_density(int x, int y, int radius) const {
+    int agent_count = 0;
+    int cell_count = 0;
+
+    for (int dy = -radius; dy <= radius; ++dy) {
+        for (int dx = -radius; dx <= radius; ++dx) {
+            const Cell& cell = get_cell(x + dx, y + dy);
+            agent_count += cell.agent_count();
+            cell_count++;
+        }
+    }
+
+    return static_cast<float>(agent_count) / cell_count;
+}
+
+void CyberGrid::update_adaptive_parameters() {
+    // Calculate average density across grid
+    float total_density = 0.0f;
+    int sample_count = 0;
+
+    for (int y = 0; y < height_; y += 5) {  // Sample every 5th cell for performance
+        for (int x = 0; x < width_; x += 5) {
+            total_density += calculate_local_density(x, y, 3);
+            sample_count++;
+        }
+    }
+
+    float avg_density = total_density / sample_count;
+
+    // Adaptive pulse phase ratio: faster pulses in high density areas
+    if (avg_density > 0.7f) {
+        pulse_phase_ratio_ = 2;  // Faster pulses when crowded
+    } else if (avg_density < 0.3f) {
+        pulse_phase_ratio_ = 6;  // Slower pulses when sparse
+    } else {
+        pulse_phase_ratio_ = 4;  // Default pulse rate
+    }
+
+    // Adaptive attenuation: stronger signals in sparse areas
+    if (avg_density < 0.3f) {
+        adaptive_attenuation_k_ = ATTENUATION_K * 0.7f;  // Longer range when sparse
+    } else if (avg_density > 0.7f) {
+        adaptive_attenuation_k_ = ATTENUATION_K * 1.3f;  // Shorter range when crowded
+    } else {
+        adaptive_attenuation_k_ = ATTENUATION_K;
+    }
+
+    // Trust decay for agents with low activity
+    auto now = std::chrono::steady_clock::now();
+    for (auto& [agent_id, trust] : agent_trust_scores_) {
+        if (last_heartbeat_.count(agent_id)) {
+            auto time_since_heartbeat = now - last_heartbeat_[agent_id];
+            if (time_since_heartbeat > std::chrono::milliseconds(5000)) {  // 5 seconds
+                trust = std::max(0.0f, trust - 0.01f);  // Slow decay
+            }
+        }
+    }
+}
+
+int CyberGrid::get_adaptive_heartbeat_interval(const std::string& agent_id) const {
+    // Base interval modulated by local density and trust
+    int base_interval = 1000;  // 1 second base
+
+    if (last_heartbeat_.count(agent_id)) {
+        auto [x, y] = get_agent_position(agent_id);
+        float local_density = calculate_local_density(x, y, 3);
+
+        // Denser areas get faster heartbeats (shorter intervals)
+        float density_factor = 1.0f - (local_density * 0.5f);  // 0.5 to 1.0
+        base_interval = static_cast<int>(base_interval * density_factor);
+
+        // Trust factor: less trusted agents heartbeat more frequently
+        float trust_factor = 1.0f;
+        if (agent_trust_scores_.count(agent_id)) {
+            trust_factor = 2.0f - agent_trust_scores_.at(agent_id);  // 1.0 to 2.0
+        }
+        base_interval = static_cast<int>(base_interval * trust_factor);
+
+        // Apply jitter: ±20%
+        float jitter = jitter_dist_(rng_);
+        base_interval = static_cast<int>(base_interval * jitter);
+    }
+
+    return std::max(200, std::min(5000, base_interval));  // Clamp to reasonable range
+}
+
+std::vector<std::string> CyberGrid::identify_failed_agents(std::chrono::milliseconds timeout_threshold) const {
+    std::vector<std::string> failed_agents;
+    auto now = std::chrono::steady_clock::now();
+
+    for (const auto& [agent_id, last_time] : last_heartbeat_) {
+        auto time_since_heartbeat = now - last_time;
+        if (time_since_heartbeat > timeout_threshold) {
+            failed_agents.push_back(agent_id);
+        }
+    }
+
+    return failed_agents;
+}
+
+void CyberGrid::initiate_sar_search(const std::string& failed_agent, const std::string& rover_agent) {
+    // SAR mechanism: designated rover agent searches for failed agent
+    if (std::find(rover_agents_.begin(), rover_agents_.end(), rover_agent) != rover_agents_.end()) {
+        // Record SAR initiation (logging/monitoring)
+        record_heartbeat(failed_agent);  // Reset failed agent's heartbeat?
+        update_agent_trust(failed_agent, false);  // Mark as temporarily failed
+    }
+}
+
+void CyberGrid::update_agent_trust(const std::string& agent_id, bool successful_communication) {
+    if (!agent_trust_scores_.count(agent_id)) {
+        agent_trust_scores_[agent_id] = 0.5f;  // Default trust
+    }
+
+    float& trust = agent_trust_scores_[agent_id];
+
+    if (successful_communication) {
+        trust = std::min(1.0f, trust + 0.1f);  // Trust recovery
+    } else {
+        trust = std::max(0.0f, trust - 0.05f);  // Trust decay on failure
+    }
+}
+
+float CyberGrid::get_agent_trust(const std::string& agent_id) const {
+    if (agent_trust_scores_.count(agent_id)) {
+        return agent_trust_scores_.at(agent_id);
+    }
+    return 0.5f;  // Default trust score
+}
+
+void CyberGrid::register_rover_agent(const std::string& agent_id) {
+    if (std::find(rover_agents_.begin(), rover_agents_.end(), agent_id) == rover_agents_.end()) {
+        rover_agents_.push_back(agent_id);
+    }
+}
+
+std::vector<std::string> CyberGrid::get_rover_agents() const {
+    return rover_agents_;
+}
+
+float CyberGrid::get_adaptive_pulse_range(int x, int y) const {
+    float local_density = calculate_local_density(x, y, 2);
+
+    // Adaptive range: longer in sparse areas, shorter in dense areas
+    if (local_density < 0.3f) {
+        return MAX_PULSE_RANGE * 1.5f;  // Extended range in sparse areas
+    } else if (local_density > 0.7f) {
+        return MAX_PULSE_RANGE * 0.7f;  // Reduced range in dense areas
+    }
+
+    return MAX_PULSE_RANGE;
+}
+
+void CyberGrid::record_heartbeat(const std::string& agent_id) {
+    last_heartbeat_[agent_id] = std::chrono::steady_clock::now();
+}
+
+std::chrono::steady_clock::time_point CyberGrid::get_last_heartbeat(const std::string& agent_id) const {
+    if (last_heartbeat_.count(agent_id)) {
+        return last_heartbeat_.at(agent_id);
+    }
+    return std::chrono::steady_clock::time_point{};  // Default/empty time point
 }

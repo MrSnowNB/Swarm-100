@@ -225,6 +225,63 @@ private:
      * @return Estimated memory usage in bytes
      */
     size_t estimate_memory_usage() const;
+
+    /**
+     * Trust-based fault containment methods
+     * Methods for incorporating agent trust scores into root cause analysis
+     */
+
+    /**
+     * Analyze with trust-based filtering
+     * @param target_agent The agent where failure was observed
+     * @param symptoms List of observed symptoms/error messages
+     * @param graph The dependency graph of agent relationships
+     * @param trust_scores Map of agent_id -> trust_score (0.0 to 1.0)
+     * @return Root cause analysis result with trust-based filtering
+     */
+    RootCauseResult analyze_with_trust_filtering(
+        const std::string& target_agent,
+        const std::vector<std::string>& symptoms,
+        const AdjacencyList& graph,
+        const std::unordered_map<std::string, float>& trust_scores
+    );
+
+    /**
+     * Set trust-based analysis parameters
+     * @param min_trust_threshold Minimum trust score to consider agent reliable (default 0.3)
+     * @param trust_decay_factor How much to reduce confidence for low-trust agents (default 0.5)
+     */
+    void configure_trust_analysis(float min_trust_threshold = 0.3f, float trust_decay_factor = 0.5f);
+
+    /**
+     * Filter dependency chain based on trust scores
+     * @param chain Original dependency chain
+     * @param trust_scores Agent trust scores
+     * @return Filtered chain with low-trust agents potentially removed
+     */
+    std::vector<AgentDependency> filter_chain_by_trust(
+        const std::vector<AgentDependency>& chain,
+        const std::unordered_map<std::string, float>& trust_scores
+    ) const;
+
+    /**
+     * Generate trust-based mitigation recommendations
+     * @param failure_mode Type of failure detected
+     * @param dependency_chain Chain of failing agents
+     * @param trust_scores Agent trust scores
+     * @return List of recommended actions considering trust levels
+     */
+    std::vector<MitigationRecommendation> generate_trust_based_recommendations(
+        const std::string& failure_mode,
+        const std::vector<AgentDependency>& dependency_chain,
+        const std::unordered_map<std::string, float>& trust_scores
+    ) const;
+
+private:
+    // Trust-based analysis parameters
+    float min_trust_threshold_;
+    float trust_decay_factor_;
+    const std::unordered_map<std::string, float>* current_trust_scores_;
 };
 
 // Utility functions for result formatting
