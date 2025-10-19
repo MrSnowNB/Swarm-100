@@ -3,6 +3,8 @@
 #include <iomanip>
 #include <cmath>
 #include <limits>
+#include <chrono>
+#include <thread>
 
 // CyberGrid Implementation
 
@@ -11,7 +13,10 @@ CyberGrid::CyberGrid(int width, int height)
       height_(height),
       grid_(static_cast<size_t>(width) * height),
       rng_(std::random_device{}()),
-      noise_dist_(0.0f, 1.0f) {
+      noise_dist_(0.0f, 1.0f),
+      tick_count_(0),
+      last_tick_time_(std::chrono::steady_clock::now()),
+      timing_error_accumulator_(0.0) {
 
     // Initialize cells with coordinates
     for (int y = 0; y < height_; ++y) {
@@ -80,9 +85,40 @@ std::pair<int, int> CyberGrid::get_agent_position(const std::string& agent_id) {
 }
 
 void CyberGrid::step() {
-    // Execute one full simulation cycle
-    int state_changes = apply_conway_rules();
-    apply_lora_pulses();
+    // Hardware-locked fixed timestep execution
+    static constexpr std::chrono::duration<double> TICK_PERIOD(1.0 / TICK_FREQUENCY_HZ);
+
+    auto t_start = std::chrono::steady_clock::now();
+
+    // Execute Conway rules every tick
+    apply_conway_rules();
+
+    // Apply LoRA pulses as phase-locked subharmonic (every PULSE_PHASE_RATIO ticks)
+    if (tick_count_ % PULSE_PHASE_RATIO == 0) {
+        apply_lora_pulses();
+    }
+
+    tick_count_++;
+
+    // Calculate timing error and accumulate for drift correction
+    auto t_elapsed = std::chrono::steady_clock::now() - t_start;
+    double actual_duration = t_elapsed.count();
+    double expected_duration = TICK_PERIOD.count();
+    double error = actual_duration - expected_duration;
+
+    timing_error_accumulator_ += error;
+
+    // Sleep until next tick, accounting for accumulated error
+    auto t_next = last_tick_time_ + (tick_count_ * TICK_PERIOD);
+
+    // Apply correction if error exceeds threshold
+    if (std::abs(timing_error_accumulator_) > CORRECTION_THRESHOLD) {
+        t_next -= std::chrono::duration<double>(timing_error_accumulator_ * 0.1);  // Gentle correction
+        timing_error_accumulator_ *= 0.9;  // Decay accumulator
+    }
+
+    std::this_thread::sleep_until(t_next);
+    last_tick_time_ = std::chrono::steady_clock::now();
 
     // TODO: Add agent movement logic when swarm behavior is integrated
 }

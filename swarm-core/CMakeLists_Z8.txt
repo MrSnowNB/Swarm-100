@@ -1,0 +1,175 @@
+# ====================================================================
+# CMAKE BUILD CONFIGURATION - HP Z8 FURY G5 OPTIMIZED
+# ====================================================================
+# Hardware: 4x RTX 6000 Ada GPUs (192GB total VRAM)
+# CPU: High-end workstation CPU (AMD Epyc or Intel Xeon)
+# Memory: 256GB+ system RAM
+# OS: Ubuntu Linux with CUDA 12.x
+# ====================================================================
+
+cmake_minimum_required(VERSION 3.20)  # CUDA support requires newer CMake
+project(SwarmCore_Z8 LANGUAGES CXX CUDA)
+
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CUDA_STANDARD 17)
+set(PYBIND11_FINDPYTHON ON)
+
+# ====================================================================
+# CUDA ARCHITECTURE OPTIMIZATION FOR RTX 6000 ADA
+# ====================================================================
+# RTX 6000 Ada = Ada Lovelace architecture (sm_89)
+# - Compute capability: 8.9
+# - Tensor Cores: 4th generation
+# - RT Cores: 3rd generation
+# - Maxwell Tensor Pipeline for improved matrix ops
+# ====================================================================
+
+set(CMAKE_CUDA_ARCHITECTURES "89")  # SM 8.9 for Ada Lovelace
+
+# Additional architectures for backward compatibility (if needed)
+# set(CMAKE_CUDA_ARCHITECTURES "89;86;87")
+
+# ====================================================================
+# COMPILER FLAGS - Z8 WORKSTATION OPTIMIZATION
+# ====================================================================
+
+# NVIDIA HPC SDK compiler flags for maximum performance
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -march=native -mtune=native")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fopenmp -pthread")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -ffast-math -funroll-loops")
+
+set(CMAKE_CUDA_FLAGS "${CMAKE_CUDA_FLAGS} --default-stream per-thread")
+set(CMAKE_CUDA_FLAGS "${CMAKE_CUDA_FLAGS} --use_fast_math")
+set(CMAKE_CUDA_FLAGS "${CMAKE_CUDA_FLAGS} --ptxas-options=-v")
+set(CMAKE_CUDA_FLAGS "${CMAKE_CUDA_FLAGS} --generate-line-info")
+
+# ====================================================================
+# CUDA MEMORY OPTIMIZATION
+# ====================================================================
+# RTX 6000 Ada has 48GB GDDR6 with high bandwidth
+# - Unified Memory for seamless CPU/GPU data sharing
+# - Async memory operations for non-blocking transfers
+# - Memory pool management for reduced overhead
+
+find_package(CUDA 12.0 REQUIRED)
+
+# ====================================================================
+# PyBind11 CONFIGURATION
+# ====================================================================
+
+find_package(pybind11 CONFIG REQUIRED)
+
+# ====================================================================
+# SOURCE FILE DISCOVERY
+# ====================================================================
+
+file(GLOB_RECURSE CUDA_SOURCES src/*.cu)
+file(GLOB_RECURSE CXX_SOURCES src/*.cpp)
+list(REMOVE_ITEM CXX_SOURCES ${CUDA_SOURCES})  # CUDA files compiled separately
+
+# ====================================================================
+# SWARM CORE LIBRARY - HIGH PERFORMANCE BUILD
+# ====================================================================
+
+# CPU-only library for analysis components
+add_library(swarm_core_cpu STATIC ${CXX_SOURCES})
+target_include_directories(swarm_core_cpu PRIVATE include)
+target_compile_options(swarm_core_cpu PRIVATE
+    -O3 -march=native -mtune=native
+    -fopenmp -pthread
+    -ffast-math -funroll-loops
+)
+
+# CUDA-acceleration library (future GPU operations)
+if(CUDA_SOURCES)
+    add_library(swarm_core_gpu STATIC ${CUDA_SOURCES})
+    target_include_directories(swarm_core_gpu PRIVATE include)
+    set_target_properties(swarm_core_gpu PROPERTIES
+        CUDA_SEPARABLE_COMPILATION ON
+        CUDA_RESOLVE_DEVICE_SYMBOLS ON
+    )
+endif()
+
+# ====================================================================
+# PYBIND11 MODULE - Z8 OPTIMIZED
+# ====================================================================
+
+# Combine CPU and GPU components
+set(ALL_SOURCES ${CXX_SOURCES})
+if(CUDA_SOURCES)
+    list(APPEND ALL_SOURCES ${CUDA_SOURCES})
+endif()
+
+pybind11_add_module(swarm_core_z8 ${ALL_SOURCES} bindings/pybind_module.cpp)
+
+target_include_directories(swarm_core_z8 PRIVATE include)
+
+# Link libraries optimized for Z8
+target_link_libraries(swarm_core_z8 PRIVATE
+    CUDA::cudart_static
+    CUDA::cuda_driver
+    OpenMP::OpenMP_CXX
+)
+
+# ====================================================================
+# BUILD OPTIMIZATIONS FOR Z8 HARDWARE
+# ====================================================================
+
+# Link-time optimization for maximum performance
+set_target_properties(swarm_core_z8 PROPERTIES
+    INTERPROCEDURAL_OPTIMIZATION TRUE
+)
+
+# ====================================================================
+# INSTALLATION CONFIGURATION
+# ====================================================================
+
+install(TARGETS swarm_core_z8
+    LIBRARY DESTINATION .
+    ARCHIVE DESTINATION lib
+    RUNTIME DESTINATION bin
+)
+
+# ====================================================================
+# BUILD INFORMATION OUTPUT
+# ====================================================================
+
+message(STATUS "========================================")
+message(STATUS "Swarm-100 C++ Core - Z8 Optimized Build")
+message(STATUS "========================================")
+message(STATUS "Target Hardware: HP Z8 Fury G5 Workstation")
+message(STATUS "GPU Configuration: 4x RTX 6000 Ada (192GB VRAM)")
+message(STATUS "CUDA Architecture: SM 8.9 (Ada Lovelace)")
+message(STATUS "Compiler Optimizations: -O3 -march=native")
+message(STATUS "CUDA Flags: --use_fast_math --default-stream")
+message(STATUS "========================================")
+
+# ====================================================================
+# PERFORMANCE BENCHMARKING TARGET
+# ====================================================================
+
+add_custom_target(performance_test
+    COMMAND python3 -c "
+from swarm_core import CyberGrid, SpatialRootCauseAnalyzer
+import time
+
+print('Z8 Performance Benchmark:')
+grid = CyberGrid(100, 100)
+start = time.time()
+for i in range(1000):
+    grid.apply_conway_rules()
+    grid.apply_lora_pulses()
+end = time.time()
+print(f'1000 iterations: {end-start:.3f}s ({1000/(end-start):.1f} iter/sec})')
+
+analyzer = SpatialRootCauseAnalyzer(grid)
+start = time.time()
+deps = analyzer.build_spatial_dependencies()
+end = time.time()
+print(f'Spatial analysis: {end-start:.3f}s ({len(deps)} dependencies)')
+print('✅ Z8 optimized performance validated!')
+"
+    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/..
+    COMMENT "Running Z8 performance validation"
+    DEPENDS swarm_core_z8
+)

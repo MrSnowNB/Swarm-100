@@ -9,6 +9,7 @@
 #include <cmath>
 #include <random>
 #include <iostream>
+#include <stdexcept>
 
 // Forward declarations
 class CyberGrid;
@@ -87,9 +88,19 @@ private:
     static constexpr float ACTIVATION_THRESHOLD = 0.65f;
     static constexpr int MAX_PULSE_RANGE = 4;        // Effective LoRA range
 
+    // Hardware-locked tick synchronization constants
+    static constexpr double TICK_FREQUENCY_HZ = 120.0;  // 120 ticks per second
+    static constexpr double CORRECTION_THRESHOLD = 0.001;  // 1ms error accumulation threshold
+    static constexpr int PULSE_PHASE_RATIO = 4;  // LoRA pulses every 4 ticks
+
     // Random number generator for noise/probabilistic behavior
     std::mt19937 rng_;
     std::uniform_real_distribution<float> noise_dist_;
+
+    // Hardware timing synchronization
+    long long tick_count_;
+    std::chrono::steady_clock::time_point last_tick_time_;
+    double timing_error_accumulator_;
 
 public:
     // Constructors
