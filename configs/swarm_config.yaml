@@ -7,28 +7,28 @@ status: active
 created: 2025-10-18
 
 # Hardware Configuration
-# Test: reduced to 5 bots per GPU for timing issue diagnosis
-# 25 worked with long stagger (37 dead), 5 should work better with short stagger?
-# Hypothesis: confirm if stagger fixes the Ollama timeout issues
+# Full deployment test: 25 bots per GPU for final validation
+# Previous tests showed stagger delay prevents premature health check failures
+# Soft health check allows Ollama warmup time
 hardware:
   gpus:
     - id: 0
       name: "RTX 6000 Ada"
       vram_gb: 48
-      bots: 5
+      bots: 25
     - id: 1
       name: "RTX 6000 Ada"
       vram_gb: 48
-      bots: 5
+      bots: 25
     - id: 2
       name: "RTX 6000 Ada"
       vram_gb: 48
-      bots: 5
+      bots: 25
     - id: 3
       name: "RTX 6000 Ada"
       vram_gb: 48
-      bots: 5
-  total_bots: 20
+      bots: 25
+  total_bots: 100
 
 # Model Configuration
 model:

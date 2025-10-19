@@ -1,17 +1,74 @@
-[Bot-0_1] 2025-10-19 09:05:52,911 - Failed to instrument Flask: No module named 'flask'
-[Bot-0_1] 2025-10-19 09:05:52,911 - Swarm tracing initialized for bot-0_1
-[Bot-0_1] 2025-10-19 09:05:52,911 - Bot starting on GPU 0, Port 11401
-[Bot-0_1] 2025-10-19 09:05:52,911 - Connecting to Ollama at http://localhost:11434
-[Bot-0_1] 2025-10-19 09:05:58,203 - ✓ Health check passed - Stats: {'requests': 1, 'errors': 0, 'start_time': '2025-10-19T09:05:52.911632'}
-[Bot-0_1] 2025-10-19 09:05:58,203 - Bot operational, entering main loop
-[Bot-0_1] 2025-10-19 09:06:02,889 - Transient error StatusCode.UNAVAILABLE encountered while exporting traces to localhost:4317, retrying in 0.88s.
-[Bot-0_1] 2025-10-19 09:06:09,322 - Failed to export traces to localhost:4317, error code: StatusCode.UNAVAILABLE
-[Bot-0_1] 2025-10-19 09:07:13,455 - ✓ Health check passed - Stats: {'requests': 2, 'errors': 0, 'start_time': '2025-10-19T09:05:52.911632'}
-[Bot-0_1] 2025-10-19 09:07:14,324 - Transient error StatusCode.UNAVAILABLE encountered while exporting traces to localhost:4317, retrying in 1.06s.
-[Bot-0_1] 2025-10-19 09:07:21,190 - Failed to export traces to localhost:4317, error code: StatusCode.UNAVAILABLE
-[Bot-0_1] 2025-10-19 09:08:14,242 - ✓ Health check passed - Stats: {'requests': 3, 'errors': 0, 'start_time': '2025-10-19T09:05:52.911632'}
-[Bot-0_1] 2025-10-19 09:08:16,194 - Transient error StatusCode.UNAVAILABLE encountered while exporting traces to localhost:4317, retrying in 1.11s.
-[Bot-0_1] 2025-10-19 09:08:22,823 - Failed to export traces to localhost:4317, error code: StatusCode.UNAVAILABLE
-[Bot-0_1] 2025-10-19 09:09:31,602 - ✓ Health check passed - Stats: {'requests': 4, 'errors': 0, 'start_time': '2025-10-19T09:05:52.911632'}
-[Bot-0_1] 2025-10-19 09:09:32,826 - Transient error StatusCode.UNAVAILABLE encountered while exporting traces to localhost:4317, retrying in 0.99s.
-[Bot-0_1] 2025-10-19 09:09:39,709 - Failed to export traces to localhost:4317, error code: StatusCode.UNAVAILABLE
+[Bot-0_1] 2025-10-19 09:13:38,214 - Failed to instrument Flask: No module named 'flask'
+[Bot-0_1] 2025-10-19 09:13:38,214 - Swarm tracing initialized for bot-0_1
+[Bot-0_1] 2025-10-19 09:13:38,214 - Bot starting on GPU 0, Port 11401
+[Bot-0_1] 2025-10-19 09:13:38,214 - Connecting to Ollama at http://localhost:11434
+[Bot-0_1] 2025-10-19 09:13:45,833 - ✓ Health check passed - Stats: {'requests': 1, 'errors': 0, 'start_time': '2025-10-19T09:13:38.214877'}
+[Bot-0_1] 2025-10-19 09:13:45,833 - Bot operational, entering main loop
+[Bot-0_1] 2025-10-19 09:13:48,191 - Transient error StatusCode.UNAVAILABLE encountered while exporting traces to localhost:4317, retrying in 1.12s.
+[Bot-0_1] 2025-10-19 09:13:54,893 - Failed to export traces to localhost:4317, error code: StatusCode.UNAVAILABLE
+[Bot-0_1] 2025-10-19 09:14:53,381 - ✓ Health check passed - Stats: {'requests': 2, 'errors': 0, 'start_time': '2025-10-19T09:13:38.214877'}
+[Bot-0_1] 2025-10-19 09:14:54,896 - Transient error StatusCode.UNAVAILABLE encountered while exporting traces to localhost:4317, retrying in 1.10s.
+[Bot-0_1] 2025-10-19 09:15:02,226 - Failed to export traces to localhost:4317, error code: StatusCode.UNAVAILABLE
+[Bot-0_1] 2025-10-19 09:15:53,744 - ✓ Health check passed - Stats: {'requests': 3, 'errors': 0, 'start_time': '2025-10-19T09:13:38.214877'}
+[Bot-0_1] 2025-10-19 09:15:57,230 - Transient error StatusCode.UNAVAILABLE encountered while exporting traces to localhost:4317, retrying in 1.08s.
+[Bot-0_1] 2025-10-19 09:16:00,173 - Transient error StatusCode.UNAVAILABLE encountered while exporting traces to localhost:4317, retrying in 4.24s.
+[Bot-0_1] 2025-10-19 09:16:04,415 - Failed to export traces to localhost:4317, error code: StatusCode.UNAVAILABLE
+[Bot-0_1] 2025-10-19 09:17:10,314 - ✓ Health check passed - Stats: {'requests': 4, 'errors': 0, 'start_time': '2025-10-19T09:13:38.214877'}
+[Bot-0_1] 2025-10-19 09:17:14,417 - Transient error StatusCode.UNAVAILABLE encountered while exporting traces to localhost:4317, retrying in 0.95s.
+[Bot-0_1] 2025-10-19 09:17:21,349 - Failed to export traces to localhost:4317, error code: StatusCode.UNAVAILABLE
+[Bot-0_1] 2025-10-19 09:18:40,351 - Query failed: HTTPConnectionPool(host='localhost', port=11434): Read timed out. (read timeout=30)
+[Bot-0_1] 2025-10-19 09:18:40,351 - ✗ Health check failed
+[Bot-0_1] 2025-10-19 09:18:41,352 - Transient error StatusCode.UNAVAILABLE encountered while exporting traces to localhost:4317, retrying in 1.15s.
+[Bot-0_1] 2025-10-19 09:18:48,739 - Failed to export traces to localhost:4317, error code: StatusCode.UNAVAILABLE
+[Bot-0_1] 2025-10-19 09:20:10,387 - Query failed: HTTPConnectionPool(host='localhost', port=11434): Read timed out. (read timeout=30)
+[Bot-0_1] 2025-10-19 09:20:10,388 - ✗ Health check failed
+[Bot-0_1] 2025-10-19 09:20:13,743 - Transient error StatusCode.UNAVAILABLE encountered while exporting traces to localhost:4317, retrying in 0.91s.
+[Bot-0_1] 2025-10-19 09:20:20,990 - Failed to export traces to localhost:4317, error code: StatusCode.UNAVAILABLE
+[Bot-0_1] 2025-10-19 09:21:39,455 - ✓ Health check passed - Stats: {'requests': 5, 'errors': 2, 'start_time': '2025-10-19T09:13:38.214877'}
+[Bot-0_1] 2025-10-19 09:21:40,994 - Transient error StatusCode.UNAVAILABLE encountered while exporting traces to localhost:4317, retrying in 1.20s.
+[Bot-0_1] 2025-10-19 09:21:48,266 - Failed to export traces to localhost:4317, error code: StatusCode.UNAVAILABLE
+[Bot-0_1] 2025-10-19 09:22:39,556 - ✗ Health check failed
+[Bot-0_1] 2025-10-19 09:22:43,269 - Transient error StatusCode.UNAVAILABLE encountered while exporting traces to localhost:4317, retrying in 1.02s.
+[Bot-0_1] 2025-10-19 09:22:50,727 - Failed to export traces to localhost:4317, error code: StatusCode.UNAVAILABLE
+[Bot-0_1] 2025-10-19 09:23:39,663 - ✗ Health check failed
+[Bot-0_1] 2025-10-19 09:23:40,730 - Transient error StatusCode.UNAVAILABLE encountered while exporting traces to localhost:4317, retrying in 0.89s.
+[Bot-0_1] 2025-10-19 09:23:47,498 - Failed to export traces to localhost:4317, error code: StatusCode.UNAVAILABLE
+[Bot-0_1] 2025-10-19 09:24:39,768 - ✗ Health check failed
+[Bot-0_1] 2025-10-19 09:24:42,502 - Transient error StatusCode.UNAVAILABLE encountered while exporting traces to localhost:4317, retrying in 1.05s.
+[Bot-0_1] 2025-10-19 09:24:48,967 - Failed to export traces to localhost:4317, error code: StatusCode.UNAVAILABLE
+[Bot-0_1] 2025-10-19 09:25:39,872 - ✗ Health check failed
+[Bot-0_1] 2025-10-19 09:25:43,971 - Transient error StatusCode.UNAVAILABLE encountered while exporting traces to localhost:4317, retrying in 1.15s.
+[Bot-0_1] 2025-10-19 09:25:51,358 - Failed to export traces to localhost:4317, error code: StatusCode.UNAVAILABLE
+[Bot-0_1] 2025-10-19 09:26:39,977 - ✗ Health check failed
+[Bot-0_1] 2025-10-19 09:26:41,361 - Transient error StatusCode.UNAVAILABLE encountered while exporting traces to localhost:4317, retrying in 0.91s.
+[Bot-0_1] 2025-10-19 09:26:48,451 - Failed to export traces to localhost:4317, error code: StatusCode.UNAVAILABLE
+[Bot-0_1] 2025-10-19 09:27:40,084 - ✗ Health check failed
+[Bot-0_1] 2025-10-19 09:27:43,454 - Transient error StatusCode.UNAVAILABLE encountered while exporting traces to localhost:4317, retrying in 0.91s.
+[Bot-0_1] 2025-10-19 09:27:50,638 - Failed to export traces to localhost:4317, error code: StatusCode.UNAVAILABLE
+[Bot-0_1] 2025-10-19 09:28:40,192 - ✗ Health check failed
+[Bot-0_1] 2025-10-19 09:28:40,641 - Transient error StatusCode.UNAVAILABLE encountered while exporting traces to localhost:4317, retrying in 0.92s.
+[Bot-0_1] 2025-10-19 09:28:47,913 - Failed to export traces to localhost:4317, error code: StatusCode.UNAVAILABLE
+[Bot-0_1] 2025-10-19 09:29:40,296 - ✗ Health check failed
+[Bot-0_1] 2025-10-19 09:29:42,916 - Transient error StatusCode.UNAVAILABLE encountered while exporting traces to localhost:4317, retrying in 0.96s.
+[Bot-0_1] 2025-10-19 09:29:50,564 - Failed to export traces to localhost:4317, error code: StatusCode.UNAVAILABLE
+[Bot-0_1] 2025-10-19 09:30:40,400 - ✗ Health check failed
+[Bot-0_1] 2025-10-19 09:30:40,567 - Transient error StatusCode.UNAVAILABLE encountered while exporting traces to localhost:4317, retrying in 0.94s.
+[Bot-0_1] 2025-10-19 09:30:47,690 - Failed to export traces to localhost:4317, error code: StatusCode.UNAVAILABLE
+[Bot-0_1] 2025-10-19 09:31:40,508 - ✗ Health check failed
+[Bot-0_1] 2025-10-19 09:31:42,694 - Transient error StatusCode.UNAVAILABLE encountered while exporting traces to localhost:4317, retrying in 1.06s.
+[Bot-0_1] 2025-10-19 09:31:49,883 - Failed to export traces to localhost:4317, error code: StatusCode.UNAVAILABLE
+[Bot-0_1] 2025-10-19 09:32:40,611 - ✗ Health check failed
+[Bot-0_1] 2025-10-19 09:32:44,886 - Transient error StatusCode.UNAVAILABLE encountered while exporting traces to localhost:4317, retrying in 1.02s.
+[Bot-0_1] 2025-10-19 09:32:51,977 - Failed to export traces to localhost:4317, error code: StatusCode.UNAVAILABLE
+[Bot-0_1] 2025-10-19 09:33:40,713 - ✗ Health check failed
+[Bot-0_1] 2025-10-19 09:33:41,981 - Transient error StatusCode.UNAVAILABLE encountered while exporting traces to localhost:4317, retrying in 0.90s.
+[Bot-0_1] 2025-10-19 09:33:48,344 - Failed to export traces to localhost:4317, error code: StatusCode.UNAVAILABLE
+[Bot-0_1] 2025-10-19 09:34:40,810 - ✗ Health check failed
+[Bot-0_1] 2025-10-19 09:34:43,347 - Transient error StatusCode.UNAVAILABLE encountered while exporting traces to localhost:4317, retrying in 1.18s.
+[Bot-0_1] 2025-10-19 09:34:49,888 - Failed to export traces to localhost:4317, error code: StatusCode.UNAVAILABLE
+[Bot-0_1] 2025-10-19 09:35:40,908 - ✗ Health check failed
+[Bot-0_1] 2025-10-19 09:35:44,891 - Transient error StatusCode.UNAVAILABLE encountered while exporting traces to localhost:4317, retrying in 1.03s.
+[Bot-0_1] 2025-10-19 09:35:51,541 - Failed to export traces to localhost:4317, error code: StatusCode.UNAVAILABLE
+[Bot-0_1] 2025-10-19 09:36:41,015 - ✗ Health check failed
+[Bot-0_1] 2025-10-19 09:36:41,545 - Transient error StatusCode.UNAVAILABLE encountered while exporting traces to localhost:4317, retrying in 0.85s.
+[Bot-0_1] 2025-10-19 09:36:49,104 - Failed to export traces to localhost:4317, error code: StatusCode.UNAVAILABLE
