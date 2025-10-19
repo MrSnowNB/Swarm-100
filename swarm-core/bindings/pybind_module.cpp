@@ -164,7 +164,7 @@ PYBIND11_MODULE(swarm_core, m) {
           "Format root cause analysis result for display");
 
     // Type aliases for cleaner Python interface
-    m.attr("AdjacencyList") = m.attr("dict");  // Python dict maps to our AdjacencyList
+    m.attr("AdjacencyList") = py::module_::import("builtins").attr("dict");  // Python dict maps to our AdjacencyList
 
     // Module metadata
     m.attr("__version__") = "0.1.0";

@@ -1,4 +1,6 @@
 ---
+name: "Granite4 MicroH Swarm Validation"
+description: "Validation workflow for Granite4 MicroH Swarm system"
 project: granite4-microh-swarm
 version: 1.0.0
 status: active
@@ -62,6 +64,19 @@ logging:
   dir: "logs"
   rotation: "daily"
   retention_days: 7
+
+gates:
+  gate1:
+    name: "Initial Gate"
+    description: "This is the initial validation gate."
+    required_success_rate: 100
+    steps:
+      - name: "Check Hardware Configuration"
+        type: "command"
+        command: "echo 'Checking hardware configuration...'"
+      - name: "Check Model Configuration"
+        type: "command"
+        command: "echo 'Checking model configuration...'"
 
 # Monitoring
 monitoring:

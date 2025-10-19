@@ -166,7 +166,7 @@ specs:
 # Development Status & Roadmap
 status:
   alpha_release:
-    completed: ["Hardware-locked timing system", "CyberGrid with LoRA coupling", "PyBind11 bindings", "Basic agent architecture", "Pylance type error resolution", "Workspace cleanup and archiving"]
+    completed: ["Hardware-locked timing system", "CyberGrid with LoRA coupling", "PyBind11 bindings", "Basic agent architecture", "Pylance type error resolution", "C++ include path configuration", "Workspace cleanup and archiving"]
     in_progress: ["Distributed multi-agent coordination", "CUDA acceleration integration", "Advanced failure analysis"]
     planned: ["Full swarm intelligence emergence", "Production deployment infrastructure", "GPU fault simulation"]
 

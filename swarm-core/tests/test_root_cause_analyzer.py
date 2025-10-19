@@ -30,7 +30,7 @@ try:
 except ImportError:
     SWARM_CORE_AVAILABLE = False
 
-@pytest.mark.skipif(not SWARM_CORE_AVAILABLE)
+@pytest.mark.skipif(not SWARM_CORE_AVAILABLE, reason="swarm_core module not available")
 class TestRootCauseAnalyzerIntegration:
     """Test C++ RootCauseAnalyzer PyBind11 integration"""
 
@@ -198,7 +198,7 @@ class TestRootCauseAnalyzerIntegration:
         assert hasattr(swarm_core.AnalysisResult, 'SUCCESS')  # type: ignore[attr-defined]
         assert hasattr(swarm_core.AnalysisResult, 'CYCLE_DETECTED')  # type: ignore[attr-defined]
 
-@pytest.mark.skipif(not SWARM_CORE_AVAILABLE)
+@pytest.mark.skipif(not SWARM_CORE_AVAILABLE, reason="swarm_core module not available")
 class TestDependencyChainStructures:
     """Test data structure bindings"""
 

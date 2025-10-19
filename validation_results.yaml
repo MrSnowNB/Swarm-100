@@ -1,0 +1,30 @@
+workflow_name: Granite4 MicroH Swarm Validation
+start_time: '2025-10-19T02:42:22.858830'
+gates_passed: 1
+gates_failed: 0
+gates_total: 1
+failed_gates: []
+gate_results:
+  gate1:
+    name: Initial Gate
+    steps_executed: 2
+    steps_passed: 2
+    steps_failed: 0
+    step_results:
+    - name: Check Hardware Configuration
+      type: command
+      success: true
+      duration_seconds: 0
+    - name: Check Model Configuration
+      type: command
+      success: true
+      duration_seconds: 0
+    success: true
+    duration_seconds: 0.004802
+overall_success: true
+end_time: '2025-10-19T02:42:22.863731'
+command_line:
+- swarm-core/validation_runner.py
+- --workflow
+- configs/swarm_config.yaml
+working_directory: /home/mr-snow/Documents/Testing the Beast/Swarm

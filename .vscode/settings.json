@@ -2,5 +2,11 @@
   "python.defaultInterpreterPath": "/home/mr-snow/Documents/Testing the Beast/Swarm/swarm_testing_env/bin/python",
   "python.analysis.extraPaths": [
     "/home/mr-snow/Documents/Testing the Beast/Swarm/swarm_testing_env/lib/python3.12/site-packages"
+  ],
+  "C_Cpp.default.includePath": [
+    "${workspaceFolder}/**",
+    "/home/mr-snow/Documents/Testing the Beast/Swarm/swarm_testing_env/include/python3.12",
+    "/home/mr-snow/Documents/Testing the Beast/Swarm/swarm_testing_env/lib/python3.12/site-packages/pybind11/include",
+    "/usr/include"
   ]
 }

@@ -1,0 +1,231 @@
+---
+# Swarm-100 C++ Core Validation Workflow - Gated Testing
+# ALL GATES MUST PASS 100% OR VALIDATION FAILS
+name: "Swarm-100 C++ Core Gated Validation"
+description: "Comprehensive validation of pybind11 fixes with 100% success requirement"
+version: "1.0.0"
+timestamp: "2025-10-19"
+
+# Global requirements
+requirements:
+  python_version: "3.12.3"
+  cmake_version: "3.15+"
+  build_system: "GNU Make"
+  cpp_standard: "C++17"
+  virtual_env: "swarm_testing_env"
+
+# Gated testing phases - each must pass 100% to proceed
+gates:
+  # GATE 1: Build Validation
+  gate_1_build_validation:
+    name: "Build Validation"
+    description: "Verify C++ compilation and linking succeeds"
+    required_success_rate: 100
+    timeout_seconds: 300
+    steps:
+      - name: "Environment Check"
+        type: "command"
+        command: "test -f ../swarm_testing_env/bin/activate && echo 'Virtual env exists'"
+        expected_exit_code: 0
+        fail_on_error: true
+
+      - name: "CMake Configuration"
+        type: "command"
+        command: "cd build && cmake .."
+        expected_exit_code: 0
+        fail_on_error: true
+
+      - name: "Build Execution"
+        type: "command"
+        command: "cd build && make -j$(nproc)"
+        expected_exit_code: 0
+        fail_on_error: true
+
+      - name: "Module Generation"
+        type: "file_check"
+        file_path: "build/swarm_core.cpython-312-x86_64-linux-gnu.so"
+        must_exist: true
+        fail_on_error: true
+
+  # GATE 2: Module Import
+  gate_2_module_import:
+    name: "Module Import Validation"
+    description: "Verify Python can import the compiled C++ module"
+    required_success_rate: 100
+    timeout_seconds: 60
+    fail_all_on_failure: true
+    steps:
+      - name: "Python Module Import"
+        type: "python_import"
+        module: "swarm_core"
+        expected_attributes:
+          - CyberGrid
+          - RootCauseAnalyzer
+          - AnalysisResult
+          - DependencyLink
+        fail_on_error: true
+
+      - name: "Module Integrity Check"
+        type: "python_script"
+        script: |
+          import sys
+          sys.path.insert(0, 'build')
+          import swarm_core
+          assert hasattr(swarm_core, '__version__')
+          assert hasattr(swarm_core, 'CyberGrid')
+          assert hasattr(swarm_core, 'RootCauseAnalyzer')
+          print("✓ Module integrity verified")
+        fail_on_error: true
+
+  # GATE 3: Basic Functionality
+  gate_3_basic_functionality:
+    name: "Basic Functionality Validation"
+    description: "Test fundamental C++ class operations"
+    required_success_rate: 100
+    timeout_seconds: 120
+    steps:
+      - name: "CyberGrid Creation"
+        type: "python_script"
+        script: |
+          import sys
+          sys.path.insert(0, 'build')
+          import swarm_core
+
+          grid = swarm_core.CyberGrid(50, 50)
+          assert grid.width() == 50
+          assert grid.height() == 50
+          assert grid.cell_count() == 2500
+          print("✓ CyberGrid creation and basic properties verified")
+
+      - name: "RootCauseAnalyzer Initialization"
+        type: "python_script"
+        script: |
+          import sys
+          sys.path.insert(0, 'build')
+          import swarm_core
+
+          config = swarm_core.AnalysisConfig()
+          analyzer = swarm_core.RootCauseAnalyzer(config)
+          assert analyzer.get_current_memory_usage() >= 0
+          print("✓ RootCauseAnalyzer creation and basic methods verified")
+
+      - name: "Agent and Grid Operations"
+        type: "python_script"
+        script: |
+          import sys
+          sys.path.insert(0, 'build')
+          import swarm_core
+
+          grid = swarm_core.CyberGrid(10, 10)
+          assert grid.place_agent(5, 5, "test_agent") == True
+
+          analyzer = swarm_core.RootCauseAnalyzer()
+          graph = {"agent1": [swarm_core.DependencyLink("agent2", 0.8, "communication")]}
+          result = analyzer.analyze_dependency_chain("agent1", ["test"], graph)
+          assert hasattr(result, 'dependency_chain')
+          print("✓ Agent management and analysis operations verified")
+
+  # GATE 4: Integration Tests
+  gate_4_integration_tests:
+    name: "Integration Test Suite"
+    description: "Run complete pytest test suite with 100% pass rate"
+    required_success_rate: 100
+    timeout_seconds: 300
+    steps:
+      - name: "Pytest Collection"
+        type: "command"
+        command: "python3 -m pytest tests/test_root_cause_analyzer.py --collect-only -q | grep collected"
+        expected_pattern: "collected [0-9]+ items"
+        fail_on_error: true
+
+      - name: "Run All Tests"
+        type: "command"
+        command: "python3 -m pytest tests/test_root_cause_analyzer.py -v --tb=short"
+        expected_exit_code: 0
+        fail_on_error: true
+
+      - name: "Validate Test Results"
+        type: "python_script"
+        script: |
+          import subprocess
+          result = subprocess.run([
+              'python3', '-m', 'pytest',
+              'tests/test_root_cause_analyzer.py',
+              '--tb=no', '-q',
+              '--disable-warnings'
+          ], capture_output=True, text=True)
+
+          passed = result.returncode == 0
+          if not passed:
+              print(result.stdout)
+              print(result.stderr)
+              assert False, f"Tests failed with exit code {result.returncode}"
+
+          print("✓ Integration test suite passed 100%")
+
+  # GATE 5: Swarm Scenario Validation
+  gate_5_swarm_validation:
+    name: "Full Swarm Validation"
+    description: "Real swarm scenario with multi-agent interactions"
+    required_success_rate: 100
+    timeout_seconds: 180
+    steps:
+      - name: "Complex Swarm Scenario"
+        type: "python_script"
+        script: |
+          import sys
+          sys.path.insert(0, 'build')
+          import swarm_core
+
+          # Create cyber landscape
+          grid = swarm_core.CyberGrid(100, 100)
+          grid.randomize(0.2, 0.3)  # 20% alive, 0.3 base energy
+
+          # Place agents
+          agents = [f"agent_{i:02d}" for i in range(20)]
+          placed = 0
+          for agent in agents:
+              for attempt in range(100):
+                  x, y = attempt % 10, attempt // 10
+                  if grid.place_agent(x + 10, y + 10, agent):
+                      placed += 1
+                      break
+
+          assert placed >= 15, f"Only placed {placed}/20 agents"
+
+          # Create dependency network
+          graph = {}
+          for i, agent in enumerate(agents):
+              deps = []
+              if i > 0:  # Add dependency to previous agent
+                  deps.append(swarm_core.DependencyLink(agents[i-1], 0.7, "communication"))
+              if i < len(agents)-1:  # Add dependency to next agent
+                  deps.append(swarm_core.DependencyLink(agents[i+1], 0.6, "resource"))
+              if deps:
+                  graph[agent] = deps
+
+          # Perform root cause analysis on failure cascade
+          analyzer = swarm_core.RootCauseAnalyzer()
+          result = analyzer.analyze_dependency_chain(
+              agents[-1],  # Last agent fails
+              ["network_failure", "resource_timeout"],
+              graph
+          )
+
+          assert result.analysis_complete
+          assert len(result.dependency_chain) > 0
+          assert isinstance(result.primary_root_cause, str)
+          assert len(result.primary_root_cause) > 0
+
+          # Run grid evolution
+          initial_energy = grid.average_energy()
+          for _ in range(10):
+              grid.step()
+          final_energy = grid.average_energy()
+
+          print(f"✓ Swarm scenario completed: {len(graph)} agents, {len(result.dependency_chain)} chain length, energy {initial_energy:.3f} -> {final_energy:.3f}")
+
+# Validation results will be written to this file
+results_file: "validation_results.yaml"
+failure_policy: "stop_all_gates"  # If any gate fails, stop the entire validation
+success_threshold: 100  # All tests must pass
