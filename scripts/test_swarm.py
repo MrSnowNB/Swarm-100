@@ -11,7 +11,6 @@ created: 2025-10-18
 import requests
 import time
 import argparse
-import yaml
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
 class SwarmTester:

@@ -20,7 +20,7 @@ import signal
 import psutil
 from concurrent.futures import ThreadPoolExecutor
 import requests
-from typing import List, Dict, Optional
+from typing import List, Dict, Optional, cast, Any
 import logging
 
 
@@ -33,12 +33,15 @@ class AgentLifecycleSimulator:
 
     def __init__(self, config_path='configs/swarm_config.yaml'):
         with open(config_path, 'r') as f:
-            self.config = yaml.safe_load(f)
+            raw_config = yaml.safe_load(f)
+        if raw_config is None:
+            raise ValueError(f"Configuration file '{config_path}' is empty or invalid")
+        self.config: Dict[str, Any] = cast(Dict[str, Any], raw_config)
         self.launched_processes: List[subprocess.Popen] = []
-        self.agent_configs: List[Dict] = []
+        self.agent_configs: List[Dict[str, Any]] = []
         self.base_port = self.config['bot']['base_port']
 
-    def generate_agent_config(self, gpu_id: int, agent_id: int) -> Dict:
+    def generate_agent_config(self, gpu_id: int, agent_id: int) -> Dict[str, Any]:
         """Generate configuration for a single agent"""
         port = self.base_port + (gpu_id * 100) + agent_id
         config = {
@@ -54,7 +57,7 @@ class AgentLifecycleSimulator:
         }
         return config
 
-    def launch_single_agent(self, gpu_id: int, agent_id: int) -> Dict:
+    def launch_single_agent(self, gpu_id: int, agent_id: int) -> Optional[Dict[str, Any]]:
         """Launch a single agent process for testing"""
         config = self.generate_agent_config(gpu_id, agent_id)
 
@@ -87,7 +90,7 @@ class AgentLifecycleSimulator:
             logger.error(f"Failed to launch agent {config['bot_id']}: {e}")
             return None
 
-    def check_agent_health(self, config: Dict) -> bool:
+    def check_agent_health(self, config: Dict[str, Any]) -> bool:
         """Check if agent is healthy by querying its health endpoint"""
         # Since agents don't have direct health endpoints, check process status
         if config.get('process') and config['process'].poll() is None:
@@ -95,7 +98,7 @@ class AgentLifecycleSimulator:
             return True
         return False
 
-    def stop_agent(self, config: Dict) -> bool:
+    def stop_agent(self, config: Dict[str, Any]) -> bool:
         """Stop a single agent gracefully"""
         if config.get('process'):
             try:
@@ -306,7 +309,7 @@ def test_concurrent_agent_operations(agent_lifecycle_simulator, metrics_collecto
     assert healthy_count == 10, f"Only {healthy_count}/10 agents healthy after concurrent launch"
 
     # Test concurrent shutdowns
-    def shutdown_agent_worker(config: Dict):
+    def shutdown_agent_worker(config: Dict[str, Any]):
         return agent_lifecycle_simulator.stop_agent(config)
 
     with ThreadPoolExecutor(max_workers=10) as executor:
@@ -357,8 +360,10 @@ def test_agent_lifecycle_state_persistence(agent_lifecycle_simulator, tmp_path):
 
     # Reload state would happen in agent startup
     with open(state_file, 'r') as f:
-        reloaded_state = yaml.safe_load(f)
-
+        reloaded_state_raw = yaml.safe_load(f)
+    if reloaded_state_raw is None:
+        pytest.fail("Failed to load state")
+    reloaded_state: Dict[str, Any] = cast(Dict[str, Any], reloaded_state_raw)
     assert reloaded_state['test_metric'] == 42, "State persistence failed"
 
     logger.info("State persistence validated")

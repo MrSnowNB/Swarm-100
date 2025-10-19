@@ -18,7 +18,7 @@ import psutil
 import os
 import yaml
 from concurrent.futures import ThreadPoolExecutor, as_completed
-import numpy as np
+import numpy as np  # type: ignore
 
 
 class PerformanceMonitor:

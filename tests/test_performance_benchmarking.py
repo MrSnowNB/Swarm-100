@@ -142,7 +142,12 @@ class PerformanceBenchmarker:
             'gpu_utilization_avg': [],
             'memory_usage_mb': [],
             'temperature_readings': [],
-            'power_consumption': []
+            'power_consumption': [],
+            'avg_gpu_util': 0.0,
+            'peak_gpu_util': 0.0,
+            'avg_memory_usage': 0.0,
+            'avg_temperature': 0.0,
+            'avg_power': 0.0
         }
 
         # Simulate GPU monitoring for duration
@@ -174,9 +179,9 @@ class PerformanceBenchmarker:
     def benchmark_network_performance(self, num_nodes: int = 100) -> Dict:
         """Benchmark network communication performance"""
         results = {
-            'message_delivery_rate': 0,
-            'network_latency_avg': 0,
-            'bandwidth_utilization': 0,
+            'message_delivery_rate': 0.0,
+            'network_latency_avg': 0.0,
+            'bandwidth_utilization': 0.0,
             'connection_failures': 0
         }
 

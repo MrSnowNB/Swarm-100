@@ -35,7 +35,7 @@ class BotWorker:
         self.logger = logging.getLogger(f'Bot-{bot_id}')
 
         # Initialize tracing
-        init_swarm_tracing(f"bot-{bot_id}")
+        self.swarm_tracer = init_swarm_tracing(f"bot-{bot_id}")
 
         self.memory = []
         self.stats = {

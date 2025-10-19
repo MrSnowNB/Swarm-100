@@ -298,6 +298,9 @@ class TestConfigurationValidation:
         with open(config_path, 'r') as f:
             config = yaml.safe_load(f)
 
+        assert config is not None
+        assert isinstance(config, dict)
+
         required_sections = ['project', 'hardware', 'model', 'swarm', 'bot', 'performance', 'logging', 'monitoring']
         for section in required_sections:
             assert section in config, f"Missing required config section: {section}"

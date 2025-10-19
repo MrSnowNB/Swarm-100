@@ -10,14 +10,15 @@ created: 2025-10-18
 
 import os
 import logging
-from opentelemetry import trace
-from opentelemetry.sdk.trace import TracerProvider
-from opentelemetry.sdk.trace.export import BatchSpanProcessor
-from opentelemetry.exporter.otlp.proto.grpc.trace_exporter import OTLPSpanExporter
-from opentelemetry.instrumentation.flask import FlaskInstrumentor
-from opentelemetry.instrumentation.requests import RequestsInstrumentor
-from opentelemetry.sdk.resources import Resource
-from opentelemetry.semconv.resource import ResourceAttributes
+from typing import Optional
+from opentelemetry import trace  # type: ignore[import]
+from opentelemetry.trace import Tracer  # type: ignore[import]
+from opentelemetry.sdk.trace import TracerProvider  # type: ignore[import]
+from opentelemetry.sdk.trace.export import BatchSpanProcessor  # type: ignore[import]
+from opentelemetry.exporter.otlp.proto.grpc.trace_exporter import OTLPSpanExporter  # type: ignore[import]
+
+from opentelemetry.sdk.resources import Resource  # type: ignore[import]
+from opentelemetry.semconv.resource import ResourceAttributes  # type: ignore[import]
 
 
 class SwarmTracer:
@@ -26,8 +27,6 @@ class SwarmTracer:
     def __init__(self, service_name="swarm-agent", service_version="1.0.0"):
         self.service_name = service_name
         self.service_version = service_version
-        self.tracer_provider = None
-        self.tracer = None
         self._setup_tracing()
 
     def _setup_tracing(self):
@@ -64,9 +63,15 @@ class SwarmTracer:
     def _setup_auto_instrumentation(self):
         """Setup automatic instrumentation for HTTP requests"""
         try:
+            from opentelemetry.instrumentation.requests import RequestsInstrumentor  # type: ignore[import]
             RequestsInstrumentor().instrument()
         except Exception as e:
             logging.warning(f"Failed to instrument requests: {e}")
+        try:
+            from opentelemetry.instrumentation.flask import FlaskInstrumentor  # type: ignore[import]
+            FlaskInstrumentor().instrument()
+        except Exception as e:
+            logging.warning(f"Failed to instrument Flask: {e}")
 
     def get_tracer(self):
         """Get the configured tracer"""
@@ -74,7 +79,7 @@ class SwarmTracer:
 
     def create_swarm_span(self, operation_name, bot_id=None, gpu_id=None, **attributes):
         """Create a span for swarm operations"""
-        span = self.tracer.start_as_span(operation_name)
+        span = self.tracer.start_span(operation_name)
 
         # Add standard swarm attributes
         if bot_id:
@@ -133,11 +138,13 @@ class SwarmSpan:
         return self.span
 
     def __exit__(self, exc_type, exc_val, exc_tb):
+        if self.span is None:
+            return
         if exc_type is not None:
             self.span.record_exception(exc_val)
             self.span.set_status(trace.Status(trace.StatusCode.ERROR, str(exc_val)))
         else:
-            self.span.set_status(trace.Status.OK)
+            self.span.set_status(trace.Status(trace.StatusCode.OK))
 
         self.span.end()
 

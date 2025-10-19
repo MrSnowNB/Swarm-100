@@ -29,8 +29,8 @@ import psutil
 import requests
 from typing import List, Dict, Optional, Callable
 import logging
+import random
 from concurrent.futures import ThreadPoolExecutor, as_completed
-import numpy as np
 from unittest.mock import patch, MagicMock
 
 
@@ -160,11 +160,11 @@ class MockFailureResistantAgent:
         else:
             # Recovery success probability varies by failure type
             if any('gpu' in f for f in agent_failures):
-                success = np.random.random() < 0.7  # 70% recovery success for GPU failures
+                success = random.random() < 0.7  # 70% recovery success for GPU failures
             elif any('network' in f for f in agent_failures):
-                success = np.random.random() < 0.8  # 80% for network failures
+                success = random.random() < 0.8  # 80% for network failures
             elif any('memory' in f for f in agent_failures):
-                success = np.random.random() < 0.9  # 90% for memory issues
+                success = random.random() < 0.9  # 90% for memory issues
             else:
                 success = True
 
@@ -210,9 +210,10 @@ class FailureRecoverySimulator:
             'system_downtime': 0
         }
 
-    def inject_failure_scenario(self, scenario: str, targets: List[str] = None, duration: float = 5.0):
+    def inject_failure_scenario(self, scenario: str, targets: Optional[List[str]] = None, duration: float = 5.0):
         """Inject a specific failure scenario"""
         scenario_start = time.time()
+        isolated_agents = []  # Initialize to prevent unbound variable warning
 
         if scenario == "gpu_failure_cascade":
             # Fail entire GPU

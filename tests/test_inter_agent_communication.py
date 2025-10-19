@@ -83,7 +83,7 @@ class MockAgentNode:
         """Add a neighboring agent"""
         self.neighbors.add(neighbor_id)
 
-    def send_message(self, message: MockMessage, target_agent_id: str = None):
+    def send_message(self, message: MockMessage, target_agent_id: Optional[str] = None):
         """Mock sending a message to target agent or broadcast to neighbors"""
         message.hops += 1
 
@@ -225,7 +225,7 @@ class MockSwarmNetwork:
         stats = {
             'total_agents': len(self.agents),
             'total_connections': sum(len(agent.neighbors) for agent in self.agents.values()),
-            'avg_neighbors_per_agent': 0,
+            'avg_neighbors_per_agent': 0.0,
             'network_diameter': 0,
             'clustering_coefficient': 0
         }
