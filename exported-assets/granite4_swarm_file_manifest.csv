@@ -1,9 +1,0 @@
-filename,path,description,executable,required
-swarm_config.yaml,configs/,Main swarm configuration file,False,True
-bot_template.yaml,configs/,Individual bot configuration template,False,True
-launch_swarm.py,scripts/,Main swarm launcher script,True,True
-bot_worker.py,scripts/,Individual bot worker process,True,True
-health_monitor.py,scripts/,Health monitoring and status script,True,True
-stop_swarm.sh,scripts/,Graceful shutdown script,True,True
-test_swarm.py,scripts/,Functionality testing script,True,False
-quickstart.sh,,Automated setup script,True,False
