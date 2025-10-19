@@ -15,6 +15,7 @@ import json
 import os
 import logging
 from datetime import datetime
+from tracing_setup import init_swarm_tracing, trace_health_check, SwarmSpan
 
 class BotWorker:
     def __init__(self, bot_id, gpu_id, port):
@@ -30,6 +31,9 @@ class BotWorker:
         )
         self.logger = logging.getLogger(f'Bot-{bot_id}')
 
+        # Initialize tracing
+        init_swarm_tracing(f"bot-{bot_id}")
+
         self.memory = []
         self.stats = {
             'requests': 0,
@@ -39,44 +43,63 @@ class BotWorker:
 
     def query_ollama(self, prompt):
         """Query Ollama with prompt"""
-        try:
-            response = requests.post(
-                f"{self.ollama_url}/api/generate",
-                json={
-                    "model": "granite4:micro-h",
-                    "prompt": prompt,
-                    "stream": False,
-                    "options": {
-                        "temperature": 0.7,
-                        "top_p": 0.9,
-                        "top_k": 40
-                    }
-                },
-                timeout=30
-            )
+        with SwarmSpan("ollama_query",
+                      bot_id=self.bot_id,
+                      gpu_id=self.gpu_id,
+                      prompt_length=len(prompt)) as span:
+            start_time = time.time()
+            try:
+                response = requests.post(
+                    f"{self.ollama_url}/api/generate",
+                    json={
+                        "model": "granite4:micro-h",
+                        "prompt": prompt,
+                        "stream": False,
+                        "options": {
+                            "temperature": 0.7,
+                            "top_p": 0.9,
+                            "top_k": 40
+                        }
+                    },
+                    timeout=30
+                )
 
-            if response.status_code == 200:
-                self.stats['requests'] += 1
-                return response.json()['response']
-            else:
+                latency = time.time() - start_time
+                span.set_attribute("query.latency", latency)
+                span.set_attribute("query.prompt_length", len(prompt))
+
+                if response.status_code == 200:
+                    self.stats['requests'] += 1
+                    response_length = len(response.json()['response'])
+                    span.set_attribute("query.response_length", response_length)
+                    span.set_attribute("query.success", True)
+                    return response.json()['response']
+                else:
+                    self.stats['errors'] += 1
+                    span.set_attribute("query.success", False)
+                    span.set_attribute("query.error_code", response.status_code)
+                    self.logger.error(f"Ollama error: {response.status_code}")
+                    return None
+
+            except Exception as e:
+                latency = time.time() - start_time
+                span.set_attribute("query.latency", latency)
+                span.set_attribute("query.success", False)
+                span.set_attribute("query.error", str(e))
                 self.stats['errors'] += 1
-                self.logger.error(f"Ollama error: {response.status_code}")
+                self.logger.error(f"Query failed: {e}")
                 return None
-
-        except Exception as e:
-            self.stats['errors'] += 1
-            self.logger.error(f"Query failed: {e}")
-            return None
 
     def health_check(self):
         """Perform health check"""
-        result = self.query_ollama("ping")
-        if result:
-            self.logger.info(f"✓ Health check passed - Stats: {self.stats}")
-            return True
-        else:
-            self.logger.error("✗ Health check failed")
-            return False
+        with trace_health_check(self.bot_id, self.gpu_id, "health_check"):
+            result = self.query_ollama("ping")
+            if result:
+                self.logger.info(f"✓ Health check passed - Stats: {self.stats}")
+                return True
+            else:
+                self.logger.error("✗ Health check failed")
+                return False
 
     def run(self):
         """Main bot loop"""
