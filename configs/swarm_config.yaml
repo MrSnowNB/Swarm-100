@@ -6,28 +6,28 @@ version: 1.0.0
 status: active
 created: 2025-10-18
 
-# Hardware Configuration - PHASE 1: Initial Bootstrap (10 bots/GPU for validation)
-# Testing zombie rebirth consistency with smaller deployment
-# Expected: 40 total bots (10 × 4 GPUs)
+# Hardware Configuration - PHASE 2: Full CA Deployment (25 bots/GPU for 10x10 grid)
+# CA-enabled swarm with cellular automata grid mapping
+# Expected: 100 total bots (25 × 4 GPUs) for 10x10 CA grid
 hardware:
   gpus:
     - id: 0
       name: "RTX 6000 Ada"
       vram_gb: 48
-      bots: 10
+      bots: 25
     - id: 1
       name: "RTX 6000 Ada"
       vram_gb: 48
-      bots: 10
+      bots: 25
     - id: 2
       name: "RTX 6000 Ada"
       vram_gb: 48
-      bots: 10
+      bots: 25
     - id: 3
       name: "RTX 6000 Ada"
       vram_gb: 48
-      bots: 10
-  total_bots: 40
+      bots: 25
+  total_bots: 100
 
 # Model Configuration
 model:
@@ -46,7 +46,7 @@ swarm:
   ttl: 4
   # CA Grid Configuration
   grid_width: 10  # CA grid width (bots per row)
-  grid_height: 4  # CA grid height (derived from total bots)
+  grid_height: 10  # CA grid height (total bots / grid width)
 
 # Bot Configuration
 bot:
@@ -55,7 +55,7 @@ bot:
   max_retries: 3
   health_check_interval: 60
   startup_grace_period_seconds: 30  # Don't fail bots that haven't had time to init
-  launch_stagger_seconds: 10.0  # Delay between bot launches to prevent Ollama connection overload
+  launch_stagger_seconds: 2.0  # Delay between bot launches to prevent Ollama connection overload
 
 # Performance Tuning
 performance:
