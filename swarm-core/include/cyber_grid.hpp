@@ -10,6 +10,7 @@
 #include <random>
 #include <iostream>
 #include <stdexcept>
+#include <chrono>        // for std::chrono timing
 
 // Forward declarations
 class CyberGrid;
@@ -200,7 +201,7 @@ public:
     float calculate_local_density(int x, int y, int radius = 3) const;
     void update_adaptive_parameters();
     int get_adaptive_heartbeat_interval(const std::string& agent_id) const;
-    std::vector<std::string> identify_failed_agents(std::chrono::milliseconds timeout_threshold) const;
+    std::vector<std::string> identify_failed_agents(int timeout_ms) const;
     void initiate_sar_search(const std::string& failed_agent, const std::string& rover_agent);
     void update_agent_trust(const std::string& agent_id, bool successful_communication);
     float get_agent_trust(const std::string& agent_id) const;

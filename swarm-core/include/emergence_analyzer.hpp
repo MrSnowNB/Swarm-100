@@ -57,6 +57,12 @@ public:
     double calculate_energy_entropy() const;
     double calculate_entropy_to_coherence_ratio() const;  // ECR primary metric
 
+    // Pulsing cellular automata metrics (per DDLab pulsing-CA model)
+    double calculate_pulse_wavelength() const;              // λ: cycles between peaks
+    double calculate_pulse_amplitude() const;               // A: energy difference range
+    std::vector<std::vector<double>> compute_entropy_density_map() const;  // Spatial pulse coherence
+    bool detect_glider_coherence_chains() const;            // Identify stable pulse propagation paths
+
     // Pattern detection
     void detect_oscillators();
     void track_pattern_persistence();

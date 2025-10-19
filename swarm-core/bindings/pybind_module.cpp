@@ -86,9 +86,9 @@ PYBIND11_MODULE(swarm_core, m) {
     py::class_<Cell>(m, "Cell")
         .def_readonly("x", &Cell::x)
         .def_readonly("y", &Cell::y)
-        .def_property_readonly("alive", &Cell::alive)
-        .def_property_readonly("energy", &Cell::energy)
-        .def_property_readonly("occupants", &Cell::occupants)
+        .def_readonly("alive", &Cell::alive)
+        .def_readonly("energy", &Cell::energy)
+        .def_readonly("occupants", &Cell::occupants)
         .def("agent_count", &Cell::agent_count)
         .def("is_empty", &Cell::is_empty)
         .def("can_occupy", &Cell::can_occupy)
@@ -169,54 +169,4 @@ PYBIND11_MODULE(swarm_core, m) {
     // Module metadata
     m.attr("__version__") = "0.1.0";
     m.attr("__doc__") = "Swarm-100 C++ Core Modules - Alice in CyberLand: High-performance root cause analysis, cellular automata, and LoRA pulse simulation";
-}
-
-</final_file_content>
-
-IMPORTANT: For any future changes to this file, use the final_file_content shown above as your reference. This content reflects the current state of the file, including any auto-formatting (e.g., if you used single quotes but the formatter converted them to double quotes). Always base your SEARCH/REPLACE operations on this final version to ensure accuracy.
-
-<environment_details>
-# Visual Studio Code Visible Files
-swarm-core/bindings/pybind_module.cpp
-
-# Visual Studio Code Open Tabs
-configs/swarm_config.yaml
-configs/bot_template.yaml
-scripts/launch_swarm.py
-scripts/health_monitor.py
-scripts/stop_swarm.sh
-scripts/test_swarm.py
-validation_progress.yaml
-testing_improvement_plan.yaml
-tests/test_baseline_performance.py
-scripts/tracing_setup.py
-scripts/test_stage1_individual_agents.py
-scripts/bot_worker.py
-grok_workflow.yaml
-architecture_review_report.yaml
-tests/test_swarm_agent_lifecycle.py
-tests/test_inter_agent_communication.py
-tests/test_failure_recovery_scenarios.py
-tests/test_performance_benchmarking.py
-.alice_in_cyberland.story
-scripts/swarm_debug_analyzer.py
-scripts/swarm_debug_usage_example.sh
-swarm-core/src/root_cause_analyzer.cpp
-swarm-core/include/root_cause_analyzer.hpp
-swarm-core/tests/test_root_cause_analyzer.py
-swarm-core/README.md
-swarm-core/include/cyber_grid.hpp
-swarm-core/src/cyber_grid.cpp
-swarm-core/CMakeLists.txt
-swarm-core/bindings/pybind_module.cpp
-quickstart.sh
-
-# Current Time
-10/18/2025, 11:00:39 PM (America/New_York, UTC-4:00)
-
-# Context Window Usage
-175,861 / 256K tokens used (69%)
-
-# Current Mode
-ACT MODE
 }

@@ -6,6 +6,7 @@
 #include <iomanip>
 #include <sstream>
 #include <random>
+#include <queue>
 
 // EmergenceAnalyzer Implementation
 
@@ -636,7 +637,7 @@ ResilientEmergenceBenchmarker::run_resilience_simulation(
         update_resilience_snapshot(gen);
 
         // Update agent state based on faults
-        auto failed_agents = grid_->identify_failed_agents(std::chrono::milliseconds(1000));
+        auto failed_agents = grid_->identify_failed_agents(1000);
         for (const auto& failed_agent : failed_agents) {
             if (survived_simulation.count(failed_agent)) {
                 int current_failures = reconnect_times[failed_agent];
@@ -713,7 +714,7 @@ void ResilientEmergenceBenchmarker::inject_pulse_interference(int x, int y, int 
 }
 
 std::vector<std::string> ResilientEmergenceBenchmarker::get_failed_agents() const {
-    return grid_->identify_failed_agents(std::chrono::milliseconds(1000));
+    return grid_->identify_failed_agents(1000);
 }
 
 double ResilientEmergenceBenchmarker::calculate_current_connectivity() const {
@@ -911,4 +912,210 @@ std::vector<std::string> ResilientEmergenceBenchmarker::select_random_agents(int
 
     selected.resize(count);
     return selected;
+}
+
+// Pulsing Cellular Automata Metrics Implementation (per DDLab pulsing-CA model)
+
+double EmergenceAnalyzer::calculate_pulse_wavelength() const {
+    // Calculate λ: average number of ticks between energy peaks in the grid
+    // This requires tracking energy history over time, but since we don't have temporal
+    // history in this implementation, we use spatial coherence as proxy for pulsing frequency
+
+    std::vector<double> peak_intervals;
+
+    // Find local energy maxima and their separations
+    for (int y = 1; y < grid_.height() - 1; ++y) {
+        for (int x = 1; x < grid_.width() - 1; ++x) {
+            const auto& center = grid_.get_cell(x, y);
+            bool is_local_max = true;
+
+            // Check if center is local energy maximum
+            for (int dy = -1; dy <= 1 && is_local_max; ++dy) {
+                for (int dx = -1; dx <= 1 && is_local_max; ++dx) {
+                    if (dx == 0 && dy == 0) continue;
+                    const auto& neighbor = grid_.get_cell(x + dx, y + dy);
+                    if (neighbor.energy >= center.energy) {
+                        is_local_max = false;
+                    }
+                }
+            }
+
+            if (is_local_max && center.energy > 0.7f) {  // High-energy peak
+                // Calculate distance to nearest other high-energy peak
+                double min_distance = std::numeric_limits<double>::max();
+                for (int ny = 0; ny < grid_.height(); ++ny) {
+                    for (int nx = 0; nx < grid_.width(); ++nx) {
+                        if (nx == x && ny == y) continue;
+                        const auto& neighbor = grid_.get_cell(nx, ny);
+                        if (neighbor.energy > 0.7f) {
+                            double dist = grid_.toroidal_distance(x, y, nx, ny);
+                            min_distance = std::min(min_distance, dist);
+                        }
+                    }
+                }
+
+                if (min_distance < std::numeric_limits<double>::max()) {
+                    peak_intervals.push_back(min_distance);
+                }
+            }
+        }
+    }
+
+    // Average peak spacing as wavelength approximation
+    if (peak_intervals.empty()) return 0.0;
+    double avg_spacing = 0.0;
+    for (double spacing : peak_intervals) {
+        avg_spacing += spacing;
+    }
+    return avg_spacing / peak_intervals.size();
+}
+
+double EmergenceAnalyzer::calculate_pulse_amplitude() const {
+    // Calculate A: energy difference (range) across the grid at current time
+    // max_energy - min_energy = amplitude measure
+
+    if (grid_.width() == 0 || grid_.height() == 0) return 0.0;
+
+    double max_energy = 0.0;
+    double min_energy = 1.0;  // Energy clamped to [0,1]
+
+    for (int y = 0; y < grid_.height(); ++y) {
+        for (int x = 0; x < grid_.width(); ++x) {
+            double energy = grid_.get_cell(x, y).energy;
+            max_energy = std::max(max_energy, energy);
+            min_energy = std::min(min_energy, energy);
+        }
+    }
+
+    return max_energy - min_energy;
+}
+
+std::vector<std::vector<double>> EmergenceAnalyzer::compute_entropy_density_map() const {
+    // Spatial entropy-density map: local information content variation
+    // Higher entropy-density indicates more chaotic/complex pulsing regions
+
+    std::vector<std::vector<double>> entropy_map(grid_.height(),
+                                                std::vector<double>(grid_.width(), 0.0));
+
+    const int PATCH_SIZE = 3;  // 3x3 patches for local analysis
+
+    for (int y = 0; y < grid_.height(); ++y) {
+        for (int x = 0; x < grid_.width(); ++x) {
+            // Calculate local energy entropy in PATCH_SIZE x PATCH_SIZE neighborhood
+            std::vector<double> local_energies;
+            int valid_cells = 0;
+
+            // Collect energies in local patch (with toroidal wrapping)
+            for (int dy = -PATCH_SIZE/2; dy <= PATCH_SIZE/2; ++dy) {
+                for (int dx = -PATCH_SIZE/2; dx <= PATCH_SIZE/2; ++dx) {
+                    int nx = (x + dx + grid_.width()) % grid_.width();
+                    int ny = (y + dy + grid_.height()) % grid_.height();
+                    local_energies.push_back(grid_.get_cell(nx, ny).energy);
+                    valid_cells++;
+                }
+            }
+
+            // Calculate entropy of binned energy distribution
+            const int ENERGY_BINS = 8;
+            std::vector<int> bins(ENERGY_BINS, 0);
+
+            for (double energy : local_energies) {
+                int bin = static_cast<int>(energy * (ENERGY_BINS - 1));
+                bin = std::clamp(bin, 0, ENERGY_BINS - 1);
+                bins[bin]++;
+            }
+
+            double entropy = 0.0;
+            for (int count : bins) {
+                if (count > 0) {
+                    double p = static_cast<double>(count) / valid_cells;
+                    entropy -= p * std::log2(p);
+                }
+            }
+
+            // Normalize entropy to [0,1] range
+            entropy_map[y][x] = entropy / std::log2(ENERGY_BINS);
+        }
+    }
+
+    return entropy_map;
+}
+
+bool EmergenceAnalyzer::detect_glider_coherence_chains() const {
+    // Detect stable pulse propagation chains (glider-like coherence)
+    // Look for connected regions of high energy with consistent directional flow
+
+    // Create connectivity graph of high-energy cells
+    std::vector<std::pair<int, int>> high_energy_cells;
+
+    for (int y = 0; y < grid_.height(); ++y) {
+        for (int x = 0; x < grid_.width(); ++x) {
+            if (grid_.get_cell(x, y).energy > 0.8f) {  // Very high energy threshold
+                high_energy_cells.emplace_back(x, y);
+            }
+        }
+    }
+
+    // Check for coherent chains: connected components with directional consistency
+    // Simplified: look for linear chains of high-energy cells
+    std::unordered_set<std::string> visited;
+
+    for (const auto& [x, y] : high_energy_cells) {
+        std::string key = std::to_string(x) + "," + std::to_string(y);
+        if (visited.count(key)) continue;
+
+        // BFS to find connected component
+        std::vector<std::pair<int, int>> component;
+        std::queue<std::pair<int, int>> queue;
+        queue.emplace(x, y);
+        visited.insert(key);
+
+        while (!queue.empty()) {
+            auto [cx, cy] = queue.front();
+            queue.pop();
+            component.emplace_back(cx, cy);
+
+            // Check Moore neighbors for connectivity
+            for (int dy = -1; dy <= 1; ++dy) {
+                for (int dx = -1; dx <= 1; ++dx) {
+                    if (dx == 0 && dy == 0) continue;
+
+                    int nx = (cx + dx + grid_.width()) % grid_.width();
+                    int ny = (cy + dy + grid_.height()) % grid_.height();
+
+                    if (grid_.get_cell(nx, ny).energy > 0.8f) {
+                        std::string nkey = std::to_string(nx) + "," + std::to_string(ny);
+                        if (!visited.count(nkey)) {
+                            visited.insert(nkey);
+                            queue.emplace(nx, ny);
+                        }
+                    }
+                }
+            }
+        }
+
+        // Check if component forms a coherent chain (aspect ratio > 3:1)
+        if (component.size() >= 5) {  // Minimum chain length
+            double min_x = component[0].first, max_x = min_x;
+            double min_y = component[0].second, max_y = min_y;
+
+            for (const auto& [px, py] : component) {
+                min_x = std::min(min_x, (double)px);
+                max_x = std::max(max_x, (double)px);
+                min_y = std::min(min_y, (double)py);
+                max_y = std::max(max_y, (double)py);
+            }
+
+            double width = max_x - min_x + 1;
+            double height = max_y - min_y + 1;
+            double aspect_ratio = std::max(width / height, height / width);
+
+            // Aspect ratio > 3 indicates a coherent directional chain
+            if (aspect_ratio > 3.0) {
+                return true;  // Found coherent glider-like chain
+            }
+        }
+    }
+
+    return false;
 }

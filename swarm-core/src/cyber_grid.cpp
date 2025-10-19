@@ -142,7 +142,9 @@ int CyberGrid::apply_conway_rules() {
             int live_neighbors = count_living_neighbors(x, y);
             float current_energy = current.energy;
 
-            // Modified Conway's Game of Life with LoRA energy coupling
+            bool was_alive = current.alive;
+
+            // Modified Conway's Game of Life with enhanced LoRA energy coupling
             if (current.alive) {
                 // Alive cell survival rules
                 if (live_neighbors < 2) {
@@ -183,8 +185,27 @@ int CyberGrid::apply_conway_rules() {
                 // Dead cells maintain their death state
             }
 
-            // Energy naturally decays slightly even in alive cells
-            next.energy = std::max(0.0f, current_energy * 0.98f);
+            // Cross-diffusion coupling: life changes create energy pulses
+            if (was_alive != next.alive) {
+                // Death → burst of energy release, Birth → energy consumption
+                float life_change_pulse = next.alive ? -0.1f : 0.3f;  // Birth consumes, death releases
+                next.energy += life_change_pulse;
+            }
+
+            // Constructive interference: life gradient affects energy
+            float life_gradient_energy = 0.0f;
+            auto neighbors = get_moore_neighbors(x, y);
+            for (const auto& [nx, ny] : neighbors) {
+                const Cell& neighbor = get_cell(nx, ny);
+                if (neighbor.alive && !current.alive) {
+                    // Alive neighbor enhances birth potential in dead cells
+                    life_gradient_energy += 0.05f;
+                }
+            }
+            next.energy += life_gradient_energy;
+
+            // Clamp energy and natural decay
+            next.energy = std::max(0.0f, std::min(1.0f, next.energy * 0.98f));
         }
     }
 
@@ -597,13 +618,14 @@ int CyberGrid::get_adaptive_heartbeat_interval(const std::string& agent_id) cons
     return std::max(200, std::min(5000, base_interval));  // Clamp to reasonable range
 }
 
-std::vector<std::string> CyberGrid::identify_failed_agents(std::chrono::milliseconds timeout_threshold) const {
+std::vector<std::string> CyberGrid::identify_failed_agents(int timeout_ms) const {
     std::vector<std::string> failed_agents;
     auto now = std::chrono::steady_clock::now();
+    auto timeout = std::chrono::milliseconds(timeout_ms);
 
     for (const auto& [agent_id, last_time] : last_heartbeat_) {
         auto time_since_heartbeat = now - last_time;
-        if (time_since_heartbeat > timeout_threshold) {
+        if (time_since_heartbeat > timeout) {
             failed_agents.push_back(agent_id);
         }
     }

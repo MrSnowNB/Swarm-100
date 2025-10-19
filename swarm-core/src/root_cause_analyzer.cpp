@@ -150,11 +150,7 @@ AnalysisResult RootCauseAnalyzer::analyze_recursive(
     dependency_depths_[current_agent] = depth;
 
     try {
-        // RAII pattern - stack will be popped when function exits
-        auto stack_guard = [&]() noexcept {
-            recursion_stack_.pop();
-        };
-        auto cleanup = std::unique_ptr<void, decltype(stack_guard)>((void*)1, stack_guard);
+        // RAII pattern - stack will be popped when function exits (directly in finally-like block)
 
         // Identify failure mode for this agent
         std::string failure_mode = identify_failure_mode(symptoms, current_agent);
@@ -201,9 +197,12 @@ AnalysisResult RootCauseAnalyzer::analyze_recursive(
             }
         }
 
+        // Ensure stack gets popped
+        recursion_stack_.pop();
         return AnalysisResult::SUCCESS;
 
     } catch (...) {
+        recursion_stack_.pop();  // Ensure cleanup on exception
         return AnalysisResult::INVALID_INPUT;
     }
 }
