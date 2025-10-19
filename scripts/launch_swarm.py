@@ -2,7 +2,7 @@
 """
 ---
 script: launch_swarm.py
-purpose: Deploy 100-bot Granite4:micro-h swarm across 4 Ada6000 GPUs
+purpose: Deploy swarm (Granite4:micro-h or Zombie CA bots) across 4 GPUs
 status: production-ready
 created: 2025-10-18
 ---
@@ -13,6 +13,7 @@ import yaml
 import time
 import os
 import sys
+import argparse
 from pathlib import Path
 from datetime import datetime
 import logging
@@ -30,7 +31,7 @@ logging.basicConfig(
 logger = logging.getLogger('SwarmManager')
 
 class SwarmManager:
-    def __init__(self, config_path=None):
+    def __init__(self, config_path=None, zombie_active=False):
         if config_path is None:
             config_path = Path(__file__).parent.parent / 'configs' / 'swarm_config.yaml'
         with open(config_path, 'r') as f:
@@ -41,6 +42,7 @@ class SwarmManager:
             raise ValueError(f"Config must be a dictionary")
         self.config: Dict[str, Any] = config_data
 
+        self.zombie_active = zombie_active
         self.bots = []
         self.processes = []
 
@@ -58,12 +60,24 @@ class SwarmManager:
                                   capture_output=True,
                                   text=True,
                                   check=True)
-            if 'granite4' in result.stdout:
-                logger.info("✓ Ollama running, granite4:micro-h available")
-                return True
+            models_available = []
+            for line in result.stdout.strip().split('\n')[1:]:  # Skip header
+                if line.strip():
+                    models_available.append(line.split()[0])
+
+            if self.zombie_active:
+                required = ['gemma3:270m']
             else:
-                logger.error("✗ granite4:micro-h model not found")
-                return False
+                required = ['granite4:micro-h']
+
+            for model in required:
+                if model not in models_available:
+                    logger.error(f"✗ Required model {model} not found")
+                    return False
+
+            logger.info(f"✓ Ollama running, models available: {', '.join(required)}")
+            return True
+
         except Exception as e:
             logger.error(f"✗ Ollama check failed: {e}")
             return False
@@ -97,12 +111,21 @@ class SwarmManager:
 
         log_file = open(f'logs/gpu{gpu_id}/bot_{bot_id:02d}.log', 'w')
 
+        # Choose bot script based on zombie_active flag
+        if self.zombie_active:
+            script_path = 'scripts/bot_worker_zombie.py'
+            bot_type = "ZombieBot"
+        else:
+            script_path = 'scripts/bot_worker.py'
+            bot_type = "Granite4"
+
         # Launch bot worker
-        cmd = ['python3', 'scripts/bot_worker.py',
+        cmd = ['python3', script_path,
                '--bot-id', f"{gpu_id}_{bot_id}",
                '--gpu', str(gpu_id),
                '--port', str(port)]
 
+        logger.debug(f"Launching {bot_type} bot: {' '.join(cmd)}")
         proc = subprocess.Popen(cmd, env=env, stdout=log_file, stderr=log_file)
 
         return {
@@ -233,5 +256,16 @@ class SwarmManager:
             logger.info("\nShutdown signal received")
 
 if __name__ == '__main__':
-    manager = SwarmManager()
+    parser = argparse.ArgumentParser(description='Swarm Deployment Manager')
+    parser.add_argument('--ca-active', action='store_true',
+                       help='Launch CA-enabled ZombieBots with Gemma3:270M')
+    parser.add_argument('--zombie-active', action='store_true',
+                       help='Launch zombie recovery enabled bots (implies --ca-active)')
+
+    args = parser.parse_args()
+
+    # Zombie-active implies CA-active for backward compatibility
+    zombie_active = args.zombie_active or args.ca_active
+
+    manager = SwarmManager(zombie_active=zombie_active)
     manager.run()
