@@ -1,0 +1,9 @@
+[Bot-2_5] 2025-10-19 08:25:44,477 - Failed to instrument Flask: No module named 'flask'
+[Bot-2_5] 2025-10-19 08:25:44,477 - Swarm tracing initialized for bot-2_5
+[Bot-2_5] 2025-10-19 08:25:44,477 - Bot starting on GPU 2, Port 11605
+[Bot-2_5] 2025-10-19 08:25:44,477 - Connecting to Ollama at http://localhost:11434
+[Bot-2_5] 2025-10-19 08:26:16,516 - Query failed: HTTPConnectionPool(host='localhost', port=11434): Read timed out. (read timeout=30)
+[Bot-2_5] 2025-10-19 08:26:16,516 - ✗ Health check failed
+[Bot-2_5] 2025-10-19 08:26:16,516 - Initial health check failed, exiting
+[Bot-2_5] 2025-10-19 08:26:16,522 - Transient error StatusCode.UNAVAILABLE encountered while exporting traces to localhost:4317, retrying in 1.03s.
+[Bot-2_5] 2025-10-19 08:26:22,955 - Failed to export traces to localhost:4317, error code: StatusCode.UNAVAILABLE

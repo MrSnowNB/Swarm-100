@@ -1,0 +1,275 @@
+---
+# Granite4:micro-h 100-Bot Swarm Deployment Plan
+name: "Granite4 Swarm Deployment"
+description: "Stepwise deployment plan for 100-bot Granite4:micro-h swarm across 4 GPUs"
+version: "1.0.0"
+status: "ready"
+created: 2025-10-19
+updated: 2025-10-19
+
+# Prerequisites
+prerequisites:
+  - hardware: 4x RTX 6000 Ada / A6000 GPUs with >=48GB VRAM each
+  - software: Ollama 0.12+, Python 3.12+, CUDA 12+
+  - network: Access to internet for model download
+  - system: Linux with nvidia-driver-xxx
+
+# Phase 1: Environment Preparation (15-30 minutes)
+phase1_environment_prep:
+  name: "Environment Preparation"
+  duration_estimate_min: 30
+  steps:
+    - id: "verify-gpus"
+      name: "Verify GPU Configuration"
+      description: "Check nvidia-smi shows 4 GPUs with adequate VRAM"
+      command: "nvidia-smi --query-gpu=index,name,memory.total --format=csv,noheader"
+      expected: "4 GPUs listed, each with >=48GB"
+      validation: "manual_check"
+
+    - id: "verify-ollama"
+      name: "Verify Ollama Installation"
+      description: "Ensure Ollama is installed and running"
+      command: "ollama --version"
+      expected: "ollama version 0.12.x"
+      validation: "command_output"
+
+    - id: "pull-model"
+      name: "Download Granite4:micro-h Model"
+      description: "Pull the Granite4:micro-h model from Ollama registry"
+      command: "ollama pull granite4:micro-h"
+      estimated_duration: 300  # 5 minutes
+      validation: "ollama_list"
+
+    - id: "warm-model"
+      name: "Warm Start the Model"
+      description: "Initial model load to prepare for swarm deployment"
+      command: "ollama run granite4:micro-h 'ping'"
+      estimated_duration: 60   # 1 minute
+      validation: "model_response"
+
+    - id: "clone-repo"
+      name: "Clone Swarm Repository"
+      description: "Clone the Swarm-100 repository with orchestration files"
+      command: "git clone https://github.com/MrSnowNB/Swarm-100.git"
+      skip_if: "current_directory_is_repo"
+      validation: "directory_exists"
+
+    - id: "create-directories"
+      name: "Create Directories"
+      description: "Set up logs directories for each GPU and bots"
+      command: "mkdir -p logs/gpu{0,1,2,3} bots"
+      validation: "directory_structure"
+
+    - id: "install-deps"
+      name: "Install Python Dependencies"
+      description: "Ensure PyYAML and requests are installed"
+      command: "pip3 install -U pyyaml requests"
+      validation: "pip_check"
+
+# Phase 2: Swarm Configuration (5-10 minutes)
+phase2_configuration:
+  name: "Configuration Setup"
+  duration_estimate_min: 10
+  steps:
+    - id: "validate-config"
+      name: "Validate Swarm Configuration"
+      description: "Check swarm_config.yaml has correct settings"
+      command: "python3 -c \"import yaml; c=yaml.safe_load(open('configs/swarm_config.yaml')); print(f'Bots: {c[\"hardware\"][\"total_bots\"]}, Context: {c[\"model\"][\"context_length\"]}, Port: {c[\"bot\"][\"base_port\"]}')\""
+      expected: "Bots: 100, Context: 4096, Port: 11400"
+      validation: "config_values"
+
+    - id: "check-quantization"
+      name: "Verify Model Quantization"
+      description: "Confirm granite4:micro-h is Q4 quantized"
+      command: "ollama show granite4:micro-h | grep -i quant"
+      expected: "Q4"
+      validation: "output_contains_Q4"
+
+# Phase 3: Swarm Launch (5-10 minutes)
+phase3_launch:
+  name: "Swarm Deployment"
+  duration_estimate_min: 10
+  steps:
+    - id: "launch-swarm"
+      name: "Launch 100-Bot Swarm"
+      description: "Deploy bots across 4 GPUs with staggered startup"
+      command: "python3 scripts/launch_swarm.py"
+      estimated_duration: 300  # 5 minutes for all bots
+      validation: "health_check_success"
+      rollback: "python3 scripts/stop_swarm.sh"
+
+    - id: "initial-health"
+      name: "Initial Health Check"
+      description: "Verify all 100 bots are operational"
+      command: "sleep 10 && python3 scripts/health_monitor.py --check-all"
+      validation: "exit_code_0"
+      expected_runtime: 15
+
+# Phase 4: Monitoring and Validation (15-30 minutes)
+phase4_monitoring:
+  name: "Monitoring & Testing"
+  duration_estimate_min: 30
+  steps:
+    - id: "start-gpu-monitor"
+      name: "Start GPU Monitoring"
+      description: "Monitor GPU usage during operations"
+      command: "watch -n 2 nvidia-smi"
+      background: true
+      validation: "manual_monitor"
+
+    - id: "run-swarm-monitor"
+      name: "Run Swarm Health Monitor"
+      description: "Monitor bot process health"
+      command: "python3 scripts/health_monitor.py"
+      background: true
+      validation: "dashboard_active"
+
+    - id: "functional-test"
+      name: "Quick Functionality Test"
+      description: "Test swarm responsiveness with 20 concurrent queries"
+      command: "python3 scripts/test_swarm.py --bots 20"
+      expected: "Success rate >95%, avg latency <30s"
+      validation: "test_results"
+
+# Phase 5: Stabilization and Tuning (20-40 minutes) - Conditional
+phase5_stabilization:
+  name: "Tuning & Optimization"
+  duration_estimate_min: 40
+  condition: "if_vram_tight_or_latency_spikes"
+  steps:
+    - id: "assess-vram"
+      name: "Assess VRAM Usage"
+      description: "Check if VRAM usage exceeds 90%"
+      command: "python3 scripts/health_monitor.py"
+      validation: "manual_assessment"
+
+    - id: "reduce-context"
+      name: "Reduce Context Length"
+      description: "Adjust to 2048 to free VRAM if needed"
+      command: "sed -i 's/context_length: 4096/context_length: 2048/' configs/swarm_config.yaml"
+      validation: "config_updated"
+      rollback: "sed -i 's/context_length: 2048/context_length: 4096/' configs/swarm_config.yaml"
+
+    - id: "reduce-bots"
+      name: "Reduce Bots per GPU"
+      description: "Drop to 20 bots/GPU temporarily if memory tight"
+      command: "sed -i 's/bots: 25/bots: 20/' configs/swarm_config.yaml && sed -i 's/total_bots: 100/total_bots: 80/' configs/swarm_config.yaml"
+      validation: "config_updated"
+      restart_required: true
+
+    - id: "relaunch-tune"
+      name: "Relaunch with Tuned Config"
+      description: "Restart swarm with optimized settings"
+      command: "python3 scripts/stop_swarm.sh && sleep 5 && python3 scripts/launch_swarm.py"
+      validation: "swarm_running"
+
+# Phase 6: Add Persistence and Observability (optional, 30-60 minutes)
+phase6_observability:
+  name: "Persistence & Observability"
+  duration_estimate_min: 60
+  optional: true
+  steps:
+    - id: "add-ring-buffer"
+      name: "Implement Per-Bot Ring Buffer"
+      description: "Add memory ring buffer for last 1000 prompts/responses"
+      implementation: "Modify bot_worker.py"
+      persistence: "Persist every N requests to bots/state.jsonl"
+
+    - id: "metrics-collection"
+      name: "Lightweight Metrics"
+      description: "Extend health_monitor.py for CSV metrics every minute"
+      implementation: "Modify health_monitor.py"
+      metrics: "GPU mem_used, util, alive_bots"
+
+    - id: "simple-dashboard"
+      name: "Simple Dashboard"
+      description: "Use watch for heads-up display"
+      command: "watch -n 5 python3 scripts/health_monitor.py"
+
+# Phase 7: Prototype Gossip/Consensus (Phase 2 stub, 1-2 hours)
+phase7_gossip_prototype:
+  name: "Gossip Consensus Prototype"
+  duration_estimate_min: 120
+  status: "stub"
+  optional: true
+  steps:
+    - id: "add-message-ids"
+      name: "Add Gossip IDs and TTL"
+      description: "Add message_id (uuid4), TTL=4, seen_ids=set()"
+      implementation: "Modify bot_worker.py"
+
+    - id: "confidence-accumulation"
+      name: "Confidence Accumulation"
+      description: "Dict key->confidence, increment on re-encounter, time-decay"
+      implementation: "Add confidence tracking"
+
+    - id: "gatekeeper-service"
+      name: "Gatekeeper Service"
+      description: "Add scripts/gatekeeper.py for answer validation"
+      threshold: "normalized_confidence > threshold"
+
+# Phase 8: Production Hardening (systemd, crash recovery, etc.)
+phase8_production_harden:
+  name: "Production Hardening"
+  duration_estimate_min: 90
+  optional: true
+  status: "design_only"
+  steps:
+    - id: "systemd-unit"
+      name: "Create Systemd Service"
+      description: "Auto-start launch_swarm.py on boot"
+      implementation: "Create /etc/systemd/system/swarm.service"
+
+    - id: "crash-resilience"
+      name: "Crash Resilience"
+      description: "health_monitor.py restarts dead bots via subprocess"
+      implementation: "Enhance health_monitor.py"
+
+    - id: "log-rotation"
+      name: "Log Rotation"
+      description: "Rotate logs daily, keep 7 days, compress old"
+      implementation: "systemd timer or logrotate"
+
+    - id: "backpressure"
+      name: "Backpressure Handling"
+      description: "Limit concurrent requests, queue or drop when saturated"
+      implementation: "Modify swarm_config.yaml and bot_worker.py"
+
+# Validation Gates
+validation_gates:
+  - name: "Pre-Launch Gate"
+    required_success_rate: 100
+    checks:
+      - "all_prerequisites_met"
+      - "ollama_running"
+      - "model_loaded"
+      - "config_valid"
+
+  - name: "Post-Launch Gate"
+    required_success_rate: 95
+    checks:
+      - "all_bots_running"
+      - "gpu_memory_within_limits"
+      - "test_queries_successful"
+
+  - name: "Stability Gate"
+    required_success_rate: 90
+    checks:
+      - "no_crashes_1hour"
+      - "memory_stable"
+      - "performance_consistent"
+
+# Monitoring Dashboard Commands
+monitoring_commands:
+  - "watch -n 2 nvidia-smi"
+  - "watch -n 10 'python3 scripts/health_monitor.py'"
+  - "tail -f logs/swarm_manager.log"
+  - "tail -f logs/gpu0/bot_00.log"
+  - "python3 scripts/test_swarm.py --bots 5"
+
+# Emergency Procedures
+emergency:
+  graceful_shutdown: "python3 scripts/stop_swarm.sh"
+  force_kill: "pkill -f bot_worker.py && pkill -f ollama"
+  resource_cleanup: "rm -rf logs/gpu* bots/swarm_state.yaml"
+  restart: "python3 scripts/launch_swarm.py"

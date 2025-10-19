@@ -12,26 +12,26 @@ hardware:
     - id: 0
       name: "RTX 6000 Ada"
       vram_gb: 48
-      bots: 25
+      bots: 5
     - id: 1
       name: "RTX 6000 Ada"
       vram_gb: 48
-      bots: 25
+      bots: 5
     - id: 2
       name: "RTX 6000 Ada"
       vram_gb: 48
-      bots: 25
+      bots: 5
     - id: 3
       name: "RTX 6000 Ada"
       vram_gb: 48
-      bots: 25
-  total_bots: 100
+      bots: 5
+  total_bots: 20
 
 # Model Configuration
 model:
   name: "granite4:micro-h"
   quantization: "Q4"
-  context_length: 4096
+  context_length: 2048
   temperature: 0.7
   top_p: 0.9
   top_k: 40
