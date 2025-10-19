@@ -1,0 +1,12 @@
+[Bot-3_11] 2025-10-18 20:53:01,479 - Bot starting on GPU 3, Port 11711
+[Bot-3_11] 2025-10-18 20:53:01,479 - Connecting to Ollama at http://localhost:11434
+[Bot-3_11] 2025-10-18 20:53:33,245 - ✓ Health check passed - Stats: {'requests': 1, 'errors': 0, 'start_time': '2025-10-18T20:53:01.479837'}
+[Bot-3_11] 2025-10-18 20:53:33,245 - Bot operational, entering main loop
+[Bot-3_11] 2025-10-18 20:55:03,277 - Query failed: HTTPConnectionPool(host='localhost', port=11434): Read timed out. (read timeout=30)
+[Bot-3_11] 2025-10-18 20:55:03,278 - ✗ Health check failed
+[Bot-3_11] 2025-10-18 20:56:21,786 - ✓ Health check passed - Stats: {'requests': 2, 'errors': 1, 'start_time': '2025-10-18T20:53:01.479837'}
+[Bot-3_11] 2025-10-18 20:57:44,778 - ✓ Health check passed - Stats: {'requests': 3, 'errors': 1, 'start_time': '2025-10-18T20:53:01.479837'}
+[Bot-3_11] 2025-10-18 20:59:14,409 - ✓ Health check passed - Stats: {'requests': 4, 'errors': 1, 'start_time': '2025-10-18T20:53:01.479837'}
+[Bot-3_11] 2025-10-18 21:00:44,442 - Query failed: HTTPConnectionPool(host='localhost', port=11434): Read timed out. (read timeout=30)
+[Bot-3_11] 2025-10-18 21:00:44,442 - ✗ Health check failed
+[Bot-3_11] 2025-10-18 21:02:09,861 - ✓ Health check passed - Stats: {'requests': 5, 'errors': 2, 'start_time': '2025-10-18T20:53:01.479837'}

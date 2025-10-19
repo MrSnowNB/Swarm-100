@@ -1,0 +1,67 @@
+2025-10-18 20:52:18,076 - SwarmManager - INFO - ============================================================
+2025-10-18 20:52:18,076 - SwarmManager - INFO - GRANITE4:MICRO-H SWARM MANAGER
+2025-10-18 20:52:18,076 - SwarmManager - INFO - ============================================================
+2025-10-18 20:52:18,076 - SwarmManager - INFO - Directory structure created
+2025-10-18 20:52:18,105 - SwarmManager - INFO - ✓ Ollama running, granite4:micro-h available
+2025-10-18 20:52:18,165 - SwarmManager - INFO - ✓ Detected 4 GPUs
+2025-10-18 20:52:18,165 - SwarmManager - INFO -   0, NVIDIA RTX A6000, 49140 MiB
+2025-10-18 20:52:18,165 - SwarmManager - INFO -   1, NVIDIA RTX A6000, 46068 MiB
+2025-10-18 20:52:18,165 - SwarmManager - INFO -   2, NVIDIA RTX A6000, 46068 MiB
+2025-10-18 20:52:18,165 - SwarmManager - INFO -   3, NVIDIA RTX A6000, 49140 MiB
+2025-10-18 20:52:18,165 - SwarmManager - INFO - Starting swarm launch sequence...
+2025-10-18 20:52:18,165 - SwarmManager - INFO - 
+Launching 25 bots on GPU 0...
+2025-10-18 20:52:20,677 - SwarmManager - INFO -   Launched 5/25 bots on GPU 0
+2025-10-18 20:52:23,190 - SwarmManager - INFO -   Launched 10/25 bots on GPU 0
+2025-10-18 20:52:25,703 - SwarmManager - INFO -   Launched 15/25 bots on GPU 0
+2025-10-18 20:52:28,215 - SwarmManager - INFO -   Launched 20/25 bots on GPU 0
+2025-10-18 20:52:30,727 - SwarmManager - INFO -   Launched 25/25 bots on GPU 0
+2025-10-18 20:52:30,727 - SwarmManager - INFO - 
+Launching 25 bots on GPU 1...
+2025-10-18 20:52:33,239 - SwarmManager - INFO -   Launched 5/25 bots on GPU 1
+2025-10-18 20:52:35,753 - SwarmManager - INFO -   Launched 10/25 bots on GPU 1
+2025-10-18 20:52:38,266 - SwarmManager - INFO -   Launched 15/25 bots on GPU 1
+2025-10-18 20:52:40,778 - SwarmManager - INFO -   Launched 20/25 bots on GPU 1
+2025-10-18 20:52:43,291 - SwarmManager - INFO -   Launched 25/25 bots on GPU 1
+2025-10-18 20:52:43,291 - SwarmManager - INFO - 
+Launching 25 bots on GPU 2...
+2025-10-18 20:52:45,804 - SwarmManager - INFO -   Launched 5/25 bots on GPU 2
+2025-10-18 20:52:48,316 - SwarmManager - INFO -   Launched 10/25 bots on GPU 2
+2025-10-18 20:52:50,826 - SwarmManager - INFO -   Launched 15/25 bots on GPU 2
+2025-10-18 20:52:53,335 - SwarmManager - INFO -   Launched 20/25 bots on GPU 2
+2025-10-18 20:52:55,845 - SwarmManager - INFO -   Launched 25/25 bots on GPU 2
+2025-10-18 20:52:55,846 - SwarmManager - INFO - 
+Launching 25 bots on GPU 3...
+2025-10-18 20:52:58,353 - SwarmManager - INFO -   Launched 5/25 bots on GPU 3
+2025-10-18 20:53:00,862 - SwarmManager - INFO -   Launched 10/25 bots on GPU 3
+2025-10-18 20:53:03,371 - SwarmManager - INFO -   Launched 15/25 bots on GPU 3
+2025-10-18 20:53:05,880 - SwarmManager - INFO -   Launched 20/25 bots on GPU 3
+2025-10-18 20:53:08,388 - SwarmManager - INFO -   Launched 25/25 bots on GPU 3
+2025-10-18 20:53:08,388 - SwarmManager - INFO - 
+============================================================
+2025-10-18 20:53:08,388 - SwarmManager - INFO - ✓ Swarm launch complete: 100 bots deployed
+2025-10-18 20:53:08,388 - SwarmManager - INFO - ============================================================
+2025-10-18 20:53:08,403 - SwarmManager - INFO - Swarm state saved to bots/swarm_state.yaml
+2025-10-18 20:53:18,403 - SwarmManager - INFO - Health check: 70/100 bots alive
+2025-10-18 20:53:18,404 - SwarmManager - WARNING - Dead bots: ['bot_00_10', 'bot_00_12', 'bot_00_15', 'bot_00_17', 'bot_00_18', 'bot_00_19', 'bot_00_21', 'bot_00_22', 'bot_00_23', 'bot_00_24', 'bot_01_00', 'bot_01_01', 'bot_01_02', 'bot_01_09', 'bot_01_11', 'bot_01_12', 'bot_01_13', 'bot_01_14', 'bot_01_15', 'bot_01_16', 'bot_01_17', 'bot_01_18', 'bot_01_19', 'bot_01_21', 'bot_01_22', 'bot_01_23', 'bot_02_00', 'bot_02_02', 'bot_02_03', 'bot_02_04']
+2025-10-18 20:53:18,404 - SwarmManager - INFO - 
+Swarm is operational. Press Ctrl+C to monitor or stop.
+2025-10-18 20:53:18,404 - SwarmManager - INFO - Run 'python3 scripts/health_monitor.py' for detailed monitoring
+2025-10-18 20:54:18,405 - SwarmManager - INFO - Health check: 43/100 bots alive
+2025-10-18 20:54:18,405 - SwarmManager - WARNING - Dead bots: ['bot_00_10', 'bot_00_12', 'bot_00_15', 'bot_00_17', 'bot_00_18', 'bot_00_19', 'bot_00_21', 'bot_00_22', 'bot_00_23', 'bot_00_24', 'bot_01_00', 'bot_01_01', 'bot_01_02', 'bot_01_09', 'bot_01_11', 'bot_01_12', 'bot_01_13', 'bot_01_14', 'bot_01_15', 'bot_01_16', 'bot_01_17', 'bot_01_18', 'bot_01_19', 'bot_01_21', 'bot_01_22', 'bot_01_23', 'bot_02_00', 'bot_02_02', 'bot_02_03', 'bot_02_04', 'bot_02_06', 'bot_02_07', 'bot_02_09', 'bot_02_11', 'bot_02_12', 'bot_02_13', 'bot_02_14', 'bot_02_15', 'bot_02_16', 'bot_02_17', 'bot_02_18', 'bot_02_19', 'bot_03_02', 'bot_03_04', 'bot_03_05', 'bot_03_07', 'bot_03_08', 'bot_03_09', 'bot_03_10', 'bot_03_12', 'bot_03_15', 'bot_03_17', 'bot_03_18', 'bot_03_20', 'bot_03_21', 'bot_03_23', 'bot_03_24']
+2025-10-18 20:55:18,406 - SwarmManager - INFO - Health check: 43/100 bots alive
+2025-10-18 20:55:18,406 - SwarmManager - WARNING - Dead bots: ['bot_00_10', 'bot_00_12', 'bot_00_15', 'bot_00_17', 'bot_00_18', 'bot_00_19', 'bot_00_21', 'bot_00_22', 'bot_00_23', 'bot_00_24', 'bot_01_00', 'bot_01_01', 'bot_01_02', 'bot_01_09', 'bot_01_11', 'bot_01_12', 'bot_01_13', 'bot_01_14', 'bot_01_15', 'bot_01_16', 'bot_01_17', 'bot_01_18', 'bot_01_19', 'bot_01_21', 'bot_01_22', 'bot_01_23', 'bot_02_00', 'bot_02_02', 'bot_02_03', 'bot_02_04', 'bot_02_06', 'bot_02_07', 'bot_02_09', 'bot_02_11', 'bot_02_12', 'bot_02_13', 'bot_02_14', 'bot_02_15', 'bot_02_16', 'bot_02_17', 'bot_02_18', 'bot_02_19', 'bot_03_02', 'bot_03_04', 'bot_03_05', 'bot_03_07', 'bot_03_08', 'bot_03_09', 'bot_03_10', 'bot_03_12', 'bot_03_15', 'bot_03_17', 'bot_03_18', 'bot_03_20', 'bot_03_21', 'bot_03_23', 'bot_03_24']
+2025-10-18 20:56:18,406 - SwarmManager - INFO - Health check: 43/100 bots alive
+2025-10-18 20:56:18,407 - SwarmManager - WARNING - Dead bots: ['bot_00_10', 'bot_00_12', 'bot_00_15', 'bot_00_17', 'bot_00_18', 'bot_00_19', 'bot_00_21', 'bot_00_22', 'bot_00_23', 'bot_00_24', 'bot_01_00', 'bot_01_01', 'bot_01_02', 'bot_01_09', 'bot_01_11', 'bot_01_12', 'bot_01_13', 'bot_01_14', 'bot_01_15', 'bot_01_16', 'bot_01_17', 'bot_01_18', 'bot_01_19', 'bot_01_21', 'bot_01_22', 'bot_01_23', 'bot_02_00', 'bot_02_02', 'bot_02_03', 'bot_02_04', 'bot_02_06', 'bot_02_07', 'bot_02_09', 'bot_02_11', 'bot_02_12', 'bot_02_13', 'bot_02_14', 'bot_02_15', 'bot_02_16', 'bot_02_17', 'bot_02_18', 'bot_02_19', 'bot_03_02', 'bot_03_04', 'bot_03_05', 'bot_03_07', 'bot_03_08', 'bot_03_09', 'bot_03_10', 'bot_03_12', 'bot_03_15', 'bot_03_17', 'bot_03_18', 'bot_03_20', 'bot_03_21', 'bot_03_23', 'bot_03_24']
+2025-10-18 20:57:18,407 - SwarmManager - INFO - Health check: 43/100 bots alive
+2025-10-18 20:57:18,407 - SwarmManager - WARNING - Dead bots: ['bot_00_10', 'bot_00_12', 'bot_00_15', 'bot_00_17', 'bot_00_18', 'bot_00_19', 'bot_00_21', 'bot_00_22', 'bot_00_23', 'bot_00_24', 'bot_01_00', 'bot_01_01', 'bot_01_02', 'bot_01_09', 'bot_01_11', 'bot_01_12', 'bot_01_13', 'bot_01_14', 'bot_01_15', 'bot_01_16', 'bot_01_17', 'bot_01_18', 'bot_01_19', 'bot_01_21', 'bot_01_22', 'bot_01_23', 'bot_02_00', 'bot_02_02', 'bot_02_03', 'bot_02_04', 'bot_02_06', 'bot_02_07', 'bot_02_09', 'bot_02_11', 'bot_02_12', 'bot_02_13', 'bot_02_14', 'bot_02_15', 'bot_02_16', 'bot_02_17', 'bot_02_18', 'bot_02_19', 'bot_03_02', 'bot_03_04', 'bot_03_05', 'bot_03_07', 'bot_03_08', 'bot_03_09', 'bot_03_10', 'bot_03_12', 'bot_03_15', 'bot_03_17', 'bot_03_18', 'bot_03_20', 'bot_03_21', 'bot_03_23', 'bot_03_24']
+2025-10-18 20:58:18,408 - SwarmManager - INFO - Health check: 43/100 bots alive
+2025-10-18 20:58:18,408 - SwarmManager - WARNING - Dead bots: ['bot_00_10', 'bot_00_12', 'bot_00_15', 'bot_00_17', 'bot_00_18', 'bot_00_19', 'bot_00_21', 'bot_00_22', 'bot_00_23', 'bot_00_24', 'bot_01_00', 'bot_01_01', 'bot_01_02', 'bot_01_09', 'bot_01_11', 'bot_01_12', 'bot_01_13', 'bot_01_14', 'bot_01_15', 'bot_01_16', 'bot_01_17', 'bot_01_18', 'bot_01_19', 'bot_01_21', 'bot_01_22', 'bot_01_23', 'bot_02_00', 'bot_02_02', 'bot_02_03', 'bot_02_04', 'bot_02_06', 'bot_02_07', 'bot_02_09', 'bot_02_11', 'bot_02_12', 'bot_02_13', 'bot_02_14', 'bot_02_15', 'bot_02_16', 'bot_02_17', 'bot_02_18', 'bot_02_19', 'bot_03_02', 'bot_03_04', 'bot_03_05', 'bot_03_07', 'bot_03_08', 'bot_03_09', 'bot_03_10', 'bot_03_12', 'bot_03_15', 'bot_03_17', 'bot_03_18', 'bot_03_20', 'bot_03_21', 'bot_03_23', 'bot_03_24']
+2025-10-18 20:59:18,408 - SwarmManager - INFO - Health check: 43/100 bots alive
+2025-10-18 20:59:18,409 - SwarmManager - WARNING - Dead bots: ['bot_00_10', 'bot_00_12', 'bot_00_15', 'bot_00_17', 'bot_00_18', 'bot_00_19', 'bot_00_21', 'bot_00_22', 'bot_00_23', 'bot_00_24', 'bot_01_00', 'bot_01_01', 'bot_01_02', 'bot_01_09', 'bot_01_11', 'bot_01_12', 'bot_01_13', 'bot_01_14', 'bot_01_15', 'bot_01_16', 'bot_01_17', 'bot_01_18', 'bot_01_19', 'bot_01_21', 'bot_01_22', 'bot_01_23', 'bot_02_00', 'bot_02_02', 'bot_02_03', 'bot_02_04', 'bot_02_06', 'bot_02_07', 'bot_02_09', 'bot_02_11', 'bot_02_12', 'bot_02_13', 'bot_02_14', 'bot_02_15', 'bot_02_16', 'bot_02_17', 'bot_02_18', 'bot_02_19', 'bot_03_02', 'bot_03_04', 'bot_03_05', 'bot_03_07', 'bot_03_08', 'bot_03_09', 'bot_03_10', 'bot_03_12', 'bot_03_15', 'bot_03_17', 'bot_03_18', 'bot_03_20', 'bot_03_21', 'bot_03_23', 'bot_03_24']
+2025-10-18 21:00:18,409 - SwarmManager - INFO - Health check: 43/100 bots alive
+2025-10-18 21:00:18,409 - SwarmManager - WARNING - Dead bots: ['bot_00_10', 'bot_00_12', 'bot_00_15', 'bot_00_17', 'bot_00_18', 'bot_00_19', 'bot_00_21', 'bot_00_22', 'bot_00_23', 'bot_00_24', 'bot_01_00', 'bot_01_01', 'bot_01_02', 'bot_01_09', 'bot_01_11', 'bot_01_12', 'bot_01_13', 'bot_01_14', 'bot_01_15', 'bot_01_16', 'bot_01_17', 'bot_01_18', 'bot_01_19', 'bot_01_21', 'bot_01_22', 'bot_01_23', 'bot_02_00', 'bot_02_02', 'bot_02_03', 'bot_02_04', 'bot_02_06', 'bot_02_07', 'bot_02_09', 'bot_02_11', 'bot_02_12', 'bot_02_13', 'bot_02_14', 'bot_02_15', 'bot_02_16', 'bot_02_17', 'bot_02_18', 'bot_02_19', 'bot_03_02', 'bot_03_04', 'bot_03_05', 'bot_03_07', 'bot_03_08', 'bot_03_09', 'bot_03_10', 'bot_03_12', 'bot_03_15', 'bot_03_17', 'bot_03_18', 'bot_03_20', 'bot_03_21', 'bot_03_23', 'bot_03_24']
+2025-10-18 21:01:18,410 - SwarmManager - INFO - Health check: 43/100 bots alive
+2025-10-18 21:01:18,410 - SwarmManager - WARNING - Dead bots: ['bot_00_10', 'bot_00_12', 'bot_00_15', 'bot_00_17', 'bot_00_18', 'bot_00_19', 'bot_00_21', 'bot_00_22', 'bot_00_23', 'bot_00_24', 'bot_01_00', 'bot_01_01', 'bot_01_02', 'bot_01_09', 'bot_01_11', 'bot_01_12', 'bot_01_13', 'bot_01_14', 'bot_01_15', 'bot_01_16', 'bot_01_17', 'bot_01_18', 'bot_01_19', 'bot_01_21', 'bot_01_22', 'bot_01_23', 'bot_02_00', 'bot_02_02', 'bot_02_03', 'bot_02_04', 'bot_02_06', 'bot_02_07', 'bot_02_09', 'bot_02_11', 'bot_02_12', 'bot_02_13', 'bot_02_14', 'bot_02_15', 'bot_02_16', 'bot_02_17', 'bot_02_18', 'bot_02_19', 'bot_03_02', 'bot_03_04', 'bot_03_05', 'bot_03_07', 'bot_03_08', 'bot_03_09', 'bot_03_10', 'bot_03_12', 'bot_03_15', 'bot_03_17', 'bot_03_18', 'bot_03_20', 'bot_03_21', 'bot_03_23', 'bot_03_24']
+2025-10-18 21:02:18,410 - SwarmManager - INFO - Health check: 43/100 bots alive
+2025-10-18 21:02:18,411 - SwarmManager - WARNING - Dead bots: ['bot_00_10', 'bot_00_12', 'bot_00_15', 'bot_00_17', 'bot_00_18', 'bot_00_19', 'bot_00_21', 'bot_00_22', 'bot_00_23', 'bot_00_24', 'bot_01_00', 'bot_01_01', 'bot_01_02', 'bot_01_09', 'bot_01_11', 'bot_01_12', 'bot_01_13', 'bot_01_14', 'bot_01_15', 'bot_01_16', 'bot_01_17', 'bot_01_18', 'bot_01_19', 'bot_01_21', 'bot_01_22', 'bot_01_23', 'bot_02_00', 'bot_02_02', 'bot_02_03', 'bot_02_04', 'bot_02_06', 'bot_02_07', 'bot_02_09', 'bot_02_11', 'bot_02_12', 'bot_02_13', 'bot_02_14', 'bot_02_15', 'bot_02_16', 'bot_02_17', 'bot_02_18', 'bot_02_19', 'bot_03_02', 'bot_03_04', 'bot_03_05', 'bot_03_07', 'bot_03_08', 'bot_03_09', 'bot_03_10', 'bot_03_12', 'bot_03_15', 'bot_03_17', 'bot_03_18', 'bot_03_20', 'bot_03_21', 'bot_03_23', 'bot_03_24']

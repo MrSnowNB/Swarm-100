@@ -1,0 +1,10 @@
+[Bot-1_4] 2025-10-18 20:52:32,860 - Bot starting on GPU 1, Port 11504
+[Bot-1_4] 2025-10-18 20:52:32,860 - Connecting to Ollama at http://localhost:11434
+[Bot-1_4] 2025-10-18 20:53:04,202 - ✓ Health check passed - Stats: {'requests': 1, 'errors': 0, 'start_time': '2025-10-18T20:52:32.860689'}
+[Bot-1_4] 2025-10-18 20:53:04,202 - Bot operational, entering main loop
+[Bot-1_4] 2025-10-18 20:54:22,546 - ✓ Health check passed - Stats: {'requests': 2, 'errors': 0, 'start_time': '2025-10-18T20:52:32.860689'}
+[Bot-1_4] 2025-10-18 20:55:50,724 - ✓ Health check passed - Stats: {'requests': 3, 'errors': 0, 'start_time': '2025-10-18T20:52:32.860689'}
+[Bot-1_4] 2025-10-18 20:57:19,238 - ✓ Health check passed - Stats: {'requests': 4, 'errors': 0, 'start_time': '2025-10-18T20:52:32.860689'}
+[Bot-1_4] 2025-10-18 20:58:43,064 - ✓ Health check passed - Stats: {'requests': 5, 'errors': 0, 'start_time': '2025-10-18T20:52:32.860689'}
+[Bot-1_4] 2025-10-18 21:00:02,206 - ✓ Health check passed - Stats: {'requests': 6, 'errors': 0, 'start_time': '2025-10-18T20:52:32.860689'}
+[Bot-1_4] 2025-10-18 21:01:32,066 - ✓ Health check passed - Stats: {'requests': 7, 'errors': 0, 'start_time': '2025-10-18T20:52:32.860689'}
