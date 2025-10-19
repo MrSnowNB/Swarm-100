@@ -32,12 +32,13 @@ class CAExperimentRunner:
     G6: Emergent behavior analysis - convergence detection or oscillation
     """
 
-    def __init__(self):
+    def __init__(self, quick_test=False):
         self.logger = logging.getLogger('CAExperimentation')
         self.experiment_id = f"exp_{int(time.time())}"
         self.start_time = time.time()
         self.experiment_dir = Path('logs/experimentation')
         self.experiment_dir.mkdir(parents=True, exist_ok=True)
+        self.quick_test = quick_test  # Validation flag for fewer ticks
 
         # Process handles
         self.swarm_process = None
@@ -73,16 +74,22 @@ class CAExperimentRunner:
             self.prepare_experiment()
 
             # G5: Stability Test
-            self.logger.info("EXECUTING G5: Stability Test (200 ticks)")
+            ticks = 20 if self.quick_test else 200
+            skip_g6 = self.quick_test
+            self.logger.info(f"EXECUTING G5: Stability Test ({ticks} ticks)")
             self.execute_g5_stability_test()
 
             # Validate G5 success
             if not self.g5_passed:
                 raise RuntimeError("G5 stability test failed - aborting G6")
 
-            # G6: Emergent Behavior Analysis
-            self.logger.info("EXECUTING G6: Emergent Behavior Analysis")
-            g6_results = self.execute_g6_emergent_analysis()
+            if skip_g6:
+                self.logger.info("Quick test mode - skipping G6 analysis")
+                g6_results = {}
+            else:
+                # G6: Emergent Behavior Analysis
+                self.logger.info("EXECUTING G6: Emergent Behavior Analysis")
+                g6_results = self.execute_g6_emergent_analysis()
 
             # Generate final results
             results = self.generate_final_results(g6_results)
@@ -144,9 +151,9 @@ class CAExperimentRunner:
         # Launch the integrated system (swarm + CA + zombie + global tick)
         self.launch_integrated_system()
 
-        # Monitor for 200 ticks
-        target_ticks = 200
-        tick_timeout = 300  # 5 minutes maximum for 200 ticks (should take ~200s)
+        # Monitor for ticks
+        target_ticks = 20 if self.quick_test else 200
+        tick_timeout = 60 if self.quick_test else 300  # Adjust timeout for quick test
 
         start_time = time.time()
         ticks_completed = 0
@@ -161,7 +168,7 @@ class CAExperimentRunner:
                     if current_tick > ticks_completed:
                         ticks_completed = current_tick
                         bots_alive = len([b for b in swarm_state.get('bots', []) if b.get('alive', True)])
-                        self.logger.info(f"Tick {current_tick}/200 - Bots alive: {bots_alive}")
+                        self.logger.info(f"Tick {current_tick}/{target_ticks} - Bots alive: {bots_alive}")
 
                 time.sleep(2)  # Check every 2 seconds
 
@@ -237,8 +244,9 @@ class CAExperimentRunner:
             with open(metrics_file, 'r') as f:
                 lines = f.readlines()
 
-            if len(lines) < 50:  # Should have at least 50 data points
-                self.logger.error(f"Insufficient metrics data: {len(lines)-1} records")
+            min_metrics = 10 if self.quick_test else 50  # Fewer metrics required for quick test
+            if len(lines) < min_metrics:
+                self.logger.error(f"Insufficient metrics data: {len(lines)-1} records (need at least {min_metrics})")
                 return False
 
             # Check final active bot count (should be close to 40)
@@ -518,6 +526,8 @@ def main():
                        help='Enable verbose logging')
     parser.add_argument('--skip-cleanup', action='store_true',
                        help='Skip process cleanup (for debugging)')
+    parser.add_argument('--quick-test', action='store_true',
+                       help='Run quick validation test (20 ticks instead of 200)')
 
     args = parser.parse_args()
 
@@ -525,7 +535,7 @@ def main():
     logging.basicConfig(level=level,
                        format='%(asctime)s - CA-Exp - %(levelname)s - %(message)s')
 
-    runner = CAExperimentRunner()
+    runner = CAExperimentRunner(quick_test=args.quick_test)
 
     try:
         results = runner.run_experiment()
