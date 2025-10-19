@@ -15,6 +15,9 @@ import json
 import os
 import logging
 from datetime import datetime
+import sys
+import os
+sys.path.append(os.path.dirname(__file__))
 from tracing_setup import init_swarm_tracing, trace_health_check, SwarmSpan
 
 class BotWorker:
