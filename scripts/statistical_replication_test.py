@@ -83,7 +83,7 @@ class StatisticalReplicationTest:
 
         # Approximation for p-value (two-tailed test)
         # Using normal approximation for simplicity
-        p_value = 2 * (1 - self.norm_cdf(abs(t)))
+        p_value = 2 * (1 - self.norm_cdf(float(abs(t))))
 
         return t, min(p_value, 1.0)  # Cap at 1.0
 
@@ -181,6 +181,10 @@ class StatisticalReplicationTest:
             try:
                 with open(latest_file, 'r') as f:
                     data = yaml.safe_load(f)
+                if data is None:
+                    raise KeyError("YAML data is None")
+                if not isinstance(data, dict):
+                    raise KeyError("YAML data is not a dictionary")
                 recovery_time = data.get('resilience_metrics', {}).get('convergence_time_ticks')
                 final_similarity = data.get('resilience_metrics', {}).get('final_similarity')
                 similarity_trajectory = data.get('convergence', {}).get('similarity_trajectory', [])
@@ -356,7 +360,7 @@ class StatisticalReplicationTest:
             expected_mean = 30.0  # Expected maximum recovery time
 
             # Cohen's d calculation
-            cohens_d = (expected_mean - np.mean(recovery_times)) / np.std(recovery_times, ddof=1)
+            cohens_d = float((expected_mean - np.mean(recovery_times)) / np.std(recovery_times, ddof=1))
 
             self.significance_tests['effect_size'] = {
                 'cohens_d': float(abs(cohens_d)),  # Absolute value for magnitude
@@ -386,6 +390,8 @@ class StatisticalReplicationTest:
             logger.info("📊 Statistical results still computed and saved")
             return
 
+        assert plt is not None  # Type checker assurance
+
         try:
             # Figure 1: Recovery time distribution with confidence interval
             recovery_times = [rep['recovery_time'] for rep in successful_reps if rep['recovery_time']]
@@ -396,7 +402,7 @@ class StatisticalReplicationTest:
                 # Subplot 1: Recovery time distribution
                 plt.subplot(2, 2, 1)
                 plt.hist(recovery_times, alpha=0.7, bins=min(len(recovery_times), 5), color='skyblue', edgecolor='black')
-                plt.axvline(np.mean(recovery_times), color='red', linestyle='--', linewidth=2,
+                plt.axvline(float(np.mean(recovery_times)), color='red', linestyle='--', linewidth=2,
                            label='.1f')
                 if 'confidence_interval_95' in self.stats_summary.get('recovery_times', {}):
                     ci = self.stats_summary['recovery_times']['confidence_interval_95']

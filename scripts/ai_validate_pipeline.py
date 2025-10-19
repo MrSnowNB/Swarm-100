@@ -57,7 +57,7 @@ class AIFirstValidationPipeline:
         logger.info("🤖 AI-FIRST VALIDATION PIPELINE ORCHESTRATOR v2")
         logger.info("=" * 70)
 
-    def emit_gate_status(self, gate: str, status: str, metadata: Dict[str, Any] = None):
+    def emit_gate_status(self, gate: str, status: str, metadata: Optional[Dict[str, Any]] = None):
         """Emit machine-readable gate status for autonomous tracking"""
         status_entry = {
             'timestamp': datetime.now().isoformat(),
