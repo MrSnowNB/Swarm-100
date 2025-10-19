@@ -1,0 +1,5727 @@
+experiment:
+  grid_size: 10
+  temporal_resolutions:
+  - 1
+  - 10
+  - 50
+  - 100
+  - 200
+  timestamp: '2025-10-19T12:08:02.624299'
+  type: 10x10_ca_experiment
+snapshots:
+- grid_data:
+  - alive: true
+    bot_id: 1
+    intensity: 0.8402363530613585
+    x: 0
+    y: 0
+  - alive: true
+    bot_id: 2
+    intensity: 0.7842524389104365
+    x: 1
+    y: 0
+  - alive: true
+    bot_id: 3
+    intensity: 0.7886689264265574
+    x: 2
+    y: 0
+  - alive: true
+    bot_id: 4
+    intensity: 0.8204869147333405
+    x: 3
+    y: 0
+  - alive: true
+    bot_id: 5
+    intensity: 0.80831970740037
+    x: 4
+    y: 0
+  - alive: true
+    bot_id: 6
+    intensity: 0.8030538556394129
+    x: 5
+    y: 0
+  - alive: true
+    bot_id: 7
+    intensity: 0.8124720664648427
+    x: 6
+    y: 0
+  - alive: true
+    bot_id: 8
+    intensity: 0.8065292264836408
+    x: 7
+    y: 0
+  - alive: true
+    bot_id: 9
+    intensity: 0.845049902739345
+    x: 8
+    y: 0
+  - alive: true
+    bot_id: 10
+    intensity: 0.8108323093799132
+    x: 9
+    y: 0
+  - alive: true
+    bot_id: 11
+    intensity: 0.8218244968861631
+    x: 0
+    y: 1
+  - alive: true
+    bot_id: 12
+    intensity: 0.8146127498526733
+    x: 1
+    y: 1
+  - alive: true
+    bot_id: 13
+    intensity: 0.8009822012422079
+    x: 2
+    y: 1
+  - alive: true
+    bot_id: 14
+    intensity: 0.7956014828516511
+    x: 3
+    y: 1
+  - alive: true
+    bot_id: 15
+    intensity: 0.8033910510053973
+    x: 4
+    y: 1
+  - alive: true
+    bot_id: 16
+    intensity: 0.8399971724718036
+    x: 5
+    y: 1
+  - alive: true
+    bot_id: 17
+    intensity: 0.8721674510203405
+    x: 6
+    y: 1
+  - alive: true
+    bot_id: 18
+    intensity: 0.8191166894759918
+    x: 7
+    y: 1
+  - alive: true
+    bot_id: 19
+    intensity: 0.8291967648886585
+    x: 8
+    y: 1
+  - alive: true
+    bot_id: 20
+    intensity: 0.7969020609872632
+    x: 9
+    y: 1
+  - alive: true
+    bot_id: 21
+    intensity: 0.7922131232016062
+    x: 0
+    y: 2
+  - alive: true
+    bot_id: 22
+    intensity: 0.8528996864749558
+    x: 1
+    y: 2
+  - alive: true
+    bot_id: 23
+    intensity: 0.8086841158999956
+    x: 2
+    y: 2
+  - alive: true
+    bot_id: 24
+    intensity: 0.8351666881789803
+    x: 3
+    y: 2
+  - alive: true
+    bot_id: 25
+    intensity: 0.8149958864613606
+    x: 4
+    y: 2
+  - alive: true
+    bot_id: 26
+    intensity: 0.7812261806584841
+    x: 5
+    y: 2
+  - alive: true
+    bot_id: 27
+    intensity: 0.7808156596364851
+    x: 6
+    y: 2
+  - alive: true
+    bot_id: 28
+    intensity: 0.8154283136303707
+    x: 7
+    y: 2
+  - alive: true
+    bot_id: 29
+    intensity: 0.789301874141459
+    x: 8
+    y: 2
+  - alive: true
+    bot_id: 30
+    intensity: 0.7875476965286106
+    x: 9
+    y: 2
+  - alive: true
+    bot_id: 31
+    intensity: 0.7837507142293086
+    x: 0
+    y: 3
+  - alive: true
+    bot_id: 32
+    intensity: 0.8172298173366608
+    x: 1
+    y: 3
+  - alive: true
+    bot_id: 33
+    intensity: 0.7931024506825192
+    x: 2
+    y: 3
+  - alive: true
+    bot_id: 34
+    intensity: 0.8094848619842752
+    x: 3
+    y: 3
+  - alive: true
+    bot_id: 35
+    intensity: 0.8280654591399529
+    x: 4
+    y: 3
+  - alive: true
+    bot_id: 36
+    intensity: 0.8373461505188864
+    x: 5
+    y: 3
+  - alive: true
+    bot_id: 37
+    intensity: 0.8396901889476103
+    x: 6
+    y: 3
+  - alive: true
+    bot_id: 38
+    intensity: 0.845266538640099
+    x: 7
+    y: 3
+  - alive: true
+    bot_id: 39
+    intensity: 0.8364509697860394
+    x: 8
+    y: 3
+  - alive: true
+    bot_id: 40
+    intensity: 0.8184946247675684
+    x: 9
+    y: 3
+  - alive: true
+    bot_id: 41
+    intensity: 0.7673145441846978
+    x: 0
+    y: 4
+  - alive: true
+    bot_id: 42
+    intensity: 0.8319219670985424
+    x: 1
+    y: 4
+  - alive: true
+    bot_id: 43
+    intensity: 0.8351375462969287
+    x: 2
+    y: 4
+  - alive: true
+    bot_id: 44
+    intensity: 0.8430080342338769
+    x: 3
+    y: 4
+  - alive: true
+    bot_id: 45
+    intensity: 0.7933460944884642
+    x: 4
+    y: 4
+  - alive: true
+    bot_id: 46
+    intensity: 0.8179650426766463
+    x: 5
+    y: 4
+  - alive: true
+    bot_id: 47
+    intensity: 0.8054962047680373
+    x: 6
+    y: 4
+  - alive: true
+    bot_id: 48
+    intensity: 0.7660364749654691
+    x: 7
+    y: 4
+  - alive: true
+    bot_id: 49
+    intensity: 0.8259761981315904
+    x: 8
+    y: 4
+  - alive: true
+    bot_id: 50
+    intensity: 0.8522985768200326
+    x: 9
+    y: 4
+  - alive: true
+    bot_id: 51
+    intensity: 0.8218147214010354
+    x: 0
+    y: 5
+  - alive: true
+    bot_id: 52
+    intensity: 0.8240300490102384
+    x: 1
+    y: 5
+  - alive: true
+    bot_id: 53
+    intensity: 0.8429825714405614
+    x: 2
+    y: 5
+  - alive: true
+    bot_id: 54
+    intensity: 0.8004472042061608
+    x: 3
+    y: 5
+  - alive: true
+    bot_id: 55
+    intensity: 0.8497906379037715
+    x: 4
+    y: 5
+  - alive: true
+    bot_id: 56
+    intensity: 0.7654373899792499
+    x: 5
+    y: 5
+  - alive: true
+    bot_id: 57
+    intensity: 0.8024715946415192
+    x: 6
+    y: 5
+  - alive: true
+    bot_id: 58
+    intensity: 0.8275924687258277
+    x: 7
+    y: 5
+  - alive: true
+    bot_id: 59
+    intensity: 0.8335535028769371
+    x: 8
+    y: 5
+  - alive: true
+    bot_id: 60
+    intensity: 0.7995702144159802
+    x: 9
+    y: 5
+  - alive: true
+    bot_id: 61
+    intensity: 0.794439216549051
+    x: 0
+    y: 6
+  - alive: true
+    bot_id: 62
+    intensity: 0.807628744512812
+    x: 1
+    y: 6
+  - alive: true
+    bot_id: 63
+    intensity: 0.8088185698245243
+    x: 2
+    y: 6
+  - alive: true
+    bot_id: 64
+    intensity: 0.7926923778707848
+    x: 3
+    y: 6
+  - alive: true
+    bot_id: 65
+    intensity: 0.8153602680846846
+    x: 4
+    y: 6
+  - alive: true
+    bot_id: 66
+    intensity: 0.7872163913048296
+    x: 5
+    y: 6
+  - alive: true
+    bot_id: 67
+    intensity: 0.8231727097071616
+    x: 6
+    y: 6
+  - alive: true
+    bot_id: 68
+    intensity: 0.826259957988744
+    x: 7
+    y: 6
+  - alive: true
+    bot_id: 69
+    intensity: 0.817130297541131
+    x: 8
+    y: 6
+  - alive: true
+    bot_id: 70
+    intensity: 0.8316734074306436
+    x: 9
+    y: 6
+  - alive: true
+    bot_id: 71
+    intensity: 0.8408995163901596
+    x: 0
+    y: 7
+  - alive: true
+    bot_id: 72
+    intensity: 0.8127644454818841
+    x: 1
+    y: 7
+  - alive: true
+    bot_id: 73
+    intensity: 0.8572943782260838
+    x: 2
+    y: 7
+  - alive: true
+    bot_id: 74
+    intensity: 0.8129946934604331
+    x: 3
+    y: 7
+  - alive: true
+    bot_id: 75
+    intensity: 0.8056937590419725
+    x: 4
+    y: 7
+  - alive: true
+    bot_id: 76
+    intensity: 0.8307919917926364
+    x: 5
+    y: 7
+  - alive: true
+    bot_id: 77
+    intensity: 0.8003112361047565
+    x: 6
+    y: 7
+  - alive: true
+    bot_id: 78
+    intensity: 0.8140425523301149
+    x: 7
+    y: 7
+  - alive: true
+    bot_id: 79
+    intensity: 0.8605248410176021
+    x: 8
+    y: 7
+  - alive: true
+    bot_id: 80
+    intensity: 0.8653783013490252
+    x: 9
+    y: 7
+  - alive: true
+    bot_id: 81
+    intensity: 0.8122818810604887
+    x: 0
+    y: 8
+  - alive: true
+    bot_id: 82
+    intensity: 0.8457288624330002
+    x: 1
+    y: 8
+  - alive: true
+    bot_id: 83
+    intensity: 0.80820916217245
+    x: 2
+    y: 8
+  - alive: true
+    bot_id: 84
+    intensity: 0.7925447176730384
+    x: 3
+    y: 8
+  - alive: true
+    bot_id: 85
+    intensity: 0.8073785346890755
+    x: 4
+    y: 8
+  - alive: true
+    bot_id: 86
+    intensity: 0.8426037444253737
+    x: 5
+    y: 8
+  - alive: true
+    bot_id: 87
+    intensity: 0.7945752164230278
+    x: 6
+    y: 8
+  - alive: true
+    bot_id: 88
+    intensity: 0.823635927238352
+    x: 7
+    y: 8
+  - alive: true
+    bot_id: 89
+    intensity: 0.8252823694245034
+    x: 8
+    y: 8
+  - alive: true
+    bot_id: 90
+    intensity: 0.760589813567361
+    x: 9
+    y: 8
+  - alive: true
+    bot_id: 91
+    intensity: 0.815327444149295
+    x: 0
+    y: 9
+  - alive: true
+    bot_id: 92
+    intensity: 0.8077542667321467
+    x: 1
+    y: 9
+  - alive: true
+    bot_id: 93
+    intensity: 0.8069765632221783
+    x: 2
+    y: 9
+  - alive: true
+    bot_id: 94
+    intensity: 0.8277796486333161
+    x: 3
+    y: 9
+  - alive: true
+    bot_id: 95
+    intensity: 0.8124708270259641
+    x: 4
+    y: 9
+  - alive: true
+    bot_id: 96
+    intensity: 0.8431865128810421
+    x: 5
+    y: 9
+  - alive: true
+    bot_id: 97
+    intensity: 0.8095179684903556
+    x: 6
+    y: 9
+  - alive: true
+    bot_id: 98
+    intensity: 0.7912631715360857
+    x: 7
+    y: 9
+  - alive: true
+    bot_id: 99
+    intensity: 0.7765942998555081
+    x: 8
+    y: 9
+  - alive: true
+    bot_id: 100
+    intensity: 0.8256724019276126
+    x: 9
+    y: 9
+  tick: 1
+  timestamp: '2025-10-19T12:07:57.487643'
+- grid_data:
+  - alive: true
+    bot_id: 1
+    intensity: 0.25016005207217035
+    x: 0
+    y: 0
+  - alive: true
+    bot_id: 2
+    intensity: 0.24896596891845096
+    x: 1
+    y: 0
+  - alive: true
+    bot_id: 3
+    intensity: 0.2461391626343723
+    x: 2
+    y: 0
+  - alive: true
+    bot_id: 4
+    intensity: 0.24302506342165456
+    x: 3
+    y: 0
+  - alive: true
+    bot_id: 5
+    intensity: 0.25084494533939783
+    x: 4
+    y: 0
+  - alive: true
+    bot_id: 6
+    intensity: 0.2616121760137055
+    x: 5
+    y: 0
+  - alive: true
+    bot_id: 7
+    intensity: 0.26006499214471257
+    x: 6
+    y: 0
+  - alive: true
+    bot_id: 8
+    intensity: 0.25408668752256236
+    x: 7
+    y: 0
+  - alive: true
+    bot_id: 9
+    intensity: 0.254938622538075
+    x: 8
+    y: 0
+  - alive: true
+    bot_id: 10
+    intensity: 0.2497673292254293
+    x: 9
+    y: 0
+  - alive: true
+    bot_id: 11
+    intensity: 0.2403096172307982
+    x: 0
+    y: 1
+  - alive: true
+    bot_id: 12
+    intensity: 0.23552079784280777
+    x: 1
+    y: 1
+  - alive: true
+    bot_id: 13
+    intensity: 0.23691943989052774
+    x: 2
+    y: 1
+  - alive: true
+    bot_id: 14
+    intensity: 0.24696534465635261
+    x: 3
+    y: 1
+  - alive: true
+    bot_id: 15
+    intensity: 0.253395397087834
+    x: 4
+    y: 1
+  - alive: true
+    bot_id: 16
+    intensity: 0.2536618592463181
+    x: 5
+    y: 1
+  - alive: true
+    bot_id: 17
+    intensity: 0.25320012292396
+    x: 6
+    y: 1
+  - alive: true
+    bot_id: 18
+    intensity: 0.2494549503834429
+    x: 7
+    y: 1
+  - alive: true
+    bot_id: 19
+    intensity: 0.24571891507396298
+    x: 8
+    y: 1
+  - alive: true
+    bot_id: 20
+    intensity: 0.2404210080909676
+    x: 9
+    y: 1
+  - alive: true
+    bot_id: 21
+    intensity: 0.24476528822648547
+    x: 0
+    y: 2
+  - alive: true
+    bot_id: 22
+    intensity: 0.2436707135624668
+    x: 1
+    y: 2
+  - alive: true
+    bot_id: 23
+    intensity: 0.24757205772038882
+    x: 2
+    y: 2
+  - alive: true
+    bot_id: 24
+    intensity: 0.25817879777130986
+    x: 3
+    y: 2
+  - alive: true
+    bot_id: 25
+    intensity: 0.2577522045136521
+    x: 4
+    y: 2
+  - alive: true
+    bot_id: 26
+    intensity: 0.251423460193808
+    x: 5
+    y: 2
+  - alive: true
+    bot_id: 27
+    intensity: 0.24782382034559505
+    x: 6
+    y: 2
+  - alive: true
+    bot_id: 28
+    intensity: 0.24521185466919998
+    x: 7
+    y: 2
+  - alive: true
+    bot_id: 29
+    intensity: 0.24544507621519734
+    x: 8
+    y: 2
+  - alive: true
+    bot_id: 30
+    intensity: 0.2408929826404366
+    x: 9
+    y: 2
+  - alive: true
+    bot_id: 31
+    intensity: 0.2475853133941695
+    x: 0
+    y: 3
+  - alive: true
+    bot_id: 32
+    intensity: 0.2491394698849776
+    x: 1
+    y: 3
+  - alive: true
+    bot_id: 33
+    intensity: 0.25805340943114996
+    x: 2
+    y: 3
+  - alive: true
+    bot_id: 34
+    intensity: 0.2570126279877235
+    x: 3
+    y: 3
+  - alive: true
+    bot_id: 35
+    intensity: 0.2543738791670536
+    x: 4
+    y: 3
+  - alive: true
+    bot_id: 36
+    intensity: 0.25070324853585013
+    x: 5
+    y: 3
+  - alive: true
+    bot_id: 37
+    intensity: 0.24865974726864887
+    x: 6
+    y: 3
+  - alive: true
+    bot_id: 38
+    intensity: 0.24693282947896242
+    x: 7
+    y: 3
+  - alive: true
+    bot_id: 39
+    intensity: 0.24903531898574766
+    x: 8
+    y: 3
+  - alive: true
+    bot_id: 40
+    intensity: 0.24611850956246245
+    x: 9
+    y: 3
+  - alive: true
+    bot_id: 41
+    intensity: 0.25691935892938217
+    x: 0
+    y: 4
+  - alive: true
+    bot_id: 42
+    intensity: 0.2584670441896686
+    x: 1
+    y: 4
+  - alive: true
+    bot_id: 43
+    intensity: 0.26628191544230234
+    x: 2
+    y: 4
+  - alive: true
+    bot_id: 44
+    intensity: 0.25726081745248974
+    x: 3
+    y: 4
+  - alive: true
+    bot_id: 45
+    intensity: 0.25003000732963093
+    x: 4
+    y: 4
+  - alive: true
+    bot_id: 46
+    intensity: 0.24888377546706048
+    x: 5
+    y: 4
+  - alive: true
+    bot_id: 47
+    intensity: 0.24695791713912857
+    x: 6
+    y: 4
+  - alive: true
+    bot_id: 48
+    intensity: 0.24573229698068388
+    x: 7
+    y: 4
+  - alive: true
+    bot_id: 49
+    intensity: 0.2508646745748201
+    x: 8
+    y: 4
+  - alive: true
+    bot_id: 50
+    intensity: 0.25374947261702074
+    x: 9
+    y: 4
+  - alive: true
+    bot_id: 51
+    intensity: 0.2567115445136126
+    x: 0
+    y: 5
+  - alive: true
+    bot_id: 52
+    intensity: 0.25693839841501553
+    x: 1
+    y: 5
+  - alive: true
+    bot_id: 53
+    intensity: 0.2617987028252264
+    x: 2
+    y: 5
+  - alive: true
+    bot_id: 54
+    intensity: 0.25015345909144493
+    x: 3
+    y: 5
+  - alive: true
+    bot_id: 55
+    intensity: 0.24898083683700395
+    x: 4
+    y: 5
+  - alive: true
+    bot_id: 56
+    intensity: 0.24975563573714338
+    x: 5
+    y: 5
+  - alive: true
+    bot_id: 57
+    intensity: 0.2521325195459988
+    x: 6
+    y: 5
+  - alive: true
+    bot_id: 58
+    intensity: 0.249095853300149
+    x: 7
+    y: 5
+  - alive: true
+    bot_id: 59
+    intensity: 0.25021940432695694
+    x: 8
+    y: 5
+  - alive: true
+    bot_id: 60
+    intensity: 0.2548060749675537
+    x: 9
+    y: 5
+  - alive: true
+    bot_id: 61
+    intensity: 0.2589819187646605
+    x: 0
+    y: 6
+  - alive: true
+    bot_id: 62
+    intensity: 0.2542834634897521
+    x: 1
+    y: 6
+  - alive: true
+    bot_id: 63
+    intensity: 0.2526777500631797
+    x: 2
+    y: 6
+  - alive: true
+    bot_id: 64
+    intensity: 0.2413485926923952
+    x: 3
+    y: 6
+  - alive: true
+    bot_id: 65
+    intensity: 0.24934777034343109
+    x: 4
+    y: 6
+  - alive: true
+    bot_id: 66
+    intensity: 0.2504182607748558
+    x: 5
+    y: 6
+  - alive: true
+    bot_id: 67
+    intensity: 0.2508034659531043
+    x: 6
+    y: 6
+  - alive: true
+    bot_id: 68
+    intensity: 0.25539403598685523
+    x: 7
+    y: 6
+  - alive: true
+    bot_id: 69
+    intensity: 0.25437660342531015
+    x: 8
+    y: 6
+  - alive: true
+    bot_id: 70
+    intensity: 0.25737351053361485
+    x: 9
+    y: 6
+  - alive: true
+    bot_id: 71
+    intensity: 0.2686146503054742
+    x: 0
+    y: 7
+  - alive: true
+    bot_id: 72
+    intensity: 0.2624751018515338
+    x: 1
+    y: 7
+  - alive: true
+    bot_id: 73
+    intensity: 0.25226479909284744
+    x: 2
+    y: 7
+  - alive: true
+    bot_id: 74
+    intensity: 0.23969712831481954
+    x: 3
+    y: 7
+  - alive: true
+    bot_id: 75
+    intensity: 0.2539341145887067
+    x: 4
+    y: 7
+  - alive: true
+    bot_id: 76
+    intensity: 0.25507780780930267
+    x: 5
+    y: 7
+  - alive: true
+    bot_id: 77
+    intensity: 0.24817971428884583
+    x: 6
+    y: 7
+  - alive: true
+    bot_id: 78
+    intensity: 0.25788224168596113
+    x: 7
+    y: 7
+  - alive: true
+    bot_id: 79
+    intensity: 0.2614249493958565
+    x: 8
+    y: 7
+  - alive: true
+    bot_id: 80
+    intensity: 0.2643677509344597
+    x: 9
+    y: 7
+  - alive: true
+    bot_id: 81
+    intensity: 0.2628915040999165
+    x: 0
+    y: 8
+  - alive: true
+    bot_id: 82
+    intensity: 0.2574407453085792
+    x: 1
+    y: 8
+  - alive: true
+    bot_id: 83
+    intensity: 0.2492272543983128
+    x: 2
+    y: 8
+  - alive: true
+    bot_id: 84
+    intensity: 0.24264185049540837
+    x: 3
+    y: 8
+  - alive: true
+    bot_id: 85
+    intensity: 0.25805791014589713
+    x: 4
+    y: 8
+  - alive: true
+    bot_id: 86
+    intensity: 0.25869574077929325
+    x: 5
+    y: 8
+  - alive: true
+    bot_id: 87
+    intensity: 0.24695585253270744
+    x: 6
+    y: 8
+  - alive: true
+    bot_id: 88
+    intensity: 0.252479150011635
+    x: 7
+    y: 8
+  - alive: true
+    bot_id: 89
+    intensity: 0.2574713855238646
+    x: 8
+    y: 8
+  - alive: true
+    bot_id: 90
+    intensity: 0.2568059482519299
+    x: 9
+    y: 8
+  - alive: true
+    bot_id: 91
+    intensity: 0.2550071018988011
+    x: 0
+    y: 9
+  - alive: true
+    bot_id: 92
+    intensity: 0.25350196566305827
+    x: 1
+    y: 9
+  - alive: true
+    bot_id: 93
+    intensity: 0.2471332242315419
+    x: 2
+    y: 9
+  - alive: true
+    bot_id: 94
+    intensity: 0.23777922770961793
+    x: 3
+    y: 9
+  - alive: true
+    bot_id: 95
+    intensity: 0.24996361702490583
+    x: 4
+    y: 9
+  - alive: true
+    bot_id: 96
+    intensity: 0.25844243600376976
+    x: 5
+    y: 9
+  - alive: true
+    bot_id: 97
+    intensity: 0.2500222872707679
+    x: 6
+    y: 9
+  - alive: true
+    bot_id: 98
+    intensity: 0.24765669539162244
+    x: 7
+    y: 9
+  - alive: true
+    bot_id: 99
+    intensity: 0.24987768832692242
+    x: 8
+    y: 9
+  - alive: true
+    bot_id: 100
+    intensity: 0.24819625505926615
+    x: 9
+    y: 9
+  tick: 10
+  timestamp: '2025-10-19T12:07:57.750533'
+- grid_data:
+  - alive: true
+    bot_id: 1
+    intensity: 0.12289680891213242
+    x: 0
+    y: 0
+  - alive: true
+    bot_id: 2
+    intensity: 0.1216094925722206
+    x: 1
+    y: 0
+  - alive: true
+    bot_id: 3
+    intensity: 0.12014352768775083
+    x: 2
+    y: 0
+  - alive: true
+    bot_id: 4
+    intensity: 0.12046791465166418
+    x: 3
+    y: 0
+  - alive: true
+    bot_id: 5
+    intensity: 0.12195328681167523
+    x: 4
+    y: 0
+  - alive: true
+    bot_id: 6
+    intensity: 0.12323577242245351
+    x: 5
+    y: 0
+  - alive: true
+    bot_id: 7
+    intensity: 0.12376212831228847
+    x: 6
+    y: 0
+  - alive: true
+    bot_id: 8
+    intensity: 0.12636866383154718
+    x: 7
+    y: 0
+  - alive: true
+    bot_id: 9
+    intensity: 0.12560793304001766
+    x: 8
+    y: 0
+  - alive: true
+    bot_id: 10
+    intensity: 0.12407619568782631
+    x: 9
+    y: 0
+  - alive: true
+    bot_id: 11
+    intensity: 0.12379486202064008
+    x: 0
+    y: 1
+  - alive: true
+    bot_id: 12
+    intensity: 0.12101007010031921
+    x: 1
+    y: 1
+  - alive: true
+    bot_id: 13
+    intensity: 0.11969984978672961
+    x: 2
+    y: 1
+  - alive: true
+    bot_id: 14
+    intensity: 0.11946618031116847
+    x: 3
+    y: 1
+  - alive: true
+    bot_id: 15
+    intensity: 0.12048087082368064
+    x: 4
+    y: 1
+  - alive: true
+    bot_id: 16
+    intensity: 0.12341645022764292
+    x: 5
+    y: 1
+  - alive: true
+    bot_id: 17
+    intensity: 0.123626300192208
+    x: 6
+    y: 1
+  - alive: true
+    bot_id: 18
+    intensity: 0.1242347387590635
+    x: 7
+    y: 1
+  - alive: true
+    bot_id: 19
+    intensity: 0.12347511601870029
+    x: 8
+    y: 1
+  - alive: true
+    bot_id: 20
+    intensity: 0.12275359540737558
+    x: 9
+    y: 1
+  - alive: true
+    bot_id: 21
+    intensity: 0.12331970004046981
+    x: 0
+    y: 2
+  - alive: true
+    bot_id: 22
+    intensity: 0.12070754445417298
+    x: 1
+    y: 2
+  - alive: true
+    bot_id: 23
+    intensity: 0.11973538042495253
+    x: 2
+    y: 2
+  - alive: true
+    bot_id: 24
+    intensity: 0.12012570850932487
+    x: 3
+    y: 2
+  - alive: true
+    bot_id: 25
+    intensity: 0.12145978498405882
+    x: 4
+    y: 2
+  - alive: true
+    bot_id: 26
+    intensity: 0.12047157847144581
+    x: 5
+    y: 2
+  - alive: true
+    bot_id: 27
+    intensity: 0.12127757285197116
+    x: 6
+    y: 2
+  - alive: true
+    bot_id: 28
+    intensity: 0.12306352774545819
+    x: 7
+    y: 2
+  - alive: true
+    bot_id: 29
+    intensity: 0.12171523080601494
+    x: 8
+    y: 2
+  - alive: true
+    bot_id: 30
+    intensity: 0.12317058624235848
+    x: 9
+    y: 2
+  - alive: true
+    bot_id: 31
+    intensity: 0.12525355676528954
+    x: 0
+    y: 3
+  - alive: true
+    bot_id: 32
+    intensity: 0.12160788382324103
+    x: 1
+    y: 3
+  - alive: true
+    bot_id: 33
+    intensity: 0.12039874658770917
+    x: 2
+    y: 3
+  - alive: true
+    bot_id: 34
+    intensity: 0.1202690741951081
+    x: 3
+    y: 3
+  - alive: true
+    bot_id: 35
+    intensity: 0.12002538758825276
+    x: 4
+    y: 3
+  - alive: true
+    bot_id: 36
+    intensity: 0.11911474390557937
+    x: 5
+    y: 3
+  - alive: true
+    bot_id: 37
+    intensity: 0.12082089266009637
+    x: 6
+    y: 3
+  - alive: true
+    bot_id: 38
+    intensity: 0.12288599065364052
+    x: 7
+    y: 3
+  - alive: true
+    bot_id: 39
+    intensity: 0.12373409376023445
+    x: 8
+    y: 3
+  - alive: true
+    bot_id: 40
+    intensity: 0.12403795642374645
+    x: 9
+    y: 3
+  - alive: true
+    bot_id: 41
+    intensity: 0.12464028162522882
+    x: 0
+    y: 4
+  - alive: true
+    bot_id: 42
+    intensity: 0.12371038054051711
+    x: 1
+    y: 4
+  - alive: true
+    bot_id: 43
+    intensity: 0.12144971158843099
+    x: 2
+    y: 4
+  - alive: true
+    bot_id: 44
+    intensity: 0.12073489463494222
+    x: 3
+    y: 4
+  - alive: true
+    bot_id: 45
+    intensity: 0.11949458448958075
+    x: 4
+    y: 4
+  - alive: true
+    bot_id: 46
+    intensity: 0.12075318380986873
+    x: 5
+    y: 4
+  - alive: true
+    bot_id: 47
+    intensity: 0.12288919339961339
+    x: 6
+    y: 4
+  - alive: true
+    bot_id: 48
+    intensity: 0.12517736778334207
+    x: 7
+    y: 4
+  - alive: true
+    bot_id: 49
+    intensity: 0.12519263499762273
+    x: 8
+    y: 4
+  - alive: true
+    bot_id: 50
+    intensity: 0.12432053297269988
+    x: 9
+    y: 4
+  - alive: true
+    bot_id: 51
+    intensity: 0.12691604533077672
+    x: 0
+    y: 5
+  - alive: true
+    bot_id: 52
+    intensity: 0.12396493350874527
+    x: 1
+    y: 5
+  - alive: true
+    bot_id: 53
+    intensity: 0.12117589527700849
+    x: 2
+    y: 5
+  - alive: true
+    bot_id: 54
+    intensity: 0.12096954560255795
+    x: 3
+    y: 5
+  - alive: true
+    bot_id: 55
+    intensity: 0.12252409902275496
+    x: 4
+    y: 5
+  - alive: true
+    bot_id: 56
+    intensity: 0.1232106357509899
+    x: 5
+    y: 5
+  - alive: true
+    bot_id: 57
+    intensity: 0.12199090221143365
+    x: 6
+    y: 5
+  - alive: true
+    bot_id: 58
+    intensity: 0.12531474030591513
+    x: 7
+    y: 5
+  - alive: true
+    bot_id: 59
+    intensity: 0.12661038621025617
+    x: 8
+    y: 5
+  - alive: true
+    bot_id: 60
+    intensity: 0.12714306326553823
+    x: 9
+    y: 5
+  - alive: true
+    bot_id: 61
+    intensity: 0.12760677602251616
+    x: 0
+    y: 6
+  - alive: true
+    bot_id: 62
+    intensity: 0.12523397870147385
+    x: 1
+    y: 6
+  - alive: true
+    bot_id: 63
+    intensity: 0.12192004983279511
+    x: 2
+    y: 6
+  - alive: true
+    bot_id: 64
+    intensity: 0.12142927308437053
+    x: 3
+    y: 6
+  - alive: true
+    bot_id: 65
+    intensity: 0.1215591503197857
+    x: 4
+    y: 6
+  - alive: true
+    bot_id: 66
+    intensity: 0.12421632729747248
+    x: 5
+    y: 6
+  - alive: true
+    bot_id: 67
+    intensity: 0.12443897808660942
+    x: 6
+    y: 6
+  - alive: true
+    bot_id: 68
+    intensity: 0.1242339703357808
+    x: 7
+    y: 6
+  - alive: true
+    bot_id: 69
+    intensity: 0.12704259633061774
+    x: 8
+    y: 6
+  - alive: true
+    bot_id: 70
+    intensity: 0.1271493886273195
+    x: 9
+    y: 6
+  - alive: true
+    bot_id: 71
+    intensity: 0.1278242796400466
+    x: 0
+    y: 7
+  - alive: true
+    bot_id: 72
+    intensity: 0.12485855117711002
+    x: 1
+    y: 7
+  - alive: true
+    bot_id: 73
+    intensity: 0.11990300846811719
+    x: 2
+    y: 7
+  - alive: true
+    bot_id: 74
+    intensity: 0.12173836652808276
+    x: 3
+    y: 7
+  - alive: true
+    bot_id: 75
+    intensity: 0.12074192324046289
+    x: 4
+    y: 7
+  - alive: true
+    bot_id: 76
+    intensity: 0.12544588086335068
+    x: 5
+    y: 7
+  - alive: true
+    bot_id: 77
+    intensity: 0.12595888641619485
+    x: 6
+    y: 7
+  - alive: true
+    bot_id: 78
+    intensity: 0.1262910737220834
+    x: 7
+    y: 7
+  - alive: true
+    bot_id: 79
+    intensity: 0.1262294038568999
+    x: 8
+    y: 7
+  - alive: true
+    bot_id: 80
+    intensity: 0.1295059072126425
+    x: 9
+    y: 7
+  - alive: true
+    bot_id: 81
+    intensity: 0.1271982875316566
+    x: 0
+    y: 8
+  - alive: true
+    bot_id: 82
+    intensity: 0.1242342318685125
+    x: 1
+    y: 8
+  - alive: true
+    bot_id: 83
+    intensity: 0.12201984747696733
+    x: 2
+    y: 8
+  - alive: true
+    bot_id: 84
+    intensity: 0.12126517802574317
+    x: 3
+    y: 8
+  - alive: true
+    bot_id: 85
+    intensity: 0.12122475763765919
+    x: 4
+    y: 8
+  - alive: true
+    bot_id: 86
+    intensity: 0.12546275259100065
+    x: 5
+    y: 8
+  - alive: true
+    bot_id: 87
+    intensity: 0.12616286077048475
+    x: 6
+    y: 8
+  - alive: true
+    bot_id: 88
+    intensity: 0.12767961122972762
+    x: 7
+    y: 8
+  - alive: true
+    bot_id: 89
+    intensity: 0.1275719642472802
+    x: 8
+    y: 8
+  - alive: true
+    bot_id: 90
+    intensity: 0.12853009794826514
+    x: 9
+    y: 8
+  - alive: true
+    bot_id: 91
+    intensity: 0.12479888608003024
+    x: 0
+    y: 9
+  - alive: true
+    bot_id: 92
+    intensity: 0.12330178086453877
+    x: 1
+    y: 9
+  - alive: true
+    bot_id: 93
+    intensity: 0.12117310440312963
+    x: 2
+    y: 9
+  - alive: true
+    bot_id: 94
+    intensity: 0.12008972950923691
+    x: 3
+    y: 9
+  - alive: true
+    bot_id: 95
+    intensity: 0.12252752328913344
+    x: 4
+    y: 9
+  - alive: true
+    bot_id: 96
+    intensity: 0.12451558712878767
+    x: 5
+    y: 9
+  - alive: true
+    bot_id: 97
+    intensity: 0.12548229331102523
+    x: 6
+    y: 9
+  - alive: true
+    bot_id: 98
+    intensity: 0.12633332742921516
+    x: 7
+    y: 9
+  - alive: true
+    bot_id: 99
+    intensity: 0.12619615429870076
+    x: 8
+    y: 9
+  - alive: true
+    bot_id: 100
+    intensity: 0.12649859739381408
+    x: 9
+    y: 9
+  tick: 50
+  timestamp: '2025-10-19T12:07:58.917543'
+- grid_data:
+  - alive: true
+    bot_id: 1
+    intensity: 0.11864190398537793
+    x: 0
+    y: 0
+  - alive: true
+    bot_id: 2
+    intensity: 0.11710763422941653
+    x: 1
+    y: 0
+  - alive: true
+    bot_id: 3
+    intensity: 0.11669615190508617
+    x: 2
+    y: 0
+  - alive: true
+    bot_id: 4
+    intensity: 0.11612049276265113
+    x: 3
+    y: 0
+  - alive: true
+    bot_id: 5
+    intensity: 0.11576941310622604
+    x: 4
+    y: 0
+  - alive: true
+    bot_id: 6
+    intensity: 0.11623732940251519
+    x: 5
+    y: 0
+  - alive: true
+    bot_id: 7
+    intensity: 0.1156057429245275
+    x: 6
+    y: 0
+  - alive: true
+    bot_id: 8
+    intensity: 0.11678692001711226
+    x: 7
+    y: 0
+  - alive: true
+    bot_id: 9
+    intensity: 0.11819386843161302
+    x: 8
+    y: 0
+  - alive: true
+    bot_id: 10
+    intensity: 0.11698672448487282
+    x: 9
+    y: 0
+  - alive: true
+    bot_id: 11
+    intensity: 0.11792156277086163
+    x: 0
+    y: 1
+  - alive: true
+    bot_id: 12
+    intensity: 0.11528930084868824
+    x: 1
+    y: 1
+  - alive: true
+    bot_id: 13
+    intensity: 0.11683086253936821
+    x: 2
+    y: 1
+  - alive: true
+    bot_id: 14
+    intensity: 0.11507894183272518
+    x: 3
+    y: 1
+  - alive: true
+    bot_id: 15
+    intensity: 0.11509659732326945
+    x: 4
+    y: 1
+  - alive: true
+    bot_id: 16
+    intensity: 0.11572085422905634
+    x: 5
+    y: 1
+  - alive: true
+    bot_id: 17
+    intensity: 0.11669009353708926
+    x: 6
+    y: 1
+  - alive: true
+    bot_id: 18
+    intensity: 0.1173578230602899
+    x: 7
+    y: 1
+  - alive: true
+    bot_id: 19
+    intensity: 0.11829387135499456
+    x: 8
+    y: 1
+  - alive: true
+    bot_id: 20
+    intensity: 0.11736761710717283
+    x: 9
+    y: 1
+  - alive: true
+    bot_id: 21
+    intensity: 0.11656832920293629
+    x: 0
+    y: 2
+  - alive: true
+    bot_id: 22
+    intensity: 0.1165611456144408
+    x: 1
+    y: 2
+  - alive: true
+    bot_id: 23
+    intensity: 0.11757112267102823
+    x: 2
+    y: 2
+  - alive: true
+    bot_id: 24
+    intensity: 0.11471129562500235
+    x: 3
+    y: 2
+  - alive: true
+    bot_id: 25
+    intensity: 0.11563933220674516
+    x: 4
+    y: 2
+  - alive: true
+    bot_id: 26
+    intensity: 0.11733773505537035
+    x: 5
+    y: 2
+  - alive: true
+    bot_id: 27
+    intensity: 0.11790690029386894
+    x: 6
+    y: 2
+  - alive: true
+    bot_id: 28
+    intensity: 0.11883099439229142
+    x: 7
+    y: 2
+  - alive: true
+    bot_id: 29
+    intensity: 0.11964058566616893
+    x: 8
+    y: 2
+  - alive: true
+    bot_id: 30
+    intensity: 0.11768582718756812
+    x: 9
+    y: 2
+  - alive: true
+    bot_id: 31
+    intensity: 0.11640514278076461
+    x: 0
+    y: 3
+  - alive: true
+    bot_id: 32
+    intensity: 0.11680575568046705
+    x: 1
+    y: 3
+  - alive: true
+    bot_id: 33
+    intensity: 0.11766219180111523
+    x: 2
+    y: 3
+  - alive: true
+    bot_id: 34
+    intensity: 0.11621328956044272
+    x: 3
+    y: 3
+  - alive: true
+    bot_id: 35
+    intensity: 0.11520202674286169
+    x: 4
+    y: 3
+  - alive: true
+    bot_id: 36
+    intensity: 0.11690390014176655
+    x: 5
+    y: 3
+  - alive: true
+    bot_id: 37
+    intensity: 0.11636730842322487
+    x: 6
+    y: 3
+  - alive: true
+    bot_id: 38
+    intensity: 0.1156074232954318
+    x: 7
+    y: 3
+  - alive: true
+    bot_id: 39
+    intensity: 0.11660586449638399
+    x: 8
+    y: 3
+  - alive: true
+    bot_id: 40
+    intensity: 0.1171990551133771
+    x: 9
+    y: 3
+  - alive: true
+    bot_id: 41
+    intensity: 0.11818981654679725
+    x: 0
+    y: 4
+  - alive: true
+    bot_id: 42
+    intensity: 0.11779668995635957
+    x: 1
+    y: 4
+  - alive: true
+    bot_id: 43
+    intensity: 0.11750442204009004
+    x: 2
+    y: 4
+  - alive: true
+    bot_id: 44
+    intensity: 0.11730101105680668
+    x: 3
+    y: 4
+  - alive: true
+    bot_id: 45
+    intensity: 0.11705165664711281
+    x: 4
+    y: 4
+  - alive: true
+    bot_id: 46
+    intensity: 0.1167766770931085
+    x: 5
+    y: 4
+  - alive: true
+    bot_id: 47
+    intensity: 0.11586878600867981
+    x: 6
+    y: 4
+  - alive: true
+    bot_id: 48
+    intensity: 0.1157037331681022
+    x: 7
+    y: 4
+  - alive: true
+    bot_id: 49
+    intensity: 0.11725506250067459
+    x: 8
+    y: 4
+  - alive: true
+    bot_id: 50
+    intensity: 0.1174231347375079
+    x: 9
+    y: 4
+  - alive: true
+    bot_id: 51
+    intensity: 0.11700105151628144
+    x: 0
+    y: 5
+  - alive: true
+    bot_id: 52
+    intensity: 0.11644660823955402
+    x: 1
+    y: 5
+  - alive: true
+    bot_id: 53
+    intensity: 0.11787937052085926
+    x: 2
+    y: 5
+  - alive: true
+    bot_id: 54
+    intensity: 0.11598380372485388
+    x: 3
+    y: 5
+  - alive: true
+    bot_id: 55
+    intensity: 0.11694047437632564
+    x: 4
+    y: 5
+  - alive: true
+    bot_id: 56
+    intensity: 0.1166198554906551
+    x: 5
+    y: 5
+  - alive: true
+    bot_id: 57
+    intensity: 0.11615065303652228
+    x: 6
+    y: 5
+  - alive: true
+    bot_id: 58
+    intensity: 0.11884804493575767
+    x: 7
+    y: 5
+  - alive: true
+    bot_id: 59
+    intensity: 0.11935213418947821
+    x: 8
+    y: 5
+  - alive: true
+    bot_id: 60
+    intensity: 0.11869211813576996
+    x: 9
+    y: 5
+  - alive: true
+    bot_id: 61
+    intensity: 0.11661664710828182
+    x: 0
+    y: 6
+  - alive: true
+    bot_id: 62
+    intensity: 0.11630884601327181
+    x: 1
+    y: 6
+  - alive: true
+    bot_id: 63
+    intensity: 0.11616390420285483
+    x: 2
+    y: 6
+  - alive: true
+    bot_id: 64
+    intensity: 0.11719162381457934
+    x: 3
+    y: 6
+  - alive: true
+    bot_id: 65
+    intensity: 0.11697834703375612
+    x: 4
+    y: 6
+  - alive: true
+    bot_id: 66
+    intensity: 0.11839777531931236
+    x: 5
+    y: 6
+  - alive: true
+    bot_id: 67
+    intensity: 0.11735916851601746
+    x: 6
+    y: 6
+  - alive: true
+    bot_id: 68
+    intensity: 0.11894764911024877
+    x: 7
+    y: 6
+  - alive: true
+    bot_id: 69
+    intensity: 0.11965480831255411
+    x: 8
+    y: 6
+  - alive: true
+    bot_id: 70
+    intensity: 0.11859813036954932
+    x: 9
+    y: 6
+  - alive: true
+    bot_id: 71
+    intensity: 0.11712840162215148
+    x: 0
+    y: 7
+  - alive: true
+    bot_id: 72
+    intensity: 0.1161501923343587
+    x: 1
+    y: 7
+  - alive: true
+    bot_id: 73
+    intensity: 0.11537385960309095
+    x: 2
+    y: 7
+  - alive: true
+    bot_id: 74
+    intensity: 0.1166250611465696
+    x: 3
+    y: 7
+  - alive: true
+    bot_id: 75
+    intensity: 0.11670953706167315
+    x: 4
+    y: 7
+  - alive: true
+    bot_id: 76
+    intensity: 0.11787399416391302
+    x: 5
+    y: 7
+  - alive: true
+    bot_id: 77
+    intensity: 0.11722144492955958
+    x: 6
+    y: 7
+  - alive: true
+    bot_id: 78
+    intensity: 0.11916585851461747
+    x: 7
+    y: 7
+  - alive: true
+    bot_id: 79
+    intensity: 0.11935199835609252
+    x: 8
+    y: 7
+  - alive: true
+    bot_id: 80
+    intensity: 0.11871194290638214
+    x: 9
+    y: 7
+  - alive: true
+    bot_id: 81
+    intensity: 0.11853780673806638
+    x: 0
+    y: 8
+  - alive: true
+    bot_id: 82
+    intensity: 0.11697371420611805
+    x: 1
+    y: 8
+  - alive: true
+    bot_id: 83
+    intensity: 0.11700058920942635
+    x: 2
+    y: 8
+  - alive: true
+    bot_id: 84
+    intensity: 0.1155639328337225
+    x: 3
+    y: 8
+  - alive: true
+    bot_id: 85
+    intensity: 0.11652528964215496
+    x: 4
+    y: 8
+  - alive: true
+    bot_id: 86
+    intensity: 0.11724010516649594
+    x: 5
+    y: 8
+  - alive: true
+    bot_id: 87
+    intensity: 0.11831649416952672
+    x: 6
+    y: 8
+  - alive: true
+    bot_id: 88
+    intensity: 0.12011361685655839
+    x: 7
+    y: 8
+  - alive: true
+    bot_id: 89
+    intensity: 0.11906432144569978
+    x: 8
+    y: 8
+  - alive: true
+    bot_id: 90
+    intensity: 0.1182664412661387
+    x: 9
+    y: 8
+  - alive: true
+    bot_id: 91
+    intensity: 0.11793910115653213
+    x: 0
+    y: 9
+  - alive: true
+    bot_id: 92
+    intensity: 0.11782006546625343
+    x: 1
+    y: 9
+  - alive: true
+    bot_id: 93
+    intensity: 0.11613805316911607
+    x: 2
+    y: 9
+  - alive: true
+    bot_id: 94
+    intensity: 0.11646465047085701
+    x: 3
+    y: 9
+  - alive: true
+    bot_id: 95
+    intensity: 0.1173027463509777
+    x: 4
+    y: 9
+  - alive: true
+    bot_id: 96
+    intensity: 0.11746418393643072
+    x: 5
+    y: 9
+  - alive: true
+    bot_id: 97
+    intensity: 0.1181697929795645
+    x: 6
+    y: 9
+  - alive: true
+    bot_id: 98
+    intensity: 0.11845035291204227
+    x: 7
+    y: 9
+  - alive: true
+    bot_id: 99
+    intensity: 0.11715529134519136
+    x: 8
+    y: 9
+  - alive: true
+    bot_id: 100
+    intensity: 0.11714019525809158
+    x: 9
+    y: 9
+  tick: 100
+  timestamp: '2025-10-19T12:08:00.304004'
+- grid_data:
+  - alive: true
+    bot_id: 1
+    intensity: 0.11874015325687884
+    x: 0
+    y: 0
+  - alive: true
+    bot_id: 2
+    intensity: 0.11848218629123844
+    x: 1
+    y: 0
+  - alive: true
+    bot_id: 3
+    intensity: 0.12010108643299036
+    x: 2
+    y: 0
+  - alive: true
+    bot_id: 4
+    intensity: 0.11890465162592104
+    x: 3
+    y: 0
+  - alive: true
+    bot_id: 5
+    intensity: 0.12027895881866153
+    x: 4
+    y: 0
+  - alive: true
+    bot_id: 6
+    intensity: 0.11739135819002577
+    x: 5
+    y: 0
+  - alive: true
+    bot_id: 7
+    intensity: 0.1187348964722897
+    x: 6
+    y: 0
+  - alive: true
+    bot_id: 8
+    intensity: 0.11871240007869362
+    x: 7
+    y: 0
+  - alive: true
+    bot_id: 9
+    intensity: 0.11979415173737906
+    x: 8
+    y: 0
+  - alive: true
+    bot_id: 10
+    intensity: 0.11805392274238384
+    x: 9
+    y: 0
+  - alive: true
+    bot_id: 11
+    intensity: 0.11849194294804466
+    x: 0
+    y: 1
+  - alive: true
+    bot_id: 12
+    intensity: 0.118245495346381
+    x: 1
+    y: 1
+  - alive: true
+    bot_id: 13
+    intensity: 0.11890988824442676
+    x: 2
+    y: 1
+  - alive: true
+    bot_id: 14
+    intensity: 0.118341029613181
+    x: 3
+    y: 1
+  - alive: true
+    bot_id: 15
+    intensity: 0.11831095223423597
+    x: 4
+    y: 1
+  - alive: true
+    bot_id: 16
+    intensity: 0.1177404356688087
+    x: 5
+    y: 1
+  - alive: true
+    bot_id: 17
+    intensity: 0.11883555121918654
+    x: 6
+    y: 1
+  - alive: true
+    bot_id: 18
+    intensity: 0.11824648181019257
+    x: 7
+    y: 1
+  - alive: true
+    bot_id: 19
+    intensity: 0.11770334344350933
+    x: 8
+    y: 1
+  - alive: true
+    bot_id: 20
+    intensity: 0.11712523111886679
+    x: 9
+    y: 1
+  - alive: true
+    bot_id: 21
+    intensity: 0.118509476468637
+    x: 0
+    y: 2
+  - alive: true
+    bot_id: 22
+    intensity: 0.11780939997527111
+    x: 1
+    y: 2
+  - alive: true
+    bot_id: 23
+    intensity: 0.11797908257757413
+    x: 2
+    y: 2
+  - alive: true
+    bot_id: 24
+    intensity: 0.1185949933991783
+    x: 3
+    y: 2
+  - alive: true
+    bot_id: 25
+    intensity: 0.11822915791086641
+    x: 4
+    y: 2
+  - alive: true
+    bot_id: 26
+    intensity: 0.11765379555372169
+    x: 5
+    y: 2
+  - alive: true
+    bot_id: 27
+    intensity: 0.11765372310723413
+    x: 6
+    y: 2
+  - alive: true
+    bot_id: 28
+    intensity: 0.11679210567591776
+    x: 7
+    y: 2
+  - alive: true
+    bot_id: 29
+    intensity: 0.11746018771361902
+    x: 8
+    y: 2
+  - alive: true
+    bot_id: 30
+    intensity: 0.11822167084705297
+    x: 9
+    y: 2
+  - alive: true
+    bot_id: 31
+    intensity: 0.11895905123342983
+    x: 0
+    y: 3
+  - alive: true
+    bot_id: 32
+    intensity: 0.11642117713519665
+    x: 1
+    y: 3
+  - alive: true
+    bot_id: 33
+    intensity: 0.1176688661828698
+    x: 2
+    y: 3
+  - alive: true
+    bot_id: 34
+    intensity: 0.11748220832814993
+    x: 3
+    y: 3
+  - alive: true
+    bot_id: 35
+    intensity: 0.11715979701413812
+    x: 4
+    y: 3
+  - alive: true
+    bot_id: 36
+    intensity: 0.11781763511441361
+    x: 5
+    y: 3
+  - alive: true
+    bot_id: 37
+    intensity: 0.11910170968505154
+    x: 6
+    y: 3
+  - alive: true
+    bot_id: 38
+    intensity: 0.11811369923820114
+    x: 7
+    y: 3
+  - alive: true
+    bot_id: 39
+    intensity: 0.11766991397416211
+    x: 8
+    y: 3
+  - alive: true
+    bot_id: 40
+    intensity: 0.11889003161276086
+    x: 9
+    y: 3
+  - alive: true
+    bot_id: 41
+    intensity: 0.11857517732658074
+    x: 0
+    y: 4
+  - alive: true
+    bot_id: 42
+    intensity: 0.11884809708078378
+    x: 1
+    y: 4
+  - alive: true
+    bot_id: 43
+    intensity: 0.11765527425865478
+    x: 2
+    y: 4
+  - alive: true
+    bot_id: 44
+    intensity: 0.11865165843153047
+    x: 3
+    y: 4
+  - alive: true
+    bot_id: 45
+    intensity: 0.1185583393122505
+    x: 4
+    y: 4
+  - alive: true
+    bot_id: 46
+    intensity: 0.11798274892067928
+    x: 5
+    y: 4
+  - alive: true
+    bot_id: 47
+    intensity: 0.11829857124591954
+    x: 6
+    y: 4
+  - alive: true
+    bot_id: 48
+    intensity: 0.11727049674567361
+    x: 7
+    y: 4
+  - alive: true
+    bot_id: 49
+    intensity: 0.11759438472927453
+    x: 8
+    y: 4
+  - alive: true
+    bot_id: 50
+    intensity: 0.11783527789082886
+    x: 9
+    y: 4
+  - alive: true
+    bot_id: 51
+    intensity: 0.11832241967969488
+    x: 0
+    y: 5
+  - alive: true
+    bot_id: 52
+    intensity: 0.11777756924618529
+    x: 1
+    y: 5
+  - alive: true
+    bot_id: 53
+    intensity: 0.11793763715272387
+    x: 2
+    y: 5
+  - alive: true
+    bot_id: 54
+    intensity: 0.11804820434202554
+    x: 3
+    y: 5
+  - alive: true
+    bot_id: 55
+    intensity: 0.11766644914438402
+    x: 4
+    y: 5
+  - alive: true
+    bot_id: 56
+    intensity: 0.11697910310374593
+    x: 5
+    y: 5
+  - alive: true
+    bot_id: 57
+    intensity: 0.11858859448759178
+    x: 6
+    y: 5
+  - alive: true
+    bot_id: 58
+    intensity: 0.11874461416552251
+    x: 7
+    y: 5
+  - alive: true
+    bot_id: 59
+    intensity: 0.11784518870725233
+    x: 8
+    y: 5
+  - alive: true
+    bot_id: 60
+    intensity: 0.11903738501004005
+    x: 9
+    y: 5
+  - alive: true
+    bot_id: 61
+    intensity: 0.11787674560756096
+    x: 0
+    y: 6
+  - alive: true
+    bot_id: 62
+    intensity: 0.11793906504104737
+    x: 1
+    y: 6
+  - alive: true
+    bot_id: 63
+    intensity: 0.11811766499299936
+    x: 2
+    y: 6
+  - alive: true
+    bot_id: 64
+    intensity: 0.11772320704706092
+    x: 3
+    y: 6
+  - alive: true
+    bot_id: 65
+    intensity: 0.11783226125937933
+    x: 4
+    y: 6
+  - alive: true
+    bot_id: 66
+    intensity: 0.1183666150636444
+    x: 5
+    y: 6
+  - alive: true
+    bot_id: 67
+    intensity: 0.11777393997916305
+    x: 6
+    y: 6
+  - alive: true
+    bot_id: 68
+    intensity: 0.11861265721689976
+    x: 7
+    y: 6
+  - alive: true
+    bot_id: 69
+    intensity: 0.11906148831650243
+    x: 8
+    y: 6
+  - alive: true
+    bot_id: 70
+    intensity: 0.11954313498720133
+    x: 9
+    y: 6
+  - alive: true
+    bot_id: 71
+    intensity: 0.11711930235897691
+    x: 0
+    y: 7
+  - alive: true
+    bot_id: 72
+    intensity: 0.1172046692320926
+    x: 1
+    y: 7
+  - alive: true
+    bot_id: 73
+    intensity: 0.11821415583209553
+    x: 2
+    y: 7
+  - alive: true
+    bot_id: 74
+    intensity: 0.11660138518215854
+    x: 3
+    y: 7
+  - alive: true
+    bot_id: 75
+    intensity: 0.11879369515563327
+    x: 4
+    y: 7
+  - alive: true
+    bot_id: 76
+    intensity: 0.119057129814001
+    x: 5
+    y: 7
+  - alive: true
+    bot_id: 77
+    intensity: 0.11819941460978071
+    x: 6
+    y: 7
+  - alive: true
+    bot_id: 78
+    intensity: 0.11829055223572242
+    x: 7
+    y: 7
+  - alive: true
+    bot_id: 79
+    intensity: 0.11825156258585631
+    x: 8
+    y: 7
+  - alive: true
+    bot_id: 80
+    intensity: 0.11777536289614454
+    x: 9
+    y: 7
+  - alive: true
+    bot_id: 81
+    intensity: 0.11682725297849603
+    x: 0
+    y: 8
+  - alive: true
+    bot_id: 82
+    intensity: 0.1182501909561758
+    x: 1
+    y: 8
+  - alive: true
+    bot_id: 83
+    intensity: 0.11823821319047234
+    x: 2
+    y: 8
+  - alive: true
+    bot_id: 84
+    intensity: 0.11879546366135804
+    x: 3
+    y: 8
+  - alive: true
+    bot_id: 85
+    intensity: 0.12042513318182331
+    x: 4
+    y: 8
+  - alive: true
+    bot_id: 86
+    intensity: 0.11827821015012244
+    x: 5
+    y: 8
+  - alive: true
+    bot_id: 87
+    intensity: 0.11805555189480355
+    x: 6
+    y: 8
+  - alive: true
+    bot_id: 88
+    intensity: 0.1181912167430238
+    x: 7
+    y: 8
+  - alive: true
+    bot_id: 89
+    intensity: 0.11839250985179754
+    x: 8
+    y: 8
+  - alive: true
+    bot_id: 90
+    intensity: 0.11803951899508966
+    x: 9
+    y: 8
+  - alive: true
+    bot_id: 91
+    intensity: 0.11996218240998544
+    x: 0
+    y: 9
+  - alive: true
+    bot_id: 92
+    intensity: 0.11848847092030479
+    x: 1
+    y: 9
+  - alive: true
+    bot_id: 93
+    intensity: 0.12001485652906474
+    x: 2
+    y: 9
+  - alive: true
+    bot_id: 94
+    intensity: 0.11896528857835775
+    x: 3
+    y: 9
+  - alive: true
+    bot_id: 95
+    intensity: 0.11878939116143898
+    x: 4
+    y: 9
+  - alive: true
+    bot_id: 96
+    intensity: 0.11800086018911107
+    x: 5
+    y: 9
+  - alive: true
+    bot_id: 97
+    intensity: 0.11829893579377342
+    x: 6
+    y: 9
+  - alive: true
+    bot_id: 98
+    intensity: 0.11855083144862857
+    x: 7
+    y: 9
+  - alive: true
+    bot_id: 99
+    intensity: 0.1192415488230534
+    x: 8
+    y: 9
+  - alive: true
+    bot_id: 100
+    intensity: 0.11834007322929685
+    x: 9
+    y: 9
+  tick: 200
+  timestamp: '2025-10-19T12:08:02.624254'
+time_series:
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.6531244641791756
+      magnitude_stability: 0.5442955854690148
+    neighbor_similarity:
+      count: 100
+      mean: 0.3468755358208244
+      std: 0.035604214225634444
+    state_magnitude:
+      max: 17.44334902040681
+      mean: 16.304301370120275
+      min: 15.21179627134722
+      std: 0.45570441453098526
+    vector_entropy: 0.03185651295258845
+  tick: 1
+  timestamp: '2025-10-19T12:07:57.487192'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.401460751018607
+      magnitude_stability: 0.6619619201877214
+    neighbor_similarity:
+      count: 100
+      mean: 0.598539248981393
+      std: 0.026074369139405466
+    state_magnitude:
+      max: 13.334275715871893
+      mean: 12.543734324204184
+      min: 11.782646575706803
+      std: 0.33803807981227857
+    vector_entropy: 0.024508008169049588
+  tick: 2
+  timestamp: '2025-10-19T12:07:57.516732'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.2449298956523449
+      magnitude_stability: 0.7314568629603999
+    neighbor_similarity:
+      count: 100
+      mean: 0.7550701043476551
+      std: 0.017857833326728374
+    state_magnitude:
+      max: 10.794446896468529
+      mean: 10.172573638790148
+      min: 9.64618321226397
+      std: 0.2685431370396001
+    vector_entropy: 0.019874780195193634
+  tick: 3
+  timestamp: '2025-10-19T12:07:57.545683'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.15281602790260096
+      magnitude_stability: 0.7746578865249555
+    neighbor_similarity:
+      count: 100
+      mean: 0.847183972097399
+      std: 0.012296179619198473
+    state_magnitude:
+      max: 9.097013161036134
+      mean: 8.605301736361788
+      min: 8.220222947092998
+      std: 0.22534211347504454
+    vector_entropy: 0.016812469400111402
+  tick: 4
+  timestamp: '2025-10-19T12:07:57.574878'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.09867244956788634
+      magnitude_stability: 0.8053931009845533
+    neighbor_similarity:
+      count: 100
+      mean: 0.9013275504321137
+      std: 0.008603880587977042
+    state_magnitude:
+      max: 7.984421444189154
+      mean: 7.523631354370684
+      min: 7.137253359356505
+      std: 0.19460689901544667
+    vector_entropy: 0.014698944376071894
+  tick: 5
+  timestamp: '2025-10-19T12:07:57.603756'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.06609335167316355
+      magnitude_stability: 0.8268099324536429
+    neighbor_similarity:
+      count: 100
+      mean: 0.9339066483268365
+      std: 0.006244222350697313
+    state_magnitude:
+      max: 7.193502921573994
+      mean: 6.740635578235097
+      min: 6.360772316569166
+      std: 0.17319006754635718
+    vector_entropy: 0.013169015166098974
+  tick: 6
+  timestamp: '2025-10-19T12:07:57.633125'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.0459868225219654
+      magnitude_stability: 0.8395113275239021
+    neighbor_similarity:
+      count: 100
+      mean: 0.9540131774780346
+      std: 0.004694695031086478
+    state_magnitude:
+      max: 6.580911888464813
+      mean: 6.1544053902547615
+      min: 5.775884972375756
+      std: 0.16048867247609783
+    vector_entropy: 0.012023725859862297
+  tick: 7
+  timestamp: '2025-10-19T12:07:57.662469'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.03332886241150479
+      magnitude_stability: 0.8535301076750379
+    neighbor_similarity:
+      count: 100
+      mean: 0.9666711375884952
+      std: 0.0036055701285714393
+    state_magnitude:
+      max: 6.083751304626801
+      mean: 5.698365967062513
+      min: 5.341630100234239
+      std: 0.1464698923249621
+    vector_entropy: 0.011132542709154666
+  tick: 8
+  timestamp: '2025-10-19T12:07:57.691772'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.025172249331278373
+      magnitude_stability: 0.8636950987006413
+    neighbor_similarity:
+      count: 100
+      mean: 0.9748277506687216
+      std: 0.0028889975125208226
+    state_magnitude:
+      max: 5.698937812648618
+      mean: 5.333644083608471
+      min: 4.991474365769664
+      std: 0.1363049012993587
+    vector_entropy: 0.010419902616317507
+  tick: 9
+  timestamp: '2025-10-19T12:07:57.720905'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.019709511722154627
+      magnitude_stability: 0.8717799980068404
+    neighbor_similarity:
+      count: 100
+      mean: 0.9802904882778454
+      std: 0.002334875486068308
+    state_magnitude:
+      max: 5.3722930061094845
+      mean: 5.032086848383573
+      min: 4.710415956856155
+      std: 0.1282200019931596
+    vector_entropy: 0.009830713979303782
+  tick: 10
+  timestamp: '2025-10-19T12:07:57.750275'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.016048853146977238
+      magnitude_stability: 0.8788185910513119
+    neighbor_similarity:
+      count: 100
+      mean: 0.9839511468530228
+      std: 0.0019167106799655922
+    state_magnitude:
+      max: 5.103134493145732
+      mean: 4.776848884316078
+      min: 4.472262357597448
+      std: 0.12118140894868816
+    vector_entropy: 0.009331998772347737
+  tick: 11
+  timestamp: '2025-10-19T12:07:57.779888'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.013473849236007696
+      magnitude_stability: 0.8845131791533564
+    neighbor_similarity:
+      count: 100
+      mean: 0.9865261507639923
+      std: 0.0016870954782782848
+    state_magnitude:
+      max: 4.8780900280088995
+      mean: 4.55756251032297
+      min: 4.2794389047123005
+      std: 0.1154868208466436
+    vector_entropy: 0.008903519992724098
+  tick: 12
+  timestamp: '2025-10-19T12:07:57.809055'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.01168310415374596
+      magnitude_stability: 0.8886944776396022
+    neighbor_similarity:
+      count: 100
+      mean: 0.988316895846254
+      std: 0.0014469224280825661
+    state_magnitude:
+      max: 4.66451522371493
+      mean: 4.369327990964287
+      min: 4.109103629310866
+      std: 0.11130552236039785
+    vector_entropy: 0.008535742996489315
+  tick: 13
+  timestamp: '2025-10-19T12:07:57.838447'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.010405627796856276
+      magnitude_stability: 0.8910235924085504
+    neighbor_similarity:
+      count: 100
+      mean: 0.9895943722031437
+      std: 0.0013065510975451276
+    state_magnitude:
+      max: 4.502653396979314
+      mean: 4.204792512654177
+      min: 3.9469398831648235
+      std: 0.10897640759144953
+    vector_entropy: 0.008214335938815398
+  tick: 14
+  timestamp: '2025-10-19T12:07:57.867773'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.009542698425204277
+      magnitude_stability: 0.895610206720432
+    neighbor_similarity:
+      count: 100
+      mean: 0.9904573015747957
+      std: 0.0011542264879827048
+    state_magnitude:
+      max: 4.330439037569611
+      mean: 4.057253931722812
+      min: 3.832737848549704
+      std: 0.10438979327956796
+    vector_entropy: 0.00792604628042592
+  tick: 15
+  timestamp: '2025-10-19T12:07:57.897044'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.008838887593299871
+      magnitude_stability: 0.8985441714492799
+    neighbor_similarity:
+      count: 100
+      mean: 0.9911611124067001
+      std: 0.0009823154482506374
+    state_magnitude:
+      max: 4.2076442196350206
+      mean: 3.9238899045450135
+      min: 3.7109169401837088
+      std: 0.10145582855072013
+    vector_entropy: 0.007665482858192071
+  tick: 16
+  timestamp: '2025-10-19T12:07:57.926525'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.008366581297285292
+      magnitude_stability: 0.9030317063602886
+    neighbor_similarity:
+      count: 100
+      mean: 0.9916334187027147
+      std: 0.0009417562753671416
+    state_magnitude:
+      max: 4.0859171936389505
+      mean: 3.805449651640798
+      min: 3.6028206908903058
+      std: 0.09696829363971135
+    vector_entropy: 0.007433965412106663
+  tick: 17
+  timestamp: '2025-10-19T12:07:57.955919'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.008005237403443832
+      magnitude_stability: 0.9076207570074435
+    neighbor_similarity:
+      count: 100
+      mean: 0.9919947625965562
+      std: 0.0009204058781165463
+    state_magnitude:
+      max: 3.9501207556127658
+      mean: 3.697142713195134
+      min: 3.498819923260018
+      std: 0.09237924299255654
+    vector_entropy: 0.007222225892501014
+  tick: 18
+  timestamp: '2025-10-19T12:07:57.985377'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.007773122861691073
+      magnitude_stability: 0.9087891446866396
+    neighbor_similarity:
+      count: 100
+      mean: 0.9922268771383089
+      std: 0.0008427351013781791
+    state_magnitude:
+      max: 3.8272924062312828
+      mean: 3.5980031354009943
+      min: 3.398804170442858
+      std: 0.09121085531336032
+    vector_entropy: 0.00702857756449307
+  tick: 19
+  timestamp: '2025-10-19T12:07:58.014582'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.007596858842875642
+      magnitude_stability: 0.9123436378242296
+    neighbor_similarity:
+      count: 100
+      mean: 0.9924031411571244
+      std: 0.0008624324401148003
+    state_magnitude:
+      max: 3.7303677631968215
+      mean: 3.507375304209545
+      min: 3.324618236911274
+      std: 0.08765636217577043
+    vector_entropy: 0.0068514372549670745
+  tick: 20
+  timestamp: '2025-10-19T12:07:58.043511'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.007529446208357604
+      magnitude_stability: 0.912951467581027
+    neighbor_similarity:
+      count: 100
+      mean: 0.9924705537916424
+      std: 0.0008249386743223586
+    state_magnitude:
+      max: 3.6347958679646393
+      mean: 3.4242526168784746
+      min: 3.2375759782708666
+      std: 0.087048532418973
+    vector_entropy: 0.006689060548512294
+  tick: 21
+  timestamp: '2025-10-19T12:07:58.072636'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.007523363105221725
+      magnitude_stability: 0.9127708413073731
+    neighbor_similarity:
+      count: 100
+      mean: 0.9924766368947783
+      std: 0.0008043210808001944
+    state_magnitude:
+      max: 3.561302245296182
+      mean: 3.347594119601019
+      min: 3.176172638307302
+      std: 0.08722915869262696
+    vector_entropy: 0.0065394320168516784
+  tick: 22
+  timestamp: '2025-10-19T12:07:58.101610'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.007422436232291663
+      magnitude_stability: 0.9146649260008034
+    neighbor_similarity:
+      count: 100
+      mean: 0.9925775637677083
+      std: 0.0008315301154902325
+    state_magnitude:
+      max: 3.4712580806956495
+      mean: 3.2755222873629295
+      min: 3.1091844317182007
+      std: 0.08533507399919657
+    vector_entropy: 0.006398582166433692
+  tick: 23
+  timestamp: '2025-10-19T12:07:58.130692'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.0074159475749507875
+      magnitude_stability: 0.9170376103749764
+    neighbor_similarity:
+      count: 100
+      mean: 0.9925840524250492
+      std: 0.0007278237836746669
+    state_magnitude:
+      max: 3.401398797831179
+      mean: 3.210253903077344
+      min: 3.0538675466576057
+      std: 0.0829623896250235
+    vector_entropy: 0.006271036554020405
+  tick: 24
+  timestamp: '2025-10-19T12:07:58.159837'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.0074506924832721255
+      magnitude_stability: 0.9195803887157878
+    neighbor_similarity:
+      count: 100
+      mean: 0.9925493075167279
+      std: 0.0007757587672057352
+    state_magnitude:
+      max: 3.3277365410591173
+      mean: 3.150382918712176
+      min: 2.9924009048722096
+      std: 0.08041961128421218
+    vector_entropy: 0.006154023043684358
+  tick: 25
+  timestamp: '2025-10-19T12:07:58.188928'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.007534585827684737
+      magnitude_stability: 0.9194241811720957
+    neighbor_similarity:
+      count: 100
+      mean: 0.9924654141723153
+      std: 0.0007360464813438078
+    state_magnitude:
+      max: 3.263941613326928
+      mean: 3.0939845880081354
+      min: 2.9335855867716623
+      std: 0.08057581882790434
+    vector_entropy: 0.006043918353280035
+  tick: 26
+  timestamp: '2025-10-19T12:07:58.217946'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.007543361746214949
+      magnitude_stability: 0.9203752928955297
+    neighbor_similarity:
+      count: 100
+      mean: 0.992456638253785
+      std: 0.0007420322481588611
+    state_magnitude:
+      max: 3.2156889413836933
+      mean: 3.0420682451601238
+      min: 2.8932687656848
+      std: 0.07962470710447035
+    vector_entropy: 0.005942483179616707
+  tick: 27
+  timestamp: '2025-10-19T12:07:58.247109'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.007580378001713517
+      magnitude_stability: 0.9233788734640239
+    neighbor_similarity:
+      count: 100
+      mean: 0.9924196219982865
+      std: 0.0007162542757413369
+    state_magnitude:
+      max: 3.1578678928751374
+      mean: 2.9933484823892567
+      min: 2.8596461481744924
+      std: 0.07662112653597608
+    vector_entropy: 0.0058471398947568
+  tick: 28
+  timestamp: '2025-10-19T12:07:58.276157'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.007567184900272306
+      magnitude_stability: 0.9259918603534634
+    neighbor_similarity:
+      count: 100
+      mean: 0.9924328150997277
+      std: 0.0007112796626868804
+    state_magnitude:
+      max: 3.1173625219974475
+      mean: 2.9476373707779504
+      min: 2.817833471716874
+      std: 0.07400813964653664
+    vector_entropy: 0.005757720002901083
+  tick: 29
+  timestamp: '2025-10-19T12:07:58.305096'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.007650678033839564
+      magnitude_stability: 0.9293000783623306
+    neighbor_similarity:
+      count: 100
+      mean: 0.9923493219661604
+      std: 0.0006257197383796563
+    state_magnitude:
+      max: 3.0645345215766464
+      mean: 2.906176718085872
+      min: 2.790193557926796
+      std: 0.07069992163766936
+    vector_entropy: 0.0056766078642821235
+  tick: 30
+  timestamp: '2025-10-19T12:07:58.334292'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.007679588384841174
+      magnitude_stability: 0.9327135203548491
+    neighbor_similarity:
+      count: 100
+      mean: 0.9923204116151588
+      std: 0.0006538129291996402
+    state_magnitude:
+      max: 3.0268428559511324
+      mean: 2.866546707955761
+      min: 2.7639766088592737
+      std: 0.06728647964515085
+    vector_entropy: 0.005599069607532585
+  tick: 31
+  timestamp: '2025-10-19T12:07:58.363196'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.007790081094985024
+      magnitude_stability: 0.9331732843423208
+    neighbor_similarity:
+      count: 100
+      mean: 0.992209918905015
+      std: 0.0007040763172027044
+    state_magnitude:
+      max: 2.9919971766263003
+      mean: 2.829359750067647
+      min: 2.72026639696878
+      std: 0.0668267156576792
+    vector_entropy: 0.005526521674092556
+  tick: 32
+  timestamp: '2025-10-19T12:07:58.392456'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.007932837505348123
+      magnitude_stability: 0.9338442279426676
+    neighbor_similarity:
+      count: 100
+      mean: 0.9920671624946519
+      std: 0.0007669298539228843
+    state_magnitude:
+      max: 2.940312799209662
+      mean: 2.795543916817254
+      min: 2.6866005231580616
+      std: 0.06615577205733233
+    vector_entropy: 0.00546037182832037
+  tick: 33
+  timestamp: '2025-10-19T12:07:58.421677'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.00791554788418325
+      magnitude_stability: 0.9362168384117893
+    neighbor_similarity:
+      count: 100
+      mean: 0.9920844521158168
+      std: 0.000706786667960336
+    state_magnitude:
+      max: 2.8986158342276847
+      mean: 2.763792549459207
+      min: 2.6634411090898684
+      std: 0.06378316158821078
+    vector_entropy: 0.005398310774268526
+  tick: 34
+  timestamp: '2025-10-19T12:07:58.450798'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.00803401837616946
+      magnitude_stability: 0.9370015491910892
+    neighbor_similarity:
+      count: 100
+      mean: 0.9919659816238305
+      std: 0.0006619171885916646
+    state_magnitude:
+      max: 2.870505694538393
+      mean: 2.7353350305073305
+      min: 2.6300907390122323
+      std: 0.06299845080891076
+    vector_entropy: 0.005342658185535033
+  tick: 35
+  timestamp: '2025-10-19T12:07:58.479922'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.00811429582388723
+      magnitude_stability: 0.9385640139525018
+    neighbor_similarity:
+      count: 100
+      mean: 0.9918857041761128
+      std: 0.0006316891899867961
+    state_magnitude:
+      max: 2.8427344793970115
+      mean: 2.708628485806956
+      min: 2.602525750782694
+      std: 0.06143598604749827
+    vector_entropy: 0.005290469767006072
+  tick: 36
+  timestamp: '2025-10-19T12:07:58.509105'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.008121485814252871
+      magnitude_stability: 0.9416994683229506
+    neighbor_similarity:
+      count: 100
+      mean: 0.9918785141857471
+      std: 0.0006485773923064839
+    state_magnitude:
+      max: 2.8146124181652787
+      mean: 2.682455084361862
+      min: 2.5778682440730574
+      std: 0.058300531677049454
+    vector_entropy: 0.0052392107094137155
+  tick: 37
+  timestamp: '2025-10-19T12:07:58.538178'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.008228527747329406
+      magnitude_stability: 0.9422503089450285
+    neighbor_similarity:
+      count: 100
+      mean: 0.9917714722526706
+      std: 0.0006045265116388943
+    state_magnitude:
+      max: 2.7853719414024947
+      mean: 2.6573579984142044
+      min: 2.5580092847993
+      std: 0.057749691054971505
+    vector_entropy: 0.005190164165107288
+  tick: 38
+  timestamp: '2025-10-19T12:07:58.567441'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.00825142284725755
+      magnitude_stability: 0.9437054437010718
+    neighbor_similarity:
+      count: 100
+      mean: 0.9917485771527424
+      std: 0.0006137550913384844
+    state_magnitude:
+      max: 2.7499286884789966
+      mean: 2.6342579272577074
+      min: 2.525976054192161
+      std: 0.05629455629892818
+    vector_entropy: 0.005144895216411693
+  tick: 39
+  timestamp: '2025-10-19T12:07:58.596512'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.008422249299244289
+      magnitude_stability: 0.9439213531241419
+    neighbor_similarity:
+      count: 100
+      mean: 0.9915777507007557
+      std: 0.0006526170965135897
+    state_magnitude:
+      max: 2.7307558772016316
+      mean: 2.6147447884841415
+      min: 2.495926662505533
+      std: 0.056078646875858076
+    vector_entropy: 0.005106830135077978
+  tick: 40
+  timestamp: '2025-10-19T12:07:58.625566'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.008403272239632886
+      magnitude_stability: 0.9464483861890506
+    neighbor_similarity:
+      count: 100
+      mean: 0.9915967277603671
+      std: 0.0006332839608938914
+    state_magnitude:
+      max: 2.7071950434485297
+      mean: 2.594813012041505
+      min: 2.487326628140801
+      std: 0.05355161381094945
+    vector_entropy: 0.005067851439668758
+  tick: 41
+  timestamp: '2025-10-19T12:07:58.654672'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.008508876531532983
+      magnitude_stability: 0.9495817541627246
+    neighbor_similarity:
+      count: 100
+      mean: 0.991491123468467
+      std: 0.0006883804673080061
+    state_magnitude:
+      max: 2.673912515960626
+      mean: 2.5770494550745764
+      min: 2.478550434091392
+      std: 0.05041824583727544
+    vector_entropy: 0.005033027336338635
+  tick: 42
+  timestamp: '2025-10-19T12:07:58.683811'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.0084932519537676
+      magnitude_stability: 0.9496346785186557
+    neighbor_similarity:
+      count: 100
+      mean: 0.9915067480462324
+      std: 0.00065454957681499
+    state_magnitude:
+      max: 2.6744306504624653
+      mean: 2.5622922862028177
+      min: 2.4570629402675976
+      std: 0.05036532148134429
+    vector_entropy: 0.005004093538061253
+  tick: 43
+  timestamp: '2025-10-19T12:07:58.713009'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.00854928137040345
+      magnitude_stability: 0.9505182519599258
+    neighbor_similarity:
+      count: 100
+      mean: 0.9914507186295966
+      std: 0.0006243066432936921
+    state_magnitude:
+      max: 2.653888043239335
+      mean: 2.546170369035433
+      min: 2.4521519899741144
+      std: 0.049481748040074214
+    vector_entropy: 0.0049726077838131285
+  tick: 44
+  timestamp: '2025-10-19T12:07:58.742152'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.008524626730707863
+      magnitude_stability: 0.9515794379881819
+    neighbor_similarity:
+      count: 100
+      mean: 0.9914753732692921
+      std: 0.0006101863259149164
+    state_magnitude:
+      max: 2.635187596498881
+      mean: 2.531456940505894
+      min: 2.4342003416405094
+      std: 0.048420562011818095
+    vector_entropy: 0.004943777547262887
+  tick: 45
+  timestamp: '2025-10-19T12:07:58.771293'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.008678092523871639
+      magnitude_stability: 0.950686018422789
+    neighbor_similarity:
+      count: 100
+      mean: 0.9913219074761284
+      std: 0.0006796139110211201
+    state_magnitude:
+      max: 2.62875299128978
+      mean: 2.5158068241613716
+      min: 2.4268407559487537
+      std: 0.04931398157721096
+    vector_entropy: 0.004913227168360602
+  tick: 46
+  timestamp: '2025-10-19T12:07:58.800290'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.00866990646394783
+      magnitude_stability: 0.9505953567902605
+    neighbor_similarity:
+      count: 100
+      mean: 0.9913300935360522
+      std: 0.0006670164058901945
+    state_magnitude:
+      max: 2.6178520159850374
+      mean: 2.503092632301315
+      min: 2.4128402934062074
+      std: 0.049404643209739516
+    vector_entropy: 0.004888328048267501
+  tick: 47
+  timestamp: '2025-10-19T12:07:58.829362'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.008669116221418527
+      magnitude_stability: 0.9491232974590188
+    neighbor_similarity:
+      count: 100
+      mean: 0.9913308837785815
+      std: 0.0006483008702350933
+    state_magnitude:
+      max: 2.617841778127688
+      mean: 2.491957974865455
+      min: 2.39384738186558
+      std: 0.050876702540981214
+    vector_entropy: 0.00486664508898667
+  tick: 48
+  timestamp: '2025-10-19T12:07:58.858651'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.008748933995173624
+      magnitude_stability: 0.9495231847877544
+    neighbor_similarity:
+      count: 100
+      mean: 0.9912510660048264
+      std: 0.0006407894601109054
+    state_magnitude:
+      max: 2.60099498138875
+      mean: 2.4794759093317493
+      min: 2.38577177015619
+      std: 0.05047681521224559
+    vector_entropy: 0.004842320781931368
+  tick: 49
+  timestamp: '2025-10-19T12:07:58.887728'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.008730546283117535
+      magnitude_stability: 0.950475002183553
+    neighbor_similarity:
+      count: 100
+      mean: 0.9912694537168825
+      std: 0.0006037573837033818
+    state_magnitude:
+      max: 2.59011814425285
+      mean: 2.467810410719339
+      min: 2.3822948781115874
+      std: 0.04952499781644705
+    vector_entropy: 0.00481956391424268
+  tick: 50
+  timestamp: '2025-10-19T12:07:58.917263'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.008877053055754036
+      magnitude_stability: 0.9514889703928365
+    neighbor_similarity:
+      count: 100
+      mean: 0.991122946944246
+      std: 0.0006767217261295261
+    state_magnitude:
+      max: 2.5668483803454363
+      mean: 2.458226721763735
+      min: 2.381349089211189
+      std: 0.04851102960716342
+    vector_entropy: 0.00480074920261535
+  tick: 51
+  timestamp: '2025-10-19T12:07:58.947079'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.008947666989442049
+      magnitude_stability: 0.9506728374025185
+    neighbor_similarity:
+      count: 100
+      mean: 0.991052333010558
+      std: 0.0007045810976203088
+    state_magnitude:
+      max: 2.560260673135088
+      mean: 2.4478716828470306
+      min: 2.3667562698663245
+      std: 0.04932716259748144
+    vector_entropy: 0.004780600078722146
+  tick: 52
+  timestamp: '2025-10-19T12:07:58.976702'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.00885682149043543
+      magnitude_stability: 0.9523747926869958
+    neighbor_similarity:
+      count: 100
+      mean: 0.9911431785095646
+      std: 0.0007430586980595749
+    state_magnitude:
+      max: 2.541419081262923
+      mean: 2.4410315766880375
+      min: 2.351774623033776
+      std: 0.047625207313004195
+    vector_entropy: 0.0047672114545156
+  tick: 53
+  timestamp: '2025-10-19T12:07:59.006074'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.008902537497364693
+      magnitude_stability: 0.9538641139234978
+    neighbor_similarity:
+      count: 100
+      mean: 0.9910974625026353
+      std: 0.0006243538528396988
+    state_magnitude:
+      max: 2.5368606887656147
+      mean: 2.4342585596927964
+      min: 2.3527692957901056
+      std: 0.04613588607650222
+    vector_entropy: 0.004753909882320853
+  tick: 54
+  timestamp: '2025-10-19T12:07:59.035461'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.00887523388528133
+      magnitude_stability: 0.9532554666713948
+    neighbor_similarity:
+      count: 100
+      mean: 0.9911247661147187
+      std: 0.0006831445179996792
+    state_magnitude:
+      max: 2.5190001958451687
+      mean: 2.4263887895238025
+      min: 2.3391435370322857
+      std: 0.046744533328605134
+    vector_entropy: 0.004738581908447141
+  tick: 55
+  timestamp: '2025-10-19T12:07:59.064711'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.00907217496818613
+      magnitude_stability: 0.9539102847640405
+    neighbor_similarity:
+      count: 100
+      mean: 0.9909278250318139
+      std: 0.0006179689822063032
+    state_magnitude:
+      max: 2.5083542693313157
+      mean: 2.418641472982387
+      min: 2.339385140735777
+      std: 0.04608971523595947
+    vector_entropy: 0.004723386037129672
+  tick: 56
+  timestamp: '2025-10-19T12:07:59.093880'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.00897007957708884
+      magnitude_stability: 0.9537029999273802
+    neighbor_similarity:
+      count: 100
+      mean: 0.9910299204229112
+      std: 0.0006945392344388491
+    state_magnitude:
+      max: 2.50381008728861
+      mean: 2.4141124365640905
+      min: 2.337255476351384
+      std: 0.04629700007261986
+    vector_entropy: 0.004714538643720244
+  tick: 57
+  timestamp: '2025-10-19T12:07:59.123079'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.008998145424770287
+      magnitude_stability: 0.9551162714002118
+    neighbor_similarity:
+      count: 100
+      mean: 0.9910018545752297
+      std: 0.000677184471757687
+    state_magnitude:
+      max: 2.5157056881561353
+      mean: 2.4084315730156534
+      min: 2.330299336912823
+      std: 0.04488372859978821
+    vector_entropy: 0.004703392652679535
+  tick: 58
+  timestamp: '2025-10-19T12:07:59.152142'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.009033640403363852
+      magnitude_stability: 0.9562631691304305
+    neighbor_similarity:
+      count: 100
+      mean: 0.9909663595966361
+      std: 0.0006313811194820872
+    state_magnitude:
+      max: 2.506388955438525
+      mean: 2.402223701614637
+      min: 2.3149464468638334
+      std: 0.043736830869569435
+    vector_entropy: 0.004691184555479015
+  tick: 59
+  timestamp: '2025-10-19T12:07:59.181168'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.008957859217506692
+      magnitude_stability: 0.9582868076706335
+    neighbor_similarity:
+      count: 100
+      mean: 0.9910421407824933
+      std: 0.0006561612113785564
+    state_magnitude:
+      max: 2.487314805201052
+      mean: 2.395801310450456
+      min: 2.3209372632523197
+      std: 0.04171319232936654
+    vector_entropy: 0.004678553270810639
+  tick: 60
+  timestamp: '2025-10-19T12:07:59.210409'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.009048073639215892
+      magnitude_stability: 0.9580353902585911
+    neighbor_similarity:
+      count: 100
+      mean: 0.9909519263607841
+      std: 0.0005639669350660021
+    state_magnitude:
+      max: 2.49653036651467
+      mean: 2.391847282883027
+      min: 2.3021726716267805
+      std: 0.04196460974140887
+    vector_entropy: 0.0046709101132845696
+  tick: 61
+  timestamp: '2025-10-19T12:07:59.239986'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.009159765270835063
+      magnitude_stability: 0.9579529145956787
+    neighbor_similarity:
+      count: 100
+      mean: 0.9908402347291649
+      std: 0.0005828301519578018
+    state_magnitude:
+      max: 2.4902363873573026
+      mean: 2.390147946396072
+      min: 2.3112240126650563
+      std: 0.04204708540432135
+    vector_entropy: 0.004667621101178457
+  tick: 62
+  timestamp: '2025-10-19T12:07:59.269235'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.009159610883884839
+      magnitude_stability: 0.9573228840944453
+    neighbor_similarity:
+      count: 100
+      mean: 0.9908403891161152
+      std: 0.0006409853294114534
+    state_magnitude:
+      max: 2.471930635217111
+      mean: 2.3851717236960495
+      min: 2.3011040311956963
+      std: 0.04267711590555471
+    vector_entropy: 0.004657884291370297
+  tick: 63
+  timestamp: '2025-10-19T12:07:59.298350'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.009062058683914076
+      magnitude_stability: 0.9596670177810913
+    neighbor_similarity:
+      count: 100
+      mean: 0.9909379413160859
+      std: 0.0006030990081119536
+    state_magnitude:
+      max: 2.477446220038806
+      mean: 2.3808101170559457
+      min: 2.2950222453151836
+      std: 0.040332982218908645
+    vector_entropy: 0.004649282348334155
+  tick: 64
+  timestamp: '2025-10-19T12:07:59.327505'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.009090262684101624
+      magnitude_stability: 0.9578488050882616
+    neighbor_similarity:
+      count: 100
+      mean: 0.9909097373158984
+      std: 0.0006766903436604181
+    state_magnitude:
+      max: 2.477006351807106
+      mean: 2.3752600975766995
+      min: 2.295969525587497
+      std: 0.0421511949117384
+    vector_entropy: 0.004638463972879691
+  tick: 65
+  timestamp: '2025-10-19T12:07:59.356705'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.009134563778231852
+      magnitude_stability: 0.9581921169280854
+    neighbor_similarity:
+      count: 100
+      mean: 0.9908654362217681
+      std: 0.000652682465434789
+    state_magnitude:
+      max: 2.4710266675693844
+      mean: 2.3720739338715093
+      min: 2.2914769038488036
+      std: 0.04180788307191468
+    vector_entropy: 0.004632267731061529
+  tick: 66
+  timestamp: '2025-10-19T12:07:59.385922'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.00914216964002379
+      magnitude_stability: 0.959296002077614
+    neighbor_similarity:
+      count: 100
+      mean: 0.9908578303599762
+      std: 0.0006008074676468769
+    state_magnitude:
+      max: 2.4606880865431835
+      mean: 2.3697848023115644
+      min: 2.2960269908136075
+      std: 0.04070399792238599
+    vector_entropy: 0.004627651841860154
+  tick: 67
+  timestamp: '2025-10-19T12:07:59.415040'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.009160691157559464
+      magnitude_stability: 0.9599983282670664
+    neighbor_similarity:
+      count: 100
+      mean: 0.9908393088424405
+      std: 0.0006692563840695597
+    state_magnitude:
+      max: 2.456922383251793
+      mean: 2.367208423214203
+      min: 2.297099797377151
+      std: 0.04000167173293359
+    vector_entropy: 0.004622663439483471
+  tick: 68
+  timestamp: '2025-10-19T12:07:59.444351'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.009149633389330947
+      magnitude_stability: 0.9608800701652286
+    neighbor_similarity:
+      count: 100
+      mean: 0.990850366610669
+      std: 0.0005790545066248938
+    state_magnitude:
+      max: 2.4568388778406764
+      mean: 2.367240761655194
+      min: 2.28953294900458
+      std: 0.03911992983477143
+    vector_entropy: 0.0046226423528989815
+  tick: 69
+  timestamp: '2025-10-19T12:07:59.473408'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.009175454314024778
+      magnitude_stability: 0.9629393975992937
+    neighbor_similarity:
+      count: 100
+      mean: 0.9908245456859752
+      std: 0.0005766211252820826
+    state_magnitude:
+      max: 2.444147902100027
+      mean: 2.365557143419601
+      min: 2.2920056037401184
+      std: 0.03706060240070626
+    vector_entropy: 0.004619315370953731
+  tick: 70
+  timestamp: '2025-10-19T12:07:59.502670'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.009183977303237723
+      magnitude_stability: 0.9636205702806686
+    neighbor_similarity:
+      count: 100
+      mean: 0.9908160226967623
+      std: 0.0006659114588459502
+    state_magnitude:
+      max: 2.4414173093504346
+      mean: 2.3630671407312094
+      min: 2.293102620812157
+      std: 0.036379429719331356
+    vector_entropy: 0.0046144412469434435
+  tick: 71
+  timestamp: '2025-10-19T12:07:59.531811'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.009184870196547346
+      magnitude_stability: 0.9636426556998261
+    neighbor_similarity:
+      count: 100
+      mean: 0.9908151298034527
+      std: 0.000640910550817279
+    state_magnitude:
+      max: 2.4433730624709016
+      mean: 2.362941748959152
+      min: 2.280724605097329
+      std: 0.036357344300173934
+    vector_entropy: 0.004614207064003821
+  tick: 72
+  timestamp: '2025-10-19T12:07:59.561021'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.009212053537466014
+      magnitude_stability: 0.9651576809177665
+    neighbor_similarity:
+      count: 100
+      mean: 0.990787946462534
+      std: 0.0007001651711636312
+    state_magnitude:
+      max: 2.4344238850181217
+      mean: 2.35918741784897
+      min: 2.2897131878328874
+      std: 0.03484231908223343
+    vector_entropy: 0.004606825763104658
+  tick: 73
+  timestamp: '2025-10-19T12:07:59.590343'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.00920276135442022
+      magnitude_stability: 0.9658479614763448
+    neighbor_similarity:
+      count: 100
+      mean: 0.9907972386455798
+      std: 0.0005859173607045326
+    state_magnitude:
+      max: 2.4308870562386233
+      mean: 2.358436953571169
+      min: 2.28041058476762
+      std: 0.03415203852365521
+    vector_entropy: 0.004605348876583415
+  tick: 74
+  timestamp: '2025-10-19T12:07:59.619415'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.009284949937456544
+      magnitude_stability: 0.966669022710071
+    neighbor_similarity:
+      count: 100
+      mean: 0.9907150500625435
+      std: 0.0006341734480772007
+    state_magnitude:
+      max: 2.426166598561584
+      mean: 2.3601511338708527
+      min: 2.282925494805738
+      std: 0.033330977289928995
+    vector_entropy: 0.004608657924698038
+  tick: 75
+  timestamp: '2025-10-19T12:07:59.648674'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.009107134825055763
+      magnitude_stability: 0.9682844526757969
+    neighbor_similarity:
+      count: 100
+      mean: 0.9908928651749442
+      std: 0.0006059994174812076
+    state_magnitude:
+      max: 2.4258564240126588
+      mean: 2.358931706454237
+      min: 2.2776684131839415
+      std: 0.031715547324203085
+    vector_entropy: 0.00460623404284525
+  tick: 76
+  timestamp: '2025-10-19T12:07:59.677978'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.00911776491100913
+      magnitude_stability: 0.9705088647061285
+    neighbor_similarity:
+      count: 100
+      mean: 0.9908822350889909
+      std: 0.0005809747458147351
+    state_magnitude:
+      max: 2.4202750205188663
+      mean: 2.357158242240642
+      min: 2.2759837442729873
+      std: 0.029491135293871533
+    vector_entropy: 0.004602646717513207
+  tick: 77
+  timestamp: '2025-10-19T12:07:59.707283'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.00904807079866854
+      magnitude_stability: 0.9715195707181301
+    neighbor_similarity:
+      count: 100
+      mean: 0.9909519292013315
+      std: 0.0006431398359499499
+    state_magnitude:
+      max: 2.4140905308128544
+      mean: 2.3560450377734963
+      min: 2.276773855635189
+      std: 0.028480429281869876
+    vector_entropy: 0.004600409045346825
+  tick: 78
+  timestamp: '2025-10-19T12:07:59.737052'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.009179671021238955
+      magnitude_stability: 0.9730531843474624
+    neighbor_similarity:
+      count: 100
+      mean: 0.990820328978761
+      std: 0.0006205383533632064
+    state_magnitude:
+      max: 2.4035311546777662
+      mean: 2.355574283101141
+      min: 2.2811430077520902
+      std: 0.026946815652537624
+    vector_entropy: 0.004599382063151194
+  tick: 79
+  timestamp: '2025-10-19T12:07:59.766305'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.009114382213909256
+      magnitude_stability: 0.9731521578860842
+    neighbor_similarity:
+      count: 100
+      mean: 0.9908856177860907
+      std: 0.0006344182799631528
+    state_magnitude:
+      max: 2.406318203469877
+      mean: 2.3545934365613537
+      min: 2.2853170990502942
+      std: 0.02684784211391578
+    vector_entropy: 0.00459747359442089
+  tick: 80
+  timestamp: '2025-10-19T12:07:59.795671'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.009231096267607874
+      magnitude_stability: 0.9746439332057198
+    neighbor_similarity:
+      count: 100
+      mean: 0.9907689037323921
+      std: 0.0006014190722036343
+    state_magnitude:
+      max: 2.40743095181563
+      mean: 2.3542713380647187
+      min: 2.2786822727561966
+      std: 0.025356066794280197
+    vector_entropy: 0.004596817341079439
+  tick: 81
+  timestamp: '2025-10-19T12:07:59.824895'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.009205507118838718
+      magnitude_stability: 0.9739478983884357
+    neighbor_similarity:
+      count: 100
+      mean: 0.9907944928811613
+      std: 0.0006431057074693033
+    state_magnitude:
+      max: 2.4096417912488266
+      mean: 2.352981138532652
+      min: 2.2731951660615817
+      std: 0.026052101611564377
+    vector_entropy: 0.0045942329488696115
+  tick: 82
+  timestamp: '2025-10-19T12:07:59.854258'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.009201626630882198
+      magnitude_stability: 0.9721585583228761
+    neighbor_similarity:
+      count: 100
+      mean: 0.9907983733691178
+      std: 0.0005875063984928849
+    state_magnitude:
+      max: 2.410107363628345
+      mean: 2.351212467076776
+      min: 2.2632907039968946
+      std: 0.027841441677123876
+    vector_entropy: 0.004590856264714465
+  tick: 83
+  timestamp: '2025-10-19T12:07:59.883551'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.009114817278659149
+      magnitude_stability: 0.9718660055182995
+    neighbor_similarity:
+      count: 100
+      mean: 0.9908851827213409
+      std: 0.0006449760463429228
+    state_magnitude:
+      max: 2.399883729983598
+      mean: 2.351113508347366
+      min: 2.2681842619002373
+      std: 0.02813399448170053
+    vector_entropy: 0.004590691651047107
+  tick: 84
+  timestamp: '2025-10-19T12:07:59.912851'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.009170905796799689
+      magnitude_stability: 0.973805030521662
+    neighbor_similarity:
+      count: 100
+      mean: 0.9908290942032003
+      std: 0.0006273508890033306
+    state_magnitude:
+      max: 2.4028552343944924
+      mean: 2.348921930598786
+      min: 2.287625634702488
+      std: 0.02619496947833801
+    vector_entropy: 0.004586385739531023
+  tick: 85
+  timestamp: '2025-10-19T12:07:59.941966'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.009075107880920696
+      magnitude_stability: 0.9727719117353886
+    neighbor_similarity:
+      count: 100
+      mean: 0.9909248921190793
+      std: 0.000597585748360026
+    state_magnitude:
+      max: 2.395485702157352
+      mean: 2.347366498830417
+      min: 2.282583313054391
+      std: 0.027228088264611445
+    vector_entropy: 0.004583440364836546
+  tick: 86
+  timestamp: '2025-10-19T12:07:59.971243'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.00910337679468054
+      magnitude_stability: 0.9735939651562765
+    neighbor_similarity:
+      count: 100
+      mean: 0.9908966232053195
+      std: 0.0005946093363735829
+    state_magnitude:
+      max: 2.413434521418861
+      mean: 2.3466101005504383
+      min: 2.2787692032754756
+      std: 0.02640603484372354
+    vector_entropy: 0.004581788907654153
+  tick: 87
+  timestamp: '2025-10-19T12:08:00.000507'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.00912678497189523
+      magnitude_stability: 0.9733020667855418
+    neighbor_similarity:
+      count: 100
+      mean: 0.9908732150281048
+      std: 0.0006080185267793478
+    state_magnitude:
+      max: 2.4067382250169715
+      mean: 2.3477425169031516
+      min: 2.262820797368353
+      std: 0.02669793321445819
+    vector_entropy: 0.004584052536821007
+  tick: 88
+  timestamp: '2025-10-19T12:08:00.028406'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.009202900437848993
+      magnitude_stability: 0.9734853315298926
+    neighbor_similarity:
+      count: 100
+      mean: 0.990797099562151
+      std: 0.0006213441848507785
+    state_magnitude:
+      max: 2.4131100755902097
+      mean: 2.347566102544396
+      min: 2.2766699019111334
+      std: 0.026514668470107465
+    vector_entropy: 0.004583594523870651
+  tick: 89
+  timestamp: '2025-10-19T12:08:00.052432'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.009176354745794257
+      magnitude_stability: 0.9721230340629294
+    neighbor_similarity:
+      count: 100
+      mean: 0.9908236452542057
+      std: 0.0005415511110697472
+    state_magnitude:
+      max: 2.4121127182919686
+      mean: 2.346777619165531
+      min: 2.2684256624297845
+      std: 0.027876965937070588
+    vector_entropy: 0.004582027994157333
+  tick: 90
+  timestamp: '2025-10-19T12:08:00.076135'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.009169534022191672
+      magnitude_stability: 0.973225936410756
+    neighbor_similarity:
+      count: 100
+      mean: 0.9908304659778083
+      std: 0.0006120392950241626
+    state_magnitude:
+      max: 2.408065878228771
+      mean: 2.3470232632503136
+      min: 2.2750828461730155
+      std: 0.026774063589243998
+    vector_entropy: 0.004582562922720227
+  tick: 91
+  timestamp: '2025-10-19T12:08:00.099769'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.00913950278408604
+      magnitude_stability: 0.9732624054775249
+    neighbor_similarity:
+      count: 100
+      mean: 0.990860497215914
+      std: 0.0005695920501774527
+    state_magnitude:
+      max: 2.4133425244246056
+      mean: 2.3487659539634667
+      min: 2.291756160248917
+      std: 0.026737594522475153
+    vector_entropy: 0.004586096132850131
+  tick: 92
+  timestamp: '2025-10-19T12:08:00.122541'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.009271990125243601
+      magnitude_stability: 0.9736394106660591
+    neighbor_similarity:
+      count: 100
+      mean: 0.9907280098747564
+      std: 0.0006409418872647058
+    state_magnitude:
+      max: 2.4170459530436395
+      mean: 2.3482360440347665
+      min: 2.2809103681779472
+      std: 0.026360589333940972
+    vector_entropy: 0.00458506265733661
+  tick: 93
+  timestamp: '2025-10-19T12:08:00.144931'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.009104813120207056
+      magnitude_stability: 0.9750667088180387
+    neighbor_similarity:
+      count: 100
+      mean: 0.9908951868797929
+      std: 0.0005596673545135869
+    state_magnitude:
+      max: 2.4143598315421193
+      mean: 2.348173845786217
+      min: 2.2939470917059266
+      std: 0.0249332911819613
+    vector_entropy: 0.004584800775950569
+  tick: 94
+  timestamp: '2025-10-19T12:08:00.167396'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.00910660413030362
+      magnitude_stability: 0.9750791874615928
+    neighbor_similarity:
+      count: 100
+      mean: 0.9908933958696964
+      std: 0.0005217615037372281
+    state_magnitude:
+      max: 2.411564749489678
+      mean: 2.3479654100255276
+      min: 2.295764765866282
+      std: 0.024920812538407187
+    vector_entropy: 0.004584348976184929
+  tick: 95
+  timestamp: '2025-10-19T12:08:00.190201'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.009160895232124155
+      magnitude_stability: 0.973975015754486
+    neighbor_similarity:
+      count: 100
+      mean: 0.9908391047678758
+      std: 0.0005744776122628044
+    state_magnitude:
+      max: 2.408743967709723
+      mean: 2.3488655552408777
+      min: 2.2881853708991597
+      std: 0.026024984245514075
+    vector_entropy: 0.004586140416614915
+  tick: 96
+  timestamp: '2025-10-19T12:08:00.213740'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.009132141890523582
+      magnitude_stability: 0.9762298315313014
+    neighbor_similarity:
+      count: 100
+      mean: 0.9908678581094764
+      std: 0.0005553746653117639
+    state_magnitude:
+      max: 2.3976561153209968
+      mean: 2.3468872870588187
+      min: 2.2954216917176127
+      std: 0.023770168468698654
+    vector_entropy: 0.004582231389926331
+  tick: 97
+  timestamp: '2025-10-19T12:08:00.236713'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.009223406347312446
+      magnitude_stability: 0.977127040742067
+    neighbor_similarity:
+      count: 100
+      mean: 0.9907765936526876
+      std: 0.0006186737269097933
+    state_magnitude:
+      max: 2.3966445918925188
+      mean: 2.344837000022386
+      min: 2.301031251390653
+      std: 0.02287295925793301
+    vector_entropy: 0.004578098715739239
+  tick: 98
+  timestamp: '2025-10-19T12:08:00.258214'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.009296546719238852
+      magnitude_stability: 0.9767352040337766
+    neighbor_similarity:
+      count: 100
+      mean: 0.9907034532807611
+      std: 0.0006496946116727977
+    state_magnitude:
+      max: 2.3968787385267816
+      mean: 2.342920059507559
+      min: 2.2966519400693137
+      std: 0.023264795966223488
+    vector_entropy: 0.00457436112393639
+  tick: 99
+  timestamp: '2025-10-19T12:08:00.280861'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.009170621587035743
+      magnitude_stability: 0.9771450176594514
+    neighbor_similarity:
+      count: 100
+      mean: 0.9908293784129643
+      std: 0.0006572181615947015
+    state_magnitude:
+      max: 2.402272337131168
+      mean: 2.3436359941486535
+      min: 2.294225912500047
+      std: 0.02285498234054857
+    vector_entropy: 0.00457581291521076
+  tick: 100
+  timestamp: '2025-10-19T12:08:00.303845'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.00923973855964777
+      magnitude_stability: 0.9775640533484335
+    neighbor_similarity:
+      count: 100
+      mean: 0.9907602614403522
+      std: 0.0006312840113582351
+    state_magnitude:
+      max: 2.407070359579807
+      mean: 2.342660447422317
+      min: 2.299585889642619
+      std: 0.022435946651566483
+    vector_entropy: 0.004573916366774883
+  tick: 101
+  timestamp: '2025-10-19T12:08:00.326363'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.009282631568928834
+      magnitude_stability: 0.9805871525081206
+    neighbor_similarity:
+      count: 100
+      mean: 0.9907173684310712
+      std: 0.0006624922101532806
+    state_magnitude:
+      max: 2.3980536988247283
+      mean: 2.3418396340918237
+      min: 2.3027356500577087
+      std: 0.01941284749187947
+    vector_entropy: 0.004572241153628681
+  tick: 102
+  timestamp: '2025-10-19T12:08:00.349982'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.009178541301383403
+      magnitude_stability: 0.9799702861875527
+    neighbor_similarity:
+      count: 100
+      mean: 0.9908214586986166
+      std: 0.0006495443759461247
+    state_magnitude:
+      max: 2.39385591875538
+      mean: 2.3405989960877234
+      min: 2.2978762420024337
+      std: 0.020029713812447378
+    vector_entropy: 0.004569932833980598
+  tick: 103
+  timestamp: '2025-10-19T12:08:00.373501'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.009303130774152013
+      magnitude_stability: 0.9823902195779637
+    neighbor_similarity:
+      count: 100
+      mean: 0.990696869225848
+      std: 0.0006046942512364133
+    state_magnitude:
+      max: 2.3959346071101173
+      mean: 2.339786278276437
+      min: 2.297975024657916
+      std: 0.017609780422036352
+    vector_entropy: 0.0045683393055934345
+  tick: 104
+  timestamp: '2025-10-19T12:08:00.396311'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.009260476708771948
+      magnitude_stability: 0.9815510889524155
+    neighbor_similarity:
+      count: 100
+      mean: 0.990739523291228
+      std: 0.0006146689410957111
+    state_magnitude:
+      max: 2.387348088943555
+      mean: 2.3399716084276805
+      min: 2.2847577871274587
+      std: 0.018448911047584542
+    vector_entropy: 0.0045686762490482515
+  tick: 105
+  timestamp: '2025-10-19T12:08:00.419163'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.009278011076686132
+      magnitude_stability: 0.9814837878074708
+    neighbor_similarity:
+      count: 100
+      mean: 0.9907219889233139
+      std: 0.0006206792635742607
+    state_magnitude:
+      max: 2.4051807569282415
+      mean: 2.339611396082982
+      min: 2.3003503271249373
+      std: 0.01851621219252916
+    vector_entropy: 0.0045680411397718635
+  tick: 106
+  timestamp: '2025-10-19T12:08:00.442320'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.009214627487327487
+      magnitude_stability: 0.9817143576780996
+    neighbor_similarity:
+      count: 100
+      mean: 0.9907853725126725
+      std: 0.0005326310117057577
+    state_magnitude:
+      max: 2.405719335869231
+      mean: 2.3408528564174675
+      min: 2.286752746635299
+      std: 0.018285642321900445
+    vector_entropy: 0.004570445616995496
+  tick: 107
+  timestamp: '2025-10-19T12:08:00.465836'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.009129731264746366
+      magnitude_stability: 0.9835127407121435
+    neighbor_similarity:
+      count: 100
+      mean: 0.9908702687352536
+      std: 0.0005644143963238187
+    state_magnitude:
+      max: 2.4035436370934447
+      mean: 2.3430649483061323
+      min: 2.301631919050336
+      std: 0.016487259287856524
+    vector_entropy: 0.004574816243251999
+  tick: 108
+  timestamp: '2025-10-19T12:08:00.488036'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.00923031865571522
+      magnitude_stability: 0.9834233266521881
+    neighbor_similarity:
+      count: 100
+      mean: 0.9907696813442848
+      std: 0.0005446500063457802
+    state_magnitude:
+      max: 2.3993164723835965
+      mean: 2.3431057139714593
+      min: 2.3013121696924483
+      std: 0.016576673347811856
+    vector_entropy: 0.0045748559264974014
+  tick: 109
+  timestamp: '2025-10-19T12:08:00.511150'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.009241317776204405
+      magnitude_stability: 0.9816544271749593
+    neighbor_similarity:
+      count: 100
+      mean: 0.9907586822237956
+      std: 0.0005752962112806469
+    state_magnitude:
+      max: 2.4037366995535647
+      mean: 2.3429713035874316
+      min: 2.304118406968685
+      std: 0.018345572825040683
+    vector_entropy: 0.00457462665455725
+  tick: 110
+  timestamp: '2025-10-19T12:08:00.534526'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.009186729574817143
+      magnitude_stability: 0.9814288762376306
+    neighbor_similarity:
+      count: 100
+      mean: 0.9908132704251829
+      std: 0.0005181500819242599
+    state_magnitude:
+      max: 2.4005870089459593
+      mean: 2.3416238472800694
+      min: 2.2932713690649624
+      std: 0.018571123762369413
+    vector_entropy: 0.004572034894824787
+  tick: 111
+  timestamp: '2025-10-19T12:08:00.557966'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.00909775149258829
+      magnitude_stability: 0.9824476894290606
+    neighbor_similarity:
+      count: 100
+      mean: 0.9909022485074117
+      std: 0.0005566820347950991
+    state_magnitude:
+      max: 2.377609938100278
+      mean: 2.341001439838364
+      min: 2.2795022595704246
+      std: 0.01755231057093943
+    vector_entropy: 0.004570827561273771
+  tick: 112
+  timestamp: '2025-10-19T12:08:00.581351'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.009150199424648231
+      magnitude_stability: 0.9811602003133673
+    neighbor_similarity:
+      count: 100
+      mean: 0.9908498005753518
+      std: 0.000586038591443122
+    state_magnitude:
+      max: 2.3766708562479173
+      mean: 2.340553078843762
+      min: 2.275959965572471
+      std: 0.018839799686632755
+    vector_entropy: 0.0045699820958567125
+  tick: 113
+  timestamp: '2025-10-19T12:08:00.604737'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.009167487773572458
+      magnitude_stability: 0.9818412975073342
+    neighbor_similarity:
+      count: 100
+      mean: 0.9908325122264275
+      std: 0.0005407869288138705
+    state_magnitude:
+      max: 2.380864447185016
+      mean: 2.342147096003942
+      min: 2.295069631107295
+      std: 0.018158702492665827
+    vector_entropy: 0.004573130729022507
+  tick: 114
+  timestamp: '2025-10-19T12:08:00.628085'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.009154342309241392
+      magnitude_stability: 0.9836912923419253
+    neighbor_similarity:
+      count: 100
+      mean: 0.9908456576907586
+      std: 0.0005095848898513634
+    state_magnitude:
+      max: 2.379588520445501
+      mean: 2.3434691434851818
+      min: 2.3066792381229653
+      std: 0.016308707658074684
+    vector_entropy: 0.004575708905295451
+  tick: 115
+  timestamp: '2025-10-19T12:08:00.651066'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.009204145629149174
+      magnitude_stability: 0.9849559346916675
+    neighbor_similarity:
+      count: 100
+      mean: 0.9907958543708508
+      std: 0.0005903812621570319
+    state_magnitude:
+      max: 2.3769568805147747
+      mean: 2.3433663512012615
+      min: 2.3062081114909394
+      std: 0.015044065308332489
+    vector_entropy: 0.004575550014053123
+  tick: 116
+  timestamp: '2025-10-19T12:08:00.674171'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.009205529514923705
+      magnitude_stability: 0.9845863780249813
+    neighbor_similarity:
+      count: 100
+      mean: 0.9907944704850763
+      std: 0.0005837354417461176
+    state_magnitude:
+      max: 2.380644073290755
+      mean: 2.3435889302386625
+      min: 2.308405153829687
+      std: 0.01541362197501873
+    vector_entropy: 0.0045759778214225656
+  tick: 117
+  timestamp: '2025-10-19T12:08:00.697605'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.009157249639636378
+      magnitude_stability: 0.9841557721443254
+    neighbor_similarity:
+      count: 100
+      mean: 0.9908427503603636
+      std: 0.000607293838671743
+    state_magnitude:
+      max: 2.384000300415968
+      mean: 2.3428456775622433
+      min: 2.3054311172589994
+      std: 0.015844227855674582
+    vector_entropy: 0.0045745173145189805
+  tick: 118
+  timestamp: '2025-10-19T12:08:00.720913'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.009190831790958032
+      magnitude_stability: 0.9823488881000001
+    neighbor_similarity:
+      count: 100
+      mean: 0.990809168209042
+      std: 0.000570728135936483
+    state_magnitude:
+      max: 2.3806500648821185
+      mean: 2.343776910107341
+      min: 2.3004073353398744
+      std: 0.017651111899999922
+    vector_entropy: 0.004576367271431872
+  tick: 119
+  timestamp: '2025-10-19T12:08:00.744351'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.009293578357075338
+      magnitude_stability: 0.980901563246246
+    neighbor_similarity:
+      count: 100
+      mean: 0.9907064216429247
+      std: 0.0006507824286278107
+    state_magnitude:
+      max: 2.3869164734982062
+      mean: 2.3442431003469757
+      min: 2.29482890110111
+      std: 0.019098436753753976
+    vector_entropy: 0.004577357830968401
+  tick: 120
+  timestamp: '2025-10-19T12:08:00.767065'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.009217277382608247
+      magnitude_stability: 0.9802146121323272
+    neighbor_similarity:
+      count: 100
+      mean: 0.9907827226173918
+      std: 0.0005501579747253859
+    state_magnitude:
+      max: 2.3838617472266996
+      mean: 2.343903070215618
+      min: 2.304079246403394
+      std: 0.01978538786767276
+    vector_entropy: 0.0045767270721692455
+  tick: 121
+  timestamp: '2025-10-19T12:08:00.790017'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.009286124064815215
+      magnitude_stability: 0.9802576806969736
+    neighbor_similarity:
+      count: 100
+      mean: 0.9907138759351848
+      std: 0.0006026953836215343
+    state_magnitude:
+      max: 2.3870468264726563
+      mean: 2.3423462256696443
+      min: 2.288297940529159
+      std: 0.019742319303026352
+    vector_entropy: 0.004573710619075782
+  tick: 122
+  timestamp: '2025-10-19T12:08:00.813421'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.009283195534597
+      magnitude_stability: 0.9806772374309111
+    neighbor_similarity:
+      count: 100
+      mean: 0.990716804465403
+      std: 0.0005629583570778696
+    state_magnitude:
+      max: 2.3922623464038444
+      mean: 2.341901543041053
+      min: 2.27672939588098
+      std: 0.019322762569088908
+    vector_entropy: 0.004572891456645313
+  tick: 123
+  timestamp: '2025-10-19T12:08:00.836148'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.009244465682287317
+      magnitude_stability: 0.9807446537183855
+    neighbor_similarity:
+      count: 100
+      mean: 0.9907555343177127
+      std: 0.0005957511718660201
+    state_magnitude:
+      max: 2.393188335300952
+      mean: 2.343370733742578
+      min: 2.2792404925462226
+      std: 0.019255346281614533
+    vector_entropy: 0.004575713360361428
+  tick: 124
+  timestamp: '2025-10-19T12:08:00.859339'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.009373862733585092
+      magnitude_stability: 0.9822505531279621
+    neighbor_similarity:
+      count: 100
+      mean: 0.9906261372664149
+      std: 0.000613629167093495
+    state_magnitude:
+      max: 2.3856620459427345
+      mean: 2.3448697639157383
+      min: 2.302871915084448
+      std: 0.017749446872037913
+    vector_entropy: 0.004578576205122664
+  tick: 125
+  timestamp: '2025-10-19T12:08:00.882327'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.009330894471514029
+      magnitude_stability: 0.9821335096692787
+    neighbor_similarity:
+      count: 100
+      mean: 0.990669105528486
+      std: 0.0005647785524360737
+    state_magnitude:
+      max: 2.3853788847028334
+      mean: 2.34373148606003
+      min: 2.3021969276277683
+      std: 0.017866490330721317
+    vector_entropy: 0.00457640282171898
+  tick: 126
+  timestamp: '2025-10-19T12:08:00.905858'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.009316399924159002
+      magnitude_stability: 0.9814557689595664
+    neighbor_similarity:
+      count: 100
+      mean: 0.990683600075841
+      std: 0.0005204974760383627
+    state_magnitude:
+      max: 2.389439076977226
+      mean: 2.3413884015937856
+      min: 2.296288308425981
+      std: 0.01854423104043358
+    vector_entropy: 0.004571734522023356
+  tick: 127
+  timestamp: '2025-10-19T12:08:00.929273'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.009210004403728655
+      magnitude_stability: 0.9801118417035295
+    neighbor_similarity:
+      count: 100
+      mean: 0.9907899955962713
+      std: 0.000552430054141636
+    state_magnitude:
+      max: 2.3939038215508694
+      mean: 2.3431030143037277
+      min: 2.2994587291860906
+      std: 0.019888158296470546
+    vector_entropy: 0.004575055820795681
+  tick: 128
+  timestamp: '2025-10-19T12:08:00.951727'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.009175946318867534
+      magnitude_stability: 0.9830302598107269
+    neighbor_similarity:
+      count: 100
+      mean: 0.9908240536811325
+      std: 0.0005450842300551046
+    state_magnitude:
+      max: 2.386289513538762
+      mean: 2.3439910775129116
+      min: 2.300810672272781
+      std: 0.016969740189273153
+    vector_entropy: 0.004576719715710211
+  tick: 129
+  timestamp: '2025-10-19T12:08:00.973744'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.009048568466911155
+      magnitude_stability: 0.9820949740789807
+    neighbor_similarity:
+      count: 100
+      mean: 0.9909514315330888
+      std: 0.0005459262951240832
+    state_magnitude:
+      max: 2.3879476231240786
+      mean: 2.344298030123745
+      min: 2.291711078167303
+      std: 0.017905025921019245
+    vector_entropy: 0.004577267500116033
+  tick: 130
+  timestamp: '2025-10-19T12:08:00.995988'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.009153702360426008
+      magnitude_stability: 0.983147910851851
+    neighbor_similarity:
+      count: 100
+      mean: 0.990846297639574
+      std: 0.0005959635933273071
+    state_magnitude:
+      max: 2.383623531283923
+      mean: 2.344818858586489
+      min: 2.309362301185255
+      std: 0.016852089148148962
+    vector_entropy: 0.004578352745515705
+  tick: 131
+  timestamp: '2025-10-19T12:08:01.018799'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.009195866113813289
+      magnitude_stability: 0.9827184470004648
+    neighbor_similarity:
+      count: 100
+      mean: 0.9908041338861867
+      std: 0.000630568368939604
+    state_magnitude:
+      max: 2.3848830337252216
+      mean: 2.34489189454624
+      min: 2.302075603784995
+      std: 0.01728155299953511
+    vector_entropy: 0.004578461452207462
+  tick: 132
+  timestamp: '2025-10-19T12:08:01.041460'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.009170680575155021
+      magnitude_stability: 0.9826730971750712
+    neighbor_similarity:
+      count: 100
+      mean: 0.990829319424845
+      std: 0.0005579322949380839
+    state_magnitude:
+      max: 2.3887896553036323
+      mean: 2.345735535497725
+      min: 2.3077483784661226
+      std: 0.01732690282492881
+    vector_entropy: 0.004580131725108978
+  tick: 133
+  timestamp: '2025-10-19T12:08:01.064299'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.00925055263152108
+      magnitude_stability: 0.9806519221537544
+    neighbor_similarity:
+      count: 100
+      mean: 0.9907494473684789
+      std: 0.0005568497569043093
+    state_magnitude:
+      max: 2.389171766539206
+      mean: 2.3468410230155983
+      min: 2.303099301826335
+      std: 0.019348077846245603
+    vector_entropy: 0.004582315570793034
+  tick: 134
+  timestamp: '2025-10-19T12:08:01.086845'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.009220086684431639
+      magnitude_stability: 0.9799554378208328
+    neighbor_similarity:
+      count: 100
+      mean: 0.9907799133155684
+      std: 0.0005849644245161417
+    state_magnitude:
+      max: 2.3934855530527988
+      mean: 2.347659343185665
+      min: 2.299828259728528
+      std: 0.020044562179167127
+    vector_entropy: 0.004583877726297831
+  tick: 135
+  timestamp: '2025-10-19T12:08:01.109813'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.009126399776407834
+      magnitude_stability: 0.9807938478408079
+    neighbor_similarity:
+      count: 100
+      mean: 0.9908736002235922
+      std: 0.0006495819964922688
+    state_magnitude:
+      max: 2.389876984857614
+      mean: 2.346036132770069
+      min: 2.2987837803546376
+      std: 0.019206152159192056
+    vector_entropy: 0.004580793539386012
+  tick: 136
+  timestamp: '2025-10-19T12:08:01.133303'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.00910857352625316
+      magnitude_stability: 0.9825450275810863
+    neighbor_similarity:
+      count: 100
+      mean: 0.9908914264737468
+      std: 0.0005659961483759124
+    state_magnitude:
+      max: 2.3845286871330673
+      mean: 2.3486198006201393
+      min: 2.293641073214376
+      std: 0.017454972418913653
+    vector_entropy: 0.004585908845762453
+  tick: 137
+  timestamp: '2025-10-19T12:08:01.156256'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.009168999173851944
+      magnitude_stability: 0.9822085537749083
+    neighbor_similarity:
+      count: 100
+      mean: 0.9908310008261481
+      std: 0.0005766453192451943
+    state_magnitude:
+      max: 2.3894432412069544
+      mean: 2.3486747382541817
+      min: 2.308863236229815
+      std: 0.017791446225091687
+    vector_entropy: 0.004585912280600482
+  tick: 138
+  timestamp: '2025-10-19T12:08:01.178996'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.009049664888972742
+      magnitude_stability: 0.9828750080746127
+    neighbor_similarity:
+      count: 100
+      mean: 0.9909503351110273
+      std: 0.0005641543156929314
+    state_magnitude:
+      max: 2.390732047148897
+      mean: 2.3505964208963808
+      min: 2.308938072650466
+      std: 0.01712499192538726
+    vector_entropy: 0.004589637015067383
+  tick: 139
+  timestamp: '2025-10-19T12:08:01.201595'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.009042988943397168
+      magnitude_stability: 0.9817854317963417
+    neighbor_similarity:
+      count: 100
+      mean: 0.9909570110566028
+      std: 0.0005825724169337523
+    state_magnitude:
+      max: 2.3915086693423
+      mean: 2.35321524544409
+      min: 2.3092926330287296
+      std: 0.018214568203658316
+    vector_entropy: 0.004594773860199918
+  tick: 140
+  timestamp: '2025-10-19T12:08:01.224497'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.009169789493964964
+      magnitude_stability: 0.9814063825860999
+    neighbor_similarity:
+      count: 100
+      mean: 0.990830210506035
+      std: 0.0005541178842942304
+    state_magnitude:
+      max: 2.3995749478705144
+      mean: 2.353655993669536
+      min: 2.3043828524316865
+      std: 0.01859361741390008
+    vector_entropy: 0.0045956375279218135
+  tick: 141
+  timestamp: '2025-10-19T12:08:01.246180'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.00916668015087918
+      magnitude_stability: 0.9824527983043941
+    neighbor_similarity:
+      count: 100
+      mean: 0.9908333198491208
+      std: 0.0006296053203633307
+    state_magnitude:
+      max: 2.4014786086024165
+      mean: 2.352651230829882
+      min: 2.302203339553942
+      std: 0.01754720169560583
+    vector_entropy: 0.0045935694229077935
+  tick: 142
+  timestamp: '2025-10-19T12:08:01.268017'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.009095779394871939
+      magnitude_stability: 0.9836518771346553
+    neighbor_similarity:
+      count: 100
+      mean: 0.9909042206051281
+      std: 0.0006071871650865569
+    state_magnitude:
+      max: 2.3923996079246224
+      mean: 2.3528055995113655
+      min: 2.3083643723561296
+      std: 0.016348122865344747
+    vector_entropy: 0.00459382876804507
+  tick: 143
+  timestamp: '2025-10-19T12:08:01.290035'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.009091862977834042
+      magnitude_stability: 0.9833311368282229
+    neighbor_similarity:
+      count: 100
+      mean: 0.990908137022166
+      std: 0.0005992341017002093
+    state_magnitude:
+      max: 2.3961320442808245
+      mean: 2.3546099621970185
+      min: 2.3074217685990184
+      std: 0.016668863171777116
+    vector_entropy: 0.004597382445018399
+  tick: 144
+  timestamp: '2025-10-19T12:08:01.312719'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.009175726256861028
+      magnitude_stability: 0.9851296523272174
+    neighbor_similarity:
+      count: 100
+      mean: 0.990824273743139
+      std: 0.0005661282903594454
+    state_magnitude:
+      max: 2.3932806171005523
+      mean: 2.3560085746771486
+      min: 2.3214051552729655
+      std: 0.014870347672782605
+    vector_entropy: 0.004600126137072688
+  tick: 145
+  timestamp: '2025-10-19T12:08:01.335163'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.009144798955404099
+      magnitude_stability: 0.9840051840375807
+    neighbor_similarity:
+      count: 100
+      mean: 0.9908552010445959
+      std: 0.0005733810258127005
+    state_magnitude:
+      max: 2.4038746627901326
+      mean: 2.3563149559798635
+      min: 2.3088162762267026
+      std: 0.015994815962419293
+    vector_entropy: 0.004600695096865722
+  tick: 146
+  timestamp: '2025-10-19T12:08:01.357784'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.0090717590487156
+      magnitude_stability: 0.9824447321387687
+    neighbor_similarity:
+      count: 100
+      mean: 0.9909282409512844
+      std: 0.0005473693451794662
+    state_magnitude:
+      max: 2.407595103916991
+      mean: 2.3536963940552624
+      min: 2.317300601721664
+      std: 0.017555267861231266
+    vector_entropy: 0.0045956097938707596
+  tick: 147
+  timestamp: '2025-10-19T12:08:01.383216'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.009135259462099588
+      magnitude_stability: 0.9822511427955556
+    neighbor_similarity:
+      count: 100
+      mean: 0.9908647405379004
+      std: 0.0005768577105631072
+    state_magnitude:
+      max: 2.396642462029842
+      mean: 2.354576099305596
+      min: 2.3133778269950076
+      std: 0.017748857204444395
+    vector_entropy: 0.004597319313929408
+  tick: 148
+  timestamp: '2025-10-19T12:08:01.410257'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.009109069635415468
+      magnitude_stability: 0.9803718147251842
+    neighbor_similarity:
+      count: 100
+      mean: 0.9908909303645845
+      std: 0.0005425192350379834
+    state_magnitude:
+      max: 2.4037417340869087
+      mean: 2.3552434360051127
+      min: 2.3128300999660567
+      std: 0.019628185274815784
+    vector_entropy: 0.004598572956409032
+  tick: 149
+  timestamp: '2025-10-19T12:08:01.434037'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.009081002889096412
+      magnitude_stability: 0.9812722383501268
+    neighbor_similarity:
+      count: 100
+      mean: 0.9909189971109036
+      std: 0.0006345302554593696
+    state_magnitude:
+      max: 2.394004458177714
+      mean: 2.3555365718378045
+      min: 2.314516116955655
+      std: 0.01872776164987324
+    vector_entropy: 0.004599186521572302
+  tick: 150
+  timestamp: '2025-10-19T12:08:01.458765'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.00899270380938988
+      magnitude_stability: 0.9825020684442075
+    neighbor_similarity:
+      count: 100
+      mean: 0.9910072961906101
+      std: 0.0006060175776015069
+    state_magnitude:
+      max: 2.4008106497456643
+      mean: 2.3560929456529482
+      min: 2.317879350403129
+      std: 0.017497931555792438
+    vector_entropy: 0.004600353869852043
+  tick: 151
+  timestamp: '2025-10-19T12:08:01.482608'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.00902095564349581
+      magnitude_stability: 0.9827374650878195
+    neighbor_similarity:
+      count: 100
+      mean: 0.9909790443565042
+      std: 0.0006274648891255595
+    state_magnitude:
+      max: 2.41676166386804
+      mean: 2.35736372351161
+      min: 2.317060374012025
+      std: 0.01726253491218052
+    vector_entropy: 0.004602781571842949
+  tick: 152
+  timestamp: '2025-10-19T12:08:01.506264'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.009257177188392363
+      magnitude_stability: 0.9836870635966646
+    neighbor_similarity:
+      count: 100
+      mean: 0.9907428228116076
+      std: 0.0005308199516570915
+    state_magnitude:
+      max: 2.3959317770623305
+      mean: 2.3557844130230676
+      min: 2.31580766864166
+      std: 0.016312936403335403
+    vector_entropy: 0.004599677496698595
+  tick: 153
+  timestamp: '2025-10-19T12:08:01.530213'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.009226512141407461
+      magnitude_stability: 0.9847033392850341
+    neighbor_similarity:
+      count: 100
+      mean: 0.9907734878585925
+      std: 0.0005973223408922119
+    state_magnitude:
+      max: 2.3919872894220813
+      mean: 2.3574439800366425
+      min: 2.319777510137051
+      std: 0.015296660714965915
+    vector_entropy: 0.004603059054517119
+  tick: 154
+  timestamp: '2025-10-19T12:08:01.554714'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.009153542035433282
+      magnitude_stability: 0.9838836114010168
+    neighbor_similarity:
+      count: 100
+      mean: 0.9908464579645667
+      std: 0.0005092765963741043
+    state_magnitude:
+      max: 2.3984206667030263
+      mean: 2.3575128947052253
+      min: 2.309977514008738
+      std: 0.016116388598983247
+    vector_entropy: 0.004603192291303647
+  tick: 155
+  timestamp: '2025-10-19T12:08:01.578193'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.009090806242113447
+      magnitude_stability: 0.9850300130054543
+    neighbor_similarity:
+      count: 100
+      mean: 0.9909091937578866
+      std: 0.0005827617965423192
+    state_magnitude:
+      max: 2.395344105814124
+      mean: 2.3579464296487633
+      min: 2.319936235283889
+      std: 0.01496998699454571
+    vector_entropy: 0.004604132045815583
+  tick: 156
+  timestamp: '2025-10-19T12:08:01.601964'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.009056112148854711
+      magnitude_stability: 0.9844754907918987
+    neighbor_similarity:
+      count: 100
+      mean: 0.9909438878511453
+      std: 0.0005944117531030522
+    state_magnitude:
+      max: 2.407532871272235
+      mean: 2.357999175830643
+      min: 2.3249212814332894
+      std: 0.015524509208101278
+    vector_entropy: 0.004604356992109263
+  tick: 157
+  timestamp: '2025-10-19T12:08:01.625524'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.009046278158810539
+      magnitude_stability: 0.984951013114848
+    neighbor_similarity:
+      count: 100
+      mean: 0.9909537218411895
+      std: 0.0006156210078507458
+    state_magnitude:
+      max: 2.406608446633552
+      mean: 2.3571289898675767
+      min: 2.32551710155716
+      std: 0.015048986885151987
+    vector_entropy: 0.004602631276941552
+  tick: 158
+  timestamp: '2025-10-19T12:08:01.649030'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.009007167960164542
+      magnitude_stability: 0.9841073431657318
+    neighbor_similarity:
+      count: 100
+      mean: 0.9909928320398355
+      std: 0.0005535101525794389
+    state_magnitude:
+      max: 2.409224092884109
+      mean: 2.356214526577767
+      min: 2.323121272537339
+      std: 0.01589265683426822
+    vector_entropy: 0.00460085347205978
+  tick: 159
+  timestamp: '2025-10-19T12:08:01.671892'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.009093016476801274
+      magnitude_stability: 0.9841604897700792
+    neighbor_similarity:
+      count: 100
+      mean: 0.9909069835231987
+      std: 0.0005111020744344885
+    state_magnitude:
+      max: 2.395316831471052
+      mean: 2.356816535392191
+      min: 2.3141544177933575
+      std: 0.015839510229920757
+    vector_entropy: 0.004602053836443772
+  tick: 160
+  timestamp: '2025-10-19T12:08:01.694749'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.009166935853087588
+      magnitude_stability: 0.981242590206349
+    neighbor_similarity:
+      count: 100
+      mean: 0.9908330641469124
+      std: 0.0005496035892000255
+    state_magnitude:
+      max: 2.3977991089153776
+      mean: 2.3554683087459836
+      min: 2.310559209176193
+      std: 0.018757409793651033
+    vector_entropy: 0.0045994410480782785
+  tick: 161
+  timestamp: '2025-10-19T12:08:01.718263'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.009107115591546089
+      magnitude_stability: 0.9822686867062531
+    neighbor_similarity:
+      count: 100
+      mean: 0.9908928844084539
+      std: 0.0005499106525153745
+    state_magnitude:
+      max: 2.3973109930677365
+      mean: 2.3562689268868655
+      min: 2.313866423970484
+      std: 0.017731313293746914
+    vector_entropy: 0.004600931230031877
+  tick: 162
+  timestamp: '2025-10-19T12:08:01.741524'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.00902199430964723
+      magnitude_stability: 0.9823413676224708
+    neighbor_similarity:
+      count: 100
+      mean: 0.9909780056903528
+      std: 0.0004856302318068152
+    state_magnitude:
+      max: 2.3962664850980455
+      mean: 2.3563350479136607
+      min: 2.3072706713452527
+      std: 0.017658632377529158
+    vector_entropy: 0.004601172769158636
+  tick: 163
+  timestamp: '2025-10-19T12:08:01.764663'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.008980941489290073
+      magnitude_stability: 0.984856989562384
+    neighbor_similarity:
+      count: 100
+      mean: 0.9910190585107099
+      std: 0.0005650414438843806
+    state_magnitude:
+      max: 2.3945807165791835
+      mean: 2.357386168224417
+      min: 2.3192727510006135
+      std: 0.015143010437616053
+    vector_entropy: 0.004603313868439313
+  tick: 164
+  timestamp: '2025-10-19T12:08:01.788071'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.008964456543085197
+      magnitude_stability: 0.982905404621776
+    neighbor_similarity:
+      count: 100
+      mean: 0.9910355434569148
+      std: 0.0005397522000119126
+    state_magnitude:
+      max: 2.4008311623144234
+      mean: 2.3599976885098353
+      min: 2.3222924465385835
+      std: 0.017094595378223987
+    vector_entropy: 0.004608404957078167
+  tick: 165
+  timestamp: '2025-10-19T12:08:01.810852'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.009049802721021516
+      magnitude_stability: 0.9839201957916744
+    neighbor_similarity:
+      count: 100
+      mean: 0.9909501972789785
+      std: 0.000564477930525139
+    state_magnitude:
+      max: 2.398894139838582
+      mean: 2.360857257449213
+      min: 2.3193710419539992
+      std: 0.016079804208325534
+    vector_entropy: 0.0046099904988053135
+  tick: 166
+  timestamp: '2025-10-19T12:08:01.834069'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.009000968043041513
+      magnitude_stability: 0.9836936753528479
+    neighbor_similarity:
+      count: 100
+      mean: 0.9909990319569585
+      std: 0.0005671537516441239
+    state_magnitude:
+      max: 2.405728792541169
+      mean: 2.360716953856644
+      min: 2.3203915231482797
+      std: 0.016306324647152082
+    vector_entropy: 0.004609731622532422
+  tick: 167
+  timestamp: '2025-10-19T12:08:01.857693'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.008884275503586392
+      magnitude_stability: 0.9840071835912212
+    neighbor_similarity:
+      count: 100
+      mean: 0.9911157244964136
+      std: 0.0005592380171156071
+    state_magnitude:
+      max: 2.4225925101326387
+      mean: 2.3624116301148494
+      min: 2.33504427444975
+      std: 0.015992816408778802
+    vector_entropy: 0.0046129978833026435
+  tick: 168
+  timestamp: '2025-10-19T12:08:01.880359'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.008926575234882494
+      magnitude_stability: 0.9845427998346952
+    neighbor_similarity:
+      count: 100
+      mean: 0.9910734247651175
+      std: 0.0005485768992839638
+    state_magnitude:
+      max: 2.4055066483900625
+      mean: 2.3618454709365757
+      min: 2.3266434320936042
+      std: 0.01545720016530481
+    vector_entropy: 0.004611875627301072
+  tick: 169
+  timestamp: '2025-10-19T12:08:01.903561'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.008927506869311319
+      magnitude_stability: 0.9844931006608354
+    neighbor_similarity:
+      count: 100
+      mean: 0.9910724931306887
+      std: 0.0005374064723181676
+    state_magnitude:
+      max: 2.4023843025137954
+      mean: 2.361966981775078
+      min: 2.329762960189719
+      std: 0.015506899339164656
+    vector_entropy: 0.0046121119728218096
+  tick: 170
+  timestamp: '2025-10-19T12:08:01.926735'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.008902684918603243
+      magnitude_stability: 0.9836153250125471
+    neighbor_similarity:
+      count: 100
+      mean: 0.9910973150813968
+      std: 0.0005561833415662085
+    state_magnitude:
+      max: 2.3992033242547004
+      mean: 2.362949872075838
+      min: 2.31977473236611
+      std: 0.016384674987452864
+    vector_entropy: 0.004614111327798153
+  tick: 171
+  timestamp: '2025-10-19T12:08:01.950049'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.00884206908545404
+      magnitude_stability: 0.9834735257444327
+    neighbor_similarity:
+      count: 100
+      mean: 0.991157930914546
+      std: 0.0005895840359918736
+    state_magnitude:
+      max: 2.399032926610315
+      mean: 2.3648274649076737
+      min: 2.33065226996662
+      std: 0.016526474255567317
+    vector_entropy: 0.004617780410703656
+  tick: 172
+  timestamp: '2025-10-19T12:08:01.973537'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.008930318907771628
+      magnitude_stability: 0.9835163581690928
+    neighbor_similarity:
+      count: 100
+      mean: 0.9910696810922284
+      std: 0.0004961272227090302
+    state_magnitude:
+      max: 2.404317863191438
+      mean: 2.364305343042039
+      min: 2.3211385271508025
+      std: 0.016483641830907236
+    vector_entropy: 0.00461672450181311
+  tick: 173
+  timestamp: '2025-10-19T12:08:01.996739'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.008909489294233186
+      magnitude_stability: 0.9829105217129978
+    neighbor_similarity:
+      count: 100
+      mean: 0.9910905107057668
+      std: 0.0005650190910094702
+    state_magnitude:
+      max: 2.402649692576765
+      mean: 2.364480851345614
+      min: 2.3163850359140876
+      std: 0.017089478287002233
+    vector_entropy: 0.004616968507581726
+  tick: 174
+  timestamp: '2025-10-19T12:08:02.019898'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.008943204216058986
+      magnitude_stability: 0.9839357130642692
+    neighbor_similarity:
+      count: 100
+      mean: 0.991056795783941
+      std: 0.0006079558976487832
+    state_magnitude:
+      max: 2.3967167089131003
+      mean: 2.365278831888516
+      min: 2.320800182704904
+      std: 0.016064286935730827
+    vector_entropy: 0.004618598203015886
+  tick: 175
+  timestamp: '2025-10-19T12:08:02.042822'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.009057337725414949
+      magnitude_stability: 0.98260105498321
+    neighbor_similarity:
+      count: 100
+      mean: 0.990942662274585
+      std: 0.0005676822485814095
+    state_magnitude:
+      max: 2.41059887812072
+      mean: 2.365549831485646
+      min: 2.3072511563040345
+      std: 0.01739894501679
+    vector_entropy: 0.004619236779527171
+  tick: 176
+  timestamp: '2025-10-19T12:08:02.065810'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.009053678907287588
+      magnitude_stability: 0.9829258562819129
+    neighbor_similarity:
+      count: 100
+      mean: 0.9909463210927124
+      std: 0.0006484060382890399
+    state_magnitude:
+      max: 2.4118484041974493
+      mean: 2.3654938116157767
+      min: 2.3072801362216047
+      std: 0.01707414371808713
+    vector_entropy: 0.004619136600828636
+  tick: 177
+  timestamp: '2025-10-19T12:08:02.088044'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.009047166996619893
+      magnitude_stability: 0.9850215977145027
+    neighbor_similarity:
+      count: 100
+      mean: 0.9909528330033801
+      std: 0.0005997848940767382
+    state_magnitude:
+      max: 2.3992024460757464
+      mean: 2.364860290623615
+      min: 2.3246793077902344
+      std: 0.014978402285497345
+    vector_entropy: 0.004617899554767733
+  tick: 178
+  timestamp: '2025-10-19T12:08:02.110923'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.008952864533807947
+      magnitude_stability: 0.9849591491870734
+    neighbor_similarity:
+      count: 100
+      mean: 0.991047135466192
+      std: 0.0005856132439225429
+    state_magnitude:
+      max: 2.4147803661222587
+      mean: 2.364457686915118
+      min: 2.3298190487529133
+      std: 0.01504085081292659
+    vector_entropy: 0.004617122692778659
+  tick: 179
+  timestamp: '2025-10-19T12:08:02.134277'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.008967462766038103
+      magnitude_stability: 0.9841878165318211
+    neighbor_similarity:
+      count: 100
+      mean: 0.9910325372339619
+      std: 0.000613447459867019
+    state_magnitude:
+      max: 2.3945480304080924
+      mean: 2.363267021831474
+      min: 2.324013395238136
+      std: 0.015812183468178878
+    vector_entropy: 0.00461487832131335
+  tick: 180
+  timestamp: '2025-10-19T12:08:02.157547'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.008965838690592864
+      magnitude_stability: 0.9847275623431454
+    neighbor_similarity:
+      count: 100
+      mean: 0.9910341613094071
+      std: 0.0005791705753180334
+    state_magnitude:
+      max: 2.3976754680052417
+      mean: 2.3625340119353586
+      min: 2.3259478926336428
+      std: 0.015272437656854633
+    vector_entropy: 0.00461343947961057
+  tick: 181
+  timestamp: '2025-10-19T12:08:02.180722'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.009038092890686578
+      magnitude_stability: 0.9834978393304596
+    neighbor_similarity:
+      count: 100
+      mean: 0.9909619071093134
+      std: 0.0005371795349455066
+    state_magnitude:
+      max: 2.39901421420821
+      mean: 2.3603672414291546
+      min: 2.306570354012515
+      std: 0.016502160669540328
+    vector_entropy: 0.004609237793701819
+  tick: 182
+  timestamp: '2025-10-19T12:08:02.204129'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.009034995085984043
+      magnitude_stability: 0.9834416447316303
+    neighbor_similarity:
+      count: 100
+      mean: 0.990965004914016
+      std: 0.0005660777320974473
+    state_magnitude:
+      max: 2.4081504334433363
+      mean: 2.360101983404914
+      min: 2.3188916200237526
+      std: 0.016558355268369712
+    vector_entropy: 0.004608802488094608
+  tick: 183
+  timestamp: '2025-10-19T12:08:02.227269'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.008972935331235998
+      magnitude_stability: 0.982974887140274
+    neighbor_similarity:
+      count: 100
+      mean: 0.991027064668764
+      std: 0.0005648062112523764
+    state_magnitude:
+      max: 2.3985376520293458
+      mean: 2.3610246425588093
+      min: 2.3197908547249217
+      std: 0.01702511285972598
+    vector_entropy: 0.004610620487114335
+  tick: 184
+  timestamp: '2025-10-19T12:08:02.250244'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.008987111675850312
+      magnitude_stability: 0.9840227951681733
+    neighbor_similarity:
+      count: 100
+      mean: 0.9910128883241497
+      std: 0.0005733195892906402
+    state_magnitude:
+      max: 2.4015824176542506
+      mean: 2.3610417369823873
+      min: 2.32393205715985
+      std: 0.01597720483182669
+    vector_entropy: 0.00461068437809153
+  tick: 185
+  timestamp: '2025-10-19T12:08:02.273639'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.008894746693605349
+      magnitude_stability: 0.9845010631359665
+    neighbor_similarity:
+      count: 100
+      mean: 0.9911052533063947
+      std: 0.0005964515887164258
+    state_magnitude:
+      max: 2.3937504667321936
+      mean: 2.3622051375284183
+      min: 2.327431124067912
+      std: 0.01549893686403344
+    vector_entropy: 0.004613008564364531
+  tick: 186
+  timestamp: '2025-10-19T12:08:02.296906'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.009026085350589352
+      magnitude_stability: 0.9845011263912733
+    neighbor_similarity:
+      count: 100
+      mean: 0.9909739146494106
+      std: 0.0005566938531173792
+    state_magnitude:
+      max: 2.3990739353847266
+      mean: 2.363222200852872
+      min: 2.329053642418174
+      std: 0.015498873608726758
+    vector_entropy: 0.004614979048996665
+  tick: 187
+  timestamp: '2025-10-19T12:08:02.319487'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.009029201723927516
+      magnitude_stability: 0.9840025377715251
+    neighbor_similarity:
+      count: 100
+      mean: 0.9909707982760725
+      std: 0.0005658252191898873
+    state_magnitude:
+      max: 2.4030089182471555
+      mean: 2.3641702843715957
+      min: 2.3237684604731705
+      std: 0.015997462228474833
+    vector_entropy: 0.004616830393362147
+  tick: 188
+  timestamp: '2025-10-19T12:08:02.342843'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.009010138881153984
+      magnitude_stability: 0.9846833618473672
+    neighbor_similarity:
+      count: 100
+      mean: 0.990989861118846
+      std: 0.0005686468286022763
+    state_magnitude:
+      max: 2.394376419299477
+      mean: 2.363239389337143
+      min: 2.3254649722893768
+      std: 0.01531663815263282
+    vector_entropy: 0.004615063961279992
+  tick: 189
+  timestamp: '2025-10-19T12:08:02.366408'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.009001044407773495
+      magnitude_stability: 0.9850275787615689
+    neighbor_similarity:
+      count: 100
+      mean: 0.9909989555922265
+      std: 0.0006548448598406276
+    state_magnitude:
+      max: 2.396835102529913
+      mean: 2.365830449197951
+      min: 2.3236204553249786
+      std: 0.014972421238431113
+    vector_entropy: 0.004620125183193267
+  tick: 190
+  timestamp: '2025-10-19T12:08:02.389922'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.00885330925067207
+      magnitude_stability: 0.9839832297866002
+    neighbor_similarity:
+      count: 100
+      mean: 0.9911466907493279
+      std: 0.0005592707931730503
+    state_magnitude:
+      max: 2.4040138284591004
+      mean: 2.3680553344903217
+      min: 2.323400917788243
+      std: 0.016016770213399718
+    vector_entropy: 0.004624407423564257
+  tick: 191
+  timestamp: '2025-10-19T12:08:02.413068'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.008922702529714166
+      magnitude_stability: 0.9825161635324717
+    neighbor_similarity:
+      count: 100
+      mean: 0.9910772974702858
+      std: 0.0006141890692069524
+    state_magnitude:
+      max: 2.408957724816318
+      mean: 2.367434579877867
+      min: 2.3313128976720106
+      std: 0.017483836467528283
+    vector_entropy: 0.0046232751292810135
+  tick: 192
+  timestamp: '2025-10-19T12:08:02.436426'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.009004741740666344
+      magnitude_stability: 0.982939460589441
+    neighbor_similarity:
+      count: 100
+      mean: 0.9909952582593337
+      std: 0.0005192788746542732
+    state_magnitude:
+      max: 2.4097431098874136
+      mean: 2.367613645847198
+      min: 2.3286526978633377
+      std: 0.017060539410559
+    vector_entropy: 0.004623597256539429
+  tick: 193
+  timestamp: '2025-10-19T12:08:02.459787'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.009034512685005214
+      magnitude_stability: 0.9830314030033172
+    neighbor_similarity:
+      count: 100
+      mean: 0.9909654873149948
+      std: 0.0005439427636929629
+    state_magnitude:
+      max: 2.403259347155579
+      mean: 2.3660642470608475
+      min: 2.3218600616702423
+      std: 0.01696859699668287
+    vector_entropy: 0.004620587048797671
+  tick: 194
+  timestamp: '2025-10-19T12:08:02.483123'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.008981523029492844
+      magnitude_stability: 0.9839333846852962
+    neighbor_similarity:
+      count: 100
+      mean: 0.9910184769705072
+      std: 0.000545047719783219
+    state_magnitude:
+      max: 2.4015853184325144
+      mean: 2.3654225409621317
+      min: 2.3286180968392145
+      std: 0.016066615314703804
+    vector_entropy: 0.004619298446237639
+  tick: 195
+  timestamp: '2025-10-19T12:08:02.506598'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.009036089498661526
+      magnitude_stability: 0.9846029650275708
+    neighbor_similarity:
+      count: 100
+      mean: 0.9909639105013385
+      std: 0.0005898842346928033
+    state_magnitude:
+      max: 2.399768871357897
+      mean: 2.364935453124708
+      min: 2.330220718381592
+      std: 0.015397034972429146
+    vector_entropy: 0.004618265146222516
+  tick: 196
+  timestamp: '2025-10-19T12:08:02.530112'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.008984420394168025
+      magnitude_stability: 0.9842511520645584
+    neighbor_similarity:
+      count: 100
+      mean: 0.991015579605832
+      std: 0.000554702747672721
+    state_magnitude:
+      max: 2.4078551739409106
+      mean: 2.3665518973509525
+      min: 2.3344831666550454
+      std: 0.015748847935441655
+    vector_entropy: 0.004621325761359964
+  tick: 197
+  timestamp: '2025-10-19T12:08:02.553906'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.008944355121163983
+      magnitude_stability: 0.9841984236174472
+    neighbor_similarity:
+      count: 100
+      mean: 0.991055644878836
+      std: 0.0004926505044328473
+    state_magnitude:
+      max: 2.40079813526077
+      mean: 2.365234680963718
+      min: 2.332134648189091
+      std: 0.015801576382552755
+    vector_entropy: 0.004618742799140829
+  tick: 198
+  timestamp: '2025-10-19T12:08:02.577336'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.00898228657255773
+      magnitude_stability: 0.982984414285091
+    neighbor_similarity:
+      count: 100
+      mean: 0.9910177134274423
+      std: 0.0005657446685517165
+    state_magnitude:
+      max: 2.406117901354958
+      mean: 2.3645751138826756
+      min: 2.323760214286676
+      std: 0.01701558571490899
+    vector_entropy: 0.004617431487546344
+  tick: 199
+  timestamp: '2025-10-19T12:08:02.600694'
+- metrics:
+    grid_convergence:
+      correlation_divergence: 0.008904577930229918
+      magnitude_stability: 0.9848800949708716
+    neighbor_similarity:
+      count: 100
+      mean: 0.9910954220697701
+      std: 0.0004904977195327401
+    state_magnitude:
+      max: 2.408502663636466
+      mean: 2.365209740224436
+      min: 2.328423542703933
+      std: 0.015119905029128456
+    vector_entropy: 0.00461869436028501
+  tick: 200
+  timestamp: '2025-10-19T12:08:02.624092'
