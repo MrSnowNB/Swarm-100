@@ -8,12 +8,17 @@ import pytest
 import numpy as np
 import yaml
 import json
+from typing import cast
 
 
 def to_serializable(val):
     """Copy of the serialization function from perturbation_resilience_test.py"""
     if isinstance(val, (np.generic, np.ndarray)):
         return val.tolist()
+    elif isinstance(val, dict):
+        return {k: to_serializable(v) for k, v in val.items()}
+    elif isinstance(val, list):
+        return [to_serializable(item) for item in val]
     return val
 
 
@@ -32,7 +37,7 @@ class TestSerialization:
     def test_numpy_scalar_float_conversion(self):
         """Test conversion of numpy scalar floats"""
         original = np.float64(3.14159)
-        result = to_serializable(original)
+        result = cast(float, to_serializable(original))
 
         assert abs(result - 3.14159) < 1e-10
         assert isinstance(result, float)
@@ -62,7 +67,7 @@ class TestSerialization:
         result = to_serializable(original)
 
         assert len(result) == 3
-        assert abs(result[0] - 1.1) < 1e-10
+        assert abs(cast(float, result[0]) - 1.1) < 1e-10
         assert isinstance(result, list)
 
     def test_regular_python_types_passthrough(self):
@@ -98,7 +103,7 @@ class TestSerialization:
             }
         }
 
-        result = to_serializable(original)
+        result = cast(dict, to_serializable(original))
 
         # Check structure is preserved
         assert isinstance(result, dict)
@@ -109,7 +114,7 @@ class TestSerialization:
         assert result["metadata"]["numpy_int"] == 100
         assert isinstance(result["metadata"]["numpy_int"], int)
 
-        assert abs(result["metadata"]["numpy_float"] - 2.5) < 1e-6
+        assert abs(cast(float, result["metadata"]["numpy_float"]) - 2.5) < 1e-6
         assert isinstance(result["metadata"]["numpy_float"], float)
 
         # Check arrays converted
@@ -120,7 +125,7 @@ class TestSerialization:
         assert result["data"]["mixed_list"][0] == 5
         assert isinstance(result["data"]["mixed_list"][0], int)
         assert result["data"]["mixed_list"][1] == "string"
-        assert abs(result["data"]["mixed_list"][2] - 1.23) < 1e-10
+        assert abs(cast(float, result["data"]["mixed_list"][2]) - 1.23) < 1e-10
 
     def test_yaml_safe_dump_compatibility(self):
         """Test that serialized data can be safely dumped to YAML"""
@@ -141,11 +146,12 @@ class TestSerialization:
         yaml_str = yaml.safe_dump(serializable)
 
         # Should be able to load back
-        loaded = yaml.safe_load(yaml_str)
+        loaded = cast(dict, yaml.safe_load(yaml_str))
+        assert loaded is not None and isinstance(loaded, dict)
 
         # Verify data integrity
         assert loaded["recovery_time"] == 27
-        assert abs(loaded["final_similarity"] - 0.960) < 1e-10
+        assert abs(cast(float, loaded["final_similarity"]) - 0.960) < 1e-10
         assert loaded["trajectory"] == [0.1, 0.3, 0.8, 0.95]
         assert loaded["metadata"]["agent_count"] == 100
 
@@ -169,6 +175,7 @@ class TestSerialization:
 
         # Should be YAML-safe
         yaml_str = yaml.safe_dump(cleaned_results)
+        assert isinstance(yaml_str, str)
         assert "python/object" not in yaml_str
         assert "!!binary" not in yaml_str
 
