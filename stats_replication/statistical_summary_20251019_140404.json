@@ -1,0 +1,12 @@
+{
+  "mean_recovery_time": 27.2,
+  "std_recovery_time": 1.6431676725154984,
+  "confidence_interval_95": {
+    "lower": 25.157125554518828,
+    "upper": 29.24287444548117
+  },
+  "n_replications": 5,
+  "p_value_significance": 0.00013878850347870397,
+  "effect_size_cohens_d": 1.7040257344605172,
+  "publication_ready_metrics": "27 \u00b1 2.1 ticks (95% CI)"
+}

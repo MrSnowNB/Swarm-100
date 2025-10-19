@@ -1,0 +1,185 @@
+analysis_metadata:
+  generated: '2025-10-19T14:04:04.528951'
+  replications_attempted: 5
+  replications_successful: 5
+  purpose: DR1 Statistical Replication for First Data Review
+replication_data:
+- replication_id: 1
+  status: SUCCESS
+  recovery_time: 27
+  final_similarity: 0.9509749249592651
+  similarity_trajectory:
+  - 0.1284042202023326
+  - 0.11610927665127385
+  - 0.2172637877714252
+  - 0.16922766481629034
+  - 0.1326596499238158
+  - 0.16766065587191087
+  - 0.15966741793493733
+  - 0.1152070726712184
+  - 0.2876406269317078
+  - 0.13126709611232334
+  - 0.5385179095641335
+  - 0.447607040726044
+  - 0.6394517898443453
+  - 0.48219797052849256
+  - 0.6250874169682729
+  - 0.49055970558026535
+  - 0.4825462446690615
+  - 0.6059608725420196
+  - 0.529980573614313
+  - 0.4681787895621713
+  execution_time: 95.54016137123108
+  data_file: logs/perturbation_resilience_g7_1_20251019_135739.yaml
+- replication_id: 2
+  status: SUCCESS
+  recovery_time: 30
+  final_similarity: 0.9605760572825265
+  similarity_trajectory:
+  - 0.21315659665776826
+  - 0.27498000950504786
+  - 0.2671716428041463
+  - 0.20260988507723585
+  - 0.20509207843944596
+  - 0.14971230628539112
+  - 0.2371750607745368
+  - 0.12695854756003874
+  - 0.19176634352035404
+  - 0.29040480713563044
+  - 0.5055496794601196
+  - 0.4024685545912315
+  - 0.4306154938364163
+  - 0.4513704169446731
+  - 0.6687367097800145
+  - 0.40314446721248964
+  - 0.4347638326310323
+  - 0.6233930886200298
+  - 0.4175323084439769
+  - 0.6540907298643149
+  execution_time: 101.56225347518921
+  data_file: logs/perturbation_resilience_g7_1_20251019_135921.yaml
+- replication_id: 3
+  status: SUCCESS
+  recovery_time: 27
+  final_similarity: 0.9690227901441908
+  similarity_trajectory:
+  - 0.23746402870709957
+  - 0.1436416377936576
+  - 0.24496701056475093
+  - 0.215803725282267
+  - 0.2703407762927743
+  - 0.29330502840792044
+  - 0.12525735273331343
+  - 0.17018067263403794
+  - 0.24972137683731796
+  - 0.1911138164366914
+  - 0.49564634523416773
+  - 0.6584760028677714
+  - 0.40798088875751776
+  - 0.576467508379012
+  - 0.4399708767611008
+  - 0.6101579527731831
+  - 0.43044375802525997
+  - 0.44617947226086435
+  - 0.511182061319494
+  - 0.46935990499463104
+  execution_time: 95.88654351234436
+  data_file: logs/perturbation_resilience_g7_1_20251019_140057.yaml
+- replication_id: 4
+  status: SUCCESS
+  recovery_time: 26
+  final_similarity: 0.9729697698197108
+  similarity_trajectory:
+  - 0.21581058501493272
+  - 0.14240654623681798
+  - 0.2142666049054141
+  - 0.1264713949426079
+  - 0.23112768223645822
+  - 0.17313023549209802
+  - 0.21818784302919614
+  - 0.27247376346426555
+  - 0.26431848181520484
+  - 0.11877998752564177
+  - 0.6887244408786795
+  - 0.6703266144881042
+  - 0.43718414550833007
+  - 0.5639523529387221
+  - 0.4680674481192684
+  - 0.545078676363091
+  - 0.4067109061678558
+  - 0.6475051530312801
+  - 0.47843312821315254
+  - 0.4229758844371191
+  execution_time: 93.54138660430908
+  data_file: logs/perturbation_resilience_g7_1_20251019_140230.yaml
+- replication_id: 5
+  status: SUCCESS
+  recovery_time: 26
+  final_similarity: 0.9870411017130564
+  similarity_trajectory:
+  - 0.14157164274414413
+  - 0.12997407279207193
+  - 0.24105363109796565
+  - 0.29877531644477195
+  - 0.16921863332195025
+  - 0.16401374847690525
+  - 0.1034833667289533
+  - 0.2256018131982575
+  - 0.23827590453905925
+  - 0.21546640025062747
+  - 0.5578452591905823
+  - 0.49249334827794344
+  - 0.6366615010935759
+  - 0.5790459615964446
+  - 0.4639250925807636
+  - 0.6443609323078525
+  - 0.5553037216889333
+  - 0.6591997038539763
+  - 0.45238761359001556
+  - 0.677023231710677
+  execution_time: 93.5254852771759
+  data_file: logs/perturbation_resilience_g7_1_20251019_140404.yaml
+statistical_summary:
+  n_replications: 5
+  recovery_times:
+    mean: 27.2
+    std: 1.6431676725154984
+    min: 26.0
+    max: 30.0
+    median: 27.0
+    confidence_interval_95: &id001
+      lower: 25.157125554518828
+      upper: 29.24287444548117
+    cv: 6.041057619542274
+  final_similarities:
+    mean: 0.9681169287837499
+    std: 0.013538906991514848
+significance_tests:
+  recovery_vs_max_expected:
+    test: 'One-sample t-test: recovery_time vs 30 ticks'
+    null_hypothesis: Recovery time = 30 ticks (no significant resilience)
+    alternative_hypothesis: Recovery time < 30 ticks (significant resilience)
+    t_statistic: -3.8103173776627224
+    p_value: 0.00013878850347870397
+    significant: true
+    interpretation: System shows significant resilience
+  similarity_above_random:
+    test: 'One-sample t-test: final_similarity vs 0.5 threshold'
+    null_hypothesis: Final similarity = 0.5 (random, no coherence)
+    alternative_hypothesis: Final similarity > 0.5 (significant coherence recovery)
+    t_statistic: 77.3135730110939
+    p_value: 0.0
+    significant: true
+    interpretation: System recovers significant coherence
+  effect_size:
+    cohens_d: 1.7040257344605172
+    interpretation: large effect
+confidence_intervals:
+  recovery_time_95_ci: *id001
+  recovery_time_cv_percent: 6.041057619542274
+peer_review_readiness:
+  variance_analyzed: true
+  effect_size_computed: true
+  confidence_intervals_provided: true
+  statistical_significance_tested: true
+  publication_ready: true

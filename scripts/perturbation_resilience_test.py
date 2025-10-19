@@ -13,6 +13,7 @@ created: 2025-10-19
 
 import subprocess
 import yaml
+import json
 import time
 import random
 import os
@@ -249,8 +250,16 @@ class PerturbationResilienceTest:
         """Save test results to YAML file"""
         filename = f"logs/perturbation_resilience_g7_1_{datetime.now().strftime('%Y%m%d_%H%M%S')}.yaml"
 
+        def to_serializable(val):
+            if isinstance(val, (np.generic, np.ndarray)):
+                return val.tolist()
+            return val
+
+        # Convert dict recursively before dumping
+        cleaned_results = json.loads(json.dumps(self.test_results, default=to_serializable))
+
         with open(filename, 'w') as f:
-            yaml.dump(self.test_results, f, default_flow_style=False)
+            yaml.safe_dump(cleaned_results, f, sort_keys=False)
 
         logger.info(f"Test report saved to {filename}")
 
