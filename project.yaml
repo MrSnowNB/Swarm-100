@@ -1,0 +1,208 @@
+# Swarm-100: AI-First Project Documentation
+# "Alice in CyberLand" - High-Performance Swarm Intelligence Simulation
+
+name: Swarm-100
+version: "0.1.0"
+description: "High-performance C++ swarm intelligence simulation with Python bindings for AI research and cybernetic agent coordination"
+
+metadata:
+  author: MrSnow Dev Team
+  license: MIT
+  architecture: Hybrid CUDA/C++ with Python Interop
+  focus: "Electromagnetically resonant swarm coordination via toroidal cellular automata and LoRA-style pulse propagation"
+
+# Core System Architecture
+architecture:
+  components:
+    - name: CyberGrid
+      type: C++ Core
+      location: swarm-core/src/cyber_grid.cpp
+      description: "2D toroidal cellular automata with Conway's Game of Life coupled to LoRA energy fields"
+      timing:
+        frequency: 120 Hz
+        mode: hardware_locked
+        lo_ra_ratio: "1:4 (pulses every 4 ticks)"
+      features:
+        - "Hardware-tied monotonic tick synchronization"
+        - "Phase-locked pulse propagation sub-system"
+        - "Automatic drift correction and calibration"
+    
+    - name: RootCauseAnalyzer  
+      type: C++ Core
+      location: swarm-core/src/root_cause_analyzer.cpp
+      description: "Recursive dependency analysis for swarm failure mode detection"
+      algorithms: ["DFS with cycle detection", "Confidence-weighted path analysis"]
+    
+    - name: SpatialRootCauseAnalyzer
+      type: C++ Analysis Extension
+      location: swarm-core/src/cyber_grid.cpp (embedded)
+      description: "3D spatial analysis extending RootCauseAnalyzer for grid-based issues"
+    
+    - name: SwarmManager
+      type: Python Orchestration Layer
+      location: scripts/swarm_manager.py (planned)
+      description: "Distributed agent lifecycle management and coordination"
+    
+    - name: BotWorker
+      type: Python Agent Runtime
+      location: scripts/bot_worker.py
+      description: "Individual AI agent execution engine with CUDA acceleration"
+
+  integration:
+    bindings: "PyBind11 C++↔Python interop layer"
+    communication: "Intra-swarm message passing via shared energy fields"
+    synchronization: "Hardware-locked timing ensuring deterministic emergence"
+
+# Project Structure & Organization
+structure:
+  directories:
+    - path: swarm-core/
+      type: core
+      contents: 
+        - CMake build configuration
+        - C++ source code (cyber_grid, root_cause_analyzer)
+        - Python bindings via pybind11
+      language: C++/Python
+    
+    - path: scripts/  
+      type: runtime
+      contents:
+        - Launch and management scripts
+        - Python agent workers
+        - Debugging and monitoring tools
+      language: Python/Bash
+    
+    - path: tests/
+      type: validation
+      contents:
+        - Performance benchmarking
+        - Agent lifecycle testing  
+        - Integration/validation suites
+      language: Python
+    
+    - path: configs/
+      type: configuration
+      contents:
+        - YAML configuration files for swarm parameters
+        - Bot templates and deployment specs
+      language: YAML
+    
+    - path: logs/
+      type: runtime_output
+      contents:
+        - GPU-specific log directories
+        - Manager and agent execution logs
+      
+    - path: exported-assets/
+      type: artifacts
+      contents:
+        - Generated Python code and deployment files
+        - Performance reports and manifests
+      
+    - path: bots/
+      type: deployment_state
+      contents:
+        - Runtime bot configurations and state
+      
+    - path: swarm_testing_env/
+      type: isolated_runtime 
+      contents:
+        - Python virtual environment with dependencies
+      
+    - path: docs/
+      type: documentation
+      contents:
+        - Architecture diagrams
+        - Developer guides
+        - API specifications
+        - Performance analysis
+
+  files:
+    - path: project.yaml
+      type: ai_first_documentation
+      purpose: "Machine-readable project specification for AI maintenance and evolution"
+    
+    - path: grok_workflow.yaml 
+      type: development_workflow
+      purpose: "AI-assisted development planning and task orchestration"
+    
+    - path: validation_progress.yaml
+      type: quality_tracking
+      purpose: "Automated validation state and compliance metrics"
+    
+    - path: testing_improvement_plan.yaml
+      type: roadmap_documentation
+      purpose: "Structured plan for testing evolution and quality gates"
+    
+    - path: architecture_review_report.yaml
+      type: design_review
+      purpose: "Technical architecture decisions and rationale"
+    
+    - path: .alice_in_cyberland.story
+      type: narrative_documentation
+      purpose: "Human-readable story and project vision narrative"
+
+# Key Technical Specifications
+specs:
+  performance_targets:
+    grid_size: "100x100 toroidal cellular automata"
+    agent_capacity: "Up to 4 agents per cell (400 total)"
+    tick_frequency: "120 Hz hardware-locked updates"
+    memory_budget: "GPU: Variable per system, CPU: <256MB"
+  
+  ai_first_principles:
+    - "All documentation must be machine-readable (YAML/JSON)"
+    - "Code structure designed for AI-assisted maintenance and evolution"
+    - "Comprehensive testing with automated validation"
+    - "Hardware-locked timing ensures reproducible AI behaviors"
+    - "Modular design allowing AI-driven feature extension"
+
+  timing_synchronization:
+    hardware_anchor: "CPU steady_clock (CLOCK_MONOTONIC)"
+    drift_correction: "Accumulated error PID-style correction"
+    pulse_phasing: "LoRA energy waves synchronized to hardware ticks"
+    temporal_resolution: "Sub-millisecond accuracy (<0.1% drift)"
+
+# Development Status & Roadmap
+status:
+  alpha_release: 
+    completed: ["Hardware-locked timing system", "CyberGrid with LoRA coupling", "PyBind11 bindings", "Basic agent architecture"]
+    in_progress: ["Distributed multi-agent coordination", "CUDA acceleration integration", "Advanced failure analysis"]
+    planned: ["Full swarm intelligence emergence", "Production deployment infrastructure", "GPU fault simulation"]
+
+  quality_gates:
+    - code_coverage: "80%+ automated testing" 
+    - performance_regression: "Hardware-locked timing stability tests"
+    - integration_validation: "End-to-end swarm simulation reliability"
+    - documentation_coverage: "100% YAML-documented codebase"
+
+# Dependencies & Requirements  
+dependencies:
+  runtime:
+    - Python 3.12+ (with pybind11)
+    - C++17 compiler (gcc 11+ or clang 14+)
+    - CUDA 12.0+ (recommended for GPU acceleration)
+  
+  build:
+    - CMake 3.15+ with pybind11 support
+    - Python virtualenv for reproducible environments
+  
+  development:
+    - pytest for comprehensive testing
+    - clang-format/git hooks for code quality
+    - AI-native YAML documentation maintenance
+
+# AI Evolutionary Guidelines
+ai_guidelines:
+  - "Maintain machine-readable documentation for AI analysis and expansion"
+  - "Design for automated testing and validation"
+  - "Use hardware-anchored timing for deterministic AI behaviors"
+  - "Enable modular extension for complex emergent phenomena"
+  - "Document all architectural decisions with technical rationale"
+  - "Ensure code patterns are consistent and AI-parseable"
+
+# Quick Reference Commands
+commands:
+  build: "cd swarm-core && mkdir build && cd build && cmake .. && make"
+  test: "python -m pytest tests/ -v"
+  documentation: "Read project.yaml for complete AI-first specification"
