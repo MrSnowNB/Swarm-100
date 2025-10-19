@@ -29,6 +29,15 @@ class ZombieBotWorker:
         # Initialize memory vectors (512-dim as per config)
         self.memory_vectors = np.random.randn(1000, 512).astype(np.float32)
 
+        # CA Parameters for Layer 1 Supervisor control
+        self.ca_parameters = {
+            'diffusion_rate': 0.5,
+            'noise_level': 0.1,
+            'interaction_radius': 4,
+            'alpha': 0.7,
+            'entropy_threshold': 2.0
+        }
+
         # Check for reconstructed state
         reconstructed = os.getenv('RECONSTRUCTED_STATE')
         if reconstructed:
@@ -89,6 +98,39 @@ class ZombieBotWorker:
             self.memory_vectors = np.vstack([self.memory_vectors, new_vectors.reshape(1, -1)])
             self.logger.info("🧟 Received reconstruction state")
             return jsonify({'status': 'reconstructed'})
+
+        @self.app.route('/parameters', methods=['GET'])
+        def get_parameters():
+            """Return current CA parameters for supervisor monitoring"""
+            return jsonify({
+                'parameters': self.ca_parameters,
+                'timestamp': datetime.now().isoformat()
+            })
+
+        @self.app.route('/parameters/update', methods=['POST'])
+        def update_parameters():
+            """Accept parameter updates from Layer 1 Supervisor"""
+            data = request.get_json()
+            self.logger.info(f"🧠 Receiving parameter update: {data}")
+
+            # Validate and update parameters
+            updated = []
+            for param, value in data.get('updates', {}).items():
+                if param in self.ca_parameters:
+                    old_value = self.ca_parameters[param]
+                    self.ca_parameters[param] = value
+                    updated.append(f"{param}: {old_value} → {value}")
+                    self.logger.info(f"⚙️ Updated {param}: {old_value} → {value}")
+
+            if updated:
+                self.logger.info(f"🧠 Parameters updated: {', '.join(updated)}")
+                return jsonify({
+                    'status': 'updated',
+                    'updated_parameters': updated,
+                    'current_parameters': self.ca_parameters
+                })
+            else:
+                return jsonify({'status': 'no_changes'}), 400
 
     def load_reconstructed_state(self, state_str: str):
         """Load averaged state from supervisor"""
