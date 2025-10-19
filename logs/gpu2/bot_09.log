@@ -1,5 +1,0 @@
-[Bot-2_9] 2025-10-18 20:52:47,926 - Bot starting on GPU 2, Port 11609
-[Bot-2_9] 2025-10-18 20:52:47,926 - Connecting to Ollama at http://localhost:11434
-[Bot-2_9] 2025-10-18 20:53:19,962 - Query failed: HTTPConnectionPool(host='localhost', port=11434): Read timed out. (read timeout=30)
-[Bot-2_9] 2025-10-18 20:53:19,962 - ✗ Health check failed
-[Bot-2_9] 2025-10-18 20:53:19,962 - Initial health check failed, exiting
