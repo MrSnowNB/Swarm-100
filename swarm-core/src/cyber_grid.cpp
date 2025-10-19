@@ -5,6 +5,8 @@
 #include <limits>
 #include <chrono>
 #include <thread>
+#include <array>
+#include <algorithm>
 
 // CyberGrid Implementation
 
@@ -688,6 +690,74 @@ float CyberGrid::get_adaptive_pulse_range(int x, int y) const {
 
 void CyberGrid::record_heartbeat(const std::string& agent_id) {
     last_heartbeat_[agent_id] = std::chrono::steady_clock::now();
+}
+
+// Data export methods for visualization and analysis
+std::vector<float> CyberGrid::export_energy_matrix() const {
+    std::vector<float> energy_data(grid_.size());
+    for (size_t i = 0; i < grid_.size(); ++i) {
+        energy_data[i] = grid_[i].energy;
+    }
+    return energy_data;
+}
+
+std::vector<int> CyberGrid::export_life_matrix() const {
+    std::vector<int> life_data(grid_.size());
+    for (size_t i = 0; i < grid_.size(); ++i) {
+        life_data[i] = grid_[i].alive ? 1 : 0;
+    }
+    return life_data;
+}
+
+std::vector<int> CyberGrid::export_occupancy_matrix() const {
+    std::vector<int> occupancy_data(grid_.size());
+    for (size_t i = 0; i < grid_.size(); ++i) {
+        occupancy_data[i] = static_cast<int>(grid_[i].agent_count());
+    }
+    return occupancy_data;
+}
+
+float CyberGrid::calculate_grid_entropy() const {
+    // Calculate Shannon entropy of the life-energy state distribution
+    float entropy = 0.0f;
+    float total_states = static_cast<float>(grid_.size());
+
+    // Count states: 0=dead/low-energy, 1=alive/low-energy, 2=dead/high-energy, 3=alive/high-energy
+    std::array<int, 4> state_counts = {0, 0, 0, 0};
+
+    for (const auto& cell : grid_) {
+        int state = 0;
+        if (cell.alive) state |= 1;              // Bit 0: alive
+        if (cell.energy > 0.5f) state |= 2;     // Bit 1: high energy
+        state_counts[state]++;
+    }
+
+    // Calculate entropy: H = -Σ(p_i * log₂(p_i))
+    for (int count : state_counts) {
+        if (count > 0) {
+            float p = static_cast<float>(count) / total_states;
+            entropy -= p * std::log2(p);
+        }
+    }
+
+    return entropy;
+}
+
+float CyberGrid::calculate_pulse_coherence() const {
+    // Measure coherence of energy field as inverse of spatial variation
+    if (grid_.empty()) return 0.0f;
+
+    float mean_energy = average_energy();
+    float variance = 0.0f;
+
+    for (const auto& cell : grid_) {
+        float diff = cell.energy - mean_energy;
+        variance += diff * diff;
+    }
+    variance /= grid_.size();
+
+    // Coherence = 1 / (1 + variance) - higher coherence means more uniform field
+    return 1.0f / (1.0f + variance);
 }
 
 std::chrono::steady_clock::time_point CyberGrid::get_last_heartbeat(const std::string& agent_id) const {

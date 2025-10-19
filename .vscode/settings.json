@@ -1,7 +1,8 @@
 {
   "python.defaultInterpreterPath": "/home/mr-snow/Documents/Testing the Beast/Swarm/swarm_testing_env/bin/python",
   "python.analysis.extraPaths": [
-    "/home/mr-snow/Documents/Testing the Beast/Swarm/swarm_testing_env/lib/python3.12/site-packages"
+    "/home/mr-snow/Documents/Testing the Beast/Swarm/swarm_testing_env/lib/python3.12/site-packages",
+    "/home/mr-snow/Documents/Testing the Beast/Swarm/swarm-core/build"
   ],
   "C_Cpp.default.includePath": [
     "${workspaceFolder}/**",

@@ -118,7 +118,17 @@ PYBIND11_MODULE(swarm_core, m) {
         .def("set_lora_parameters", &CyberGrid::set_lora_parameters,
              py::arg("attenuation_k") = 0.15f,
              py::arg("global_damping") = 0.95f,
-             py::arg("activation_threshold") = 0.65f);
+             py::arg("activation_threshold") = 0.65f)
+        .def("export_energy_matrix", &CyberGrid::export_energy_matrix,
+             "Export energy levels as flat vector (row-major)")
+        .def("export_life_matrix", &CyberGrid::export_life_matrix,
+             "Export life states as flat vector (row-major): 0=dead, 1=alive")
+        .def("export_occupancy_matrix", &CyberGrid::export_occupancy_matrix,
+             "Export agent occupancy counts as flat vector (row-major)")
+        .def("calculate_grid_entropy", &CyberGrid::calculate_grid_entropy,
+             "Calculate Shannon entropy of life-energy state distribution")
+        .def("calculate_pulse_coherence", &CyberGrid::calculate_pulse_coherence,
+             "Calculate energy field coherence (inverse variance, 0-1 scale)");
 
     // Bind CyberGrid configuration and factory
     py::class_<CyberGridConfig>(m, "CyberGridConfig")

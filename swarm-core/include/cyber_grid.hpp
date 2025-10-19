@@ -188,6 +188,13 @@ public:
     // Distance calculations (toroidal)
     float toroidal_distance(int x1, int y1, int x2, int y2) const;
 
+    // Data export for visualization and analysis
+    std::vector<float> export_energy_matrix() const;
+    std::vector<int> export_life_matrix() const;
+    std::vector<int> export_occupancy_matrix() const;
+    float calculate_grid_entropy() const;
+    float calculate_pulse_coherence() const;
+
     // Debugging and serialization
     void print_grid(std::ostream& os, int start_x = 0, int start_y = 0, int w = 20, int h = 20) const;
     std::string grid_to_string(int zoom_factor = 1) const;
