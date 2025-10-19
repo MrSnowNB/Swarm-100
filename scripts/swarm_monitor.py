@@ -430,6 +430,19 @@ def handle_connect():
 def handle_disconnect():
     print('Client disconnected from dashboard')
 
+@socketio.on('global_tick')
+def handle_global_tick(tick_data):
+    """Handle CA tick updates from global coordinator"""
+    print(f"Received global tick: {tick_data}")
+    # Trigger dashboard update
+    socketio.emit('update', {
+        'swarm': get_swarm_state(),
+        'gpus': get_gpu_usage(),
+        'processes': count_processes(),
+        'ca_grid': get_ca_grid(),
+        'tick': tick_data
+    })
+
 # Function to trigger updates (called by external services)
 @socketio.on('trigger_update')
 def trigger_update():

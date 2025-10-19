@@ -1,5 +1,5 @@
 workflow_name: Swarm-100 C++ Core Gated Validation
-start_time: '2025-10-19T02:23:16.092155'
+start_time: '2025-10-19T10:27:59.007055'
 gates_passed: 1
 gates_failed: 1
 gates_total: 5
@@ -29,21 +29,23 @@ gate_results:
       success: true
       duration_seconds: 0
     success: true
-    duration_seconds: 0.189837
+    duration_seconds: 0.183622
   gate_2_module_import:
     name: Module Import Validation
     steps_executed: 1
     steps_passed: 0
     steps_failed: 1
     step_results:
-    - name: Python Module Import
-      type: python_import
+    - name: Python Module Import and Attributes Check
+      type: python_script
       success: false
       duration_seconds: 0
     success: false
-    duration_seconds: 5.8e-05
+    duration_seconds: 0.005897
 overall_success: false
-end_time: '2025-10-19T02:23:16.282322'
+end_time: '2025-10-19T10:27:59.196823'
 command_line:
 - validation_runner.py
+- --workflow
+- validation_workflow.yaml
 working_directory: /home/mr-snow/Documents/Testing the Beast/Swarm/swarm-core

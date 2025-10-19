@@ -18,6 +18,7 @@ from datetime import datetime, timedelta
 import logging
 import numpy as np
 from typing import Dict, List, Any, Optional, cast
+import socketio
 
 class ZombieSupervisor:
     def __init__(self, config_path: str = "configs/gemma3-zombie-swarm.yaml"):
@@ -38,6 +39,11 @@ class ZombieSupervisor:
             'zombies_failed': 0,
             'recovery_times': []
         }
+
+        # Socket.IO client for dashboard communication
+        self.sio = socketio.Client()
+        self.setup_socketio_handlers()
+        self.connect_to_dashboard()
 
     def setup_logging(self):
         """Configure zombie supervisor logging"""
@@ -65,38 +71,65 @@ class ZombieSupervisor:
             self.swarm_state = None
 
     def get_neighbors(self, dead_bot_id: str) -> List[str]:
-        """Find K nearest neighbors for a dead bot using spatial proximity"""
+        """Find K nearest neighbors for a dead bot using CA grid adjacency"""
         if not self.swarm_state:
             return []
 
-        # Parse dead bot coordinates
-        gpu_id = int(dead_bot_id.split('_')[1])
-        bot_idx = int(dead_bot_id.split('_')[2])
-
         k = self.config['modules'][1]['reconstruction']['parameters']['k']
+        grid_width = self.swarm_state.get('grid_width', 10)
         neighbors = []
 
-        # Simple spatial neighbor finding (can be made more sophisticated)
-        # Current: left/right on same GPU, then same index on adjacent GPUs
-        candidates = []
+        # Find dead bot's grid coordinates
+        dead_x, dead_y = None, None
+        for bot in self.swarm_state.get('bots', []):
+            if bot['bot_id'] == dead_bot_id:
+                dead_x = bot.get('grid_x')
+                dead_y = bot.get('grid_y')
+                break
 
-        # Same GPU neighbors
-        for idx in range(max(0, bot_idx-1), min(25, bot_idx+2)):
-            if idx != bot_idx:
-                candidates.append(f"bot_{gpu_id:02d}_{idx:02d}")
+        if dead_x is None or dead_y is None:
+            self.logger.warning(f"Grid coordinates not found for {dead_bot_id}")
+            return []
 
-        # Adjacent GPU neighbors
-        for g in [gpu_id-1, gpu_id+1]:
-            if 0 <= g <= 3:
-                candidates.append(f"bot_{g:02d}_{bot_idx:02d}")
+        # CA grid adjacency: Von Neumann neighborhood (4 cardinal directions)
+        directions = [
+            (0, -1),   # North
+            (0, 1),    # South
+            (-1, 0),   # West
+            (1, 0)     # East
+        ]
 
-        # Filter to existing running bots
-        alive_candidates = []
-        for candidate in candidates[:k*2]:  # Get more than needed
-            if candidate in [b['bot_id'] for b in self.swarm_state.get('bots', [])]:
-                alive_candidates.append(candidate)
+        for dx, dy in directions:
+            nx = (dead_x + dx) % grid_width  # Toroidal wrap around
+            ny = dead_y + dy
+            # For height, prevent wrap-around (assume flat grid top/bottom)
+            if 0 <= ny < grid_width:  # Assuming square grid for simplicity
+                # Find bot at this position
+                for bot in self.swarm_state['bots']:
+                    if bot.get('grid_x') == nx and bot.get('grid_y') == ny:
+                        neighbors.append(bot['bot_id'])
+                        break
 
-        return alive_candidates[:k]
+        # If we don't have enough grid neighbors, supplement with nearby bots
+        if len(neighbors) < k:
+            self.logger.info(f"Found {len(neighbors)} grid neighbors, supplementing for {dead_bot_id}")
+            # Supplement with closest running bots by Euclidean distance
+            distances = []
+            for bot in self.swarm_state.get('bots', []):
+                if bot['bot_id'] == dead_bot_id:
+                    continue
+                bx = bot.get('grid_x', 0)
+                by = bot.get('grid_y', 0)
+                dist = ((bx - dead_x)**2 + (by - dead_y)**2)**0.5
+                distances.append((dist, bot['bot_id']))
+
+            distances.sort()
+            for _, bot_id in distances[:k - len(neighbors)]:
+                if bot_id not in neighbors:
+                    neighbors.append(bot_id)
+
+        self.logger.debug(f"Found {len(neighbors)} neighbors for {dead_bot_id}: {neighbors[:k]}")
+        return neighbors[:k]
 
     def query_neighbor_state(self, neighbor_bot_id: str) -> Optional[np.ndarray]:
         """Query a neighbor bot for its current state vectors"""
@@ -182,6 +215,9 @@ class ZombieSupervisor:
             )
 
             self.logger.info(f"🧟 Reconstructed zombie {bot_id} with averaged state")
+
+            # Emit event to dashboard
+            self.emit_zombie_event('reborn', f'Bot {bot_id} resurrected with averaged neighbor state')
 
             # Trigger CA rule update after resurrection for grid stabilization
             self.trigger_ca_update_on_rebirth()
@@ -280,6 +316,36 @@ class ZombieSupervisor:
                 # TODO: Implement cold restart without state
 
         return recoveries_initiated
+
+    def setup_socketio_handlers(self):
+        """Configure Socket.IO event handlers"""
+        @self.sio.event
+        def connect():
+            self.logger.info("Connected to dashboard server")
+
+        @self.sio.event
+        def disconnect():
+            self.logger.info("Disconnected from dashboard server")
+
+    def connect_to_dashboard(self):
+        """Establish connection to dashboard Socket.IO server"""
+        try:
+            self.sio.connect('http://localhost:5000')
+            self.logger.info("Connected to dashboard for event broadcasting")
+        except Exception as e:
+            self.logger.warning(f"Could not connect to dashboard: {e}")
+
+    def emit_zombie_event(self, event_type: str, message: str, details: Optional[Dict[str, Any]] = None):
+        """Emit zombie event to dashboard"""
+        if self.sio.connected:
+            self.sio.emit('zombie_event', {
+                'type': event_type,
+                'message': message,
+                'details': details,
+                'timestamp': time.time()
+            })
+        else:
+            self.logger.debug(f"Dashboard not connected - zombie event: {event_type}: {message}")
 
     def log_metrics(self):
         """Log current zombie metrics"""

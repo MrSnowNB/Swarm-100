@@ -55,14 +55,17 @@ gates:
     timeout_seconds: 60
     fail_all_on_failure: true
     steps:
-      - name: "Python Module Import"
-        type: "python_import"
-        module: "swarm_core"
-        expected_attributes:
-          - CyberGrid
-          - RootCauseAnalyzer
-          - AnalysisResult
-          - DependencyLink
+      - name: "Python Module Import and Attributes Check"
+        type: "python_script"
+        script: |
+          import sys
+          sys.path.insert(0, 'build')
+          import swarm_core
+          # Check expected attributes exist
+          expected_attrs = ['CyberGrid', 'RootCauseAnalyzer', 'AnalysisResult', 'DependencyLink']
+          for attr in expected_attrs:
+              assert hasattr(swarm_core, attr), f"Missing attribute: {attr}"
+          print("✓ Python module imported successfully with all expected attributes")
         fail_on_error: true
 
       - name: "Module Integrity Check"
