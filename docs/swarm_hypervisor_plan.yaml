@@ -1,0 +1,176 @@
+---
+# Swarm Hypervisor Architecture Documentation
+# Research-validated hierarchical multi-agent system (2025)
+# Bridge CA swarm intelligence with human interaction
+
+title: "Hierarchical Multi-Agent Swarm Hypervisor Architecture"
+version: "1.0.0"
+created: "2025-10-19"
+author: "Cliff (Cline)"
+
+research_foundation:
+  - "ArXiv 2508.12683 - Hierarchical Multi-Agent Systems (HMAS) Taxonomy"
+  - "NVIDIA Research 2025 - Small Models as Workers + Large Model Specialists"
+  - "ArXiv 2508.17814 - Scalable LLM HPC Architecture"
+  - "ArXiv 2509.05355 - Adaptive LLM-Swarm Control for Autonomous Systems"
+  - "IJSRA 2025 - Hierarchical Swarm Intelligence for Autonomous Systems"
+
+architecture_overview:
+  principle: "Hybrid orchestration: SLMs for execution, LLMs for supervision"
+  layers: 3
+  models:
+    execution: "Gemma3:270M (SLM swarm)"
+    supervision: "Granite4:micro-h (LLM orchestrator)"
+    interface: "Granite4:micro-h (human interaction)"
+
+  coordination_protocol:
+    hierarchical_depth: 3
+    communication:
+      - "layer_0_to_1: metrics, health, consensus"
+      - "layer_1_to_0: commands, parameters, rebalancing"
+      - "layer_2_to_1: queries, injection, policy"
+      - "layer_1_to_2: summaries, alerts, synthesis"
+
+implementation_phases:
+  phase_1: "Layer 0 Execution Layer"
+    description: "Gemma3 swarm with CA + zombie recovery"
+    gate: "G5-G6 experimentation completion"
+    status: "COMPLETE"
+    validation_criteria:
+      - "CA stability test passes (200 ticks)"
+      - "Zombie recovery functional"
+      - "Emergent behavior analysis complete"
+    artifacts:
+      - "scripts/run_ca_experimentation.py"
+      - "logs/experimentation/ca_metrics.csv"
+      - "bots/swarm_state.yaml"
+    success_metrics:
+      - "tick_rate: ≥1 Hz"
+      - "bot_survival: ≥80%"
+      - "entropy_convergence: detected"
+
+  phase_2: "Layer 1 Supervisor Orchestration"
+    description: "Granite4 orchestrator monitors and adjusts Gemma3 swarm"
+    gate: "Phase 1 PASS + Granite4 integration"
+    status: "IN_PROGRESS"
+    dependencies:
+      - "Phase 1 completion"
+      - "Granite4:micro-h model available"
+      - "REST API framework for inter-layer communication"
+    work_packages:
+      - "supervisor_script"
+      - "metrics_collection_api"
+      - "anomaly_detection_algorithms"
+      - "parameter_adjustment_logic"
+      - "health_monitoring_dashboard"
+    validation_criteria:
+      - "Supervisor detects entropy spikes within 5 seconds"
+      - "Corrective parameter updates applied autonomously"
+      - "Performance improvements measured vs baseline"
+      - "No system crashes during 1-hour unsupervised operation"
+    success_metrics:
+      - "anomaly_detection_latency: <5s"
+      - "parameter_adaptation_success: >95%"
+      - "system_stability: 99.9% uptime"
+
+  phase_3: "Layer 2 Human Interface"
+    description: "Natural language chat interface to swarm operations"
+    gate: "Phase 2 PASS + WebSocket/REST API ready"
+    status: "PLANNED"
+    dependencies:
+      - "Phase 2 completion"
+      - "WebSocket server for real-time chat"
+      - "Natural language processing pipeline"
+      - "Visualization generation capabilities"
+    work_packages:
+      - "chat_server_setup"
+      - "nlp_command_parser"
+      - "real_time_visualization"
+      - "parameter_adjustment_ui"
+      - "user_query_handling"
+    validation_criteria:
+      - "Natural language queries processed accurately (>90%)"
+      - "Real-time visualization updates within 2 seconds"
+      - "Multi-turn conversations maintained"
+      - "No data corruption from concurrent human-swarm interaction"
+    success_metrics:
+      - "query_accuracy: >90%"
+      - "response_latency: <2s"
+      - "user_satisfaction: >4.5/5"
+
+  phase_4: "Hypervisor Full Closure"
+    description: "Complete autonomous orchestration with human oversight"
+    gate: "Phase 3 PASS + All layers stable"
+    status: "PLANNED"
+    dependencies:
+      - "Phase 3 completion"
+      - "Adaptive scaling algorithms"
+      - "Explainability framework"
+      - "Safety constraints and overrides"
+    work_packages:
+      - "dynamic_scaling_engine"
+      - "explainability_module"
+      - "safety_monitor"
+      - "performance_optimization"
+      - "long_term_adaptation"
+    validation_criteria:
+      - "24/7 unsupervised operation for 7 days"
+      - "Adaptive scaling under load changes"
+      - "Human intervention requests <1/day"
+      - "Performance improves over baseline"
+    success_metrics:
+      - "autonomy_duration: 168 hours"
+      - "scaling_success_rate: >98%"
+      - "human_interventions: <1/day"
+
+current_execution_context:
+  active_phase: 2
+  current_task: "Create Granite4 supervisor script"
+  next_gate: "Supervisor monitors metrics and detects anomalies"
+  blocking_issues: []
+  recent_progress:
+    - "Fixed Pylance error in experimentation script"
+    - "Cleaned repository (added .gitignore, removed tracked logs)"
+    - "Validated architecture with 2025 research"
+
+implementation_timeline:
+  start_date: "2025-10-19"
+  phase_2_target: "2025-10-25"
+  phase_3_target: "2025-11-01"
+  phase_4_target: "2025-11-15"
+  total_duration: "28 days"
+
+risks_mitigations:
+  - risk: "Granite4 model size exceeds resource budget"
+    mitigation: "Use micro-h variant (4.8B params) within GPU constraints"
+
+  - risk: "Inter-layer communication introduces latency"
+    mitigation: "Asynchronous messaging with Redis pub/sub"
+
+  - risk: "Human queries overload supervisor"
+    mitigation: "Query throttling and delegation to worker LLMs"
+
+  - risk: "Supervisor makes incorrect parameter adjustments"
+    mitigation: "Human approval required for critical changes"
+
+technical_requirements:
+  models:
+    - "Gemma3:270M - CUDA-enabled for GPU acceleration"
+    - "Granite4:micro-h - Ollama-compatible for inference"
+  infrastructure:
+    - "GPU cluster (4× A5000) with CUDA 12.4+"
+    - "Redis for message queuing"
+    - "PostgreSQL for metrics storage"
+    - "WebSocket server (Node.js/FastAPI)"
+  development:
+    - "Python 3.12 with async support"
+    - "Monitoring: Prometheus + Grafana"
+    - "Testing: pytest with hypothesis"
+
+success_criteria_overall:
+  - "Publication-ready architecture (citable in academic papers)"
+  - "Scalable to 1000+ agent swarms"
+  - "Human-swarm productivity >400% vs manual operation"
+  - "99.9% system reliability in production scenarios"
+
+---
