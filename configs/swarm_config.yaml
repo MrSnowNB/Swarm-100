@@ -6,29 +6,28 @@ version: 1.0.0
 status: active
 created: 2025-10-18
 
-# Hardware Configuration
-# Full deployment test: 25 bots per GPU for final validation
-# Previous tests showed stagger delay prevents premature health check failures
-# Soft health check allows Ollama warmup time
+# Hardware Configuration - PHASE 1: Initial Bootstrap (10 bots/GPU for validation)
+# Testing zombie rebirth consistency with smaller deployment
+# Expected: 40 total bots (10 × 4 GPUs)
 hardware:
   gpus:
     - id: 0
       name: "RTX 6000 Ada"
       vram_gb: 48
-      bots: 25
+      bots: 10
     - id: 1
       name: "RTX 6000 Ada"
       vram_gb: 48
-      bots: 25
+      bots: 10
     - id: 2
       name: "RTX 6000 Ada"
       vram_gb: 48
-      bots: 25
+      bots: 10
     - id: 3
       name: "RTX 6000 Ada"
       vram_gb: 48
-      bots: 25
-  total_bots: 100
+      bots: 10
+  total_bots: 40
 
 # Model Configuration
 model:

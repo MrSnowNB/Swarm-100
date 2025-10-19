@@ -110,3 +110,59 @@ Swarm is operational. Press Ctrl+C to monitor or stop.
 2025-10-19 09:40:54,871 - SwarmManager - WARNING - Dead bots: ['bot_00_00', 'bot_00_01', 'bot_01_00', 'bot_01_01', 'bot_02_00', 'bot_02_01', 'bot_03_00', 'bot_03_01']
 2025-10-19 09:41:54,873 - SwarmManager - INFO - Health check: 0/8 bots alive
 2025-10-19 09:41:54,873 - SwarmManager - WARNING - Dead bots: ['bot_00_00', 'bot_00_01', 'bot_01_00', 'bot_01_01', 'bot_02_00', 'bot_02_01', 'bot_03_00', 'bot_03_01']
+2025-10-19 09:42:54,874 - SwarmManager - INFO - Health check: 0/8 bots alive
+2025-10-19 09:42:54,874 - SwarmManager - WARNING - Dead bots: ['bot_00_00', 'bot_00_01', 'bot_01_00', 'bot_01_01', 'bot_02_00', 'bot_02_01', 'bot_03_00', 'bot_03_01']
+2025-10-19 09:43:54,874 - SwarmManager - INFO - Health check: 0/8 bots alive
+2025-10-19 09:43:54,875 - SwarmManager - WARNING - Dead bots: ['bot_00_00', 'bot_00_01', 'bot_01_00', 'bot_01_01', 'bot_02_00', 'bot_02_01', 'bot_03_00', 'bot_03_01']
+2025-10-19 09:44:54,875 - SwarmManager - INFO - Health check: 0/8 bots alive
+2025-10-19 09:44:54,875 - SwarmManager - WARNING - Dead bots: ['bot_00_00', 'bot_00_01', 'bot_01_00', 'bot_01_01', 'bot_02_00', 'bot_02_01', 'bot_03_00', 'bot_03_01']
+2025-10-19 09:45:54,876 - SwarmManager - INFO - Health check: 0/8 bots alive
+2025-10-19 09:45:54,876 - SwarmManager - WARNING - Dead bots: ['bot_00_00', 'bot_00_01', 'bot_01_00', 'bot_01_01', 'bot_02_00', 'bot_02_01', 'bot_03_00', 'bot_03_01']
+2025-10-19 09:46:54,876 - SwarmManager - INFO - Health check: 0/8 bots alive
+2025-10-19 09:46:54,877 - SwarmManager - WARNING - Dead bots: ['bot_00_00', 'bot_00_01', 'bot_01_00', 'bot_01_01', 'bot_02_00', 'bot_02_01', 'bot_03_00', 'bot_03_01']
+2025-10-19 09:47:54,877 - SwarmManager - INFO - Health check: 0/8 bots alive
+2025-10-19 09:47:54,877 - SwarmManager - WARNING - Dead bots: ['bot_00_00', 'bot_00_01', 'bot_01_00', 'bot_01_01', 'bot_02_00', 'bot_02_01', 'bot_03_00', 'bot_03_01']
+2025-10-19 09:48:54,878 - SwarmManager - INFO - Health check: 0/8 bots alive
+2025-10-19 09:48:54,878 - SwarmManager - WARNING - Dead bots: ['bot_00_00', 'bot_00_01', 'bot_01_00', 'bot_01_01', 'bot_02_00', 'bot_02_01', 'bot_03_00', 'bot_03_01']
+2025-10-19 09:49:54,878 - SwarmManager - INFO - Health check: 0/8 bots alive
+2025-10-19 09:49:54,879 - SwarmManager - WARNING - Dead bots: ['bot_00_00', 'bot_00_01', 'bot_01_00', 'bot_01_01', 'bot_02_00', 'bot_02_01', 'bot_03_00', 'bot_03_01']
+2025-10-19 09:50:54,879 - SwarmManager - INFO - Health check: 0/8 bots alive
+2025-10-19 09:50:54,879 - SwarmManager - WARNING - Dead bots: ['bot_00_00', 'bot_00_01', 'bot_01_00', 'bot_01_01', 'bot_02_00', 'bot_02_01', 'bot_03_00', 'bot_03_01']
+2025-10-19 09:51:54,880 - SwarmManager - INFO - Health check: 0/8 bots alive
+2025-10-19 09:51:54,880 - SwarmManager - WARNING - Dead bots: ['bot_00_00', 'bot_00_01', 'bot_01_00', 'bot_01_01', 'bot_02_00', 'bot_02_01', 'bot_03_00', 'bot_03_01']
+2025-10-19 09:52:54,880 - SwarmManager - INFO - Health check: 0/8 bots alive
+2025-10-19 09:52:54,881 - SwarmManager - WARNING - Dead bots: ['bot_00_00', 'bot_00_01', 'bot_01_00', 'bot_01_01', 'bot_02_00', 'bot_02_01', 'bot_03_00', 'bot_03_01']
+2025-10-19 09:53:54,881 - SwarmManager - INFO - Health check: 0/8 bots alive
+2025-10-19 09:53:54,881 - SwarmManager - WARNING - Dead bots: ['bot_00_00', 'bot_00_01', 'bot_01_00', 'bot_01_01', 'bot_02_00', 'bot_02_01', 'bot_03_00', 'bot_03_01']
+2025-10-19 09:54:54,881 - SwarmManager - INFO - Health check: 0/8 bots alive
+2025-10-19 09:54:54,882 - SwarmManager - WARNING - Dead bots: ['bot_00_00', 'bot_00_01', 'bot_01_00', 'bot_01_01', 'bot_02_00', 'bot_02_01', 'bot_03_00', 'bot_03_01']
+2025-10-19 09:55:54,882 - SwarmManager - INFO - Health check: 0/8 bots alive
+2025-10-19 09:55:54,882 - SwarmManager - WARNING - Dead bots: ['bot_00_00', 'bot_00_01', 'bot_01_00', 'bot_01_01', 'bot_02_00', 'bot_02_01', 'bot_03_00', 'bot_03_01']
+2025-10-19 09:56:54,883 - SwarmManager - INFO - Health check: 0/8 bots alive
+2025-10-19 09:56:54,883 - SwarmManager - WARNING - Dead bots: ['bot_00_00', 'bot_00_01', 'bot_01_00', 'bot_01_01', 'bot_02_00', 'bot_02_01', 'bot_03_00', 'bot_03_01']
+2025-10-19 09:57:54,883 - SwarmManager - INFO - Health check: 0/8 bots alive
+2025-10-19 09:57:54,884 - SwarmManager - WARNING - Dead bots: ['bot_00_00', 'bot_00_01', 'bot_01_00', 'bot_01_01', 'bot_02_00', 'bot_02_01', 'bot_03_00', 'bot_03_01']
+2025-10-19 09:58:54,884 - SwarmManager - INFO - Health check: 0/8 bots alive
+2025-10-19 09:58:54,885 - SwarmManager - WARNING - Dead bots: ['bot_00_00', 'bot_00_01', 'bot_01_00', 'bot_01_01', 'bot_02_00', 'bot_02_01', 'bot_03_00', 'bot_03_01']
+2025-10-19 09:59:54,885 - SwarmManager - INFO - Health check: 0/8 bots alive
+2025-10-19 09:59:54,885 - SwarmManager - WARNING - Dead bots: ['bot_00_00', 'bot_00_01', 'bot_01_00', 'bot_01_01', 'bot_02_00', 'bot_02_01', 'bot_03_00', 'bot_03_01']
+2025-10-19 10:00:54,886 - SwarmManager - INFO - Health check: 0/8 bots alive
+2025-10-19 10:00:54,886 - SwarmManager - WARNING - Dead bots: ['bot_00_00', 'bot_00_01', 'bot_01_00', 'bot_01_01', 'bot_02_00', 'bot_02_01', 'bot_03_00', 'bot_03_01']
+2025-10-19 10:01:54,887 - SwarmManager - INFO - Health check: 0/8 bots alive
+2025-10-19 10:01:54,887 - SwarmManager - WARNING - Dead bots: ['bot_00_00', 'bot_00_01', 'bot_01_00', 'bot_01_01', 'bot_02_00', 'bot_02_01', 'bot_03_00', 'bot_03_01']
+2025-10-19 10:02:54,887 - SwarmManager - INFO - Health check: 0/8 bots alive
+2025-10-19 10:02:54,888 - SwarmManager - WARNING - Dead bots: ['bot_00_00', 'bot_00_01', 'bot_01_00', 'bot_01_01', 'bot_02_00', 'bot_02_01', 'bot_03_00', 'bot_03_01']
+2025-10-19 10:03:54,888 - SwarmManager - INFO - Health check: 0/8 bots alive
+2025-10-19 10:03:54,889 - SwarmManager - WARNING - Dead bots: ['bot_00_00', 'bot_00_01', 'bot_01_00', 'bot_01_01', 'bot_02_00', 'bot_02_01', 'bot_03_00', 'bot_03_01']
+2025-10-19 10:04:54,889 - SwarmManager - INFO - Health check: 0/8 bots alive
+2025-10-19 10:04:54,889 - SwarmManager - WARNING - Dead bots: ['bot_00_00', 'bot_00_01', 'bot_01_00', 'bot_01_01', 'bot_02_00', 'bot_02_01', 'bot_03_00', 'bot_03_01']
+2025-10-19 10:05:54,890 - SwarmManager - INFO - Health check: 0/8 bots alive
+2025-10-19 10:05:54,890 - SwarmManager - WARNING - Dead bots: ['bot_00_00', 'bot_00_01', 'bot_01_00', 'bot_01_01', 'bot_02_00', 'bot_02_01', 'bot_03_00', 'bot_03_01']
+2025-10-19 10:06:54,890 - SwarmManager - INFO - Health check: 0/8 bots alive
+2025-10-19 10:06:54,891 - SwarmManager - WARNING - Dead bots: ['bot_00_00', 'bot_00_01', 'bot_01_00', 'bot_01_01', 'bot_02_00', 'bot_02_01', 'bot_03_00', 'bot_03_01']
+2025-10-19 10:07:54,891 - SwarmManager - INFO - Health check: 0/8 bots alive
+2025-10-19 10:07:54,891 - SwarmManager - WARNING - Dead bots: ['bot_00_00', 'bot_00_01', 'bot_01_00', 'bot_01_01', 'bot_02_00', 'bot_02_01', 'bot_03_00', 'bot_03_01']
+2025-10-19 10:08:54,892 - SwarmManager - INFO - Health check: 0/8 bots alive
+2025-10-19 10:08:54,892 - SwarmManager - WARNING - Dead bots: ['bot_00_00', 'bot_00_01', 'bot_01_00', 'bot_01_01', 'bot_02_00', 'bot_02_01', 'bot_03_00', 'bot_03_01']
+2025-10-19 10:09:54,892 - SwarmManager - INFO - Health check: 0/8 bots alive
+2025-10-19 10:09:54,892 - SwarmManager - WARNING - Dead bots: ['bot_00_00', 'bot_00_01', 'bot_01_00', 'bot_01_01', 'bot_02_00', 'bot_02_01', 'bot_03_00', 'bot_03_01']

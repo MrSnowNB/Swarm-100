@@ -100,6 +100,8 @@ class ZombieSupervisor:
 
     def query_neighbor_state(self, neighbor_bot_id: str) -> Optional[np.ndarray]:
         """Query a neighbor bot for its current state vectors"""
+        if self.swarm_state is None:
+            return None
         # Find neighbor's port
         for bot in self.swarm_state.get('bots', []):
             if bot['bot_id'] == neighbor_bot_id:
@@ -133,6 +135,10 @@ class ZombieSupervisor:
 
     def reconstruct_bot(self, bot_id: str, averaged_state: np.ndarray) -> bool:
         """Reconstruct a dead bot with averaged neighbor state"""
+        if self.swarm_state is None:
+            self.logger.error(f"Cannot reconstruct {bot_id}: swarm state not available")
+            return False
+
         # Find bot details from swarm state
         for bot in self.swarm_state.get('bots', []):
             if bot['bot_id'] == bot_id:
