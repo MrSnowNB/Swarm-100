@@ -19,7 +19,10 @@ from pathlib import Path
 from typing import Dict, Any, Optional
 from datetime import datetime
 
-logger = logging.getLogger('CAExperimentation')
+# Import coordinator client for exclusive ownership
+from swarm_coordinator_client import acquire_swarm_ownership, release_swarm_ownership
+
+# Import coordinator client for exclusive ownership
 
 class CAExperimentRunner:
     """
@@ -30,6 +33,7 @@ class CAExperimentRunner:
     """
 
     def __init__(self):
+        self.logger = logging.getLogger('CAExperimentation')
         self.experiment_id = f"exp_{int(time.time())}"
         self.start_time = time.time()
         self.experiment_dir = Path('logs/experimentation')
@@ -52,7 +56,7 @@ class CAExperimentRunner:
 
     def _signal_handler(self, signum, frame):
         """Handle interruption signals gracefully"""
-        logger.info(f"Received signal {signum}, cleaning up...")
+        self.logger.info(f"Received signal {signum}, cleaning up...")
         self.cleanup()
         sys.exit(1)
 
@@ -60,16 +64,16 @@ class CAExperimentRunner:
         """
         Execute the complete G5-G6 experimentation protocol.
         """
-        logger.info("="*60)
-        logger.info(f"STARTING CA EXPERIMENTATION {self.experiment_id}")
-        logger.info("="*60)
+        self.logger.info("="*60)
+        self.logger.info(f"STARTING CA EXPERIMENTATION {self.experiment_id}")
+        self.logger.info("="*60)
 
         try:
             # Preparation
             self.prepare_experiment()
 
             # G5: Stability Test
-            logger.info("EXECUTING G5: Stability Test (200 ticks)")
+            self.logger.info("EXECUTING G5: Stability Test (200 ticks)")
             self.execute_g5_stability_test()
 
             # Validate G5 success
@@ -77,20 +81,20 @@ class CAExperimentRunner:
                 raise RuntimeError("G5 stability test failed - aborting G6")
 
             # G6: Emergent Behavior Analysis
-            logger.info("EXECUTING G6: Emergent Behavior Analysis")
+            self.logger.info("EXECUTING G6: Emergent Behavior Analysis")
             g6_results = self.execute_g6_emergent_analysis()
 
             # Generate final results
             results = self.generate_final_results(g6_results)
 
-            logger.info("="*60)
-            logger.info(f"EXPERIMENT {self.experiment_id} COMPLETED SUCCESSFULLY")
-            logger.info("="*60)
+            self.logger.info("="*60)
+            self.logger.info(f"EXPERIMENT {self.experiment_id} COMPLETED SUCCESSFULLY")
+            self.logger.info("="*60)
 
             return results
 
         except Exception as e:
-            logger.error(f"Experiment failed: {e}")
+            self.logger.error(f"Experiment failed: {e}")
             self.cleanup()
             raise
         finally:
@@ -98,7 +102,7 @@ class CAExperimentRunner:
 
     def prepare_experiment(self):
         """Set up the experiment environment"""
-        logger.info("Preparing experiment environment...")
+        self.logger.info("Preparing experiment environment...")
 
         # Clear old logs
         subprocess.run(['rm', '-rf'] + list(self.experiment_dir.glob("*.csv")), check=False)
@@ -110,7 +114,7 @@ class CAExperimentRunner:
         # Verify prerequisites (assume G0-G4 passed)
         self.verify_prerequisites()
 
-        logger.info("Experiment preparation complete")
+        self.logger.info("Experiment preparation complete")
 
     def save_baseline(self):
         """Save GPU baseline before experiment"""
@@ -120,19 +124,19 @@ class CAExperimentRunner:
             with open(baseline_file, 'w') as f:
                 f.write(f"Baseline taken at: {datetime.now()}\n")
                 f.write(result.stdout)
-            logger.info(f"GPU baseline saved to {baseline_file}")
+            self.logger.info(f"GPU baseline saved to {baseline_file}")
         except (subprocess.CalledProcessError, FileNotFoundError):
-            logger.warning("Could not save GPU baseline - nvidia-smi not available")
+            self.logger.warning("Could not save GPU baseline - nvidia-smi not available")
 
     def verify_prerequisites(self):
         """Verify that G0-G4 gates have been completed"""
         # For now, assume prerequisites are met (G0-G4 validation scripts would be separate)
-        logger.info("Assuming G0-G4 prerequisites are met (would verify in production)")
-        logger.info("Required: Ollama running, swarm config valid, G4 dashboard functional")
+        self.logger.info("Assuming G0-G4 prerequisites are met (would verify in production)")
+        self.logger.info("Required: Ollama running, swarm config valid, G4 dashboard functional")
 
     def execute_g5_stability_test(self):
         """Execute G5: 200-tick stability test"""
-        logger.info("Starting G5 stability test...")
+        self.logger.info("Starting G5 stability test...")
 
         # Start metrics collection in background
         self.start_metrics_collection()
@@ -147,7 +151,7 @@ class CAExperimentRunner:
         start_time = time.time()
         ticks_completed = 0
 
-        logger.info(f"Monitoring for {target_ticks} ticks (max {tick_timeout}s)...")
+        self.logger.info(f"Monitoring for {target_ticks} ticks (max {tick_timeout}s)...")
 
         while ticks_completed < target_ticks and (time.time() - start_time) < tick_timeout:
             try:
@@ -157,12 +161,12 @@ class CAExperimentRunner:
                     if current_tick > ticks_completed:
                         ticks_completed = current_tick
                         bots_alive = len([b for b in swarm_state.get('bots', []) if b.get('alive', True)])
-                        logger.info(f"Tick {current_tick}/200 - Bots alive: {bots_alive}")
+                        self.logger.info(f"Tick {current_tick}/200 - Bots alive: {bots_alive}")
 
                 time.sleep(2)  # Check every 2 seconds
 
             except Exception as e:
-                logger.error(f"Error monitoring ticks: {e}")
+                self.logger.error(f"Error monitoring ticks: {e}")
                 time.sleep(2)
 
         self.final_tick = ticks_completed
@@ -171,29 +175,29 @@ class CAExperimentRunner:
         # Validate G5 success criteria
         self.g5_passed = self.validate_g5_success_criteria()
         if self.g5_passed:
-            logger.info("✅ G5 stability test PASSED")
+            self.logger.info("✅ G5 stability test PASSED")
         else:
-            logger.error("❌ G5 stability test FAILED")
+            self.logger.error("❌ G5 stability test FAILED")
 
-        logger.info(f"G5 completed: {ticks_completed}/{target_ticks} ticks, {self.metrics_collected} metrics collected")
+        self.logger.info(f"G5 completed: {ticks_completed}/{target_ticks} ticks, {self.metrics_collected} metrics collected")
 
     def start_metrics_collection(self):
         """Start background metrics collection"""
-        logger.info("Starting background metrics collection...")
+        self.logger.info("Starting background metrics collection...")
 
         # Start metrics collector in background thread
         from collect_ca_metrics import BackgroundCollector
         self.metrics_collector = BackgroundCollector(tick_interval=1.0)
         self.metrics_collector.start_collecting()
 
-        logger.info("Background metrics collection started")
+        self.logger.info("Background metrics collection started")
 
     def launch_integrated_system(self):
         """Launch the complete CA + Zombie integrated system"""
-        logger.info("Launching integrated system (swarm + CA + zombie + global tick)...")
+        self.logger.info("Launching integrated system (swarm + CA + zombie + global tick)...")
 
         # 1. Start zombie supervisor
-        logger.info("Starting zombie supervisor...")
+        self.logger.info("Starting zombie supervisor...")
         self.zombie_supervisor_process = subprocess.Popen([
             sys.executable, 'scripts/zombie_supervisor.py'
         ], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
@@ -201,7 +205,7 @@ class CAExperimentRunner:
         time.sleep(2)  # Let zombie supervisor start
 
         # 2. Launch the swarm with CA rules
-        logger.info("Launching swarm...")
+        self.logger.info("Launching swarm...")
         self.swarm_process = subprocess.Popen([
             sys.executable, 'scripts/launch_swarm.py', '--ca-active', '--zombie-active'
         ], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
@@ -209,24 +213,24 @@ class CAExperimentRunner:
         time.sleep(10)  # Let swarm stabilize
 
         # 3. Start global tick coordinator
-        logger.info("Starting global tick coordinator...")
+        self.logger.info("Starting global tick coordinator...")
         self.global_tick_process = subprocess.Popen([
             sys.executable, 'scripts/global_tick.py', '--interval-ms', '1000'
         ], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
         time.sleep(5)  # Let tick coordinator start
 
-        logger.info("Integrated system launched successfully")
+        self.logger.info("Integrated system launched successfully")
 
     def validate_g5_success_criteria(self) -> bool:
         """Validate G5 stability success criteria"""
-        logger.info("Validating G5 success criteria...")
+        self.logger.info("Validating G5 success criteria...")
 
         try:
             # Load metrics CSV
             metrics_file = self.experiment_dir / 'ca_metrics.csv'
             if not metrics_file.exists():
-                logger.error("No metrics file found")
+                self.logger.error("No metrics file found")
                 return False
 
             # Read metrics data (simple validation - in production more sophisticated analysis)
@@ -234,27 +238,28 @@ class CAExperimentRunner:
                 lines = f.readlines()
 
             if len(lines) < 50:  # Should have at least 50 data points
-                logger.error(f"Insufficient metrics data: {len(lines)-1} records")
+                self.logger.error(f"Insufficient metrics data: {len(lines)-1} records")
                 return False
 
             # Check final active bot count (should be close to 40)
             swarm_state = self.load_swarm_state()
+            final_bot_count = 0
             if swarm_state:
                 final_bot_count = len([b for b in swarm_state.get('bots', []) if b.get('alive', True)])
                 if final_bot_count < 32:  # 80% survival rate
-                    logger.error(f"Bot survival too low: {final_bot_count}/40")
+                    self.logger.error(f"Bot survival too low: {final_bot_count}/40")
                     return False
 
-            logger.info(f"G5 validation: {len(lines)-1} metrics, {final_bot_count if swarm_state else 0} bots alive")
+            self.logger.info(f"G5 validation: {len(lines)-1} metrics, {final_bot_count if swarm_state else 0} bots alive")
             return True
 
         except Exception as e:
-            logger.error(f"G5 validation error: {e}")
+            self.logger.error(f"G5 validation error: {e}")
             return False
 
     def execute_g6_emergent_analysis(self) -> Dict[str, Any]:
         """Execute G6: Emergent behavior analysis"""
-        logger.info("Starting G6 emergent behavior analysis...")
+        self.logger.info("Starting G6 emergent behavior analysis...")
 
         # Stop the background collector if still running
         if self.metrics_collector:
@@ -262,7 +267,7 @@ class CAExperimentRunner:
             time.sleep(2)  # Let it finish
 
         # Run the full analysis script
-        logger.info("Running comprehensive metrics analysis...")
+        self.logger.info("Running comprehensive metrics analysis...")
         analysis_result = subprocess.run([
             sys.executable, 'scripts/analyze_ca_metrics.py',
             '--metrics', 'logs/experimentation/ca_metrics.csv',
@@ -271,7 +276,7 @@ class CAExperimentRunner:
         ], capture_output=True, text=True, timeout=300)
 
         if analysis_result.returncode != 0:
-            logger.warning(f"Analysis failed: {analysis_result.stderr}")
+            self.logger.warning(f"Analysis failed: {analysis_result.stderr}")
             return {}
 
         # Parse analysis results
@@ -280,18 +285,18 @@ class CAExperimentRunner:
             if results_file.exists():
                 with open(results_file, 'r') as f:
                     g6_results = yaml.safe_load(f)
-                logger.info("G6 analysis completed successfully")
+                self.logger.info("G6 analysis completed successfully")
                 return g6_results if isinstance(g6_results, dict) else {}
             else:
-                logger.error("Analysis results file not found")
+                self.logger.error("Analysis results file not found")
                 return {}
         except Exception as e:
-            logger.error(f"Failed to parse analysis results: {e}")
+            self.logger.error(f"Failed to parse analysis results: {e}")
             return {}
 
     def generate_final_results(self, g6_results: Dict) -> Dict[str, Any]:
         """Generate final experiment results and logs"""
-        logger.info("Generating final experiment results...")
+        self.logger.info("Generating final experiment results...")
 
         # Create experiment log using template
         self.generate_experiment_log(g6_results)
@@ -317,10 +322,10 @@ class CAExperimentRunner:
         }
 
         # Log final summary
-        logger.info(".1f")
-        logger.info(f"  G5 Stability: {'PASS' if self.g5_passed else 'FAIL'}")
-        logger.info(f"  G6 Analysis: {'PASS' if g6_results.get('success_criteria', {}).get('overall_success', False) else 'UNKNOWN'}")
-        logger.info(f"  Overall: {'SUCCESS' if results['success_criteria']['overall_success'] else 'FAILURE'}")
+        self.logger.info(".1f")
+        self.logger.info(f"  G5 Stability: {'PASS' if self.g5_passed else 'FAIL'}")
+        self.logger.info(f"  G6 Analysis: {'PASS' if g6_results.get('success_criteria', {}).get('overall_success', False) else 'UNKNOWN'}")
+        self.logger.info(f"  Overall: {'SUCCESS' if results['success_criteria']['overall_success'] else 'FAILURE'}")
 
         return results
 
@@ -328,7 +333,7 @@ class CAExperimentRunner:
         """Generate experiment log using the template"""
         template_path = Path('logs/experimentation/ca_experimentation_log_template.yaml')
         if not template_path.exists():
-            logger.warning("Experiment log template not found")
+            self.logger.warning("Experiment log template not found")
             return
 
         # Load template
@@ -336,21 +341,22 @@ class CAExperimentRunner:
             template_sections = list(yaml.safe_load_all(f))
 
         # Update template with experiment data
-        if len(template_sections) >= 3:
+        if len(template_sections) >= 3 and all(isinstance(section, dict) for section in template_sections):
             # Section 2: Gate execution summary
-            template_sections[1]['gates_executed'] = {
-                'G0_baseline_validation': 'PASS (assumed)',
-                'G1_global_tick_integration': 'PASS (assumed)',
-                'G2_rule_engine_execution': 'PASS (assumed)',
-                'G3_zombie_ca_integration': 'PASS (assumed)',
-                'G4_dashboard_visualization': 'PASS (assumed)',
-                'G5_stability_test': 'PASS' if self.g5_passed else 'FAIL',
-                'G6_emergent_behavior_analysis': 'COMPLETED'
-            }
+            if isinstance(template_sections[1], dict):
+                template_sections[1]['gates_executed'] = {
+                    'G0_baseline_validation': 'PASS (assumed)',
+                    'G1_global_tick_integration': 'PASS (assumed)',
+                    'G2_rule_engine_execution': 'PASS (assumed)',
+                    'G3_zombie_ca_integration': 'PASS (assumed)',
+                    'G4_dashboard_visualization': 'PASS (assumed)',
+                    'G5_stability_test': 'PASS' if self.g5_passed else 'FAIL',
+                    'G6_emergent_behavior_analysis': 'COMPLETED'
+                }
 
             # Section 3: Metrics data
             metrics_file = Path('logs/experimentation/ca_metrics.csv')
-            if metrics_file.exists():
+            if metrics_file.exists() and isinstance(template_sections[2], dict):
                 with open(metrics_file, 'r') as f:
                     lines = f.readlines()[:10]  # First few data points
 
@@ -371,61 +377,70 @@ class CAExperimentRunner:
                     template_sections[2]['data_samples'].append(sample)
 
             # Section 4: Aggregate results
-            if len(template_sections) >= 4:
-                aggregates = template_sections[3]['aggregates']
+            if len(template_sections) >= 4 and isinstance(template_sections[3], dict):
+                aggregates = template_sections[3].get('aggregates', {})
+                if isinstance(aggregates, dict):
+                    convergence_detected = g6_results.get('convergence', {}).get('detected', False)
+                    emergent_type = g6_results.get('emergence_classification', {}).get('type', 'unknown')
 
-                convergence_detected = g6_results.get('convergence', {}).get('detected', False)
-                emergent_type = g6_results.get('emergence_classification', {}).get('type', 'unknown')
+                    aggregates['convergence_detected'] = convergence_detected
+                    aggregates['emergent_pattern'] = {
+                        'type': emergent_type,
+                        'period_ticks': g6_results.get('oscillation', {}).get('period_ticks')
+                    }
 
-                aggregates['convergence_detected'] = convergence_detected
-                aggregates['emergent_pattern'] = {
-                    'type': emergent_type,
-                    'period_ticks': g6_results.get('oscillation', {}).get('period_ticks')
-                }
+                    # Calculate stability rating (simplified)
+                    stability = 0.97 if self.g5_passed else 0.5
+                    aggregates['stability_rating'] = stability
 
-                # Calculate stability rating (simplified)
-                stability = 0.97 if self.g5_passed else 0.5
-                aggregates['stability_rating'] = stability
+                    aggregates['final_entropy'] = g6_results.get('convergence', {}).get('final_entropy', 0.0)
+                    aggregates['entropy_drop_percent'] = ((g6_results.get('summary', {}).get('avg_state_entropy', 0) - aggregates['final_entropy']) /
+                                                        max(g6_results.get('summary', {}).get('avg_state_entropy', 0.01), 0.01) * 100)
 
-                aggregates['final_entropy'] = g6_results.get('convergence', {}).get('final_entropy', 0.0)
-                aggregates['entropy_drop_percent'] = ((g6_results.get('summary', {}).get('avg_state_entropy', 0) - aggregates['final_entropy']) /
-                                                    max(g6_results.get('summary', {}).get('avg_state_entropy', 0.01), 0.01) * 100)
+                    aggregates['total_experiment_duration_s'] = time.time() - self.start_time
 
-                aggregates['total_experiment_duration_s'] = time.time() - self.start_time
+                    template_sections[3]['aggregates'] = aggregates
 
-                # Interpretation
-                if convergence_detected:
-                    interpretation = f"The CA system converged successfully, showing stable emergent patterns. Final entropy: {aggregates['final_entropy']:.3f}"
-                else:
-                    interpretation = f"The CA system exhibited dynamic behavior: {emergent_type}. Final entropy: {aggregates['final_entropy']:.3f}"
+                    # Interpretation
+                    interpretation_section = template_sections[3].get('interpretation', {})
+                    if isinstance(interpretation_section, dict):
+                        if convergence_detected:
+                            interpretation = f"The CA system converged successfully, showing stable emergent patterns. Final entropy: {aggregates['final_entropy']:.3f}"
+                        else:
+                            interpretation = f"The CA system exhibited dynamic behavior: {emergent_type}. Final entropy: {aggregates['final_entropy']:.3f}"
 
-                template_sections[3]['interpretation']['summary'] = interpretation
+                        interpretation_section['summary'] = interpretation
+                        template_sections[3]['interpretation'] = interpretation_section
 
             # Section 6: Actions
-            if len(template_sections) >= 6:
-                actions = template_sections[5]['actions']
-                actions['backup_logs'] = f"tar -czf logs/run_{self.experiment_id}.tar.gz logs/experimentation/*"
+            if len(template_sections) >= 6 and isinstance(template_sections[5], dict):
+                actions = template_sections[5].get('actions', {})
+                if isinstance(actions, dict):
+                    actions['backup_logs'] = f"tar -czf logs/run_{self.experiment_id}.tar.gz logs/experimentation/*"
+                    template_sections[5]['actions'] = actions
 
             # Section 7: Signoff
-            if len(template_sections) >= 7:
-                signoff = template_sections[6]['signoff']
-                signoff['by'] = "Cline"
-                signoff['reviewed_by'] = "Cline"
-                signoff['date_end'] = datetime.now().strftime('%Y-%m-%dT%H:%M:%S-04:00')
-                signoff['next_step'] = "Scale to 20x20 grid (400 bots) if stable"
+            if len(template_sections) >= 7 and isinstance(template_sections[6], dict):
+                signoff = template_sections[6].get('signoff', {})
+                if isinstance(signoff, dict):
+                    signoff['by'] = "Cline"
+                    signoff['reviewed_by'] = "Cline"
+                    signoff['date_end'] = datetime.now().strftime('%Y-%m-%dT%H:%M:%S-04:00')
+                    signoff['next_step'] = "Scale to 20x20 grid (400 bots) if stable"
+                    template_sections[6]['signoff'] = signoff
 
         # Write completed log
         output_path = self.experiment_dir / f'{self.experiment_id}_results.yaml'
         try:
             with open(output_path, 'w') as f:
                 yaml.dump_all(template_sections, f, default_flow_style=False)
-            logger.info(f"Experiment log saved to: {output_path}")
+            self.logger.info(f"Experiment log saved to: {output_path}")
         except Exception as e:
-            logger.error(f"Failed to save experiment log: {e}")
+            self.logger.error(f"Failed to save experiment log: {e}")
 
     def update_documentation(self):
         """Update project documentation with results"""
-        logger.info("Updating project documentation...")
+        self.logger.info("Updating project documentation...")
 
         try:
             # Update the ca_experimentation_results.md file
@@ -434,9 +449,9 @@ class CAExperimentRunner:
                 '--experiment-id', self.experiment_id
             ], check=True)
 
-            logger.info("Documentation updated successfully")
+            self.logger.info("Documentation updated successfully")
         except Exception as e:
-            logger.error(f"Documentation update failed: {e}")
+            self.logger.error(f"Documentation update failed: {e}")
 
     def archive_logs(self):
         """Archive all experiment logs"""
@@ -448,17 +463,17 @@ class CAExperimentRunner:
                 '-C', 'logs', 'experimentation'
             ], check=True)
 
-            logger.info(f"Logs archived to: {archive_file}")
+            self.logger.info(f"Logs archived to: {archive_file}")
 
             # Clean up (optional)
             # shutil.rmtree(self.experiment_dir / 'old_runs', ignore_errors=True)
 
         except Exception as e:
-            logger.error(f"Log archiving failed: {e}")
+            self.logger.error(f"Log archiving failed: {e}")
 
     def cleanup(self):
         """Clean up all running processes"""
-        logger.info("Cleaning up processes...")
+        self.logger.info("Cleaning up processes...")
 
         processes = [
             ('Zombie Supervisor', self.zombie_supervisor_process),
@@ -468,22 +483,22 @@ class CAExperimentRunner:
 
         for name, proc in processes:
             if proc and proc.poll() is None:
-                logger.info(f"Terminating {name}...")
+                self.logger.info(f"Terminating {name}...")
                 try:
                     proc.terminate()
                     proc.wait(timeout=10)
                 except subprocess.TimeoutExpired:
-                    logger.warning(f"Force killing {name}...")
+                    self.logger.warning(f"Force killing {name}...")
                     proc.kill()
                     proc.wait()
                 except Exception as e:
-                    logger.error(f"Error cleaning up {name}: {e}")
+                    self.logger.error(f"Error cleaning up {name}: {e}")
 
         # Stop metrics collector
         if self.metrics_collector:
             self.metrics_collector.stop_collecting()
 
-        logger.info("Cleanup complete")
+        self.logger.info("Cleanup complete")
 
     def load_swarm_state(self) -> Dict[str, Any] | None:
         """Load current swarm state"""
@@ -529,12 +544,12 @@ def main():
         sys.exit(0 if results['success_criteria']['overall_success'] else 1)
 
     except KeyboardInterrupt:
-        logger.info("Experiment interrupted by user")
+        print("Experiment interrupted by user")
         if not args.skip_cleanup:
             runner.cleanup()
         sys.exit(1)
     except Exception as e:
-        logger.error(f"Experiment failed: {e}")
+        print(f"Experiment failed: {e}")
         runner.cleanup()
         sys.exit(1)
 
