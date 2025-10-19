@@ -129,15 +129,18 @@ class GlobalTickCoordinator:
             with open('bots/swarm_state.yaml', 'r') as f:
                 swarm_state = yaml.safe_load(f)
 
-            for bot in swarm_state['bots']:
-                try:
-                    bot_port = bot['port']
-                    # Send tick notification via HTTP POST
-                    requests.post(f"http://localhost:{bot_port}/tick",
-                                json=tick_data,
-                                timeout=0.1)  # Short timeout
-                except Exception as e:
-                    logger.debug(f"Failed to notify bot on port {bot_port}: {e}")
+            if swarm_state and isinstance(swarm_state, dict) and 'bots' in swarm_state:
+                for bot in swarm_state['bots']:
+                    bot_port = bot.get('port')
+                    if bot_port is None:
+                        continue
+                    try:
+                        # Send tick notification via HTTP POST
+                        requests.post(f"http://localhost:{bot_port}/tick",
+                                    json=tick_data,
+                                    timeout=0.1)  # Short timeout
+                    except Exception as e:
+                        logger.debug(f"Failed to notify bot on port {bot_port}: {e}")
 
         except FileNotFoundError:
             logger.warning("Swarm state not found - no direct bot notifications")

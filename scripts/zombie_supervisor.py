@@ -133,6 +133,19 @@ class ZombieSupervisor:
         # Simple mean for now (can add time decay later)
         return np.mean(neighbor_states, axis=0)
 
+    def trigger_ca_update_on_rebirth(self):
+        """Trigger a CA rule update after zombie rebirth for grid stabilization"""
+        try:
+            result = subprocess.run([
+                sys.executable, 'scripts/rule_engine.py'
+            ], capture_output=True, text=True, timeout=10)
+            if result.returncode == 0:
+                self.logger.info("✅ CA rules updated after zombie rebirth")
+            else:
+                self.logger.warning(f"CA update failed: {result.stderr}")
+        except Exception as e:
+            self.logger.error(f"Error triggering CA update: {e}")
+
     def reconstruct_bot(self, bot_id: str, averaged_state: np.ndarray) -> bool:
         """Reconstruct a dead bot with averaged neighbor state"""
         if self.swarm_state is None:
@@ -169,6 +182,10 @@ class ZombieSupervisor:
             )
 
             self.logger.info(f"🧟 Reconstructed zombie {bot_id} with averaged state")
+
+            # Trigger CA rule update after resurrection for grid stabilization
+            self.trigger_ca_update_on_rebirth()
+
             return True
 
         except Exception as e:

@@ -24,6 +24,8 @@ def get_swarm_state():
     try:
         with open('bots/swarm_state.yaml', 'r') as f:
             state = yaml.safe_load(f)
+        if not isinstance(state, dict):
+            return {"error": "invalid yaml format: expected dict", "total_bots": 0, "bots": []}
         return state
     except Exception as e:
         return {"error": str(e), "total_bots": 0, "bots": []}
@@ -171,6 +173,12 @@ HTML_TEMPLATE = """
             font-size: 12px;
             margin-top: 20px;
         }
+        #ca-grid div {
+            min-height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
     </style>
 </head>
 <body>
@@ -231,6 +239,13 @@ HTML_TEMPLATE = """
         </div>
 
         <div class="status-section">
+            <div class="status-header">🔳 Cellular Automata Grid (Tick: <span id="ca-tick">0</span>)</div>
+            <div id="ca-grid" style="display: grid; grid-template-columns: repeat(var(--grid-width, 10), 1fr); gap: 1px; max-width: 800px; margin: 0 auto;">
+                <!-- CA grid cells will be populated here -->
+            </div>
+        </div>
+
+        <div class="status-section">
             <div class="status-header">📋 Recent Events</div>
             <div id="events-log" style="font-family: monospace; background: #f8f9fa; padding: 10px; border-radius: 4px; height: 200px; overflow-y: auto;">
                 Connecting to live event stream...<br>
@@ -278,6 +293,21 @@ HTML_TEMPLATE = """
                 document.getElementById('alive-bots').textContent = data.swarm.total_bots || 0;
                 document.getElementById('dead-bots').textContent = 0;  // Will be updated when zombie events come
                 document.getElementById('zombie-recoveries').textContent = 0;  // Will be updated when recovery events come
+            }
+
+            // CA Grid visualization
+            if (data.ca_grid) {
+                document.documentElement.style.setProperty('--grid-width', data.ca_grid.width);
+                document.getElementById('ca-tick').textContent = data.ca_grid.tick;
+
+                const gridElement = document.getElementById('ca-grid');
+                const cellHTML = data.ca_grid.cells.map(cell => {
+                    const hue = cell.alive ? 220 : 0;  // Blue for alive, red for dead
+                    const lightness = 50 + (cell.intensity * 40);  // Adjust intensity
+                    const style = `background-color: hsl(${hue}, 100%, ${lightness}%); font-size: 10px;`;
+                    return `<div style="${style}" title="${cell.bot_id}">${cell.x},${cell.y}</div>`;
+                }).join('');
+                gridElement.innerHTML = cellHTML;
             }
 
             // Timestamp
@@ -335,6 +365,52 @@ def dashboard():
     """Serve the main dashboard HTML"""
     return render_template_string(HTML_TEMPLATE)
 
+def get_ca_grid():
+    """Build CA grid data for visualization"""
+    swarm_state = get_swarm_state()
+    if not swarm_state or 'error' in swarm_state:
+        return {'width': 10, 'height': 4, 'cells': [], 'tick': 0}
+
+    width = swarm_state.get('grid_width', 10)
+    height = swarm_state.get('grid_height', 4)
+    bots = swarm_state.get('bots', [])
+    tick = swarm_state.get('tick', 0)
+
+    # Initialize grid with bots by position
+    grid_bots = {}
+    for bot in bots:
+        x, y = bot.get('grid_x', 0), bot.get('grid_y', 0)
+        grid_bots[(x, y)] = bot
+
+    # Build cell data
+    cells = []
+    for y in range(height):
+        for x in range(width):
+            bot = grid_bots.get((x, y))
+            if bot and 'state_magnitude' in bot:
+                alive = True
+                intensity = min(float(bot['state_magnitude']) / 10, 1.0)  # Normalize
+                bot_id = bot['bot_id']
+            else:
+                alive = x*height + y < len(bots)  # Assume alive if within count
+                intensity = 0.0
+                bot_id = f"empt_{x}_{y}"
+
+            cells.append({
+                'x': x,
+                'y': y,
+                'alive': alive,
+                'intensity': intensity,
+                'bot_id': bot_id
+            })
+
+    return {
+        'width': width,
+        'height': height,
+        'cells': cells,
+        'tick': tick
+    }
+
 @app.route('/data')
 def get_data():
     """Return JSON data for dashboard"""
@@ -342,6 +418,7 @@ def get_data():
         'swarm': get_swarm_state(),
         'gpus': get_gpu_usage(),
         'processes': count_processes(),
+        'ca_grid': get_ca_grid(),
         'timestamp': time.time()
     })
 

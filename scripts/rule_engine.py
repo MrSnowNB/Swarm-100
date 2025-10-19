@@ -9,7 +9,7 @@ created: 2025-10-19
 """
 
 import numpy as np
-from typing import List, Dict, Any, Tuple
+from typing import List, Dict, Any, Tuple, cast
 import yaml
 import logging
 
@@ -23,7 +23,7 @@ class CellularRuleEngine:
     Rules are applied based on local neighbor interactions within the CA grid.
     """
 
-    def __init__(self, config_path: str = None):
+    def __init__(self, config_path: str | None = None):
         """Initialize rule engine with configuration"""
         self.config = self._load_config(config_path)
 
@@ -39,6 +39,11 @@ class CellularRuleEngine:
         if config is None:
             raise ValueError("Failed to load config file or config is empty")
 
+        if not isinstance(config, dict):
+            raise ValueError("Configuration must be a dictionary")
+
+        config = cast(Dict[str, Any], config)
+
         # Extract CA-specific settings
         ca_config = {
             'grid_width': config['swarm']['grid_width'],
@@ -48,14 +53,14 @@ class CellularRuleEngine:
             'rule_type': 'diffusion_damping'  # Type of CA rule
         }
 
-        return ca_config
+        return ca_config  # type: ignore
 
-    def load_swarm_state(self) -> Dict[str, Any]:
+    def load_swarm_state(self) -> Dict[str, Any] | None:
         """Load current swarm state with grid mapping"""
         try:
             with open('bots/swarm_state.yaml', 'r') as f:
                 state = yaml.safe_load(f)
-            return state
+            return state  # type: ignore
         except FileNotFoundError:
             logger.error("Swarm state file not found. Run launch_swarm.py first.")
             return None
