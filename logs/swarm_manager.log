@@ -633,3 +633,60 @@ Swarm is operational. Press Ctrl+C to monitor or stop.
 2025-10-19 10:41:54,913 - SwarmManager - WARNING - Dead bots: ['bot_00_00', 'bot_00_01', 'bot_01_00', 'bot_01_01', 'bot_02_00', 'bot_02_01', 'bot_03_00', 'bot_03_01']
 2025-10-19 10:42:54,913 - SwarmManager - INFO - Health check: 0/8 bots alive
 2025-10-19 10:42:54,914 - SwarmManager - WARNING - Dead bots: ['bot_00_00', 'bot_00_01', 'bot_01_00', 'bot_01_01', 'bot_02_00', 'bot_02_01', 'bot_03_00', 'bot_03_01']
+2025-10-19 10:43:54,914 - SwarmManager - INFO - Health check: 0/8 bots alive
+2025-10-19 10:43:54,914 - SwarmManager - WARNING - Dead bots: ['bot_00_00', 'bot_00_01', 'bot_01_00', 'bot_01_01', 'bot_02_00', 'bot_02_01', 'bot_03_00', 'bot_03_01']
+2025-10-19 10:44:54,915 - SwarmManager - INFO - Health check: 0/8 bots alive
+2025-10-19 10:44:54,915 - SwarmManager - WARNING - Dead bots: ['bot_00_00', 'bot_00_01', 'bot_01_00', 'bot_01_01', 'bot_02_00', 'bot_02_01', 'bot_03_00', 'bot_03_01']
+2025-10-19 10:45:54,916 - SwarmManager - INFO - Health check: 0/8 bots alive
+2025-10-19 10:45:54,916 - SwarmManager - WARNING - Dead bots: ['bot_00_00', 'bot_00_01', 'bot_01_00', 'bot_01_01', 'bot_02_00', 'bot_02_01', 'bot_03_00', 'bot_03_01']
+2025-10-19 10:46:54,916 - SwarmManager - INFO - Health check: 0/8 bots alive
+2025-10-19 10:46:54,917 - SwarmManager - WARNING - Dead bots: ['bot_00_00', 'bot_00_01', 'bot_01_00', 'bot_01_01', 'bot_02_00', 'bot_02_01', 'bot_03_00', 'bot_03_01']
+2025-10-19 10:47:54,917 - SwarmManager - INFO - Health check: 0/8 bots alive
+2025-10-19 10:47:54,917 - SwarmManager - WARNING - Dead bots: ['bot_00_00', 'bot_00_01', 'bot_01_00', 'bot_01_01', 'bot_02_00', 'bot_02_01', 'bot_03_00', 'bot_03_01']
+2025-10-19 10:48:54,918 - SwarmManager - INFO - Health check: 0/8 bots alive
+2025-10-19 10:48:54,918 - SwarmManager - WARNING - Dead bots: ['bot_00_00', 'bot_00_01', 'bot_01_00', 'bot_01_01', 'bot_02_00', 'bot_02_01', 'bot_03_00', 'bot_03_01']
+2025-10-19 10:49:54,918 - SwarmManager - INFO - Health check: 0/8 bots alive
+2025-10-19 10:49:54,919 - SwarmManager - WARNING - Dead bots: ['bot_00_00', 'bot_00_01', 'bot_01_00', 'bot_01_01', 'bot_02_00', 'bot_02_01', 'bot_03_00', 'bot_03_01']
+2025-10-19 10:50:54,919 - SwarmManager - INFO - Health check: 0/8 bots alive
+2025-10-19 10:50:54,919 - SwarmManager - WARNING - Dead bots: ['bot_00_00', 'bot_00_01', 'bot_01_00', 'bot_01_01', 'bot_02_00', 'bot_02_01', 'bot_03_00', 'bot_03_01']
+2025-10-19 10:51:54,920 - SwarmManager - INFO - Health check: 0/8 bots alive
+2025-10-19 10:51:54,920 - SwarmManager - WARNING - Dead bots: ['bot_00_00', 'bot_00_01', 'bot_01_00', 'bot_01_01', 'bot_02_00', 'bot_02_01', 'bot_03_00', 'bot_03_01']
+2025-10-19 10:52:31,788 - SwarmManager - INFO - ============================================================
+2025-10-19 10:52:31,788 - SwarmManager - INFO - GRANITE4:MICRO-H SWARM MANAGER
+2025-10-19 10:52:31,789 - SwarmManager - INFO - ============================================================
+2025-10-19 10:52:31,789 - SwarmManager - INFO - Directory structure created
+2025-10-19 10:52:31,814 - SwarmManager - INFO - ✓ Ollama running, granite4:micro-h available
+2025-10-19 10:52:31,872 - SwarmManager - INFO - ✓ Detected 4 GPUs
+2025-10-19 10:52:31,872 - SwarmManager - INFO -   0, NVIDIA RTX A6000, 49140 MiB
+2025-10-19 10:52:31,872 - SwarmManager - INFO -   1, NVIDIA RTX A6000, 46068 MiB
+2025-10-19 10:52:31,872 - SwarmManager - INFO -   2, NVIDIA RTX A6000, 46068 MiB
+2025-10-19 10:52:31,872 - SwarmManager - INFO -   3, NVIDIA RTX A6000, 49140 MiB
+2025-10-19 10:52:31,872 - SwarmManager - INFO - Starting swarm launch sequence...
+2025-10-19 10:52:31,872 - SwarmManager - INFO - 
+Launching 10 bots on GPU 0...
+2025-10-19 10:52:54,920 - SwarmManager - INFO - Health check: 0/8 bots alive
+2025-10-19 10:52:54,921 - SwarmManager - WARNING - Dead bots: ['bot_00_00', 'bot_00_01', 'bot_01_00', 'bot_01_01', 'bot_02_00', 'bot_02_01', 'bot_03_00', 'bot_03_01']
+2025-10-19 10:53:21,882 - SwarmManager - INFO -   Launched 5/10 bots on GPU 0
+2025-10-19 10:53:54,921 - SwarmManager - INFO - Health check: 0/8 bots alive
+2025-10-19 10:53:54,921 - SwarmManager - WARNING - Dead bots: ['bot_00_00', 'bot_00_01', 'bot_01_00', 'bot_01_01', 'bot_02_00', 'bot_02_01', 'bot_03_00', 'bot_03_01']
+2025-10-19 10:54:11,891 - SwarmManager - INFO -   Launched 10/10 bots on GPU 0
+2025-10-19 10:54:11,891 - SwarmManager - INFO - 
+Launching 10 bots on GPU 1...
+2025-10-19 10:54:54,921 - SwarmManager - INFO - Health check: 0/8 bots alive
+2025-10-19 10:54:54,922 - SwarmManager - WARNING - Dead bots: ['bot_00_00', 'bot_00_01', 'bot_01_00', 'bot_01_01', 'bot_02_00', 'bot_02_01', 'bot_03_00', 'bot_03_01']
+2025-10-19 10:55:01,900 - SwarmManager - INFO -   Launched 5/10 bots on GPU 1
+2025-10-19 10:55:51,909 - SwarmManager - INFO -   Launched 10/10 bots on GPU 1
+2025-10-19 10:55:51,909 - SwarmManager - INFO - 
+Launching 10 bots on GPU 2...
+2025-10-19 10:55:54,922 - SwarmManager - INFO - Health check: 0/8 bots alive
+2025-10-19 10:55:54,922 - SwarmManager - WARNING - Dead bots: ['bot_00_00', 'bot_00_01', 'bot_01_00', 'bot_01_01', 'bot_02_00', 'bot_02_01', 'bot_03_00', 'bot_03_01']
+2025-10-19 10:56:41,919 - SwarmManager - INFO -   Launched 5/10 bots on GPU 2
+2025-10-19 10:56:54,922 - SwarmManager - INFO - Health check: 0/8 bots alive
+2025-10-19 10:56:54,923 - SwarmManager - WARNING - Dead bots: ['bot_00_00', 'bot_00_01', 'bot_01_00', 'bot_01_01', 'bot_02_00', 'bot_02_01', 'bot_03_00', 'bot_03_01']
+2025-10-19 10:57:31,927 - SwarmManager - INFO -   Launched 10/10 bots on GPU 2
+2025-10-19 10:57:31,927 - SwarmManager - INFO - 
+Launching 10 bots on GPU 3...
+2025-10-19 10:57:54,923 - SwarmManager - INFO - Health check: 0/8 bots alive
+2025-10-19 10:57:54,923 - SwarmManager - WARNING - Dead bots: ['bot_00_00', 'bot_00_01', 'bot_01_00', 'bot_01_01', 'bot_02_00', 'bot_02_01', 'bot_03_00', 'bot_03_01']
+2025-10-19 10:58:54,923 - SwarmManager - INFO - Health check: 0/8 bots alive
+2025-10-19 10:58:54,923 - SwarmManager - WARNING - Dead bots: ['bot_00_00', 'bot_00_01', 'bot_01_00', 'bot_01_01', 'bot_02_00', 'bot_02_01', 'bot_03_00', 'bot_03_01']
