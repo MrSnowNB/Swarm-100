@@ -22,23 +22,34 @@ from datetime import datetime
 import logging
 from typing import Dict, List, Any
 from math import sqrt, erf
+
+# Performance optimizations: loguru and concurrent.futures
+try:
+    from loguru import logger
+    HAS_LOGURU = True
+    # Configure loguru
+    logger.remove()  # Remove default handler
+    logger.add('logs/statistical_replication.log', rotation='10 MB', level='INFO')
+    logger.add(lambda msg: print(msg, end=''), level='INFO')  # Console output
+except ImportError:
+    HAS_LOGURU = False
+    # Fallback to standard logging
+    logging.basicConfig(
+        level=logging.INFO,
+        format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+        handlers=[
+            logging.FileHandler('logs/statistical_replication.log'),
+            logging.StreamHandler()
+        ]
+    )
+    logger = logging.getLogger('StatisticalReplication')
+
 try:
     import matplotlib.pyplot as plt
     HAS_MATPLOTLIB = True
 except ImportError:
     HAS_MATPLOTLIB = False
     plt = None
-
-# Setup logging
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-    handlers=[
-        logging.FileHandler('logs/statistical_replication.log'),
-        logging.StreamHandler()
-    ]
-)
-logger = logging.getLogger('StatisticalReplication')
 
 class StatisticalReplicationTest:
     """Statistical replication analysis for peer-review strengthening"""
@@ -255,6 +266,64 @@ class StatisticalReplicationTest:
                 'error': str(e),
                 'execution_time': execution_time
             }
+
+    def compute_levene_test(self, *groups) -> tuple:
+        """Compute Levene's test for homogeneity of variance"""
+        if len(groups) < 2:
+            return 0.0, 1.0  # No test possible
+
+        # Calculate absolute deviations from group means
+        z_scores = []
+        group_sizes = []
+
+        for group in groups:
+            if len(group) == 0:
+                continue
+            group_mean = np.mean(group)
+            group_z = [abs(x - group_mean) for x in group]
+            z_scores.extend(group_z)
+            group_sizes.append(len(group))
+
+        if len(z_scores) < len(groups) * 2:
+            return 0.0, 1.0  # Insufficient data
+
+        # Group the z-scores back by original groups
+        z_groups = []
+        start_idx = 0
+        for size in group_sizes:
+            z_groups.append(z_scores[start_idx:start_idx + size])
+            start_idx += size
+
+        # Perform one-way ANOVA on z-scores (Levene's test)
+        # Calculate overall mean of z-scores
+        overall_z_mean = np.mean(z_scores)
+
+        # Calculate SSB (between groups sum of squares)
+        ssb = sum(len(group) * (np.mean(group) - overall_z_mean)**2 for group in z_groups)
+
+        # Calculate SSW (within groups sum of squares)
+        ssw = sum(sum((z - np.mean(group))**2 for z in group) for group in z_groups)
+
+        # Degrees of freedom
+        df_between = len(z_groups) - 1
+        df_within = len(z_scores) - len(z_groups)
+
+        if df_within == 0 or ssw == 0:
+            return 0.0, 1.0
+
+        # F-statistic
+        f_stat = (ssb / df_between) / (ssw / df_within)
+
+        # Approximation for p-value using F-distribution approximation
+        # For large df, F approaches normal; for small df, use conservative estimate
+        if df_between == 1:
+            # Convert to z-score approximation
+            p_value = 2 * (1 - self.norm_cdf(f_stat**0.5)) if f_stat > 1 else 0.5
+        else:
+            # Conservative p-value estimate
+            p_value = min(1.0, 1.0 / max(f_stat, 1.0))
+
+        return f_stat, min(p_value, 1.0)
 
     def compute_statistics(self, successful_reps: List[Dict[str, Any]]):
         """Compute statistical measures across replications"""

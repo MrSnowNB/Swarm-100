@@ -1,0 +1,28 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite as below."
+type: software
+title: "Swarm-100: AI-First Swarm Intelligence Ecosystem"
+abstract: "High-performance swarm intelligence through hardware-locked timing and toroidal cellular automata, with comprehensive statistical replication validation."
+authors:
+- family-names: "MrSnowNB"
+  given-names: ""
+  orcid: "https://orcid.org/0000-0000-0000-0000"
+repository-code: "https://github.com/MrSnowNB/Swarm-100"
+url: "https://github.com/MrSnowNB/Swarm-100"
+license: MIT
+keywords:
+  - swarm-intelligence
+  - cellular-automata
+  - hardware-timing
+  - statistical-replication
+  - ai-first-development
+preferred-citation:
+  type: article
+  authors:
+  - family-names: "MrSnowNB"
+    given-names: ""
+    orcid: "https://orcid.org/0000-0000-0000-0000"
+  doi: "pending"
+  journal: "Nature Machine Intelligence or Science Robotics"
+  title: "Swarm-100: Hardware-Locked Swarm Intelligence for Deterministic Emergent Behaviors"
+  year: 2025

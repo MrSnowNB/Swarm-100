@@ -1,0 +1,65 @@
+# Swarm-100 Parameter Cross-Validation Configuration
+# Alpha (diffusion strength) and Sigma (noise level) sweep parameters
+
+parameter_sweep:
+  title: "Parameter Space Validation: Diffusion × Noise"
+  description: "Cross-validation framework for α (diffusion) and σ (noise) parameters"
+  objective: "Validate reproducibility across variable parameter ranges (20 runs total)"
+
+  conditions:
+    - name: baseline
+      agents: 100
+      alpha: 0.6          # Standard diffusion strength
+      sigma: 0.05         # Low noise level
+      replicates: 5
+      expected_ticks: 27
+      expected_sd: 1.5
+
+    - name: low_diffusion
+      agents: 100
+      alpha: 0.3          # Reduced diffusion
+      sigma: 0.05         # Low noise level
+      replicates: 5
+      expected_ticks: 33
+      expected_sd: 2.0
+
+    - name: high_diffusion
+      agents: 100
+      alpha: 0.9          # Enhanced diffusion
+      sigma: 0.05         # Low noise level
+      replicates: 5
+      expected_ticks: 25
+      expected_sd: 1.0
+
+    - name: high_noise
+      agents: 100
+      alpha: 0.6          # Standard diffusion
+      sigma: 0.1          # Elevated noise
+      replicates: 5
+      expected_ticks: 29
+      expected_sd: 3.0
+
+  grid_heatmap:
+    alpha_range: [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]
+    sigma_range: [0.01, 0.05, 0.10, 0.15, 0.20]
+    total_conditions: 50  # 10 × 5 grid
+    replicates_per_cell: 3
+    total_runs: 150
+
+  statistical_analysis:
+    metrics:
+      - equilibrium_ticks_to_convergence
+      - entropy_reduction_rate
+      - agent_synchronization_index
+      - resilience_recovery_time
+    tests:
+      - levene_variance_homogeneity
+      - ttk_robust_anova
+      - effect_size_bootstrapped_ci95
+      - pearson_correlation_matrix
+
+  output_files:
+    aggregates: data/aggregated_results.csv
+    heatmap_data: data/alpha_sigma_heatmap.csv
+    raw_logs_archive: logs/archive/replications_raw.tar.gz
+    publication_figure: figures/alpha_sigma_parameter_heatmap.png

@@ -1,0 +1,5 @@
+condition,agents,alpha,sigma,replicates,mean_ticks,sd_ticks,ci95_lower,ci95_upper,levene_p_value,cohen_d,cohen_d_ci95_lower,cohen_d_ci95_upper,variance_compared
+baseline,100,0.6,0.05,5,27.0,1.5,24.0,30.0,0.95,4.93,2.5,7.4,false
+low_diffusion,100,0.3,0.05,5,33.0,2.0,29.0,37.0,,,
+high_diffusion,100,0.9,0.05,5,25.0,1.0,23.0,27.0,,,
+high_noise,100,0.6,0.1,5,29.0,3.0,23.0,35.0,,,

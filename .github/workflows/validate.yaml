@@ -1,0 +1,130 @@
+name: Swarm Validation
+
+on:
+  push:
+    branches: [ main, master, develop ]
+  pull_request:
+    branches: [ main, master, develop ]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.12"
+
+    - name: Cache pip dependencies
+      uses: actions/cache@v4
+      with:
+        path: ~/.cache/pip
+        key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-pip-
+
+    - name: Install system dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y cmake build-essential python3-dev
+
+    - name: Install Python dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install pytest pyyaml numpy scipy matplotlib seaborn
+
+    - name: Build swarm-core
+      run: |
+        cd swarm-core
+        mkdir -p build && cd build
+        cmake .. -DCMAKE_BUILD_TYPE=Release
+        make -j$(nproc)
+
+    - name: Lint code
+      run: |
+        python -m pip install flake8 black
+        flake8 scripts/ tests/ swarm-core/ --count --select=E9,F63,F7,F82 --show-source --statistics
+        black --check --diff scripts/ tests/
+
+    - name: Run unit tests
+      run: |
+        python -m pytest tests/ -v --tb=short --durations=10
+        python -m pytest swarm-core/tests/ -v --tb=short
+
+    - name: Run replication validation suite
+      run: |
+        python scripts/statistical_replication_test.py --ci-mode
+        python scripts/perturbation_resilience_test.py --validate-only
+
+    - name: Generate statistical reports
+      run: |
+        mkdir -p data/ logs/archive/
+        python scripts/statistical_replication_test.py --report-only
+
+    - name: Check statistical consistency
+      run: |
+        python -c "
+import pandas as pd
+import numpy as np
+import yaml
+
+# Load aggregated results
+try:
+    df = pd.read_csv('data/aggregated_results.csv')
+    print(f'Loaded {len(df)} statistical records')
+
+    # Basic validation checks
+    assert len(df) > 0, 'No data in aggregated_results.csv'
+    assert all(col in df.columns for col in ['mean_ticks', 'sd_ticks', 'ci95_lower', 'ci95_upper']), 'Missing required statistical columns'
+
+    # Reproducibility check
+    baseline = df[df['condition'] == 'baseline']
+    if len(baseline) > 0:
+        mean_recovery = baseline['mean_ticks'].iloc[0]
+        assert 25 <= mean_recovery <= 30, f'Baseline recovery {mean_recovery} outside expected range 25-30 ticks'
+
+    print('✓ Statistical validation passed')
+except Exception as e:
+    print(f'✗ Statistical validation failed: {e}')
+    exit(1)
+"
+
+    - name: Upload statistical artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: statistical-validation-results
+        path: |
+          data/aggregated_results.csv
+          stats_replication/
+          logs/
+        retention-days: 30
+
+    - name: Validate serialization robustness
+      run: |
+        python -c "
+import numpy as np
+import yaml
+from swarm_core.serialization import to_serializable
+
+# Test serialization fix
+test_data = {
+    'numpy_int': np.int32(42),
+    'numpy_float': np.float64(3.14),
+    'numpy_array': np.array([1.0, 2.0, 3.0]),
+    'complex_nested': {'data': np.array([[1, 2], [3, 4]])}
+}
+
+try:
+    serializable = to_serializable(test_data)
+    yaml_str = yaml.safe_dump(serializable)
+    print('✓ Serialization robustness validated')
+    print(f'YAML length: {len(yaml_str)} characters')
+except Exception as e:
+    print(f'✗ Serialization test failed: {e}')
+    exit(1)
+"
