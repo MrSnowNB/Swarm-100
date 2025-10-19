@@ -1,9 +1,11 @@
-[Bot-2_4] 2025-10-19 08:35:40,786 - Failed to instrument Flask: No module named 'flask'
-[Bot-2_4] 2025-10-19 08:35:40,786 - Swarm tracing initialized for bot-2_4
-[Bot-2_4] 2025-10-19 08:35:40,786 - Bot starting on GPU 2, Port 11604
-[Bot-2_4] 2025-10-19 08:35:40,786 - Connecting to Ollama at http://localhost:11434
-[Bot-2_4] 2025-10-19 08:36:12,825 - Query failed: HTTPConnectionPool(host='localhost', port=11434): Read timed out. (read timeout=30)
-[Bot-2_4] 2025-10-19 08:36:12,825 - ✗ Health check failed
-[Bot-2_4] 2025-10-19 08:36:12,825 - Initial health check failed, exiting
-[Bot-2_4] 2025-10-19 08:36:12,829 - Transient error StatusCode.UNAVAILABLE encountered while exporting traces to localhost:4317, retrying in 0.80s.
-[Bot-2_4] 2025-10-19 08:36:18,881 - Failed to export traces to localhost:4317, error code: StatusCode.UNAVAILABLE
+[Bot-2_4] 2025-10-19 09:08:02,910 - Failed to instrument Flask: No module named 'flask'
+[Bot-2_4] 2025-10-19 09:08:02,910 - Swarm tracing initialized for bot-2_4
+[Bot-2_4] 2025-10-19 09:08:02,910 - Bot starting on GPU 2, Port 11604
+[Bot-2_4] 2025-10-19 09:08:02,910 - Connecting to Ollama at http://localhost:11434
+[Bot-2_4] 2025-10-19 09:08:05,387 - ✓ Health check passed - Stats: {'requests': 1, 'errors': 0, 'start_time': '2025-10-19T09:08:02.910810'}
+[Bot-2_4] 2025-10-19 09:08:05,387 - Bot operational, entering main loop
+[Bot-2_4] 2025-10-19 09:08:07,889 - Transient error StatusCode.UNAVAILABLE encountered while exporting traces to localhost:4317, retrying in 0.83s.
+[Bot-2_4] 2025-10-19 09:08:15,799 - Failed to export traces to localhost:4317, error code: StatusCode.UNAVAILABLE
+[Bot-2_4] 2025-10-19 09:09:31,097 - ✓ Health check passed - Stats: {'requests': 2, 'errors': 0, 'start_time': '2025-10-19T09:08:02.910810'}
+[Bot-2_4] 2025-10-19 09:09:35,803 - Transient error StatusCode.UNAVAILABLE encountered while exporting traces to localhost:4317, retrying in 0.89s.
+[Bot-2_4] 2025-10-19 09:09:43,543 - Failed to export traces to localhost:4317, error code: StatusCode.UNAVAILABLE

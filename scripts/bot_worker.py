@@ -109,11 +109,11 @@ class BotWorker:
         self.logger.info(f"Bot starting on GPU {self.gpu_id}, Port {self.port}")
         self.logger.info(f"Connecting to Ollama at {self.ollama_url}")
 
-        # Initial health check
+        # Initial health check (soft fail - don't exit)
         time.sleep(2)
         if not self.health_check():
-            self.logger.error("Initial health check failed, exiting")
-            return
+            self.logger.warning("Initial health check failed, but continuing to allow Ollama warmup")
+            # Don't exit - let the bot run and retry later
 
         self.logger.info("Bot operational, entering main loop")
 

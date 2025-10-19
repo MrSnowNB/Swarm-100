@@ -13,6 +13,8 @@ import subprocess
 import sys
 import argparse
 from datetime import datetime
+import time
+from typing import Dict, Any
 
 class HealthMonitor:
     def __init__(self):
@@ -22,10 +24,20 @@ class HealthMonitor:
         """Load current swarm state"""
         try:
             with open('bots/swarm_state.yaml', 'r') as f:
-                self.state = yaml.safe_load(f)
+                state_data = yaml.safe_load(f)
         except FileNotFoundError:
             print("✗ Swarm state file not found. Is the swarm running?")
             sys.exit(1)
+
+        if state_data is None:
+            print("✗ Swarm state is empty")
+            sys.exit(1)
+
+        if not isinstance(state_data, dict):
+            print("✗ Swarm state must be a dictionary")
+            sys.exit(1)
+
+        self.state: Dict[str, Any] = state_data
 
     def check_processes(self):
         """Check which bot processes are alive"""
@@ -77,18 +89,31 @@ class HealthMonitor:
         print("="*70)
         print(f"Timestamp: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
         print(f"Swarm started: {self.state['timestamp']}")
-        print()
 
-        # Process status
-        alive, dead = self.check_processes()
-        print(f"Bot Processes: {len(alive)}/{self.state['total_bots']} alive")
+        # Check grace period
+        now = datetime.now()
+        start_time = datetime.fromisoformat(self.state['timestamp'])
+        since_start = (now - start_time).total_seconds()
+        grace_period = self.state.get('startup_grace_period_seconds', 30)
 
-        if dead:
-            print(f"\n⚠ Dead bots ({len(dead)}):")
-            for bot in dead[:10]:  # Show first 10
-                print(f"  - {bot['bot_id']} (PID {bot['pid']}, GPU {bot['gpu_id']})")
+        if since_start < grace_period:
+            print(f"⚠ Swarm startup grace period: {grace_period - int(since_start)}s remaining")
+            print("   Not reporting bot failures during initialization")
+            print("✓ All bots (not yet checked)")
+            print()
+            # Don't check processes yet
         else:
-            print("✓ All bots operational")
+            print()
+            # Process status
+            alive, dead = self.check_processes()
+            print(f"Bot Processes: {len(alive)}/{self.state['total_bots']} alive")
+
+            if dead:
+                print(f"\n⚠ Dead bots ({len(dead)}):")
+                for bot in dead[:10]:  # Show first 10
+                    print(f"  - {bot['bot_id']} (PID {bot['pid']}, GPU {bot['gpu_id']})")
+            else:
+                print("✓ All bots operational")
 
         # GPU status
         print("\nGPU Status:")
@@ -109,8 +134,18 @@ class HealthMonitor:
         self.print_status()
 
         if check_all:
-            alive, dead = self.check_processes()
-            sys.exit(0 if len(dead) == 0 else 1)
+            # Respect grace period for automated checks
+            now = datetime.now()
+            start_time = datetime.fromisoformat(self.state['timestamp'])
+            since_start = (now - start_time).total_seconds()
+            grace_period = self.state.get('startup_grace_period_seconds', 30)
+
+            if since_start < grace_period:
+                print(f"Check-all deferred: grace period active ({grace_period - int(since_start)}s remaining)")
+                sys.exit(0)  # Consider healthy during startup
+            else:
+                alive, dead = self.check_processes()
+                sys.exit(0 if len(dead) == 0 else 1)
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()

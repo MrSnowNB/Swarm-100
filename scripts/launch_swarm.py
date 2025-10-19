@@ -16,6 +16,7 @@ import sys
 from pathlib import Path
 from datetime import datetime
 import logging
+from typing import Dict, Any
 
 # Setup logging
 logging.basicConfig(
@@ -29,9 +30,16 @@ logging.basicConfig(
 logger = logging.getLogger('SwarmManager')
 
 class SwarmManager:
-    def __init__(self, config_path='configs/swarm_config.yaml'):
+    def __init__(self, config_path=None):
+        if config_path is None:
+            config_path = Path(__file__).parent.parent / 'configs' / 'swarm_config.yaml'
         with open(config_path, 'r') as f:
-            self.config = yaml.safe_load(f)
+            config_data = yaml.safe_load(f)
+        if config_data is None:
+            raise ValueError(f"Failed to load config from {config_path}")
+        if not isinstance(config_data, dict):
+            raise ValueError(f"Config must be a dictionary")
+        self.config: Dict[str, Any] = config_data
 
         self.bots = []
         self.processes = []
@@ -111,6 +119,7 @@ class SwarmManager:
         logger.info("Starting swarm launch sequence...")
 
         base_port = self.config['bot']['base_port']
+        stagger_seconds = self.config['bot']['launch_stagger_seconds']
 
         for gpu in self.config['hardware']['gpus']:
             gpu_id = gpu['id']
@@ -123,8 +132,8 @@ class SwarmManager:
                 bot_info = self.launch_bot(bot_idx, gpu_id, port)
                 self.bots.append(bot_info)
 
-                # Staggered launch to avoid overwhelming the system
-                time.sleep(0.5)
+                # Staggered launch to avoid overwhelming the system and model loading spikes
+                time.sleep(stagger_seconds)
 
                 if (bot_idx + 1) % 5 == 0:
                     logger.info(f"  Launched {bot_idx + 1}/{num_bots} bots on GPU {gpu_id}")
@@ -155,6 +164,7 @@ class SwarmManager:
         """Save current swarm state to file"""
         state = {
             'timestamp': datetime.now().isoformat(),
+            'startup_grace_period_seconds': self.config['bot']['startup_grace_period_seconds'],
             'total_bots': len(self.bots),
             'bots': [
                 {
