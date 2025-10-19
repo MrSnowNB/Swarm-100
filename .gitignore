@@ -1,0 +1,57 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Logs
+*.log
+logs/
+logs/**/*.log
+swarm_testing_env/
+.vscode/
+.pytest_cache/
+
+# Temporary files
+*.tmp
+*.swp
+*.swo
+*~
+
+# Environment
+.env
+.venv/
+swarm_testing_env/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Build artifacts
+*.o
+*.a
+*.exe
+
+# Repository specific
+validation_results.yaml
