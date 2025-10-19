@@ -1,0 +1,188 @@
+---
+project: gemma3-zombie-swarm
+version: 1.0.0
+status: active
+last_updated: 2025-10-19
+
+description: >
+  Self-healing swarm using Gemma3:270M and the Zombie Protocol.
+  Dead bots ("zombies") are resurrected by reconstructing their state
+  from the average vectors of the K nearest healthy neighbors.
+
+architecture:
+  model:
+    name: "gemma3:270m"
+    quantization: "Q4"
+    context_length: 2048
+    temperature: 0.7
+    top_p: 0.9
+    top_k: 40
+    notes: >
+      Gemma3:270M is lightweight (<1GB VRAM) and ideal for high-concurrency swarms.
+      Its minimal model load latency allows near-real-time self-healing.
+
+  swarm_topology:
+    gpus:
+      - id: 0
+        capacity_vram_gb: 48
+        max_bots: 50
+      - id: 1
+        capacity_vram_gb: 48
+        max_bots: 50
+      - id: 2
+        capacity_vram_gb: 48
+        max_bots: 50
+      - id: 3
+        capacity_vram_gb: 48
+        max_bots: 50
+    communication_mode: "HTTP+JSON"
+    base_port: 11400
+    inter_node_hops: 4
+    fanout: 5
+    gossip_interval_s: 5
+    self_healing_check_interval_s: 30
+
+modules:
+  - name: BotWorker
+    description: >
+      Each BotWorker runs Gemma3:270M, exposing /state and /health endpoints.
+      Responds to gossip and participates in neighbor averaging for repair.
+    memory:
+      embeddings_vector_dim: 512
+      storage_policy: "ring_buffer"
+      max_vectors: 1000
+    api_endpoints:
+      - /state
+      - /health
+      - /reconstruct
+    warm_start_policy:
+      type: "nearest_neighbor_average"
+      neighbors_to_query: 3
+      merge_strategy: "mean"
+      recovery_modes:
+        - partial_copy
+        - centroid_warmstart
+    failure_policy:
+      max_inactive_time_s: 120
+      on_failure: "mark_dead"
+      on_recovery: "spawn_zombie"
+
+  - name: ZombieSupervisor
+    description: >
+      Watches all bot processes. Detects crashes, restarts bots as zombies,
+      and requests nearest-neighbor states for reinitialization.
+    responsibilities:
+      - detect_dead_bots
+      - compute_neighbor_proximity
+      - trigger_reconstruction
+      - restart_bots_with_state
+    detection:
+      strategy: "ps_check"
+      grace_period_s: 60
+    reconstruction:
+      algorithm: "KNN_Average"
+      parameters:
+        k: 3
+        weight_decay: 0.9
+        time_window_s: 300
+    logging:
+      log_file: logs/zombie_supervisor.log
+      log_rotation: daily
+    recovery_example:
+      event_trigger: bot_1_07_dead
+      actions:
+        - log event
+        - query neighbors 1_06,1_08,2_00 for state vectors
+        - compute average vector
+        - reinstantiate bot with averaged state memory
+        - mark bot_1_07 "zombie_reborn"
+
+zombie_protocol:
+  version: 2.1
+  description: >
+    Implements automated resurrection of dead bots as zombies using nearest-neighbor interpolation.
+    Bots that were dead longer than 5 minutes are cold-started instead.
+
+  conditions:
+    - If bot marked_dead and inactivity_time < 300s:
+        protocol_step:
+          1. Request /state vectors from K neighbors via REST.
+          2. Average vectors with time-decayed weighting.
+          3. Spin up identical bot process on same GPU/port.
+          4. Restore averaged memory vectors into bot context.
+          5. Broadcast "rebirth" event.
+    - If bot marked_dead >= 300s:
+        protocol_step:
+          1. Cold restart without neighbor state.
+          2. Mark as "resurrected_cold".
+
+  logging:
+    level: INFO
+    on_rebirth: "log_to_zombie_registry"
+    metrics:
+      - zombies_reborn: total successful recoveries
+      - zombies_failed: total recovery failures
+
+process_supervision:
+  check_interval_s: 15
+  metrics: ["alive_bots", "dead_bots", "reborn_zombies"]
+  recovery_threshold:
+    max_concurrent_restarts: 4
+    cooldown_s: 60
+
+monitoring:
+  external_tools:
+    process_monitor: "htop or glances"
+    gpu_monitor: "nvtop or gpustat"
+    network_monitor: "ss -tunap | grep :11434"
+  alert_triggers:
+    - condition: zombie_failure_rate > 0.25
+      action: "send_alert('Zombie recovery unstable')"
+    - condition: bot_survival_rate < 0.80
+      action: "reduce_bot_count_per_gpu"
+
+testing_phase:
+  stage_1:
+    bots_per_gpu: 10
+    stagger_s: 3
+    objective: "Verify zombie rebirth consistency"
+  stage_2:
+    bots_per_gpu: 25
+    stagger_s: 1
+    objective: "Full-scale recovery under moderate load"
+  stage_3:
+    bots_per_gpu: 50
+    stagger_s: 0.5
+    objective: "Stress test memory and nearest-neighbor reliability"
+
+output_metrics:
+  - mean_recovery_time_s
+  - active_zombie_count
+  - average_vector_similarity
+  - bot_uptime_percent
+  - swarm_resilience_index
+
+deployment:
+  start_command: "python3 scripts/launch_swarm.py"  # Uses configs/swarm_config.yaml
+  supervisor_command: "python3 scripts/zombie_supervisor.py --config configs/gemma3-zombie-swarm.yaml"
+  bot_command: "scripts/bot_worker_zombie.py"  # Auto-spawned for zombies
+  model_pull: "ollama pull gemma3:270m"
+  recovery_test:
+    simulate_death: "kill -9 <bot_pid>"
+    observe_recovery: "tail -f logs/zombie_supervisor.log | grep -E '(reborn|reconstructed)'"
+  cleanup_command: "bash scripts/stop_swarm.sh && pkill -f zombie_supervisor"
+
+llm_model_load_instructions: |
+  # Pull and verify Gemma3 model
+  ollama pull gemma3:270m
+  ollama list | grep gemma3
+
+  # For production deployment on MLC LLM or similar:
+  # pip install mlc-llm mlc-ai-nightly
+  # mlc_llm generate --model gemma3:270m --prompt "test"
+
+integration_notes: |
+  - Use launch_swarm.py to start 100-bot deployment as normal
+  - Run zombie_supervisor.py in background for monitoring/recovery
+  - Bots auto-switch to zombie_worker on resurrection
+  - Monitor reconstruction logs for tuning KNN parameters
