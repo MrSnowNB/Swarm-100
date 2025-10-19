@@ -20,9 +20,6 @@ import numpy as np
 from pathlib import Path
 from datetime import datetime
 import logging
-from PIL import Image, ImageDraw
-import io
-import base64
 
 # Setup logging
 logging.basicConfig(
