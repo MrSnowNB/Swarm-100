@@ -1,0 +1,152 @@
+---
+project: Swarm-100
+focus: "Integration of Gemma3-Zombie-Swarm with Cellular Automata foundation"
+updated: 2025-10-19T10:15:00-04:00
+maintainer: "MrSnowNB"
+
+## 1. Current Achievements
+state_summary:
+  - multi_gpu_swarm: stable_40_bots
+  - gemma3_model_integration: complete
+  - zombie_protocol: v2.1 hot-recovery operational
+  - websocket_dashboard: prototype running
+  - zombie_supervisor: neighbor-based healing verified
+  - docs: README.yaml + project.yaml synced with AI-first format
+baseline_health: 100% bot survival (40/40) @10_bots_per_GPU
+
+---
+
+## 2. Core Objective (Re-centering Around CA)
+goal: >
+  Transition current process-based swarm into hybrid multi-agent system
+  where each bot encapsulates a "cell" in a global cellular automaton grid.
+  Each bot's internal state will follow local interaction rules analogous
+  to CA transitions, while retaining the Gemma3 cognition layer.
+
+cellular_automata_alignment:
+  cell_representation: "Bot = cell"
+  neighbor_interaction: "4-hop gossip = Von Neumann neighborhood"
+  state_vector: "512-float embedding for bot memory"
+  transition_function: "f(state, neighbors) → new_state"
+  update_frequency: 1Hz global tick synchronized per GPU
+
+---
+
+## 3. Incremental Implementation Steps
+steps:
+
+  - step: 1_define_grid_mapping
+    description: >
+      Map swarm bots to a logical CA grid (e.g. 10x10 for 100 bots).
+      Assign each bot (i,j) coordinates stored in `swarm_state.yaml`.
+    deliverables:
+      - update swarm_config.yaml with `grid_x`, `grid_y`
+      - extend `launch_swarm.py` to assign coordinates to bots
+
+  - step: 2_local_rule_engine
+    description: >
+      Implement a per-bot rule interpreter that evolves internal
+      state vectors based on neighbor averages or thresholds.
+    path: scripts/rule_engine.py
+    function: f(state, neighbor_states) → new_state
+    example_rule: >
+      new_state = mean(neighbor_vectors) * decay + self_vector * (1 - decay)
+
+  - step: 3_global_tick_synchronization
+    description: >
+      Introduce a global clock process (`scripts/global_tick.py`) to broadcast
+      periodic tick events via WebSocket or REST to all bots.
+      Each tick triggers CA rule computation.
+    interval_ms: 1000
+    future_extension: adaptively scaled tick per GPU load
+
+  - step: 4 integrate_rule_with_zombie_protocol
+    description: >
+      Extend ZombieSupervisor recovery such that resurrected bots rejoin with
+      their last known position and apply local CA rules immediately after rebirth.
+    integration_points:
+      - on_rebirth → trigger local rule update
+      - neighbor_discovery → depend on (i,j) adjacency not port
+
+  - step: 5_visualization_extension
+    description: >
+      Upgrade the WebSocket dashboard (`swarm_monitor.py`) to plot the CA grid.
+      Each cell's color = bot state intensity (vector magnitude or confidence).
+    libraries: [Plotly.js, Lightweight SVG Grid]
+    ui_features:
+      - color-coded alive vs zombie cells
+      - hover over cells = bot_id + vector centroid norm
+      - real-time update via Socket.IO
+
+  - step: 6_experimentation_phase
+    description: >
+      Run controlled experiments on emergent behaviors:
+        - Stability across ticks
+        - Zombie rebirth ripple effects
+        - Convergence or chaos in CA dynamics
+      Collect metrics via supervisor logs and emit to dashboard.
+    metrics:
+      - mean_state_entropy
+      - zombie_rebirth_wave_latency
+      - CA_tick_synchronization_drift
+      - neighbor_similarity_index
+
+  - step: 7_scaling_and_generalization
+    description: >
+      Once CA integration stable at 100 bots, scale to 400+
+      across multi-node setup.
+    grid_size: 20x20
+    coordination: inter-GPU ring sync
+    desired_outcome: emergent cooperative cluster behavior
+
+---
+
+## 4. Tooling and Integration Notes
+implementation_guidelines:
+  code_structure:
+    - scripts/global_tick.py : global scheduler
+    - scripts/rule_engine.py : CA local rule processor
+    - scripts/swarm_monitor.py : dashboard + CA grid renderer
+    - scripts/bot_worker_zombie.py : bot-level CA + recovery behavior
+    - scripts/self_healing_supervisor.py : continues neighbor tracking
+
+  communication:
+    transport: REST + WebSocket
+    tick_broadcast_endpoint: /tick
+    event_stream: /state_update (per-bot)
+
+  monitoring:
+    hooks:
+      - global_tick emits "CA update N" to dashboard
+      - bot state vectors logged every 10 ticks
+      - supervisor summarizes grid entropy/variance every minute
+
+---
+
+## 5. Research Alignment
+references:
+  - distributed_self_healing_CA: "Frontiers in Physics, 2022"
+  - adaptive_CA_rules: "Nature Machine Intelligence, 2023"
+  - multi-agent_fault_tolerance: "IJEAA, 2024"
+  - llm_based_swarm_memory: "ArXiv, 2025"
+connection_to_zombie_protocol: >
+  Zombie rebirth strategy is analogous to self-repairing CA:
+  dead cells are revived by neighbor interpolation, ensuring
+  continuity of global state across partial failure domains.
+
+---
+
+## 6. Validation Plan
+validation_metrics:
+  stability_threshold: mean_state_change < 0.05 after 100 ticks
+  resilience_score: ≥ 0.90 recovery_success
+  emergent_signal_detection: cluster formations > 3 CA cycles
+  dashboard_fps_target: ≥ 5Hz
+
+---
+
+next_actions:
+  - implement global_tick and rule_engine modules
+  - update dashboard HTML for visual CA grid
+  - run 10x10 swarm CA experiment with Gemma3:270M
+  - record time-series embeddings and visualize evolution

@@ -87,7 +87,7 @@ class SwarmManager:
             logger.error(f"✗ GPU check failed: {e}")
             return False
 
-    def launch_bot(self, bot_id, gpu_id, port):
+    def launch_bot(self, bot_id, gpu_id, port, grid_x, grid_y):
         """Launch a single bot instance"""
         env = os.environ.copy()
         env['CUDA_VISIBLE_DEVICES'] = str(gpu_id)
@@ -109,17 +109,23 @@ class SwarmManager:
             'bot_id': f"bot_{gpu_id:02d}_{bot_id:02d}",
             'gpu_id': gpu_id,
             'port': port,
+            'grid_x': grid_x,
+            'grid_y': grid_y,
             'pid': proc.pid,
             'process': proc,
             'log_file': log_file
         }
 
     def launch_swarm(self):
-        """Launch all 100 bots across 4 GPUs"""
+        """Launch all bots across GPUs with CA grid mapping"""
         logger.info("Starting swarm launch sequence...")
 
         base_port = self.config['bot']['base_port']
         stagger_seconds = self.config['bot']['launch_stagger_seconds']
+        grid_width = self.config['swarm']['grid_width']
+        grid_height = self.config['swarm']['grid_height']
+
+        global_bot_idx = 0
 
         for gpu in self.config['hardware']['gpus']:
             gpu_id = gpu['id']
@@ -129,8 +135,12 @@ class SwarmManager:
 
             for bot_idx in range(num_bots):
                 port = base_port + (gpu_id * 100) + bot_idx
-                bot_info = self.launch_bot(bot_idx, gpu_id, port)
+                grid_x = global_bot_idx % grid_width
+                grid_y = global_bot_idx // grid_width
+                bot_info = self.launch_bot(bot_idx, gpu_id, port, grid_x, grid_y)
                 self.bots.append(bot_info)
+
+                global_bot_idx += 1
 
                 # Staggered launch to avoid overwhelming the system and model loading spikes
                 time.sleep(stagger_seconds)
@@ -140,6 +150,7 @@ class SwarmManager:
 
         logger.info(f"\n{'='*60}")
         logger.info(f"✓ Swarm launch complete: {len(self.bots)} bots deployed")
+        logger.info(f"✓ CA grid configured: {grid_width}x{grid_height}")
         logger.info(f"{'='*60}")
 
     def monitor_health(self):
@@ -165,12 +176,16 @@ class SwarmManager:
         state = {
             'timestamp': datetime.now().isoformat(),
             'startup_grace_period_seconds': self.config['bot']['startup_grace_period_seconds'],
+            'grid_width': self.config['swarm']['grid_width'],
+            'grid_height': self.config['swarm']['grid_height'],
             'total_bots': len(self.bots),
             'bots': [
                 {
                     'bot_id': b['bot_id'],
                     'gpu_id': b['gpu_id'],
                     'port': b['port'],
+                    'grid_x': b['grid_x'],
+                    'grid_y': b['grid_y'],
                     'pid': b['pid']
                 }
                 for b in self.bots
@@ -180,7 +195,7 @@ class SwarmManager:
         with open('bots/swarm_state.yaml', 'w') as f:
             yaml.dump(state, f)
 
-        logger.info("Swarm state saved to bots/swarm_state.yaml")
+        logger.info("Swarm state saved to bots/swarm_state.yaml with CA grid mapping")
 
     def run(self):
         """Main execution flow"""

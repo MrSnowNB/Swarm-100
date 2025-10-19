@@ -44,6 +44,9 @@ swarm:
   fanout: 5
   confidence_threshold: 0.5
   ttl: 4
+  # CA Grid Configuration
+  grid_width: 10  # CA grid width (bots per row)
+  grid_height: 4  # CA grid height (derived from total bots)
 
 # Bot Configuration
 bot:
