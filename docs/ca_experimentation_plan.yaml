@@ -1,0 +1,396 @@
+---
+project: Swarm-100
+phase: CA_Experimentation_with_Gated_Testing
+focus: "Systematic validation of CA+Zombie integration with recursive troubleshooting"
+version: 1.0.0
+created: 2025-10-19T10:31:00-04:00
+status: active
+
+# ============================================================
+# PART 1: GATED TESTING PROTOCOL
+# ============================================================
+
+testing_philosophy:
+  principle: "Each gate must pass before proceeding to next phase"
+  failure_policy: "Stop, log, analyze, fix, restart from last successful gate"
+  documentation: "All gate results logged to logs/experimentation/"
+
+gates:
+  - gate: G0_baseline_validation
+    description: "Verify swarm launches and stabilizes without CA active"
+    prerequisites:
+      - ollama_running: true
+      - gemma3_270m_available: true
+      - swarm_config_valid: true
+    validation_checks:
+      - command: "python3 scripts/launch_swarm.py"
+        expected_outcome: "40/40 bots alive after 60s"
+        timeout_s: 300
+      - command: "python3 scripts/health_monitor.py --check-all"
+        expected_outcome: "exit code 0"
+        timeout_s: 30
+    success_criteria:
+      bot_survival_rate: ">= 0.95"
+      gpu_memory_stable: "no OOM errors"
+      log_errors: "== 0 critical errors"
+    on_failure:
+      action: "halt_and_troubleshoot"
+      log_to: "logs/experimentation/G0_failure.yaml"
+      troubleshooting_tree: "T1_swarm_launch_issues"
+
+  - gate: G1_global_tick_integration
+    description: "Verify global tick broadcasts reach all bots"
+    prerequisites:
+      - G0_baseline_validation: passed
+    setup:
+      - "Start swarm with G0 validated config"
+      - "Launch global_tick.py in separate process"
+    validation_checks:
+      - endpoint: "GET http://localhost:5000/tick_status"
+        expected: "tick_count > 10 within 15s"
+      - log_scan: "grep 'Received tick' logs/gpu*/bot_*.log | wc -l"
+        expected: ">= 400"  # 40 bots × 10 ticks
+    success_criteria:
+      tick_delivery_rate: ">= 0.98"
+      tick_jitter_ms: "<= 50"
+      bot_response_rate: ">= 0.95"
+    on_failure:
+      action: "halt_and_troubleshoot"
+      log_to: "logs/experimentation/G1_failure.yaml"
+      troubleshooting_tree: "T2_tick_synchronization_issues"
+
+  - gate: G2_rule_engine_execution
+    description: "Verify CA rules execute and update bot states"
+    prerequisites:
+      - G1_global_tick_integration: passed
+    validation_checks:
+      - state_evolution: "Compare swarm_state.yaml at tick 0 vs tick 20"
+        expected: "state_vector_changed for >= 95% of bots"
+      - rule_log: "grep 'Applied CA rule' logs/gpu*/bot_*.log | wc -l"
+        expected: ">= 800"  # 40 bots × 20 ticks
+    success_criteria:
+      state_update_rate: ">= 0.95"
+      rule_application_errors: "== 0"
+      mean_state_drift: "> 0.01"  # Confirms evolution
+    on_failure:
+      action: "halt_and_troubleshoot"
+      log_to: "logs/experimentation/G2_failure.yaml"
+      troubleshooting_tree: "T3_rule_engine_issues"
+
+  - gate: G3_zombie_ca_integration
+    description: "Verify zombies resurrect with CA grid awareness"
+    prerequisites:
+      - G2_rule_engine_execution: passed
+    setup:
+      - "Start zombie supervisor"
+      - "Kill 3 random bots after 10 ticks"
+    validation_checks:
+      - resurrection_check: "Monitor for zombie rebirth events"
+        expected: "3 zombies reborn within 90s"
+      - grid_continuity: "Verify reborn bots have correct grid_x, grid_y"
+        expected: "100% coordinate preservation"
+      - state_recovery: "Check neighbor-averaged state restoration"
+        expected: "vector_similarity to neighbors >= 0.7"
+    success_criteria:
+      zombie_recovery_rate: ">= 0.90"
+      grid_coordinate_preservation: "== 1.0"
+      ca_reintegration_latency_s: "<= 3"
+    on_failure:
+      action: "halt_and_troubleshoot"
+      log_to: "logs/experimentation/G3_failure.yaml"
+      troubleshooting_tree: "T4_zombie_ca_integration_issues"
+
+  - gate: G4_dashboard_visualization
+    description: "Verify real-time CA grid renders correctly"
+    prerequisites:
+      - G3_zombie_ca_integration: passed
+    validation_checks:
+      - endpoint: "GET http://localhost:5000/grid_state"
+        expected: "Valid JSON with all 40 bot states"
+      - websocket: "Connect Socket.IO client, receive 10 updates"
+        expected: "10 grid_update events within 15s"
+      - visual_check: "Manual verification of grid rendering"
+        expected: "Cells update color on state changes"
+    success_criteria:
+      dashboard_update_rate_hz: ">= 0.9"
+      websocket_delivery_rate: ">= 0.95"
+      grid_state_accuracy: "== 1.0"
+    on_failure:
+      action: "halt_and_troubleshoot"
+      log_to: "logs/experimentation/G4_failure.yaml"
+      troubleshooting_tree: "T5_dashboard_issues"
+
+  - gate: G5_stability_test
+    description: "Extended run to verify long-term stability"
+    prerequisites:
+      - G4_dashboard_visualization: passed
+    duration_ticks: 200
+    validation_checks:
+      - continuous_operation: "No bot deaths for 200 ticks"
+        expected: "40/40 bots alive throughout"
+      - memory_leak_check: "Monitor GPU VRAM growth"
+        expected: "VRAM increase <= 5% over duration"
+      - tick_consistency: "Verify tick delivery every second"
+        expected: "tick_jitter_variance < 0.1s"
+    success_criteria:
+      uptime_percent: ">= 0.98"
+      memory_stable: true
+      tick_reliability: ">= 0.99"
+    on_failure:
+      action: "halt_and_troubleshoot"
+      log_to: "logs/experimentation/G5_failure.yaml"
+      troubleshooting_tree: "T6_stability_issues"
+
+  - gate: G6_emergent_behavior_analysis
+    description: "Analyze CA dynamics for convergence or chaos"
+    prerequisites:
+      - G5_stability_test: passed
+    metrics_to_collect:
+      - mean_state_entropy
+      - neighbor_similarity_index
+      - zombie_wave_propagation_speed
+      - state_vector_variance
+    analysis_scripts:
+      - "python3 scripts/analyze_ca_metrics.py logs/ca_metrics.csv"
+    success_criteria:
+      convergence_detected: "mean_state_entropy < 0.05 after 100 ticks"
+      OR_emergent_pattern: "oscillation_period detected within 50 ticks"
+    on_inconclusive:
+      action: "document_and_continue"
+      note: "Emergent behavior research phase - no strict pass/fail"
+
+# ============================================================
+# PART 2: RECURSIVE TROUBLESHOOTING TREES
+# ============================================================
+
+troubleshooting_trees:
+
+  T1_swarm_launch_issues:
+    symptom: "Bots fail to start or die immediately"
+    diagnostic_steps:
+      - step: 1
+        check: "Is Ollama running?"
+        command: "systemctl status ollama"
+        if_fail: "sudo systemctl restart ollama"
+      - step: 2
+        check: "Is gemma3:270m available?"
+        command: "ollama list | grep gemma3"
+        if_fail: "ollama pull gemma3:270m"
+      - step: 3
+        check: "Are ports available?"
+        command: "ss -tulpn | grep 114 | wc -l"
+        if_fail: "bash scripts/stop_swarm.sh && wait 10s"
+      - step: 4
+        check: "Check bot logs for errors"
+        command: "tail -50 logs/gpu0/bot_00.log"
+        analysis: "Look for connection timeouts, model load failures"
+      - step: 5
+        check: "Reduce bot count temporarily"
+        action: "Edit swarm_config.yaml: bots: 5 per GPU"
+        retry: "python3 scripts/launch_swarm.py"
+    escalation:
+      if_all_fail: "Review swarm_config.yaml for syntax errors"
+      contact: "Document issue in GitHub Issues with full logs"
+
+  T2_tick_synchronization_issues:
+    symptom: "Bots not receiving tick events"
+    diagnostic_steps:
+      - step: 1
+        check: "Is global_tick.py running?"
+        command: "ps aux | grep global_tick"
+        if_fail: "python3 scripts/global_tick.py &"
+      - step: 2
+        check: "Can bots reach tick endpoint?"
+        command: "curl http://localhost:5000/tick_status"
+        if_fail: "Check firewall/port binding in global_tick.py"
+      - step: 3
+        check: "Are bots configured to listen for ticks?"
+        command: "grep 'tick_endpoint' configs/swarm_config.yaml"
+        if_fail: "Add tick_endpoint: http://localhost:5000"
+      - step: 4
+        check: "Network latency test"
+        command: "ping -c 10 localhost"
+        analysis: "If latency > 10ms, investigate system load"
+      - step: 5
+        check: "Increase tick interval"
+        action: "Edit global_tick.py: interval = 2.0  # slower ticks"
+        retry: "Restart global_tick.py"
+    escalation:
+      if_all_fail: "Switch to Redis pub/sub for tick delivery"
+
+  T3_rule_engine_issues:
+    symptom: "Bot states not evolving or rule errors logged"
+    diagnostic_steps:
+      - step: 1
+        check: "Are neighbors correctly discovered?"
+        command: "cat bots/swarm_state.yaml | grep neighbors"
+        if_fail: "Rebuild neighbor graph in launch_swarm.py"
+      - step: 2
+        check: "Rule engine import errors?"
+        command: "python3 -c 'from scripts.rule_engine import apply_rule'"
+        if_fail: "Check Python path and dependencies"
+      - step: 3
+        check: "Test rule engine in isolation"
+        command: "python3 scripts/test_rule_engine.py"
+        if_fail: "Debug rule logic with mock data"
+      - step: 4
+        check: "State vector format valid?"
+        command: "Inspect bot state in swarm_state.yaml"
+        analysis: "Ensure vectors are float arrays, not strings"
+      - step: 5
+        check: "Reduce alpha parameter"
+        action: "Edit rule_engine.py: alpha = 0.3  # less aggressive"
+        retry: "Restart swarm"
+    escalation:
+      if_all_fail: "Simplify rule to identity (return self.state)"
+
+  T4_zombie_ca_integration_issues:
+    symptom: "Zombies don't resurrect or lose grid position"
+    diagnostic_steps:
+      - step: 1
+        check: "Is zombie supervisor running?"
+        command: "ps aux | grep self_healing_supervisor"
+        if_fail: "python3 scripts/self_healing_supervisor.py &"
+      - step: 2
+        check: "Does supervisor see dead bots?"
+        command: "tail logs/zombie_supervisor.log | grep detected"
+        if_fail: "Check PID tracking in swarm_state.yaml"
+      - step: 3
+        check: "Can supervisor query neighbor states?"
+        command: "curl http://localhost:11400/state"
+        if_fail: "Verify Flask endpoints in bot_worker_zombie.py"
+      - step: 4
+        check: "Grid coordinates preserved on rebirth?"
+        command: "Compare grid_x/y before and after kill"
+        if_fail: "Update recovery logic to copy coordinates"
+      - step: 5
+        check: "Increase recovery timeout"
+        action: "Edit supervisor: recovery_timeout = 120s"
+        retry: "Kill test bot again"
+    escalation:
+      if_all_fail: "Disable zombie protocol, focus on CA stability first"
+
+  T5_dashboard_issues:
+    symptom: "Dashboard not updating or websocket failures"
+    diagnostic_steps:
+      - step: 1
+        check: "Is swarm_monitor.py running?"
+        command: "ps aux | grep swarm_monitor"
+        if_fail: "python3 scripts/swarm_monitor.py &"
+      - step: 2
+        check: "Can browser reach dashboard?"
+        command: "curl http://localhost:5000"
+        if_fail: "Check firewall, try 127.0.0.1:5000"
+      - step: 3
+        check: "Are Socket.IO events emitting?"
+        command: "Check browser console for 'update' events"
+        if_fail: "Verify socketio.emit() calls in code"
+      - step: 4
+        check: "Grid state endpoint responding?"
+        command: "curl http://localhost:5000/grid_state"
+        if_fail: "Check /grid_state route implementation"
+      - step: 5
+        check: "Browser compatibility"
+        action: "Try different browser (Chrome vs Firefox)"
+    escalation:
+      if_all_fail: "Fallback to polling /grid_state every 2s"
+
+  T6_stability_issues:
+    symptom: "Bots die during extended runs or memory grows"
+    diagnostic_steps:
+      - step: 1
+        check: "Memory leak in bot processes?"
+        command: "watch -n 10 'ps aux | grep bot_worker | awk {print $6}'"
+        analysis: "If RSS grows >10% per hour, investigate"
+      - step: 2
+        check: "GPU memory leak?"
+        command: "watch nvidia-smi"
+        if_fail: "Add torch.cuda.empty_cache() if using PyTorch"
+      - step: 3
+        check: "Log file growth unbounded?"
+        command: "du -sh logs/"
+        if_fail: "Implement log rotation"
+      - step: 4
+        check: "Reduce tick frequency"
+        action: "global_tick.py interval = 5.0s"
+        retry: "Extended stability test"
+      - step: 5
+        check: "Profile with py-spy"
+        command: "py-spy top --pid <bot_pid>"
+        analysis: "Identify hot code paths"
+    escalation:
+      if_all_fail: "Consider garbage collection tuning or process restart policy"
+
+# ============================================================
+# PART 3: EXECUTION WORKFLOW
+# ============================================================
+
+execution_plan:
+  stage: experimentation_phase
+  duration: "2-4 hours"
+
+  workflow:
+    - phase: preparation
+      tasks:
+        - Clear old logs: "rm -rf logs/experimentation/*"
+        - Create results directory: "mkdir -p logs/experimentation/results"
+        - Backup current config: "cp -r configs/ configs_backup_$(date +%s)"
+        - Document baseline: "nvidia-smi > logs/experimentation/gpu_baseline.txt"
+
+    - phase: gate_execution
+      tasks:
+        - for_each_gate: ["G0", "G1", "G2", "G3", "G4", "G5", "G6"]
+          steps:
+            - log_start: "echo 'Starting gate {gate}' >> logs/experimentation/timeline.log"
+            - execute_gate: "Follow validation_checks for {gate}"
+            - if_pass:
+                - log_success: "echo 'PASS: {gate}' >> logs/experimentation/results.log"
+                - continue_to_next_gate: true
+            - if_fail:
+                - log_failure: "echo 'FAIL: {gate}' >> logs/experimentation/results.log"
+                - trigger_troubleshooting: "Execute {gate}.troubleshooting_tree"
+                - if_resolved:
+                    - log_resolution: "echo 'RESOLVED: {gate}' >> logs/experimentation/results.log"
+                    - retry_gate: true
+                - if_not_resolved:
+                    - halt: true
+                    - generate_report: "python3 scripts/generate_failure_report.py {gate}"
+
+    - phase: post_experimentation
+      tasks:
+        - Collect all metrics: "python3 scripts/collect_metrics.py"
+        - Generate visualizations: "python3 scripts/visualize_ca_evolution.py"
+        - Archive logs: "tar -czf logs/experimentation_$(date +%s).tar.gz logs/experimentation/"
+        - Update documentation: "Auto-generate RESULTS.md from collected data"
+
+# ============================================================
+# PART 4: SUCCESS METRICS & DELIVERABLES
+# ============================================================
+
+success_metrics:
+  gates_passed: "All G0-G6"
+  bot_survival_rate: ">= 0.95"
+  ca_convergence_detected: "OR emergent_pattern_identified"
+  zombie_recovery_rate: ">= 0.90"
+  dashboard_functional: true
+  documentation_complete: true
+
+deliverables:
+  - logs/experimentation/results.log
+  - logs/experimentation/ca_metrics.csv
+  - logs/experimentation/zombie_recovery_stats.yaml
+  - docs/EXPERIMENTATION_RESULTS.md
+  - visualizations/ca_evolution.png
+  - visualizations/zombie_recovery_timeline.png
+
+next_steps_on_success:
+  - Add CA-specific unit tests (pytest suite)
+  - Scale to 100 bots (10x10 grid)
+  - Implement additional CA rule variants
+  - Prepare whitepaper draft sections
+
+next_steps_on_failure:
+  - Address root cause via troubleshooting trees
+  - Simplify system (reduce bot count, slower ticks)
+  - Request community input via GitHub Issues
+  - Consider architectural pivots if fundamental blocker
