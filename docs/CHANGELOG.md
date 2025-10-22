@@ -5,6 +5,28 @@ All notable changes to Swarm-100 will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v1.0.0.html).
 
+## [0.2.0-beta] - 2025-10-21
+
+### Documentation
+- **Reality Check Protocol**: Comprehensive empirical verification of dashboard claims using controlled pulse injection testing
+- **Reality Assessment Documentation**: `REALITY_CHECK.md` created detailing working vs. vaporware components with 95% confidence
+- **README.yaml Updated**: Revised to accurately reflect current implementation status vs. claimed features
+
+### Verification
+- **Empirical Testing Framework**: Process resource, network traffic, and file state change analysis implemented
+- **Pulse Injection Verification**: Statistical analysis of LoRA pulse effects on bot processes (p > 0.05, no significant changes)
+- **HTTP API Audit**: Comprehensive port scanning showing zero bot API endpoints (0 Python listeners)
+- **Process State Analysis**: Verified 200+ concurrent bot processes but no inter-process communication
+
+### Changed
+- **Feature Claims**: Updated documentation to reflect empirical verification results (80% mock, 20% real functionality)
+- **Launch Instructions**: Simplified to `python3 start_swarm.py` single-command deployment
+- **Architecture Description**: Revised from "swarm intelligence" to "process management with visualization"
+
+### Transparency
+- **Vaporware Identification**: Clearly documented unimplemented LoRA pulse communication and swarm intelligence features
+- **Phased Development Roadmap**: 8-week development plan outlined for implementing claimed swarm intelligence capabilities
+
 ## [0.2.0-beta] - 2025-10-19
 
 ### Added
