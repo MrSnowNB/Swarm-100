@@ -1,0 +1,3 @@
+"""
+Clock hardware timing module
+"""
