@@ -1,0 +1,164 @@
+---
+ai_first_swarm_launch:
+  version: "1.0.0"
+  description: "Complete autonomous swarm deployment for AI-first concurrency testing"
+  created: 2025-10-21
+
+  prerequisites:
+    hardware:
+      - 4x RTX 6000 Ada GPUs (48GB VRAM each)
+      - 128GB+ RAM
+      - NVIDIA drivers + CUDA 12.2+
+    software:
+      - Ubuntu 22.04+ or RHEL 8+
+      - Python 3.8+
+      - Network connectivity to Ollama
+
+  phases:
+
+    1_install_infrastructure:
+      description: "Install core dependencies and Ollama"
+      commands:
+        - name: "Install Ollama"
+          command: "curl -fsSL https://ollama.com/install.sh | sh && echo '✓ Ollama installed'"
+          expect: "✓"
+        - name: "Verify Ollama running"
+          command: "ollama --version && echo '✓ Ollama operational'"
+          expect: "✓"
+        - name: "Pull zombie brain model"
+          command: "ollama pull gemma3:270m && echo '✓ Zombie model ready'"
+          expect: "✓"
+        - name: "Pull standard intelligence model"
+          command: "ollama pull granite4:micro-h && echo '✓ Standard model ready'"
+          expect: "✓"
+        - name: "Install Python dependencies"
+          command: "pip3 install -q pyyaml requests numpy scipy matplotlib flask && echo '✓ Dependencies installed'"
+          expect: "✓"
+
+    2_verify_hardware:
+      description: "Check GPU availability and performance"
+      commands:
+        - name: "Verify GPU count"
+          command: "nvidia-smi --list-gpus | wc -l"
+          expect: "4"
+        - name: "Check GPU memory"
+          command: "nvidia-smi --query-gpu=memory.total --format=csv,noheader,nounits | head -4"
+          expect: "49152"
+        - name: "Test Ollama responsiveness"
+          command: "timeout 10 ollama run gemma3:270m 'test' > /dev/null 2>&1 && echo '✓ Ollama zombie responsive' || echo '✗ Ollama zombie failed'"
+          expect: "✓"
+
+    3_deploy_zombie_swarm:
+      description: "Launch 100 zombie-enabled CA bots across 4 GPUs"
+      commands:
+        - name: "Create swarm directories"
+          command: "mkdir -p logs/gpu{0,1,2,3} bots configs scripts && echo '✓ Directories created'"
+          expect: "✓"
+        - name: "Launch zombie swarm"
+          command: "python3 scripts/launch_swarm.py --zombie-active"
+          background: false
+          expect: "✓ Swarm launch complete: 100 bots deployed"
+        - name: "Verify swarm state"
+          command: "ls -la bots/swarm_state.yaml && echo '✓ Swarm state saved'"
+          expect: "✓"
+
+    4_activate_autonomous_monitoring:
+      description: "Start all monitoring and control systems"
+      commands:
+        - name: "Launch health monitor (CLI)"
+          command: "python3 scripts/health_monitor.py"
+          background: true
+          expect: "Starting health monitoring..."
+        - name: "Launch zombie supervisor"
+          command: "python3 scripts/zombie_supervisor.py"
+          background: true
+          expect: "Zombie supervisor active"
+        - name: "Launch swarm monitor"
+          command: "python3 scripts/swarm_monitor.py"
+          background: true
+          expect: "Swarm monitor active"
+        - name: "Launch swarm service coordinator"
+          command: "python3 scripts/swarm_service_coordinator.py"
+          background: true
+          expect: "Service coordinator active"
+
+    5_verify_deployment:
+      description: "Validate full system functionality"
+      commands:
+        - name: "Test concurrency capacity"
+          command: "python3 scripts/test_swarm.py --bots 20"
+          expect: "✓ Testing complete"
+        - name: "Check zombie state transitions"
+          command: "python3 scripts/zombie_supervisor.py --status"
+          expect: "zombie_rate"
+        - name: "Verify CA grid initialization"
+          command: "python3 scripts/analyze_ca_metrics.py --grid-status"
+          expect: "10x10 grid active"
+        - name: "Test LoRA energy propagation"
+          command: "python3 visualize_energy_propagation.py --quick-test"
+          expect: "Energy propagation verified"
+
+    6_emergency_shutdown:
+      description: "Stop all swarm processes safely"
+      commands:
+        - name: "Kill all bot processes"
+          command: "pkill -f 'bot_worker' && sleep 3 && echo '✓ Bots stopped'"
+          expect: "✓"
+        - name: "Stop monitoring processes"
+          command: "pkill -f health_monitor && pkill -f zombie_supervisor && pkill -f swarm_monitor && echo '✓ Monitors stopped'"
+          expect: "✓"
+        - name: "Full swarm shutdown"
+          command: "python3 scripts/stop_swarm.sh"
+          expect: "✓ Swarm shutdown complete"
+
+  monitoring_config:
+    cli_tools:
+      active_processes:
+        - health_monitor: "Real-time bot health and CA metrics"
+        - zombie_supervisor: "Zombie state management and transitions"
+        - swarm_monitor: "Overall swarm coordination and patterns"
+        - swarm_service_coordinator: "Inter-bot communication routing"
+      key_commands:
+        - "tail -f logs/gpu0/bot.log": "Monitor individual bot activity"
+        - "python3 scripts/swarm_debug_analyzer.py": "Debug analysis tools"
+        - "python3 scripts/analyze_ca_metrics.py --realtime": "Live CA pattern analysis"
+
+    web_dashboard:
+      status: "Autonomous startup included"
+      port: 8080
+      features:
+        - "Interactive 10x10 CA grid visualization"
+        - "Real-time bot health heatmap"
+        - "LoRA energy flux charts"
+        - "Zombie rate monitoring"
+        - "Performance metrics dashboard"
+        - "Emergency shutdown controls"
+      access: "http://localhost:8080 after deployment"
+
+  success_criteria:
+    deployment:
+      - "100 bots deployed: 25 per GPU across 4 GPUs"
+      - "Zombie brain model (gemma3:270m) active"
+      - "Standard intelligence backup (granite4:micro-h) ready"
+    functionality:
+      - "CA grid initialized: 10x10 cellular automaton"
+      - "LoRA energy propagation working"
+      - "Zombie state transitions active (0% initial rate)"
+      - "Inter-bot communication established"
+    monitoring:
+      - "CLI health monitoring active"
+      - "Zombie supervisor operational"
+      - "Web dashboard accessible"
+    performance:
+      - "Concurrent bot operations stable"
+      - "GPU memory utilization <90%"
+      - "Network latency <50ms between bots"
+
+  troubleshooting:
+    if_bots_fail: "Check log: tail -f logs/gpu0/bot.log | grep ERROR"
+    if_ollama_fails: "Run: ollama serve (in background) and re-pull models"
+    if_network_issues: "Check: netstat -tlnp | grep 11400-11800 (bot ports)"
+    full_reset: "Run phase 6_emergency_shutdown, then restart from phase 1"
+
+  total_expected_runtime: "15-25 minutes"
+  success_message: "🎉 ZOMBIE SWARM ACTIVE - 100 bots deployed with full AI-first monitoring"

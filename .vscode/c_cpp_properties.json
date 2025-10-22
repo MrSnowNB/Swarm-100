@@ -7,7 +7,8 @@
         "/home/mr-snow/Documents/Testing the Beast/Swarm/swarm_testing_env/include/python3.12",
         "/home/mr-snow/Documents/Testing the Beast/Swarm/swarm_testing_env/lib/python3.12/site-packages/pybind11/include",
         "/usr/include",
-        "/usr/local/include"
+        "/usr/local/include",
+        "/usr/include/python3.12"
       ],
       "defines": [],
       "compilerPath": "/usr/bin/g++",

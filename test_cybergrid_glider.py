@@ -40,8 +40,8 @@ class CyberGridGliderTester:
 
     # Still lifes (should remain unchanged)
     BLOCK = [(0, 0), (0, 1), (1, 0), (1, 1)]
-    BEEHIVE = [(1, 0), (2, 0), (0, 1), (3, 1), (1, 2), (2, 2)]
-    LOAF = [(1, 0), (2, 0), (0, 1), (3, 1), (1, 2), (3, 2), (2, 3)]
+    BEEHIVE = [(0, 1), (0, 2), (1, 0), (1, 3), (2, 1), (2, 2)]  # Corrected canonical coordinates
+    LOAF = [(0, 1), (0, 2), (1, 0), (1, 3), (2, 1), (2, 3), (3, 2)]  # Corrected canonical coordinates
 
     # Oscillators (should cycle with period)
     BLINKER = [(1, 0), (1, 1), (1, 2)]  # Period 2

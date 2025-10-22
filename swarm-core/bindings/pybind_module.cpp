@@ -121,6 +121,9 @@ PYBIND11_MODULE(swarm_core, m) {
              py::arg("attenuation_k") = 0.15f,
              py::arg("global_damping") = 0.95f,
              py::arg("activation_threshold") = 0.65f)
+        .def("calculate_energy_diffusion", &CyberGrid::calculate_energy_diffusion,
+             py::arg("x"), py::arg("y"),
+             "Calculate energy diffusion at cell position from LoRA neighbors")
         .def("export_energy_matrix", &CyberGrid::export_energy_matrix,
              "Export energy levels as flat vector (row-major)")
         .def("export_life_matrix", &CyberGrid::export_life_matrix,
