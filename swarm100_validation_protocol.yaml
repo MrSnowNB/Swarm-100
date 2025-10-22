@@ -1,0 +1,38 @@
+---
+# Swarm-100 Baseline Validation Protocol
+# T2.x Baseline Phase: Foundation Tests for Swarm Components
+version: 1.0
+created: 2025-10-21
+maintainer: "NEXUS-Swarm-100 Research Team"
+
+objective: >
+  Execute foundational tests before initiating full swarm operations.
+  Each T2.x test validates a critical subsystem independently.
+
+baseline_phase:
+  - test_id: T2.4
+    name: "Conway CA Glider Verification"
+    description: "Test CyberGrid Conway CA with standard glider pattern"
+    execution:
+      mode: headless
+      duration_seconds: 30
+      ca_enabled: true
+      agents_enabled: false
+      test_script: "test_cybergrid_glider.py"
+    metrics:
+      - name: "glider_period_correct"
+        expected_value: true
+        critical: true
+      - name: "cell_count_preserved"
+        expected_value: true
+        critical: true
+      - name: "still_life_stable"
+        expected_value: true
+        critical: true
+    gate:
+      pass_criteria:
+        - glider_period_correct == true
+        - cell_count_preserved == true
+        - still_life_stable == true
+      failure_action: "HALT_PHASE"
+      notes: "Validates core Conway CA implementation in CyberGrid"

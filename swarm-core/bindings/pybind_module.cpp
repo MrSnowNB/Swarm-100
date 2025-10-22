@@ -86,8 +86,8 @@ PYBIND11_MODULE(swarm_core, m) {
     py::class_<Cell>(m, "Cell")
         .def_readonly("x", &Cell::x)
         .def_readonly("y", &Cell::y)
-        .def_readonly("alive", &Cell::alive)
-        .def_readonly("energy", &Cell::energy)
+        .def_readwrite("alive", &Cell::alive)
+        .def_readwrite("energy", &Cell::energy)
         .def_readonly("occupants", &Cell::occupants)
         .def("agent_count", &Cell::agent_count)
         .def("is_empty", &Cell::is_empty)
@@ -105,6 +105,8 @@ PYBIND11_MODULE(swarm_core, m) {
              "Apply modified Conway's Game of Life rules with energy coupling")
         .def("apply_lora_pulses", &CyberGrid::apply_lora_pulses,
              "Propagate LoRA-style energy pulses through the grid")
+        .def("get_cell", py::overload_cast<int, int>(&CyberGrid::get_cell), py::return_value_policy::reference,
+             "Get reference to cell at coordinates", py::arg("x"), py::arg("y"))
         .def("place_agent", &CyberGrid::place_agent, py::arg("x"), py::arg("y"), py::arg("agent_id"))
         .def("remove_agent", &CyberGrid::remove_agent, py::arg("x"), py::arg("y"), py::arg("agent_id"))
         .def("get_agent_position", &CyberGrid::get_agent_position, py::arg("agent_id"))

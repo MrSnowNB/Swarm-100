@@ -20,6 +20,28 @@ import yaml
 
 logger = logging.getLogger('GlobalTick')
 
+class CyberGridManager:
+    """Persistent manager for CyberGrid state across ticks"""
+    _instance = None
+
+    @classmethod
+    def get_grid(cls):
+        """Get or create persistent CyberGrid instance"""
+        if cls._instance is None:
+            try:
+                import swarm_core as sc
+                cls._instance = sc.CyberGrid()
+                logger.info("CyberGrid instance created and ready for CA operations")
+            except ImportError:
+                logger.error("swarm_core not available - cannot create CyberGrid")
+                return None
+        return cls._instance
+
+    @classmethod
+    def reset_grid(cls):
+        """Reset grid state for new experiments"""
+        cls._instance = None
+
 class GlobalTickCoordinator:
     """
     Coordinator for global tick synchronization across all swarm bots.
@@ -146,18 +168,31 @@ class GlobalTickCoordinator:
             logger.warning("Swarm state not found - no direct bot notifications")
 
     def apply_ca_update(self):
-        """Apply CA rules update via rule engine"""
+        """Apply CA rules update via rule engine and CyberGrid"""
         try:
+            # First apply Rule Engine (bot state vectors)
             import subprocess
             result = subprocess.run([
                 sys.executable, 'scripts/rule_engine.py'
             ], capture_output=True, text=True, timeout=5)
 
             if result.returncode == 0:
-                self.last_ca_update = time.time()
-                logger.debug("CA rules applied successfully")
+                logger.debug("Bot state vector CA rules applied successfully")
             else:
-                logger.warning(f"CA update failed: {result.stderr}")
+                logger.warning(f"Bot state vector CA update failed: {result.stderr}")
+
+            # Then apply CyberGrid Conway CA step
+            try:
+                grid = CyberGridManager.get_grid()
+                if grid is not None:
+                    grid.step()  # Advance Conway CA one generation
+                    self.last_ca_update = time.time()
+                    logger.debug("CyberGrid Conway CA step completed")
+                else:
+                    logger.warning("CyberGrid not initialized - cannot step")
+
+            except Exception as e:
+                logger.error(f"Error stepping CyberGrid: {e}")
 
         except Exception as e:
             logger.error(f"Error applying CA rules: {e}")

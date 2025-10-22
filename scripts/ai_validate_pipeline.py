@@ -105,7 +105,8 @@ class AIFirstValidationPipeline:
             context['available_test_frameworks'] = [
                 'scripts/fault_injection_test.py',
                 'scripts/perturbation_resilience_test.py',
-                'scripts/pattern_reconstruction_test.py'
+                'scripts/pattern_reconstruction_test.py',
+                'test_cybergrid_glider.py'
             ]
 
             # Load swarm evolution plan for current status
@@ -285,7 +286,8 @@ class AIFirstValidationPipeline:
         script_map = {
             'pattern_reconstruction': 'scripts/pattern_reconstruction_test.py',
             'fault_injection': 'scripts/fault_injection_test.py',
-            'perturbation': 'scripts/perturbation_resilience_test.py'
+            'perturbation': 'scripts/perturbation_resilience_test.py',
+            'glider': 'test_cybergrid_glider.py'
         }
 
         if experiment_type not in script_map:
