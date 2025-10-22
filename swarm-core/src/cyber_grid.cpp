@@ -146,68 +146,41 @@ int CyberGrid::apply_conway_rules() {
 
             bool was_alive = current.alive;
 
-            // Modified Conway's Game of Life with enhanced LoRA energy coupling
+            // Phase 1: Pure Conway B3/S23 (decoupled from energy)
             if (current.alive) {
-                // Alive cell survival rules
-                if (live_neighbors < 2) {
-                    // Underpopulation - dies (standard Conway)
-                    next.alive = false;
-                    changes++;
-                } else if (live_neighbors <= 3) {
-                    // Survival zone (modified by energy)
-                    if (current_energy > 0.8f) {
-                        // High energy keeps it alive even outside normal range
-                        next.alive = true;
-                    } else {
-                        next.alive = true;  // Standard survival
-                    }
-                } else {
-                    // Overpopulation
-                    if (current_energy > 0.3f) {
-                        // High energy allows survival with reduced energy
-                        next.alive = true;
-                        next.energy = current_energy * 0.7f;  // Energy reduction
-                    } else {
-                        // Standard overpopulation death
-                        next.alive = false;
-                        changes++;
-                    }
-                }
+                // Alive cell survival rules (STANDARD Conway: survive with 2-3 neighbors)
+                next.alive = (live_neighbors == 2 || live_neighbors == 3);
+                if (!next.alive) changes++;  // Count if this cell died
             } else {
-                // Dead cell birth rules
-                if (live_neighbors == 3) {
-                    // Standard birth
-                    next.alive = true;
-                    changes++;
-                } else if (calculate_energy_diffusion(x, y) > 2.0f) {
-                    // Energy coupling allows birth in energized zones
-                    next.alive = true;
-                    changes++;
-                }
-                // Dead cells maintain their death state
+                // Dead cell birth rules (STANDARD Conway: birth with exactly 3 neighbors)
+                next.alive = (live_neighbors == 3);
+                if (next.alive) changes++;  // Count if this cell was born
             }
 
-            // Cross-diffusion coupling: life changes create energy pulses
+            // Phase 2: Energy field updates (reactive to Conway state, not causal)
             if (was_alive != next.alive) {
-                // Death → burst of energy release, Birth → energy consumption
+                // Life changes create energy pulses
                 float life_change_pulse = next.alive ? -0.1f : 0.3f;  // Birth consumes, death releases
                 next.energy += life_change_pulse;
             }
 
-            // Constructive interference: life gradient affects energy
-            float life_gradient_energy = 0.0f;
+            // Energy diffusion from neighbors (only from alive neighbors)
+            float neighbor_energy_contribution = 0.0f;
             auto neighbors = get_moore_neighbors(x, y);
             for (const auto& [nx, ny] : neighbors) {
                 const Cell& neighbor = get_cell(nx, ny);
-                if (neighbor.alive && !current.alive) {
-                    // Alive neighbor enhances birth potential in dead cells
-                    life_gradient_energy += 0.05f;
+                if (neighbor.alive) {
+                    // Alive neighbor enhances energy field
+                    neighbor_energy_contribution += 0.02f;  // Smaller coupling
                 }
             }
-            next.energy += life_gradient_energy;
+            next.energy += neighbor_energy_contribution;
+
+            // Energy field diffusion (passive)
+            next.energy += calculate_energy_diffusion(x, y) * 0.05f;  // Reduced LoRA coupling
 
             // Clamp energy and natural decay
-            next.energy = std::max(0.0f, std::min(1.0f, next.energy * 0.98f));
+            next.energy = std::max(0.0f, std::min(1.0f, next.energy * 0.99f));  // Slower decay
         }
     }
 

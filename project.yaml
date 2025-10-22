@@ -123,23 +123,31 @@ structure:
     - path: project.yaml
       type: ai_first_documentation
       purpose: "Machine-readable project specification for AI maintenance and evolution"
-    
-    - path: grok_workflow.yaml 
+
+    - path: grok_workflow.yaml
       type: development_workflow
       purpose: "AI-assisted development planning and task orchestration"
-    
+
     - path: validation_progress.yaml
       type: quality_tracking
       purpose: "Automated validation state and compliance metrics"
-    
+
+    - path: swarm100_validation_protocol.yaml
+      type: baseline_validation_protocol
+      purpose: "T2.4 baseline phase protocol for CyberGrid CA validation"
+
+    - path: logs/baseline_validation/
+      type: validation_artifacts
+      purpose: "CyberGrid CA baseline validation records and diagnostics"
+
     - path: testing_improvement_plan.yaml
       type: roadmap_documentation
       purpose: "Structured plan for testing evolution and quality gates"
-    
+
     - path: architecture_review_report.yaml
       type: design_review
       purpose: "Technical architecture decisions and rationale"
-    
+
     - path: .alice_in_cyberland.story
       type: narrative_documentation
       purpose: "Human-readable story and project vision narrative"

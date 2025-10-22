@@ -95,6 +95,7 @@ development_roadmap:
     - "✅ Statistical replication framework: confidence bounds computation"
     - "✅ Peer review standards: significance testing, effect sizes, reproducibility"
     - "✅ Publication material preparation: manuscript draft, data availability"
+    - "✅ T2.4 Conway CA baseline validation: All 7 canonical patterns verified (B3/S23 rules)"
 
   active_development:
     - "🔄 G7-2/G7-3 full validation: pattern reconstruction and fault injection"
