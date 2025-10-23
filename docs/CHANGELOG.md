@@ -5,6 +5,17 @@ All notable changes to Swarm-100 will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v1.0.0.html).
 
+## [0.2.1-beta] - 2025-10-22
+
+### Fixed
+- **Port Conflict Reliability**: Resolved Address already in use errors during repeated swarm deployments
+- **Stress Test Port Management**: Implemented port availability checking before bot deployment to prevent binding conflicts
+- **Deployment Stability**: Enhanced swarm launcher robustness for 100+ bot concurrent operations
+
+### Stress Testing
+- **100 Bot Load Testing**: Conducted 120-second stress test revealing port conflict vulnerabilities
+- **Deployment Resilience**: Identified and fixed repeated launch failure patterns under high concurrency
+
 ## [0.2.0-beta] - 2025-10-21
 
 ### Documentation

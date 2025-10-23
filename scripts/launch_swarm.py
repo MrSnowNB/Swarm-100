@@ -13,6 +13,7 @@ import yaml
 import time
 import os
 import sys
+import socket
 import argparse
 from pathlib import Path
 from datetime import datetime
@@ -101,6 +102,16 @@ class SwarmManager:
             logger.error(f"✗ GPU check failed: {e}")
             return False
 
+    def check_port_free(self, port):
+        """Check if a port is available for binding"""
+        try:
+            with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+                s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+                s.bind(('', port))
+                return True
+        except OSError:
+            return False
+
     def launch_bot(self, bot_id, gpu_id, port, grid_x, grid_y):
         """Launch a single bot instance"""
         env = os.environ.copy()
@@ -158,6 +169,9 @@ class SwarmManager:
 
             for bot_idx in range(num_bots):
                 port = base_port + (gpu_id * 100) + bot_idx
+                if not self.check_port_free(port):
+                    logger.warning(f"Port {port} in use for bot_{gpu_id:02d}_{bot_idx:02d}, skipping deployment")
+                    continue
                 grid_x = global_bot_idx % grid_width
                 grid_y = global_bot_idx // grid_width
                 bot_info = self.launch_bot(bot_idx, gpu_id, port, grid_x, grid_y)
